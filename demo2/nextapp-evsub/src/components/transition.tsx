@@ -21,7 +21,7 @@ export default function Transition({ children }: TransitionProps) {
   return (
     <motion.div
       key="page" 
-      className="relative h-screen"
+      className="flex-grow flex flex-col items-center justify-center"
       initial={ variants.initial }
       animate={stage === 'leaving' ? variants.exit : variants.animate }
       transition={{ 

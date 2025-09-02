@@ -31,7 +31,7 @@ export default function TransitionProvider({ children }: ProvidersProps) {
         );
       }}
     >
-      <div ref={wrapperRef}>
+      <div ref={wrapperRef} className="flex-grow flex flex-col">
         {children}
       </div>
       

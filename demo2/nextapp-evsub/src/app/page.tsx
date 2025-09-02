@@ -7,7 +7,7 @@ import Transition from "@/components/transition";
 export default function Home() {
   return (
     <Transition>
-      <section className="flex flex-col items-center justify-center gap-12 py-8 md:py-10 h-[60vh]">
+      <section className="flex flex-col items-center justify-center gap-12 py-8 md:py-10">
         <div className="inline-block max-w-xl text-center justify-center">
           <span className={title()}>
             Ready to go&nbsp; 

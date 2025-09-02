@@ -45,11 +45,15 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <TransitionProvider>
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                {children}
-              </main>
-            </TransitionProvider>
+            {/* <div className="flex-grow"> */}
+            <main className="container mx-auto max-w-7xl px-6 flex-grow flex flex-col">
+              <TransitionProvider>
+                
+                  {children}
+                
+              </TransitionProvider>
+            </main>
+            {/* </div> */}
             <footer className="w-full flex items-center justify-center py-3">
               <Link
                 isExternal
