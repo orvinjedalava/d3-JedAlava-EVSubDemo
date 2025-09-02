@@ -5,55 +5,41 @@ import { button as buttonStyles } from "@heroui/theme";
 
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import { GithubIcon, OriginIcon } from "@/components/icons";
 
 import Transition from "@/components/transition";
+import { appSettings } from "@/config/app";
+import { Button } from "@heroui/button";
 
 export default function Home() {
   return (
     <Transition>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-xl text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-          <br />
           <span className={title()}>
-            websites regardless of your design experience.
+            Ready to go&nbsp; 
           </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
-          </div>
+          <span className={title({ color: "blue" })}>Electric&nbsp;</span>
+          <span className={title()}>
+            ? 
+          </span>
+          
         </div>
 
         <div className="flex gap-3">
           <Link
-            isExternal
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
-            href={siteConfig.links.docs}
+            className="bg-secondary text-black font-medium py-2 px-4 rounded-full hover:bg-secondary-light"
+              style={{ 
+                transition: 'background-color 0.25s ease-in-out',
+              }}
+            href={siteConfig.navItems.find(item => item.label === "Calculator")?.href || "/calculator"}
           >
-            Documentation
+              Start Here 
           </Link>
-          <Link
-            isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
-          >
-            <GithubIcon size={20} />
-            GitHub
-          </Link>
+          
         </div>
 
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing <Code color="primary">app/page.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
+        
       </section>
     </Transition>
   );

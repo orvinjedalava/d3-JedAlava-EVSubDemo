@@ -9,6 +9,20 @@ const config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#ff6124',
+        secondary: {
+          DEFAULT: '#ffb233', // Main secondary color
+          light: '#ffd185',   // Lighter version for hover states
+        },
+        tertiary: '#8c39f5'
+      },
+      transitionTimingFunction: {
+        'cubic-bezier': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        '250': '0.25s',
+      },
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
