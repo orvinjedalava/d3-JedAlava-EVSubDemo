@@ -27,8 +27,17 @@ export const ChatUI = ({
 
   // Scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
+
+  // Initial scroll to bottom on component mount
+  useEffect(() => {
+    if (messagesEndRef.current && messages.length > 0) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +72,7 @@ export const ChatUI = ({
       {/* Messages container */}
       <div 
         ref={messagesContainerRef}
-        className="flex-1 p-4 overflow-y-auto"
+        className="h-[60vh] p-4 overflow-y-auto min-h-0"
       >
         {messages.map((message) => (
           <div
@@ -95,7 +104,7 @@ export const ChatUI = ({
       </div>
       
       {/* Input area */}
-      <div className="border-t border-default-200 p-2 sm:p-4 bg-default-50 dark:bg-default-100/20">
+      <div className="border-t border-default-200 p-2 sm:p-4 bg-default-50 dark:bg-default-100/20 h-[80px]">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <Input
             value={inputText}
