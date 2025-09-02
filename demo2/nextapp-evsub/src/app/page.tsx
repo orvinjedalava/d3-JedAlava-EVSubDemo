@@ -1,25 +1,18 @@
 import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
-
 import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon, OriginIcon } from "@/components/icons";
+import { title } from "@/components/primitives";
 
 import Transition from "@/components/transition";
-import { appSettings } from "@/config/app";
-import { Button } from "@heroui/button";
 
 export default function Home() {
   return (
     <Transition>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <section className="flex flex-col items-center justify-center gap-12 py-8 md:py-10 h-[60vh]">
         <div className="inline-block max-w-xl text-center justify-center">
           <span className={title()}>
             Ready to go&nbsp; 
           </span>
-          <span className={title({ color: "blue" })}>Electric&nbsp;</span>
+          <span className={title({ color: "violet" })}>Electric&nbsp;</span>
           <span className={title()}>
             ? 
           </span>

@@ -1,3 +1,3 @@
 export const appSettings = {
-  transitionDuration: 0.8
+  transitionDuration: 0.3
 };
