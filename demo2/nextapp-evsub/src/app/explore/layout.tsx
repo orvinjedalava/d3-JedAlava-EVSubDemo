@@ -1,4 +1,4 @@
-export default function CalculatorLayout({
+export default function ExploreLayout({
   children,
 }: {
   children: React.ReactNode;

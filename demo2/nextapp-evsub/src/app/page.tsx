@@ -25,7 +25,7 @@ export default function Home() {
               style={{ 
                 transition: 'background-color 0.25s ease-in-out',
               }}
-            href={siteConfig.navItems.find(item => item.label === "Calculator")?.href || "/calculator"}
+            href={siteConfig.navItems.find(item => item.label === "Explore")?.href || "/explore"}
           >
               Start Here 
           </Link>

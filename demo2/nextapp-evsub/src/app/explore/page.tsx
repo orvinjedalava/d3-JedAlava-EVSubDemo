@@ -10,7 +10,7 @@ const variants = {
   exit: { opacity: 0 }
 }
 
-export default function CalculatorPage() {
+export default function ExplorePage() {
   const { stage } = useTransitionState();
 
   return (
