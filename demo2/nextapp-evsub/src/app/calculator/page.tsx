@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useTransitionState } from 'next-transition-router';
+import { appSettings } from '@/config/app';
 
 const variants = {
   initial: { opacity: 0 },
@@ -17,7 +18,7 @@ export default function CalculatorPage() {
       initial="initial"
       animate={ stage === 'leaving' ? variants.exit : variants.animate }
       variants={variants}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: appSettings.transitionDuration }}
     >
       <h1>Calculator</h1>
       <p>This is the calculator page.</p>

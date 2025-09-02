@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { TransitionRouter } from 'next-transition-router';
 import { animate } from 'framer-motion/dom';
+import { appSettings } from '@/config/app';
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ export interface ProvidersProps {
 
 export default function TransitionProvider({ children }: ProvidersProps) {
   const wrapperRef = useRef<HTMLDivElement>(null!);
+  const transitionDuration = appSettings.transitionDuration;
 
   return (
     <TransitionRouter
@@ -18,14 +20,14 @@ export default function TransitionProvider({ children }: ProvidersProps) {
         animate(
           wrapperRef.current,
           { opacity: [1, 0] },
-          { duration: 0.8, onComplete: next }
+          { duration: transitionDuration, onComplete: next }
         );
       }}
       enter={(next) => {
         animate(
           wrapperRef.current, 
           { opacity: [0, 1] },
-          { duration: 0.8, onComplete: next }
+          { duration: transitionDuration, onComplete: next }
         );
       }}
     >

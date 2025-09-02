@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 import { useTransitionState } from 'next-transition-router';
+import { appSettings } from '@/config/app';
 
 interface TransitionProps {
   children: ReactNode
@@ -24,7 +25,7 @@ export default function Transition({ children }: TransitionProps) {
       initial={ variants.initial }
       animate={stage === 'leaving' ? variants.exit : variants.animate }
       transition={{ 
-        duration: 0.8,
+        duration: appSettings.transitionDuration,
         ease: "easeInOut"
       }}
     >
