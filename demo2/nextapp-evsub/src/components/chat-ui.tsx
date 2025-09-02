@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
+import { tv } from "tailwind-variants";
 
 type Message = {
   id: string;
@@ -24,6 +25,17 @@ export const ChatUI = ({
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  // Define message bubble styles with tails
+  const messageBubble = tv({
+    base: "max-w-[70%] p-3 rounded-lg relative",
+    variants: {
+      isUser: {
+        true: "bg-primary text-white rounded-tr-none after:content-[''] after:absolute after:top-0 after:right-[-8px] after:border-[8px] after:border-transparent after:border-l-primary after:border-t-primary",
+        false: "bg-default-100 dark:bg-default-200 rounded-tl-none after:content-[''] after:absolute after:top-0 after:left-[-8px] after:border-[8px] after:border-transparent after:border-r-default-100 after:border-t-default-100 dark:after:border-r-default-200 dark:after:border-t-default-200"
+      }
+    }
+  });
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -80,11 +92,7 @@ export const ChatUI = ({
             className={`flex mb-4 ${message.isUser ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[70%] p-3 rounded-lg ${
-                message.isUser
-                  ? "bg-primary text-white rounded-tr-none"
-                  : "bg-default-100 dark:bg-default-200 rounded-tl-none"
-              }`}
+              className={messageBubble({ isUser: message.isUser })}
             >
               <p>{message.text}</p>
               <div 
