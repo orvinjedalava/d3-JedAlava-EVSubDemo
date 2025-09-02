@@ -1,44 +1,21 @@
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem,
 } from "@heroui/navbar";
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
 import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
-  Logo,
-  OriginIcon,
-} from "@/components/icons";
-
-import { appSettings } from "@/config/app";
+import { OriginIcon } from "@/components/icons";
 
 export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <OriginIcon className="text-primary"/>
-            <p className="font-bold text-primary">Origin</p>
-          </NextLink>
-        </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
@@ -55,6 +32,20 @@ export const Navbar = () => {
             </NavbarItem>
           ))}
         </ul>
+      </NavbarContent>
+      <NavbarContent className="basis-1 pl-4" justify="end">
+        <NavbarBrand as="li" className="gap-3 max-w-fit">
+          <NextLink 
+            className="flex justify-start items-center gap-1" 
+            href="https://www.originenergy.com.au/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <OriginIcon className="text-primary"/>
+            <p className="font-bold text-primary">Origin</p>
+          </NextLink>
+        </NavbarBrand>
+        <ThemeSwitch />
       </NavbarContent>
     </HeroUINavbar>
   );
