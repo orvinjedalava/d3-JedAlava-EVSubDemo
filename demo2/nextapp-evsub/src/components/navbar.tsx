@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useReducer } from "react";
+// import { useState, useReducer } from "react";
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuToggle,
+  // NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem
 } from "@heroui/navbar";
@@ -20,15 +20,16 @@ import { OriginIcon } from "@/components/icons";
 
 export const Navbar = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false);
+  // const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false);
 
 
   return (
-    <HeroUINavbar disableAnimation maxWidth="xl" position="sticky" onMenuOpenChange={setIsMenuOpen}  isMenuOpen={isMenuOpen} >
+    // <HeroUINavbar disableAnimation maxWidth="xl" position="sticky" onMenuOpenChange={setIsMenuOpen}  isMenuOpen={isMenuOpen} >
+    <HeroUINavbar disableAnimation maxWidth="xl" position="sticky" >
 
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarMenuToggle className="lg:hidden"/>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        {/* <NavbarMenuToggle className="lg:hidden"/> */}
+        <ul className="flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -59,7 +60,7 @@ export const Navbar = () => {
         </NavbarBrand>
         <ThemeSwitch />
       </NavbarContent>
-      <NavbarMenu>
+      {/* <NavbarMenu>
         {siteConfig.navItems.map((item) => (
             <NavbarMenuItem key={`menu-${item.href}`}>
               <NextLink
@@ -75,7 +76,7 @@ export const Navbar = () => {
               </NextLink>
             </NavbarMenuItem>
           ))}
-      </NavbarMenu>
+      </NavbarMenu> */}
     </HeroUINavbar>
   );
 };
