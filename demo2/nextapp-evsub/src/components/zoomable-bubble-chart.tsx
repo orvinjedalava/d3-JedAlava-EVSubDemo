@@ -105,7 +105,8 @@ const ZoomableBubbleChart: React.FC<ZoomableBubbleChartProps> = ({
       // .style("height", "auto")
       .style("display", "block")
       .style("margin", "0 auto")
-      .style("background", color(0))
+      // .style("background", color(0))
+      
       .style("cursor", "pointer");
 
     // Append the nodes
