@@ -2,7 +2,7 @@
   {
     "name": "Electric",
     "level": 1,
-    "priority": 1,
+    "priority": 10,
     "nodes": [
       {
         "name": "Tesla",
@@ -84,7 +84,7 @@
   {
     "name": "Hybrid",
     "level": 1,
-    "priority": 2,
+    "priority": 8,
     "nodes": [
       {
         "name": "Toyota",
@@ -165,7 +165,7 @@
   },
   {
     "name": "Sedan",
-    "level": 1,
+    "level": 6,
     "priority": 3,
     "nodes": [
       {
@@ -247,7 +247,7 @@
   },
   {
     "name": "SUV",
-    "level": 1,
+    "level": 4,
     "priority": 4,
     "nodes": [
       {
