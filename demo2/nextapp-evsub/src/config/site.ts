@@ -12,10 +12,10 @@ export const siteConfig = {
       label: "Explore",
       href: "/explore",
     },
-    {
-      label: "Bubble Chart",
-      href: "/bubble-chart",
-    },
+    // {
+    //   label: "Bubble Chart",
+    //   href: "/bubble-chart",
+    // },
     // {
     //   label: "Chat Demo",
     //   href: "/chat-demo",
