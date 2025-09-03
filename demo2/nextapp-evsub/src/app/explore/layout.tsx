@@ -5,8 +5,8 @@ export default function ExploreLayout({
 }) {
   return (
     <section className="flex-grow w-full relative flex flex-col lg:flex-row">
-      <div className="border border-red-500 h-screen lg:h-auto lg:w-1/3 ">{children}</div>
-      <div className="border border-blue-500 h-screen lg:h-auto lg:w-2/3 ">Right</div>
+      <div className="h-screen lg:h-auto lg:w-1/3 flex flex-col">{children}</div>
+      <div className="h-screen lg:h-auto lg:w-2/3 flex flex-col items-center justify-center">Canvas goes here</div>
     </section>
   );
 }

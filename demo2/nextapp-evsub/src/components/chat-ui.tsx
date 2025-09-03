@@ -25,7 +25,7 @@ export const ChatUI = ({
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-
+  
   // Define message bubble styles with tails
   const messageBubble = tv({
     base: "max-w-[70%] p-3 rounded-lg relative",
@@ -80,35 +80,37 @@ export const ChatUI = ({
   };
 
   return (
-    <div className={`flex flex-col w-full h-[${height}] border border-default-200 rounded-lg overflow-hidden sm:max-w-full md:max-w-3xl mx-auto`}>
+    <div className={`flex-grow flex flex-col w-full border border-default-200 rounded-lg overflow-hidden sm:max-w-full md:max-w-3xl mx-auto`}>
       {/* Messages container */}
-      <div 
-        ref={messagesContainerRef}
-        className="h-[60vh] p-4 overflow-y-auto min-h-0"
-      >
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex mb-4 ${message.isUser ? "justify-end" : "justify-start"}`}
-          >
+      <div className="h-[72vh]">
+        <div 
+          ref={messagesContainerRef}
+          className={`h-full p-4 overflow-y-auto min-h-0`}
+        >
+          {messages.map((message) => (
             <div
-              className={messageBubble({ isUser: message.isUser })}
+              key={message.id}
+              className={`flex mb-4 ${message.isUser ? "justify-end" : "justify-start"}`}
             >
-              <p>{message.text}</p>
-              <div 
-                className={`text-xs mt-1 ${
-                  message.isUser ? "text-white/70" : "text-default-500"
-                }`}
+              <div
+                className={messageBubble({ isUser: message.isUser })}
               >
-                {message.timestamp.toLocaleTimeString([], { 
-                  hour: '2-digit', 
-                  minute: '2-digit' 
-                })}
+                <p>{message.text}</p>
+                <div 
+                  className={`text-xs mt-1 ${
+                    message.isUser ? "text-white/70" : "text-default-500"
+                  }`}
+                >
+                  {message.timestamp.toLocaleTimeString([], { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
       
       {/* Input area */}
