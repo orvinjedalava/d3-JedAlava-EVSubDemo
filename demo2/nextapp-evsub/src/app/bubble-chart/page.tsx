@@ -12,7 +12,7 @@ export default function BubbleChartPage() {
         <br />
         Bubble size is determined by priority (higher priority number = larger bubble).
       </p>
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-black rounded-lg shadow-lg p-6">
         <ZoomableBubbleChart />
       </div>
     </div>

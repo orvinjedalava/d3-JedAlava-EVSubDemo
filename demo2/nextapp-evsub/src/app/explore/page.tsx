@@ -98,15 +98,12 @@ export default function ExplorePage() {
 
   return (
     <motion.div
-      className="flex-grow flex flex-col py-8"
+      className="flex-grow flex flex-col"
       initial="initial"
       animate={ stage === 'leaving' ? variants.exit : variants.animate }
       variants={variants}
       transition={{ duration: appSettings.transitionDuration }}
     >
-      {/* <h1>Calculator</h1>
-      <p>This is the calculator page.</p> */}
-      {/* <ChatUI initialMessages={initialMessages} height="800px" /> */}
       <ChatUI initialMessages={initialMessages} height="800px" />
       
     </motion.div>

@@ -67,7 +67,7 @@ const ZoomableBubbleChart: React.FC = () => {
     d3.select(svgRef.current).selectAll("*").remove();
 
     // Specify the chart's dimensions
-    const width = 928;
+    const width = 700;
     const height = width;
 
     // Create the color scale
