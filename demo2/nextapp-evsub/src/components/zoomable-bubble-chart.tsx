@@ -17,6 +17,11 @@ interface TransformedNode {
   value?: number;
 }
 
+interface ZoomableBubbleChartProps {
+  width?: number;
+  height?: number;
+}
+
 // Define types for D3 hierarchy data
 interface HierarchyNode {
   data: {
@@ -33,7 +38,10 @@ interface HierarchyNode {
   children?: HierarchyNode[];
 }
 
-const ZoomableBubbleChart: React.FC = () => {
+const ZoomableBubbleChart: React.FC<ZoomableBubbleChartProps> = ({ 
+  width = 700, 
+  height = 700 
+}) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Transform the cars data to match D3's hierarchy format
@@ -66,9 +74,8 @@ const ZoomableBubbleChart: React.FC = () => {
     // Clear any existing SVG content
     d3.select(svgRef.current).selectAll("*").remove();
 
-    // Specify the chart's dimensions
-    const width = 700;
-    const height = width;
+    // Use the width and height props passed to the component
+    // (width and height are already available from the component props)
 
     // Create the color scale
     const color = d3.scaleLinear<string>()
@@ -94,8 +101,8 @@ const ZoomableBubbleChart: React.FC = () => {
       .attr("viewBox", `-${width / 2} -${height / 2} ${width} ${height}`)
       .attr("width", width)
       .attr("height", height)
-      .style("max-width", "100%")
-      .style("height", "auto")
+      // .style("max-width", "100%")
+      // .style("height", "auto")
       .style("display", "block")
       .style("margin", "0 auto")
       .style("background", color(0))
@@ -172,10 +179,10 @@ const ZoomableBubbleChart: React.FC = () => {
     return () => {
       // Cleanup if needed
     };
-  }, []);
+  }, [width, height]); // Add width and height to the dependency array
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="flex-grow w-full flex flex-col justify-center">
       <svg ref={svgRef} className="w-full max-w-4xl"></svg>
     </div>
   );

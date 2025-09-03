@@ -80,7 +80,7 @@ export const ChatUI = ({
   };
 
   return (
-    <div className={`flex-grow flex flex-col gap-1 w-full overflow-hidden sm:max-w-full md:max-w-3xl mx-auto`}>
+    <div className={`flex-grow flex flex-col gap-1 w-full overflow-hidden sm:max-w-full md:max-w-3xl mx-auto justify-center`}>
       {/* Messages container */}
       <div className="h-[65vh] border border-default-200 rounded-lg overflow-hidden">
         <div 
