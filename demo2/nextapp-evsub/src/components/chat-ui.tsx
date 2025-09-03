@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@heroui/button";
+// import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import { tv } from "tailwind-variants";
 
@@ -80,9 +80,9 @@ export const ChatUI = ({
   };
 
   return (
-    <div className={`flex-grow flex flex-col w-full border border-default-200 rounded-lg overflow-hidden sm:max-w-full md:max-w-3xl mx-auto`}>
+    <div className={`flex-grow flex flex-col gap-1 w-full overflow-hidden sm:max-w-full md:max-w-3xl mx-auto`}>
       {/* Messages container */}
-      <div className="h-[72vh]">
+      <div className="h-[65vh] border border-default-200 rounded-lg overflow-hidden">
         <div 
           ref={messagesContainerRef}
           className={`h-full p-4 overflow-y-auto min-h-0`}
@@ -114,24 +114,28 @@ export const ChatUI = ({
       </div>
       
       {/* Input area */}
-      <div className="border-t border-default-200 p-2 sm:p-4 bg-default-50 dark:bg-default-100/20 h-[80px]">
+      <div className="py-2 sm:py-4 h-[80px]">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <Input
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Type your message here"
             className="flex-1"
             size="sm"
             radius="lg"
+            label="How can I help you today?"
+            labelPlacement="outside"
+            
           />
-          <Button 
+          {/* <Button 
             type="submit" 
             color="primary"
             radius="lg"
             size="sm"
+            
           >
             Send
-          </Button>
+          </Button> */}
         </form>
       </div>
     </div>

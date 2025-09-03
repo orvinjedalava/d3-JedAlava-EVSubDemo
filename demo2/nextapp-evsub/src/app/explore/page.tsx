@@ -98,7 +98,7 @@ export default function ExplorePage() {
 
   return (
     <motion.div
-      className="flex-grow flex flex-col py-4"
+      className="flex-grow flex flex-col py-8"
       initial="initial"
       animate={ stage === 'leaving' ? variants.exit : variants.animate }
       variants={variants}
