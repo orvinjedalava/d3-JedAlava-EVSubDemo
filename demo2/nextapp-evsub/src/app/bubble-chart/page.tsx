@@ -10,7 +10,7 @@ export default function BubbleChartPage() {
       <p className="text-center mb-8 text-gray-600">
         Click on a bubble to zoom in. Click on the background to zoom out.
         <br />
-        Bubble size is determined by priority (lower priority number = larger bubble).
+        Bubble size is determined by priority (higher priority number = larger bubble).
       </p>
       <div className="bg-white rounded-lg shadow-lg p-6">
         <ZoomableBubbleChart />

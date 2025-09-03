@@ -43,15 +43,15 @@ const ZoomableBubbleChart: React.FC = () => {
       name: "Cars",
       children: data.map(carType => ({
         name: carType.name,
-        // Inverse priority for bubble size (lower priority = larger bubble)
+        // Using priority value directly for bubble size (higher priority = larger bubble)
         // Using a multiplier to make the size differences more noticeable
-        value: carType.priority === 1 ? 100 : (6 - carType.priority) * 20,
+        value: carType.priority * 20,
         children: carType.nodes.map(manufacturer => ({
           name: manufacturer.name,
-          value: manufacturer.priority === 1 ? 80 : (6 - manufacturer.priority) * 15,
+          value: manufacturer.priority * 15,
           children: manufacturer.nodes.map(model => ({
             name: model.name,
-            value: model.priority === 1 ? 60 : (6 - model.priority) * 10,
+            value: model.priority * 10,
           }))
         }))
       }))
