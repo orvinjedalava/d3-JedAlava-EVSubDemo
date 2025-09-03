@@ -48,10 +48,10 @@ const ZoomableBubbleChart: React.FC = () => {
         value: carType.priority * 20,
         children: carType.nodes.map(manufacturer => ({
           name: manufacturer.name,
-          value: manufacturer.priority * 15,
+          value: carType.priority * manufacturer.priority * 15,
           children: manufacturer.nodes.map(model => ({
             name: model.name,
-            value: model.priority * 10,
+            value: carType.priority * model.priority * 10,
           }))
         }))
       }))
