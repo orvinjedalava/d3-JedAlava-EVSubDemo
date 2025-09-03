@@ -2,7 +2,7 @@
   {
     "name": "Electric",
     "level": 1,
-    "priority": 10,
+    "priority": 20,
     "nodes": [
       {
         "name": "Tesla",
