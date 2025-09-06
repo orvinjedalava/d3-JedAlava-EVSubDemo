@@ -12,6 +12,10 @@ export const siteConfig = {
       label: "Explore",
       href: "/explore",
     },
+    {
+      label: "Animation",
+      href: "/animation",
+    }
     // {
     //   label: "Bubble Chart",
     //   href: "/bubble-chart",
