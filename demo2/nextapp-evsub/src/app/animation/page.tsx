@@ -121,7 +121,7 @@ export default function ExploreLayout({
     </motion.div></div>
       <div ref={containerRef} className="h-screen lg:h-auto lg:w-2/3 flex flex-col py-8 border border-red-500">
         {/* <ZoomableBubbleChart width={780} height={860} />  */}
-        <CardsPanel />
+        <CardsPanel width={780} height={860} />
       </div>
     </section>
   );
