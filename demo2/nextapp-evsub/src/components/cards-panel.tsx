@@ -77,7 +77,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const onNext = () => {
     console.log('Next button clicked');
     // setIsAnimating(true);
-    setLeftPosition(100); // Move card to the right
+    setLeftPosition(105.22312); // Move card to the right
     setOpacity(0.4); // Start fading out
   }
 
