@@ -1,5 +1,6 @@
 import { CarCard } from "@/components/car-card";
 import { Button, ButtonGroup } from "@heroui/button";
+import { useState, useEffect } from "react";
 
 interface CardsPanelProps {
   width: number;
@@ -32,33 +33,86 @@ const carData = [
 const cardWidth = 253; // 64 * 4
 const cardHeight = 276; // 80 * 4
 
-const onNext = () => {
-  console.log('Next button clicked');
-}
-
-const onBack = () => {  
-  console.log('Back button clicked');
-}
-
-
 export const CardsPanel = ({ width, height }: CardsPanelProps) => {
+  // State to track the left position
+  const [leftPosition, setLeftPosition] = useState(20);
+
+  const [opacity, setOpacity] = useState(1);
+  // State to track if we're animating
+  // const [isAnimating, setIsAnimating] = useState(false);
+
+  // Handle animation with useEffect
+  // useEffect(() => {
+  //   if (!isAnimating) return;
+
+  //   let startTime: number | null = null;
+  //   const duration = 500; // Animation duration in milliseconds
+  //   const startPosition = 20;
+  //   const endPosition = 100;
+
+  //   const animateFrame = (timestamp: number) => {
+  //     if (!startTime) {
+  //       startTime = timestamp;
+  //     }
+  //     const elapsed = timestamp - startTime;
+  //     const progress = Math.min(elapsed / duration, 1);
+      
+  //     // Calculate new position using easing function
+  //     const newPosition = startPosition + (endPosition - startPosition) * progress;
+  //     setLeftPosition(newPosition);
+      
+  //     if (progress < 1) {
+  //       requestAnimationFrame(animateFrame);
+  //     } else {
+  //       setIsAnimating(false);
+  //     }
+  //   };
+
+  //   requestAnimationFrame(animateFrame);
+  // }, [isAnimating]);
+
+  const onNext = () => {
+    console.log('Next button clicked');
+    // setIsAnimating(true);
+    setLeftPosition(100); // Move card to the right
+    setOpacity(0.4); // Start fading out
+  }
+
+  const onBack = () => {  
+    console.log('Back button clicked');
+    setLeftPosition(20); // Reset position when going back
+    setOpacity(1); // Reset opacity
+  }
+
   return (
-  <div className="flex-grow relative" >
-    <div 
-      className="absolute" 
-      style={{ 
-        width: cardWidth, 
-        height: cardHeight,
-        top: 250,
-        left: 20
-      }}>
-      <CarCard car={carData[0]} />
+    <div className="flex-grow relative">
+      <div 
+        className="absolute transition-all duration-500 ease-in-out" 
+        style={{ 
+          width: cardWidth, 
+          height: cardHeight,
+          top: 250,
+          left: leftPosition
+        }}>
+        <CarCard car={carData[0]} />
+      </div>
+      <div 
+        className="absolute transition-all duration-500 ease-in-out" 
+        style={{ 
+          width: cardWidth, 
+          height: cardHeight,
+          top: 350,
+          left: 500,
+          opacity: opacity
+        }}>
+        <CarCard car={carData[1]} />
+      </div>
+      <div className="p-8 flex flex-row justify-center">
+        <ButtonGroup>
+          <Button variant="solid" onPress={onNext}>Next</Button>
+          <Button variant="solid" onPress={onBack}>Back</Button>
+        </ButtonGroup>
+      </div>
     </div>
-    <div className="p-8 flex flex-row justify-center">
-      <ButtonGroup>
-        <Button variant="solid" onPress={onNext}>Next</Button>
-        <Button variant="solid" onPress={onBack}>Back</Button>
-      </ButtonGroup>
-    </div>
-  </div>);
+  );
 }

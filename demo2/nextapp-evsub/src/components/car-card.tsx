@@ -13,7 +13,7 @@ interface CarCardProps {
 
 export const CarCard = ({ car }: CarCardProps) => {
   return (
-    <Card isPressable shadow="sm" className="w-full h-full" >
+    <Card isPressable={false} shadow="sm" className="w-full h-full" >
           <CardBody className="overflow-visible p-0">
             <Image
               alt={car.title}
