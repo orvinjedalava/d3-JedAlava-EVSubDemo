@@ -21,6 +21,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               src={car.img}
               // width={100}
               width="100%"
+              height="auto"
             />
           </CardBody>
           <CardFooter className="text-small justify-between">

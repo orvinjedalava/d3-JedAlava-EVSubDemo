@@ -30,14 +30,17 @@ const carData = [
   },
 ];
 
-const cardWidth = 253; // 64 * 4
-const cardHeight = 276; // 80 * 4
+// const cardWidth = 253; // 64 * 4
+// const cardHeight = 276; // 80 * 4
 
 export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   // State to track the left position
   const [leftPosition, setLeftPosition] = useState(20);
 
   const [opacity, setOpacity] = useState(1);
+
+  const [cardWidth, setCardWidth] = useState(253);
+  const [cardHeight, setCardHeight] = useState(276);
   // State to track if we're animating
   // const [isAnimating, setIsAnimating] = useState(false);
 
@@ -84,6 +87,13 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
     setOpacity(1); // Reset opacity
   }
 
+  const onResize = () => {
+    console.log('Resize button clicked');
+    setCardWidth(cardWidth === 253 ? 500 : 253);
+    setCardHeight(cardHeight === 276 ? 400 : 276);
+    // Logic to resize cards can be added here
+  }
+
   return (
     <div className="flex-grow relative">
       <div 
@@ -99,8 +109,8 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
       <div 
         className="absolute transition-all duration-500 ease-in-out" 
         style={{ 
-          width: cardWidth, 
-          height: cardHeight,
+          width: 253, 
+          height: 276,
           top: 350,
           left: 500,
           opacity: opacity
@@ -111,6 +121,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
         <ButtonGroup>
           <Button variant="solid" onPress={onNext}>Next</Button>
           <Button variant="solid" onPress={onBack}>Back</Button>
+          <Button variant="solid" onPress={onResize}>Resize</Button>
         </ButtonGroup>
       </div>
     </div>
