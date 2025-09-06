@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { CardsPanel } from '@/components/cards-panel';
 import { useTransitionState } from 'next-transition-router';
 import { appSettings } from '@/config/app';
+import { Button } from '@heroui/button';
 
 const variants = {
   initial: { opacity: 0 },
@@ -105,7 +106,7 @@ export default function ExploreLayout({
   const containerRef = useRef<HTMLDivElement>(null);
   const { stage } = useTransitionState();
 
-
+  
   return (
     <section className="flex-grow w-full relative flex flex-col gap-2 lg:flex-row">
       <div className="h-screen lg:h-auto lg:w-1/3 flex flex-col py-8">
