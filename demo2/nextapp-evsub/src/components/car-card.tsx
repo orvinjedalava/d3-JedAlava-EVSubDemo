@@ -1,16 +1,20 @@
 import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import { Image } from "@heroui/image";
 import { CarInfoChip } from "./car-info-chip";
-import { WeeklyCostIcon } from "@/components/icons";
 import { CardDisplayMode, CarCardState } from "@/types";
+import { Button } from "@heroui/button";
 
 interface CarCardProps {
   car: CarCardState;
 }
 
 export const CarCard = ({ car }: CarCardProps) => {
+  const showCriteria = (car.displayMode & CardDisplayMode.ShowCriteria) !== 0;
+  const showButton = (car.displayMode & CardDisplayMode.ShowButton) !== 0;
+  const isExpanded = (car.displayMode & CardDisplayMode.Expand) !== 0;
+
   return (
-    <Card isPressable={false} shadow="sm" className="w-full h-full" >
+    <Card isPressable={false} shadow="sm" className="w-full h-full transition-all duration-500 ease-in-out" >
       <div 
         className="w-full overflow-hidden"
         >
@@ -34,29 +38,64 @@ export const CarCard = ({ car }: CarCardProps) => {
       
       
       {/* Content container - takes the other 50% */}
-      <div className="flex flex-col">
-        <CardBody className="flex-grow p-3">
-          <div className="mb-2">
+      {/* <div className="flex flex-col">
+        <CardBody className="flex-grow p-3 gap-2">
+          <div className="">
             <h3 className="text-sm font-semibold">{car.detail.title}</h3>
             <p className="text-sm text-default-500">{car.detail.subtitle}</p>
           </div>
-          <div className="flex flex-row items-center justify-center gap-2">
-            <CarInfoChip 
-              icon="/icons/weeklycosticon.svg"
-              description="Weekly Cost" 
-              value={car.detail.criteria.weeklyCost} 
-            />
-            <CarInfoChip 
-              icon="/icons/internetspeedicon.svg"
-              description="Odometer" 
-              value={car.detail.criteria.odometer} 
-            />
-          </div>
+          { showCriteria && 
+            <div className="flex flex-row items-center justify-center gap-2">
+              <CarInfoChip 
+                icon="/icons/weeklycosticon.svg"
+                description="Weekly Cost" 
+                value={car.detail.criteria.weeklyCost} 
+              />
+              <CarInfoChip 
+                icon="/icons/internetspeedicon.svg"
+                description="Odometer" 
+                value={car.detail.criteria.odometer} 
+              />
+            </div>
+          }
+          { showButton &&
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <Button variant="solid" color="primary" onPress={() => console.log("Clicked!")}>
+                See more details
+              </Button>
+            </div>
+          }
         </CardBody>
-        {/* <CardFooter className="text-small justify-between">
-          <b>{car.title}</b>
-          <p className="text-default-500">{car.price}</p>
-        </CardFooter> */}
+        
+      </div> */}
+      <div className="grid grid-rows-[auto_auto_auto] transition-all duration-500 ease-in-out">
+        <CardBody className="flex-grow p-3 gap-2">
+        <div className="">
+          <h3 className="text-sm font-semibold">{car.detail.title}</h3>
+          <p className="text-sm text-default-500">{car.detail.subtitle}</p>
+        </div>
+        
+        { showCriteria && 
+            <div className="flex flex-row items-center justify-center gap-2">
+              <CarInfoChip 
+                icon="/icons/weeklycosticon.svg"
+                description="Weekly Cost" 
+                value={car.detail.criteria.weeklyCost} 
+              />
+              <CarInfoChip 
+                icon="/icons/internetspeedicon.svg"
+                description="Odometer" 
+                value={car.detail.criteria.odometer} 
+              />
+            </div>
+          }
+        
+        <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+          <Button className="flex-grow" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
+            See more details
+          </Button>
+        </div>
+        </CardBody>
       </div>
     </Card>
   );

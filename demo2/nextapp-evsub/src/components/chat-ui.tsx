@@ -5,6 +5,7 @@ import { Input } from "@heroui/input";
 import { tv } from "tailwind-variants";
 import { Button, ButtonGroup } from "@heroui/button";
 import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
+import { CardDisplayMode } from "@/types";
 
 type Message = {
   id: string;
@@ -29,7 +30,8 @@ export const ChatUI = ({
 
   const { 
       carCardStates,
-      setCarCardPosition
+      setCarCardPosition,
+      setCarCardMode
     } = useCarGroupStore();
   
   // Define message bubble styles with tails
@@ -87,11 +89,13 @@ export const ChatUI = ({
 
   const onNext = () => {
     setCarCardPosition(0, { left: 200, zIndex: 1 });
+    setCarCardMode(0, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
     setCarCardPosition(1, { opacity: 0.4 });
   }
 
   const onBack = () => {
     setCarCardPosition(0, { left: 20, zIndex: 0 });
+    setCarCardMode(0,  CardDisplayMode.ShowCriteria); // Set to Clickable
     setCarCardPosition(1, { opacity: 1 });
   }
 
@@ -104,6 +108,10 @@ export const ChatUI = ({
         height: carCard.displayProperties.height === 350 ? 688 : 350,
         left: carCard.displayProperties.left === 200 ? 50 : 200, 
       });
+
+    setCarCardMode(0,  carCard.displayMode & CardDisplayMode.Expand ? 
+      CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
+      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
   }
 
   return (

@@ -5,10 +5,10 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export enum CardDisplayMode {
-  Minimum = "minimum",
-  ReadOnly = "readonly",
-  Clickable = "clickable",
-  Expanded = "expanded"
+  None = 0,
+  ShowCriteria = 1 << 0,    // 2 (binary: 0010)
+  ShowButton = 1 << 1,   // 4 (binary: 0100)
+  Expand = 1 << 2     // 8 (binary: 1000)
 }
 
 export interface CarCardState {
@@ -50,4 +50,5 @@ export interface CarGroupState {
   carCardStates: CarCardState[];
   setCarCardStates: (carCardStates: CarCardState[]) => void;
   setCarCardPosition: (index: number, displayProperties: CarCardDisplayProperties) => void;
+  setCarCardMode: (index: number, mode: CardDisplayMode) => void;
 }

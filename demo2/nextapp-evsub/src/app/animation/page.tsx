@@ -166,7 +166,7 @@ export default function ExploreLayout({
       return {
         displayProperties,
         detail,
-        displayMode: CardDisplayMode.ReadOnly
+        displayMode: CardDisplayMode.ShowCriteria
       };
     });
     

@@ -20,7 +20,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
           className="absolute transition-all duration-500 ease-in-out" 
           style={{ 
             width: cardState.displayProperties.width,
-            height: cardState.displayProperties.height,
+            // height: cardState.displayProperties.height,
             top: cardState.displayProperties.top || 0,
             left: cardState.displayProperties.left || 0,
             opacity: cardState.displayProperties.opacity !== undefined ? cardState.displayProperties.opacity : 1,
