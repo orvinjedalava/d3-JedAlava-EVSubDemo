@@ -58,13 +58,24 @@ export const CarCard = ({ car }: CarCardProps) => {
             className="relative transition-all duration-500 ease-in-out"
             style={{ height: isExpanded ? `220px`  :`220px` }}
             >
-            <Image
+            {/* <Image
               ref={imageRef}
               alt={car.detail.title}
               className={`absolute ${isExpanded ? "top-5 left-5 rounded-lg" :"top-0 left-0 rounded-b-none"}`}
               src={car.detail.img}
               width={isExpanded ?  `${(car.displayProperties.width ?? 0) / 2 }px` :  `${(car.displayProperties.width ?? 0)}px`}
               
+            /> */}
+            <Image
+              ref={imageRef}
+              alt={car.detail.title}
+              className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? "top-5 left-5 rounded-lg" : "top-0 left-0 rounded-b-none"}`}
+              style={{
+                transform: isExpanded ? `scale(0.5)` : `scale(1)`,
+                transformOrigin: 'top left'
+              }}
+              width={`${car.displayProperties.width ?? 0}px`}
+              src={car.detail.img}
             />
           </div>
           
