@@ -91,7 +91,7 @@ export const CarCard = ({ car }: CarCardProps) => {
           }
         
         <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <Button className="flex-grow" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
+          <Button className="w-[229px]" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
             See more details
           </Button>
         </div>
