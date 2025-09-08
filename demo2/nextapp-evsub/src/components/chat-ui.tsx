@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-// import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import { tv } from "tailwind-variants";
+import { Button, ButtonGroup } from "@heroui/button";
+import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 
 type Message = {
   id: string;
@@ -25,6 +26,11 @@ export const ChatUI = ({
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  const { 
+      carCardStates,
+      setCarCardPosition
+    } = useCarGroupStore();
   
   // Define message bubble styles with tails
   const messageBubble = tv({
@@ -79,10 +85,31 @@ export const ChatUI = ({
     }, 1000);
   };
 
+  const onNext = () => {
+    setCarCardPosition(0, { left: 200, zIndex: 1 });
+    setCarCardPosition(1, { opacity: 0.4 });
+  }
+
+  const onBack = () => {
+    setCarCardPosition(0, { left: 20, zIndex: 0 });
+    setCarCardPosition(1, { opacity: 1 });
+  }
+
+  const onResize = () => {
+    const carCard = carCardStates[0];
+
+    setCarCardPosition(0, 
+      { 
+        width: carCard.displayProperties.width === 253 ? 715 : 253, 
+        height: carCard.displayProperties.height === 350 ? 688 : 350,
+        left: carCard.displayProperties.left === 200 ? 50 : 200, 
+      });
+  }
+
   return (
     <div className={`flex-grow flex flex-col gap-1 w-full overflow-hidden sm:max-w-full md:max-w-3xl mx-auto justify-center`}>
       {/* Messages container */}
-      <div className="h-[65vh] border border-default-200 rounded-lg overflow-hidden">
+      <div className="h-[60vh] border border-default-200 rounded-lg overflow-hidden">
         <div 
           ref={messagesContainerRef}
           className={`h-full p-4 overflow-y-auto min-h-0`}
@@ -137,6 +164,13 @@ export const ChatUI = ({
             Send
           </Button> */}
         </form>
+      </div>
+      <div className="p-8 flex flex-row justify-center">
+        <ButtonGroup>
+          <Button variant="solid" onPress={onNext}>Next</Button>
+          <Button variant="solid" onPress={onBack}>Back</Button>
+          <Button variant="solid" onPress={onResize}>Resize</Button>
+        </ButtonGroup>
       </div>
     </div>
   );
