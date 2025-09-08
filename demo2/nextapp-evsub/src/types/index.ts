@@ -15,12 +15,14 @@ export interface CarCardDisplayProperties {
   top?: number;
   left?: number;
   opacity?: number;
+  zIndex?: number;
 }
 
 export interface CarCardDetail {
   title: string;
+  subtitle: string;
   img: string;
-  price: string;
+  criteria: Record<string, string>;
 }
 
 export interface BoundingBox {

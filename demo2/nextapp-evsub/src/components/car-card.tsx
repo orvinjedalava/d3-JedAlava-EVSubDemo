@@ -1,10 +1,14 @@
-import {Card, CardBody, CardFooter} from "@heroui/card";
+import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import { Image } from "@heroui/image";
+import { CarInfoChip } from "./car-info-chip";
+import { WeeklyCostIcon } from "@/components/icons";
+
 
 type Car = {
   title: string;
+  subtitle: string;
   img: string;
-  price: string;
+  criteria: Record<string, string>;
 }
 
 interface CarCardProps {
@@ -14,20 +18,53 @@ interface CarCardProps {
 export const CarCard = ({ car }: CarCardProps) => {
   return (
     <Card isPressable={false} shadow="sm" className="w-full h-full" >
-          <CardBody className="overflow-visible p-0">
-            <Image
-              alt={car.title}
-              className="w-full object-cover h-[140px]"
-              src={car.img}
-              // width={100}
-              width="100%"
-              height="auto"
+      <div 
+        className="w-full overflow-hidden"
+        >
+        <Image
+          alt={car.title}
+          // className="rounded-b-none object-none"
+          className="rounded-b-none"
+          src={car.img}
+          // width={253}
+          // height={200}
+        />
+      </div>
+
+      {/* <Image
+          alt={car.title}
+          // className="rounded-b-none object-none"
+          className=" rounded-b-none "
+          src={car.img}
+          
+        /> */}
+      
+      
+      {/* Content container - takes the other 50% */}
+      <div className="flex flex-col">
+        <CardBody className="flex-grow p-3">
+          <div className="mb-2">
+            <h3 className="text-sm font-semibold">{car.title}</h3>
+            <p className="text-sm text-default-500">{car.subtitle}</p>
+          </div>
+          <div className="flex flex-row items-center justify-center gap-2">
+            <CarInfoChip 
+              icon="/icons/weeklycosticon.svg"
+              description="Weekly Cost" 
+              value={car.criteria.weeklyCost} 
             />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{car.title}</b>
-            <p className="text-default-500">{car.price}</p>
-          </CardFooter>
-        </Card>
+            <CarInfoChip 
+              icon="/icons/internetspeedicon.svg"
+              description="Odometer" 
+              value={car.criteria.odometer} 
+            />
+          </div>
+        </CardBody>
+        {/* <CardFooter className="text-small justify-between">
+          <b>{car.title}</b>
+          <p className="text-default-500">{car.price}</p>
+        </CardFooter> */}
+      </div>
+    </Card>
   );
 }

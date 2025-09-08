@@ -8,38 +8,8 @@ interface CardsPanelProps {
   height: number;
 }
 
-// const carData = [
-//   {
-//     title: "Car 1",
-//     img: "/images/Volvo EX30.png",
-//     price: "$20,000",
-//   },
-//   {
-//     title: "Car 2",
-//     img: "/images/KIA EV5 Earth 2025.png",
-//     price: "$25,000",
-//   },
-//   {
-//     title: "Car 3",
-//     img: "/images/BMW I4 EDrive35 2023.png",
-//     price: "$30,000",
-//   },
-//   {
-//     title: "Car 4",
-//     img: "/images/Tesla Model 3 Earth 2025.png",
-//     price: "$35,000",
-//   },
-// ];
-
-// const cardWidth = 253; // 64 * 4
-// const cardHeight = 276; // 80 * 4
-
 export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   // State to track the left position
-  const [leftPosition, setLeftPosition] = useState(20);
-
-  const [opacity, setOpacity] = useState(1);
-
   const [cardWidth, setCardWidth] = useState(253);
   const [cardHeight, setCardHeight] = useState(276);
 
@@ -82,25 +52,24 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   // }, [isAnimating]);
 
   const onNext = () => {
-    console.log('Next button clicked');
-    // setIsAnimating(true);
-    // setLeftPosition(105.22312); // Move card to the right
-    // setOpacity(0.4); // Start fading out
-
-    setCarCardPosition(0, { left: 105.22312 });
+    setCarCardPosition(0, { left: 200, zIndex: 1 });
     setCarCardPosition(1, { opacity: 0.4 });
   }
 
-  const onBack = () => {  
-    setCarCardPosition(0, { left: 20 });
+  const onBack = () => {
+    setCarCardPosition(0, { left: 20, zIndex: 0 });
     setCarCardPosition(1, { opacity: 1 });
   }
 
   const onResize = () => {
     const carCard = carCardStates[0];
 
-    setCarCardPosition(0, { width: carCard.displayProperties.width === 253 ? 500 : 253, height: carCard.displayProperties.height === 276 ? 400 : 276 });
-    // Logic to resize cards can be added here
+    setCarCardPosition(0, 
+      { 
+        width: carCard.displayProperties.width === 253 ? 715 : 253, 
+        height: carCard.displayProperties.height === 350 ? 688 : 350,
+        left: carCard.displayProperties.left === 200 ? 50 : 200, 
+      });
   }
 
   return (
@@ -115,7 +84,8 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
             height: cardState.displayProperties.height || cardHeight,
             top: cardState.displayProperties.top || 0,
             left: cardState.displayProperties.left || 0,
-            opacity: cardState.displayProperties.opacity !== undefined ? cardState.displayProperties.opacity : 1
+            opacity: cardState.displayProperties.opacity !== undefined ? cardState.displayProperties.opacity : 1,
+            zIndex: cardState.displayProperties.zIndex || 0,
           }}>
           <CarCard car={cardState.detail} />
         </div>

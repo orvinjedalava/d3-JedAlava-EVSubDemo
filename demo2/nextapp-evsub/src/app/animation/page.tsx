@@ -101,14 +101,22 @@ const initialMessages = [
 
 const carCardDetails: CarCardDetail[] = [
   {
-    title: "Car 1",
+    title: "Volvo EX30",
+    subtitle: "Ultra Single Motor 2023",
     img: "/images/Volvo EX30.png",
-    price: "$20,000",
+    criteria: {
+      "weeklyCost": "$325.50",
+      "odometer": "43,793 km",
+    }
   },
   {
-    title: "Car 2",
+    title: "KIA EV5",
+    subtitle: "Earth 2025",
     img: "/images/KIA EV5 Earth 2025.png",
-    price: "$25,000",
+    criteria: {
+      "weeklyCost": "$295.80",
+      "odometer": "43,793 km",
+    }
   },
   // {
   //   title: "Car 3",
@@ -123,8 +131,8 @@ const carCardDetails: CarCardDetail[] = [
 ];
 
 const carCardDisplayProperties: CarCardDisplayProperties[] = [
-  { width: 253, height: 276, top: 250, left: 20, opacity: 1 },
-  { width: 253, height: 276, top: 350, left: 500, opacity: 1 },
+  { width: 253, height: 350, top: 80, left: 50, opacity: 1 , zIndex: 0},
+  { width: 253, height: 350, top: 350, left: 500, opacity: 1 , zIndex: 0},
 //   { width: 253, height: 276, top: 0, left: 250, opacity: 1 },
 //   { width: 253, height: 276, top: 0, left: 350, opacity: 1 },
 ];
@@ -170,7 +178,7 @@ export default function ExploreLayout({
   
   return (
     <section className="flex-grow w-full relative flex flex-col gap-2 lg:flex-row">
-      <div className="h-screen lg:h-auto lg:w-1/3 flex flex-col py-8">
+      <div className="h-screen lg:h-auto lg:w-1/4 flex flex-col py-8">
       <motion.div
         className="flex-grow flex flex-col"
         initial="initial"
@@ -181,7 +189,7 @@ export default function ExploreLayout({
       <ChatUI initialMessages={initialMessages} height="800px" />
       
     </motion.div></div>
-      <div ref={containerRef} className="h-screen lg:h-auto lg:w-2/3 flex flex-col py-8 border border-red-500">
+      <div ref={containerRef} className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8 border border-red-500">
         {/* <ZoomableBubbleChart width={780} height={860} />  */}
         <CardsPanel width={780} height={860} />
       </div>
