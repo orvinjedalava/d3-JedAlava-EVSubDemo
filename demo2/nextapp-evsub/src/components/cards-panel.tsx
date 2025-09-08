@@ -8,28 +8,28 @@ interface CardsPanelProps {
   height: number;
 }
 
-const carData = [
-  {
-    title: "Car 1",
-    img: "/images/Volvo EX30.png",
-    price: "$20,000",
-  },
-  {
-    title: "Car 2",
-    img: "/images/KIA EV5 Earth 2025.png",
-    price: "$25,000",
-  },
-  {
-    title: "Car 3",
-    img: "/images/BMW I4 EDrive35 2023.png",
-    price: "$30,000",
-  },
-  {
-    title: "Car 4",
-    img: "/images/Tesla Model 3 Earth 2025.png",
-    price: "$35,000",
-  },
-];
+// const carData = [
+//   {
+//     title: "Car 1",
+//     img: "/images/Volvo EX30.png",
+//     price: "$20,000",
+//   },
+//   {
+//     title: "Car 2",
+//     img: "/images/KIA EV5 Earth 2025.png",
+//     price: "$25,000",
+//   },
+//   {
+//     title: "Car 3",
+//     img: "/images/BMW I4 EDrive35 2023.png",
+//     price: "$30,000",
+//   },
+//   {
+//     title: "Car 4",
+//     img: "/images/Tesla Model 3 Earth 2025.png",
+//     price: "$35,000",
+//   },
+// ];
 
 // const cardWidth = 253; // 64 * 4
 // const cardHeight = 276; // 80 * 4
@@ -137,13 +137,13 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
           key={`car-card-${index}`}
           className="absolute transition-all duration-500 ease-in-out" 
           style={{ 
-            width: cardState.width || cardWidth,
-            height: cardState.height || cardHeight,
-            top: cardState.top,
-            left: cardState.left,
-            opacity: cardState.opacity !== undefined ? cardState.opacity : 1
+            width: cardState.displayProperties.width || cardWidth,
+            height: cardState.displayProperties.height || cardHeight,
+            top: cardState.displayProperties.top || 0,
+            left: cardState.displayProperties.left || 0,
+            opacity: cardState.displayProperties.opacity !== undefined ? cardState.displayProperties.opacity : 1
           }}>
-          <CarCard car={carData[index]} />
+          <CarCard car={cardState.detail} />
         </div>
       ))}
       <div className="p-8 flex flex-row justify-center">

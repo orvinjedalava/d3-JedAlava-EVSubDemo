@@ -8,6 +8,8 @@ import { CardsPanel } from '@/components/cards-panel';
 import { useTransitionState } from 'next-transition-router';
 import { appSettings } from '@/config/app';
 import { Button } from '@heroui/button';
+import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
+import type { CarCardState, CarCardDetail, CarCardDisplayProperties } from '@/types';
 
 const variants = {
   initial: { opacity: 0 },
@@ -97,6 +99,36 @@ const initialMessages = [
   }
 ];
 
+const carCardDetails: CarCardDetail[] = [
+  {
+    title: "Car 1",
+    img: "/images/Volvo EX30.png",
+    price: "$20,000",
+  },
+  {
+    title: "Car 2",
+    img: "/images/KIA EV5 Earth 2025.png",
+    price: "$25,000",
+  },
+  // {
+  //   title: "Car 3",
+  //   img: "/images/BMW I4 EDrive35 2023.png",
+  //   price: "$30,000",
+  // },
+  // {
+  //   title: "Car 4",
+  //   img: "/images/Tesla Model 3 Earth 2025.png",
+  //   price: "$35,000",
+  // },
+];
+
+const carCardDisplayProperties: CarCardDisplayProperties[] = [
+  { width: 253, height: 276, top: 250, left: 20, opacity: 1 },
+  { width: 253, height: 276, top: 350, left: 500, opacity: 1 },
+//   { width: 253, height: 276, top: 0, left: 250, opacity: 1 },
+//   { width: 253, height: 276, top: 0, left: 350, opacity: 1 },
+];
+
 export default function ExploreLayout({
   children,
 }: {
@@ -105,6 +137,35 @@ export default function ExploreLayout({
   const [dimensions, setDimensions] = useState({ width: 700, height: 700 });
   const containerRef = useRef<HTMLDivElement>(null);
   const { stage } = useTransitionState();
+
+  const { 
+    carCardStates,
+    setCarCardStates,
+  } = useCarGroupStore();
+
+  useEffect(() => {
+    // // Get the setCarCardStates function from your store
+    // const { setCarCardStates } = useCarGroupStore();
+    
+    // Create an array of CarCardState objects by combining
+    // the carCardDetails and carCardDisplayProperties arrays
+    const initialCardStates: CarCardState[] = carCardDetails.map((detail, index) => {
+      // Get the display properties for this card, or use defaults if not available
+      const displayProperties = carCardDisplayProperties[index];
+
+      // Return the CarCardState object with separate detail and displayProperties
+      return {
+        displayProperties,
+        detail
+      };
+    });
+    
+    // Update the store with the combined data
+    setCarCardStates(initialCardStates);
+    
+    // Log for debugging
+    console.log("Initialized card states:", initialCardStates);
+  }, []);
 
   
   return (

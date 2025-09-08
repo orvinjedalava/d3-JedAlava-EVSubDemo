@@ -5,12 +5,22 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export interface CarCardState {
+  displayProperties: CarCardDisplayProperties;
+  detail: CarCardDetail;
+}
+
+export interface CarCardDisplayProperties {
   width: number;
   height: number;
   top: number;
   left: number;
   opacity?: number;
-  setDimensions: (width: number, height: number, top: number, left: number, opacity?: number) => void;
+}
+
+export interface CarCardDetail {
+  title: string;
+  img: string;
+  price: string;
 }
 
 export interface BoundingBox {
@@ -28,5 +38,5 @@ export interface CarGroupCoordinates {
 
 export interface CarGroupState {
   carCardStates: CarCardState[];
-  setCarCards: (carCardStates: CarCardState[]) => void;
+  setCarCardStates: (carCardStates: CarCardState[]) => void;
 }

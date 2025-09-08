@@ -11,5 +11,6 @@ import type { CarCardState, CarGroupState, CarGroupCoordinates  } from '@/types'
 
 export const useCarGroupStore = create<CarGroupState>((set) => ({
   carCardStates: new Array<CarCardState>(),
-  setCarCards: (carCardStates) => set({ carCardStates }),
+
+  setCarCardStates: (carCardStates) => set({ carCardStates }),
 }));
