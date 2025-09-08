@@ -69,7 +69,7 @@ export const CarCard = ({ car }: CarCardProps) => {
             <Image
               ref={imageRef}
               alt={car.detail.title}
-              className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? "top-5 left-5 rounded-lg" : "top-0 left-0 rounded-b-none"}`}
+              className={`absolute transition-transform duration-500 ease-in-out ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
                 transform: isExpanded ? `scale(0.5)` : `scale(1)`,
                 transformOrigin: 'top left'
