@@ -4,9 +4,17 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export enum CardDisplayMode {
+  Minimum = "minimum",
+  ReadOnly = "readonly",
+  Clickable = "clickable",
+  Expanded = "expanded"
+}
+
 export interface CarCardState {
   displayProperties: CarCardDisplayProperties;
   detail: CarCardDetail;
+  displayMode: CardDisplayMode;
 }
 
 export interface CarCardDisplayProperties {

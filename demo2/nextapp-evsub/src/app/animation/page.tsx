@@ -10,6 +10,7 @@ import { appSettings } from '@/config/app';
 import { Button } from '@heroui/button';
 import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 import type { CarCardState, CarCardDetail, CarCardDisplayProperties } from '@/types';
+import { CardDisplayMode } from '@/types';
 
 const variants = {
   initial: { opacity: 0 },
@@ -164,7 +165,8 @@ export default function ExploreLayout({
       // Return the CarCardState object with separate detail and displayProperties
       return {
         displayProperties,
-        detail
+        detail,
+        displayMode: CardDisplayMode.ReadOnly
       };
     });
     

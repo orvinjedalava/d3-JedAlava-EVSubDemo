@@ -2,17 +2,10 @@ import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import { Image } from "@heroui/image";
 import { CarInfoChip } from "./car-info-chip";
 import { WeeklyCostIcon } from "@/components/icons";
-
-
-type Car = {
-  title: string;
-  subtitle: string;
-  img: string;
-  criteria: Record<string, string>;
-}
+import { CardDisplayMode, CarCardState } from "@/types";
 
 interface CarCardProps {
-  car: Car;
+  car: CarCardState;
 }
 
 export const CarCard = ({ car }: CarCardProps) => {
@@ -22,10 +15,10 @@ export const CarCard = ({ car }: CarCardProps) => {
         className="w-full overflow-hidden"
         >
         <Image
-          alt={car.title}
+          alt={car.detail.title}
           // className="rounded-b-none object-none"
           className="rounded-b-none"
-          src={car.img}
+          src={car.detail.img}
           // width={253}
           // height={200}
         />
@@ -44,19 +37,19 @@ export const CarCard = ({ car }: CarCardProps) => {
       <div className="flex flex-col">
         <CardBody className="flex-grow p-3">
           <div className="mb-2">
-            <h3 className="text-sm font-semibold">{car.title}</h3>
-            <p className="text-sm text-default-500">{car.subtitle}</p>
+            <h3 className="text-sm font-semibold">{car.detail.title}</h3>
+            <p className="text-sm text-default-500">{car.detail.subtitle}</p>
           </div>
           <div className="flex flex-row items-center justify-center gap-2">
             <CarInfoChip 
               icon="/icons/weeklycosticon.svg"
               description="Weekly Cost" 
-              value={car.criteria.weeklyCost} 
+              value={car.detail.criteria.weeklyCost} 
             />
             <CarInfoChip 
               icon="/icons/internetspeedicon.svg"
               description="Odometer" 
-              value={car.criteria.odometer} 
+              value={car.detail.criteria.odometer} 
             />
           </div>
         </CardBody>

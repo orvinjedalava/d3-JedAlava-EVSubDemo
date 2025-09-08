@@ -26,7 +26,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
             opacity: cardState.displayProperties.opacity !== undefined ? cardState.displayProperties.opacity : 1,
             zIndex: cardState.displayProperties.zIndex || 0,
           }}>
-          <CarCard car={cardState.detail} />
+          <CarCard car={cardState} />
         </div>
       ))}
       
