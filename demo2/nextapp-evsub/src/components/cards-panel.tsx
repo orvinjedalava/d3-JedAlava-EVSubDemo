@@ -1,6 +1,7 @@
 import { CarCard } from "@/components/car-card";
 import { Button, ButtonGroup } from "@heroui/button";
 import { useState, useEffect } from "react";
+import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 
 interface CardsPanelProps {
   width: number;
@@ -41,6 +42,11 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
 
   const [cardWidth, setCardWidth] = useState(253);
   const [cardHeight, setCardHeight] = useState(276);
+
+  const { 
+    carCardStates
+  } = useCarGroupStore();
+
   // State to track if we're animating
   // const [isAnimating, setIsAnimating] = useState(false);
 
@@ -95,28 +101,51 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   }
 
   return (
+    // <div className="flex-grow relative">
+    //   <div 
+    //     className="absolute transition-all duration-500 ease-in-out" 
+    //     style={{ 
+    //       width: cardWidth, 
+    //       height: cardHeight,
+    //       top: 250,
+    //       left: leftPosition
+    //     }}>
+    //     <CarCard car={carData[0]} />
+    //   </div>
+    //   <div 
+    //     className="absolute transition-all duration-500 ease-in-out" 
+    //     style={{ 
+    //       width: 253, 
+    //       height: 276,
+    //       top: 350,
+    //       left: 500,
+    //       opacity: opacity
+    //     }}>
+    //     <CarCard car={carData[1]} />
+    //   </div>
+    //   <div className="p-8 flex flex-row justify-center">
+    //     <ButtonGroup>
+    //       <Button variant="solid" onPress={onNext}>Next</Button>
+    //       <Button variant="solid" onPress={onBack}>Back</Button>
+    //       <Button variant="solid" onPress={onResize}>Resize</Button>
+    //     </ButtonGroup>
+    //   </div>
+    // </div>
     <div className="flex-grow relative">
-      <div 
-        className="absolute transition-all duration-500 ease-in-out" 
-        style={{ 
-          width: cardWidth, 
-          height: cardHeight,
-          top: 250,
-          left: leftPosition
-        }}>
-        <CarCard car={carData[0]} />
-      </div>
-      <div 
-        className="absolute transition-all duration-500 ease-in-out" 
-        style={{ 
-          width: 253, 
-          height: 276,
-          top: 350,
-          left: 500,
-          opacity: opacity
-        }}>
-        <CarCard car={carData[1]} />
-      </div>
+      {carCardStates.map((cardState, index) => (
+        <div 
+          key={`car-card-${index}`}
+          className="absolute transition-all duration-500 ease-in-out" 
+          style={{ 
+            width: cardState.width || cardWidth,
+            height: cardState.height || cardHeight,
+            top: cardState.top,
+            left: cardState.left,
+            opacity: cardState.opacity !== undefined ? cardState.opacity : 1
+          }}>
+          <CarCard car={carData[index]} />
+        </div>
+      ))}
       <div className="p-8 flex flex-row justify-center">
         <ButtonGroup>
           <Button variant="solid" onPress={onNext}>Next</Button>

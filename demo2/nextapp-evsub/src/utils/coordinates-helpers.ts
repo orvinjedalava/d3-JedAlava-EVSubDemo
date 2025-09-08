@@ -1,0 +1,1 @@
+import type { BoundingBox, CarGroupCoordinates } from '@/types';
