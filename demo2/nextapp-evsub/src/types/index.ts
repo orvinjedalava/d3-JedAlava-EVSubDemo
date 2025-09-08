@@ -10,10 +10,10 @@ export interface CarCardState {
 }
 
 export interface CarCardDisplayProperties {
-  width: number;
-  height: number;
-  top: number;
-  left: number;
+  width?: number;
+  height?: number;
+  top?: number;
+  left?: number;
   opacity?: number;
 }
 
@@ -39,4 +39,5 @@ export interface CarGroupCoordinates {
 export interface CarGroupState {
   carCardStates: CarCardState[];
   setCarCardStates: (carCardStates: CarCardState[]) => void;
+  setCarCardPosition: (index: number, displayProperties: CarCardDisplayProperties) => void;
 }

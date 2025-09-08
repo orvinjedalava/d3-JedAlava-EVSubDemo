@@ -44,7 +44,8 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const [cardHeight, setCardHeight] = useState(276);
 
   const { 
-    carCardStates
+    carCardStates,
+    setCarCardPosition
   } = useCarGroupStore();
 
   // State to track if we're animating
@@ -83,54 +84,27 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const onNext = () => {
     console.log('Next button clicked');
     // setIsAnimating(true);
-    setLeftPosition(105.22312); // Move card to the right
-    setOpacity(0.4); // Start fading out
+    // setLeftPosition(105.22312); // Move card to the right
+    // setOpacity(0.4); // Start fading out
+
+    setCarCardPosition(0, { left: 105.22312 });
+    setCarCardPosition(1, { opacity: 0.4 });
   }
 
   const onBack = () => {  
-    console.log('Back button clicked');
-    setLeftPosition(20); // Reset position when going back
-    setOpacity(1); // Reset opacity
+    setCarCardPosition(0, { left: 20 });
+    setCarCardPosition(1, { opacity: 1 });
   }
 
   const onResize = () => {
-    console.log('Resize button clicked');
-    setCardWidth(cardWidth === 253 ? 500 : 253);
-    setCardHeight(cardHeight === 276 ? 400 : 276);
+    const carCard = carCardStates[0];
+
+    setCarCardPosition(0, { width: carCard.displayProperties.width === 253 ? 500 : 253, height: carCard.displayProperties.height === 276 ? 400 : 276 });
     // Logic to resize cards can be added here
   }
 
   return (
-    // <div className="flex-grow relative">
-    //   <div 
-    //     className="absolute transition-all duration-500 ease-in-out" 
-    //     style={{ 
-    //       width: cardWidth, 
-    //       height: cardHeight,
-    //       top: 250,
-    //       left: leftPosition
-    //     }}>
-    //     <CarCard car={carData[0]} />
-    //   </div>
-    //   <div 
-    //     className="absolute transition-all duration-500 ease-in-out" 
-    //     style={{ 
-    //       width: 253, 
-    //       height: 276,
-    //       top: 350,
-    //       left: 500,
-    //       opacity: opacity
-    //     }}>
-    //     <CarCard car={carData[1]} />
-    //   </div>
-    //   <div className="p-8 flex flex-row justify-center">
-    //     <ButtonGroup>
-    //       <Button variant="solid" onPress={onNext}>Next</Button>
-    //       <Button variant="solid" onPress={onBack}>Back</Button>
-    //       <Button variant="solid" onPress={onResize}>Resize</Button>
-    //     </ButtonGroup>
-    //   </div>
-    // </div>
+    
     <div className="flex-grow relative">
       {carCardStates.map((cardState, index) => (
         <div 
