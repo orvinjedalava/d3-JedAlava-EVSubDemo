@@ -17,8 +17,11 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
     <div className="flex-grow relative">
       {
         carGroupStates.map((carGroupState) => (
-          <>
-            <CarGroupPanel key={`car-group-${carGroupState.info.name}`} carGroupState={carGroupState} />
+          <div key={`car-group-${carGroupState.info.name}`} >
+            <CarGroupPanel 
+              key={`car-group-panel-${carGroupState.info.name}`} 
+              carGroupState={carGroupState} 
+            />
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
               className="m-2 absolute transition-all duration-500 ease-in-out"
@@ -31,7 +34,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
             >
               {carGroupState.info.name}
             </Chip>
-          </>
+          </div>
         ))
       }
       
