@@ -110,8 +110,8 @@ export const CarCard = ({ car }: CarCardProps) => {
             
             { showCriteria &&  (
               
-              <div className="flex flex-row items-center justify-center gap-2 h-[92px]">
-                {Object.entries(car.detail.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value]) => {
+              <div className="flex flex-row items-center justify-center gap-2 h-[95px]">
+                {Object.entries(car.detail.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value], index) => {
                   // Map criteria keys to appropriate icons
                   const getIconForCriteria = (criteriaKey: string) => {
                     switch(criteriaKey) {
@@ -128,7 +128,7 @@ export const CarCard = ({ car }: CarCardProps) => {
                         icon={getIconForCriteria(key)}
                         description={key}
                         value={value}
-                        isOpacityDelayed={true} 
+                        isOpacityDelayed={index < 2 ? false : true} 
                       />
                     
                   );
