@@ -1,15 +1,22 @@
 import { Image } from "@heroui/image";
-
+import { motion } from 'framer-motion';
+import { motionOpacity } from '@/utils/coordinates-helpers';
+import { appSettings } from '@/config/app';
 
 interface CarInfoChipProps {
   icon: string;
   description: string;
   value: string;
+  isOpacityDelayed: boolean
 }
 
-export const CarInfoChip = ({ icon, description, value }: CarInfoChipProps) => {
+export const CarInfoChip = ({ icon, description, value, isOpacityDelayed }: CarInfoChipProps) => {
   return (
-    <div className="flex flex-col items-center gap-2 bg-default-100 px-3 py-1 rounded-lg ">
+    <motion.div className="flex flex-col items-center gap-2 bg-default-100 px-3 py-1 rounded-lg "
+      initial="initial"
+            animate={ motionOpacity.animate }
+            variants={motionOpacity}
+            transition={{ duration: 0.5, delay: isOpacityDelayed ? 0.5 : 0 }}>
       <Image
         src={icon}
         alt={description}
@@ -18,6 +25,6 @@ export const CarInfoChip = ({ icon, description, value }: CarInfoChipProps) => {
       />
       <span className="text-sm text-default-500">{description}</span>
       <span className="font-sm">{value}</span>
-    </div>
+    </motion.div>
   );
 };

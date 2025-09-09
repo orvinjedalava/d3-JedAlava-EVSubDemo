@@ -135,7 +135,30 @@ export const CarCard = ({ car }: CarCardProps) => {
           { showCriteria && 
             <div className="flex flex-row flex-wrap items-center justify-center gap-2">
               
-              {Object.entries(car.detail.criteria).filter((_, index) => isExpanded || index < 2).map(([key, value]) => {
+              {Object.entries(car.detail.criteria).filter((_, index) => index < 2).map(([key, value]) => {
+                // Map criteria keys to appropriate icons
+                const getIconForCriteria = (criteriaKey: string) => {
+                  switch(criteriaKey) {
+                    case 'Odometer':
+                      return '/icons/internetspeedicon.svg';
+                    default:
+                      return '/icons/dollar.svg'; // Fallback icon
+                  }
+                };
+
+                return (
+                    <CarInfoChip 
+                      key={key}
+                      icon={getIconForCriteria(key)}
+                      description={key}
+                      value={value}
+                      isOpacityDelayed={false} 
+                    />
+                  
+                );
+              })}
+
+            { isExpanded && Object.entries(car.detail.criteria).filter((_, index) => index >= 2).map(([key, value]) => {
                 // Map criteria keys to appropriate icons
                 const getIconForCriteria = (criteriaKey: string) => {
                   switch(criteriaKey) {
@@ -148,10 +171,11 @@ export const CarCard = ({ car }: CarCardProps) => {
 
                 return (
                   <CarInfoChip 
-                    key={key}
+                    key={key} 
                     icon={getIconForCriteria(key)}
                     description={key}
                     value={value} 
+                    isOpacityDelayed={true}
                   />
                 );
               })}

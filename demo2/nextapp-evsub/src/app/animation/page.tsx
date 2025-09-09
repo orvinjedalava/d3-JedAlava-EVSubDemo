@@ -11,12 +11,13 @@ import { Button } from '@heroui/button';
 import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 import type { CarCardState, CarCardDetail, CarCardDisplayProperties } from '@/types';
 import { CardDisplayMode } from '@/types';
+import { motionOpacity } from '@/utils/coordinates-helpers';
 
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 }
-}
+// const variants = {
+//   initial: { opacity: 0 },
+//   animate: { opacity: 1 },
+//   exit: { opacity: 0 }
+// }
 
 // Sample initial messages for demonstration
 const initialMessages = [
@@ -196,8 +197,8 @@ export default function ExploreLayout({
       <motion.div
         className="flex-grow flex flex-col"
         initial="initial"
-        animate={ stage === 'leaving' ? variants.exit : variants.animate }
-        variants={variants}
+        animate={ stage === 'leaving' ? motionOpacity.exit : motionOpacity.animate }
+        variants={motionOpacity}
         transition={{ duration: appSettings.transitionDuration }}
       >
       <ChatUI initialMessages={initialMessages} height="800px" />
