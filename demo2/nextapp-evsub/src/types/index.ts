@@ -53,3 +53,10 @@ export interface CarGroupState {
   setCarCardPosition: (index: number, displayProperties: CarCardDisplayProperties) => void;
   setCarCardMode: (index: number, mode: CardDisplayMode) => void;
 }
+
+export interface ChatMessage {
+  id: string,
+  text: string,
+  isUser: boolean,
+  timestamp: Date
+}

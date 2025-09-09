@@ -7,7 +7,7 @@ import type {
 
 import { CardDisplayMode } from '@/types';
 
-const getDisplayCoordinates = (cars: CarCardDetail[]): CarCardState[] => {
+export const getDisplayCoordinates = (cars: CarCardDetail[]): CarCardState[] => {
   const carsCoordinates =  [
     { width: 253, height: 350, top: 80, left: 50, opacity: 1 , zIndex: 0},
     { width: 253, height: 350, top: 350, left: 500, opacity: 1 , zIndex: 0},
