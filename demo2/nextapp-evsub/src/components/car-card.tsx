@@ -133,9 +133,9 @@ export const CarCard = ({ car }: CarCardProps) => {
           
           
           { showCriteria && 
-            <div className="flex flex-row items-center justify-center gap-2">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-2">
               
-              {Object.entries(car.detail.criteria).map(([key, value]) => {
+              {Object.entries(car.detail.criteria).filter((_, index) => isExpanded || index < 2).map(([key, value]) => {
                 // Map criteria keys to appropriate icons
                 const getIconForCriteria = (criteriaKey: string) => {
                   switch(criteriaKey) {
