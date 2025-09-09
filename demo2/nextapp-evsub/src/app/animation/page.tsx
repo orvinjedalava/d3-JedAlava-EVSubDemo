@@ -10,7 +10,7 @@ import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import type { CarState } from '@/types';
 import { motionOpacity } from '@/utils/framer-motion-helpers';
 import { getCars, getCarGroups } from '@/actions/get-cars';
-import { generateCarsStateFrom } from '@/utils/coordinates-helpers';
+import { generateCarsStateFrom } from '@/utils/state-helpers';
 import { getInitialMessages } from '@/actions/get-chat-messages';
 
 export default function ExploreLayout({
