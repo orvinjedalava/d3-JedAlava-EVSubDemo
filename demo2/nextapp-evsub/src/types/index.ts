@@ -70,6 +70,8 @@ export interface ChipState {
 export interface CarsState {
   carGroupStates: CarGroupState[];
 
+  setCarGroupSelected: (carGroupName: string, isSelected: boolean) => void;
+
   setCarStates: (carGroupName: string, carStates: CarState[]) => void;
   setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
   setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
