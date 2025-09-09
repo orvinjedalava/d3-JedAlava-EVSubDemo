@@ -57,14 +57,10 @@ export interface CarGroupCoordinates {
   cx: number;
   cy: number;
   boundingBox: BoundingBox;
+  chipX: number;
+  chipY: number;
+  chipOpacity: number;
 } 
-
-// export interface CarGroupState {
-//   carCardStates: CarCardState[];
-//   setCarCardStates: (carCardStates: CarCardState[]) => void;
-//   setCarCardPosition: (index: number, displayProperties: CarDisplayProperties) => void;
-//   setCarCardMode: (index: number, mode: CardDisplayMode) => void;
-// }
 
 export interface CarsState {
   carGroupStates: CarGroupState[];
@@ -73,6 +69,8 @@ export interface CarsState {
   setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
   setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
   setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => void;
+
+  setCarGroupChipPosition: (carGroupName: string, chipX: number, chipY: number, chipOpacity: number) => void;
 }
 
 export interface ChatMessage {

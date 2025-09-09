@@ -56,7 +56,7 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
-    
+
     const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
     if (index >= 0 && index < updatedCarStates.length) {
       updatedCarStates[index] = {
@@ -98,7 +98,24 @@ export const useCarsStore = create<CarsState>((set) => ({
     return {
       carGroupStates: updatedCarGroupStates
     };
+  }),
+
+  setCarGroupChipPosition: (carGroupName: string, chipX: number, chipY: number, chipOpacity: number) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+    if (!carGroupState) return state;
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarGroupState = {
+      ...carGroupState,
+      displayCoordinates: {
+        ...carGroupState.displayCoordinates,
+        chipX,
+        chipY,
+        chipOpacity
+      }
+    };
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
+    return {
+      carGroupStates: updatedCarGroupStates
+    };
   })
 }));
-
-    

@@ -46,10 +46,12 @@ export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupSt
   carGroupInfos.map((carGroupInfo, index) => {
 
     let carState: CarState[] = [];
+    // Get the display properties for this card, or use defaults if not available
+    let displayProperties = carsCoordinates[index];
 
     carGroupInfo.carInfos.forEach((info, idx) => {
       // Get the display properties for this card, or use defaults if not available
-      const displayProperties = carsCoordinates[index];
+      // const displayProperties = carsCoordinates[index];
       // Assign display properties to each carInfo
       carState.push({
         displayProperties,
@@ -61,7 +63,14 @@ export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupSt
     carGroupState.push({
       carStates: carState,
       info: carGroupInfo,
-      displayCoordinates: { cx: 0, cy: 0, boundingBox: { x1: 0, y1: 0, x2: 0, y2: 0 } }
+      displayCoordinates: { 
+        cx: 0, 
+        cy: 0, 
+        boundingBox: { x1: 0, y1: 0, x2: 0, y2: 0 },
+        chipX: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
+        chipY: ( displayProperties.top + displayProperties.height )|| 0, 
+        chipOpacity: displayProperties.opacity || 1
+      }
     });
   });
 

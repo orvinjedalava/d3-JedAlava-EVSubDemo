@@ -31,7 +31,8 @@ export const ChatUI = ({
   const { 
     carGroupStates,
     setCarPosition,
-    setCarDisplayMode
+    setCarDisplayMode,
+    setCarGroupChipPosition
   } = useCarsStore();
 
   // Define message bubble styles with tails
@@ -97,6 +98,9 @@ export const ChatUI = ({
     setCarPosition(carGroupName1, carCard1.info.title, { left: 200, zIndex: 1 });
     setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 0.4 });
+
+    setCarGroupChipPosition(carGroupName1, carGroupStates[0].displayCoordinates.chipX, carGroupStates[0].displayCoordinates.chipY, 1);
+    setCarGroupChipPosition(carGroupName2, carGroupStates[1].displayCoordinates.chipX, carGroupStates[1].displayCoordinates.chipY, 0.4);
   }
 
   const onBack = () => {
@@ -106,9 +110,12 @@ export const ChatUI = ({
     const carCard2 = carGroupStates[1].carStates[0];
     const carGroupName2 = carGroupStates[1].info.name;
     
-    setCarPosition(carGroupName1, carCard1.info.title, { left: 20, zIndex: 0 });
+    setCarPosition(carGroupName1, carCard1.info.title, { left: 50, zIndex: 0 });
     setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 1 });
+
+    setCarGroupChipPosition(carGroupName1, carGroupStates[0].displayCoordinates.chipX, carGroupStates[0].displayCoordinates.chipY, 1);
+    setCarGroupChipPosition(carGroupName2, carGroupStates[1].displayCoordinates.chipX, carGroupStates[1].displayCoordinates.chipY, 1);
   }
 
   const onResize = () => {

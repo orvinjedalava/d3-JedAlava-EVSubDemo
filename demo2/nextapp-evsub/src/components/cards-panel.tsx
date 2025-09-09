@@ -1,4 +1,4 @@
-import { CarCard } from "@/components/car-card";
+import { Chip } from "@heroui/chip"
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 
@@ -17,7 +17,21 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
     <div className="flex-grow relative">
       {
         carGroupStates.map((carGroupState) => (
-          <CarGroupPanel key={`car-group-${carGroupState.info.name}`} carGroupState={carGroupState} />
+          <>
+            <CarGroupPanel key={`car-group-${carGroupState.info.name}`} carGroupState={carGroupState} />
+            <Chip 
+              key={`car-group-chip-${carGroupState.info.name}`} 
+              className="m-2 absolute top-[300px] left-[220px] z-50"
+              style={{ 
+                top: carGroupState.displayCoordinates.chipY,
+                left: carGroupState.displayCoordinates.chipX,
+                opacity: carGroupState.displayCoordinates.chipOpacity,
+                // zIndex: carGroupState.displayCoordinates.zIndex,
+              }}  
+            >
+              {carGroupState.info.name}
+            </Chip>
+          </>
         ))
       }
       
