@@ -14,6 +14,30 @@ const getCardWidth = (clientWidth: number) => {
   return xScale(250);
 }
 
+export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox => {
+  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.width);
+  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.height);
+
+  return { 
+    top: yScale(carGroupBoundingBox.height / 10 * 9), 
+    left: xScale(carGroupBoundingBox.width / 5 * 3),
+    width: 0,
+    height: 0 
+  };
+}
+
+export const getSelectedChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox => {
+  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.width);
+  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.height);
+
+  return { 
+    top: yScale(carGroupBoundingBox.height / 1000 * 1), 
+    left: xScale(carGroupBoundingBox.width / 1000 * 1),
+    width: 0,
+    height: 0 
+  };
+}
+
 export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
   const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.width);
   const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.height);
