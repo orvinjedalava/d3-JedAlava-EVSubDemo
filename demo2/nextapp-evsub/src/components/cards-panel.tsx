@@ -30,24 +30,27 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
         </div>
       ))} */}
       {
-        carGroupStates.map((carGroupState, groupIndex) => (
+        carGroupStates.map((carGroupState) => (
+          
           carGroupState.carStates.map((carState, index) => (
-            <div 
-              key={`car-card-${index}`}
-              className="absolute transition-all duration-500 ease-in-out" 
-              style={{ 
-                width: carState.displayProperties.width,
-                // height: cardState.displayProperties.height,
-                top: carState.displayProperties.top || 0,
-                left: carState.displayProperties.left || 0,
-                opacity: carState.displayProperties.opacity !== undefined ? carState.displayProperties.opacity : 1,
-                zIndex: carState.displayProperties.zIndex || 0,
-              }}>
-              <CarCard car={carState} carGroupName={carGroupState.info.name}/>
-            </div>
+              <div 
+                key={`car-card-${index}`}
+                className="absolute transition-all duration-500 ease-in-out" 
+                style={{ 
+                  width: carState.displayProperties.width,
+                  // height: cardState.displayProperties.height,
+                  top: carState.displayProperties.top || 0,
+                  left: carState.displayProperties.left || 0,
+                  opacity: carState.displayProperties.opacity !== undefined ? carState.displayProperties.opacity : 1,
+                  zIndex: carState.displayProperties.zIndex || 0,
+                }}>
+                <CarCard car={carState} carGroupName={carGroupState.info.name}/>
+              </div>
           ))
-        ))
-      
+        )
+
+      )
+    
       }
       
     </div>

@@ -3,7 +3,7 @@ import { CarInfo, CarGroupInfo } from "@/types";
 
 export async function getCarGroups(): Promise<CarGroupInfo[]> {
   // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 500));
 
   return [
     {
