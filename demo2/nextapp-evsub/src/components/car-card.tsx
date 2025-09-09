@@ -93,7 +93,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               </div>
           </div>
 
-          <div className={`absolute grid grid-rows-[auto_auto] transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
+          <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
             style={{ 
               top: `${imageHeight * 1.05}px`,
               left: '16px',
