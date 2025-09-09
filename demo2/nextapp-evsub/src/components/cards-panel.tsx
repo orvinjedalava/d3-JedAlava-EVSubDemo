@@ -4,6 +4,8 @@ import { useRef, useEffect, useState } from "react";
 import { Chip } from "@heroui/chip"
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
+import { getCarGroups } from '@/actions/get-cars';
+import { generateCarsStateFrom } from '@/utils/state-helpers';
 
 interface CardsPanelProps {
   width: number;
@@ -13,6 +15,7 @@ interface CardsPanelProps {
 export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const { 
     carGroupStates,
+    setCarGroupStates,
   } = useCarsStore();
 
   // Create a ref for the container div
@@ -33,7 +36,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
         setDimensions({ width, height });
-        console.log(`Container resized: ${width}px × ${height}px`);
+        // console.log(`Container resized: ${width}px × ${height}px`);
         
         // If you need to update a store with these values:
         // updateDimensionsInStore(width, height);
@@ -42,6 +45,26 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
     
     // Start observing the container
     resizeObserver.observe(containerRef.current);
+
+    // Wrap async logic in an IIFE since useEffect cannot be async
+    (async () => {
+      // Await the cars data
+      // const cars = await getCars();
+      
+      // const initialCardStates: CarState[] = getDisplayCoordinates(cars);
+      // Update the store with the combined data
+      // setCarStates(initialCardStates);
+
+      const carGroups = await getCarGroups();
+      const initialCardGroupStates = generateCarsStateFrom(carGroups);
+
+      // Update the store with the combined data
+      if (setCarGroupStates) {
+        setCarGroupStates(initialCardGroupStates);
+      }
+      // Log for debugging
+      // console.log("Initialized card group states:", initialCardGroupStates);
+    })();
     
     // Clean up the observer when component unmounts
     return () => {

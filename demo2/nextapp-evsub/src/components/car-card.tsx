@@ -63,7 +63,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
       const resizeObserver = new ResizeObserver(entries => {
         for (const entry of entries) {
           setImageHeight(entry.target.clientHeight);
-          console.log('image height:',entry.target.clientHeight);
+          // console.log('image height:',entry.target.clientHeight);
         }
       });
       
