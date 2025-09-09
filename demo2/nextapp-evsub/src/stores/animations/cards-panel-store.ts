@@ -10,6 +10,8 @@ import type {
   ChipState  
 } from '@/types';
 
+import { refreshClientSize } from '@/utils/state-helpers';
+
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
@@ -119,7 +121,7 @@ export const useCarsStore = create<CarsState>((set) => ({
   }),
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => set((state) => {
-    console.log('Refreshing client size to:', clientWidth, clientHeight);
+    refreshClientSize(clientWidth, clientHeight);
 
     return state;
   }),

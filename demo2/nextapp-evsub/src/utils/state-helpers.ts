@@ -10,6 +10,10 @@ import type {
 
 import { CardDisplayMode } from '@/types';
 
+export const refreshClientSize = (clientWidth: number, clientHeight: number) => {
+  console.log('Refreshing client size to:', clientWidth, clientHeight);
+}
+
 export const generateCarsStateFrom = (
   carGroupInfos: CarGroupInfo[], 
   clientWidth: number, 
