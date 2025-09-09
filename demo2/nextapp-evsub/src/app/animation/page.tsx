@@ -64,8 +64,7 @@ export default function ExploreLayout({
       <ChatUI initialMessages={getInitialMessages()} height="800px" />
       
     </motion.div></div>
-      <div ref={containerRef} className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8 border border-red-500">
-        {/* <ZoomableBubbleChart width={780} height={860} />  */}
+      <div ref={containerRef} className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8">
         <CardsPanel width={780} height={860} />
       </div>
     </section>
