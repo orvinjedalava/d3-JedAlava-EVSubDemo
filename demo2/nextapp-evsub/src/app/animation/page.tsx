@@ -12,6 +12,7 @@ import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 import type { CarCardState, CarCardDetail, CarCardDisplayProperties } from '@/types';
 import { CardDisplayMode } from '@/types';
 import { motionOpacity } from '@/utils/coordinates-helpers';
+import { getCars } from '@/actions/get-cars';
 
 // const variants = {
 //   initial: { opacity: 0 },
@@ -134,16 +135,7 @@ const carCardDetails: CarCardDetail[] = [
       "Lease": "$195.80",
     }
   },
-  // {
-  //   title: "Car 3",
-  //   img: "/images/BMW I4 EDrive35 2023.png",
-  //   price: "$30,000",
-  // },
-  // {
-  //   title: "Car 4",
-  //   img: "/images/Tesla Model 3 Earth 2025.png",
-  //   price: "$35,000",
-  // },
+  
 ];
 
 const carCardDisplayProperties: CarCardDisplayProperties[] = [
@@ -168,28 +160,30 @@ export default function ExploreLayout({
   } = useCarGroupStore();
 
   useEffect(() => {
-    // // Get the setCarCardStates function from your store
-    // const { setCarCardStates } = useCarGroupStore();
-    
-    // Create an array of CarCardState objects by combining
-    // the carCardDetails and carCardDisplayProperties arrays
-    const initialCardStates: CarCardState[] = carCardDetails.map((detail, index) => {
-      // Get the display properties for this card, or use defaults if not available
-      const displayProperties = carCardDisplayProperties[index];
+    // Wrap async logic in an IIFE since useEffect cannot be async
+    (async () => {
+      // Await the cars data
+      const cars = await getCars();
+      // Create an array of CarCardState objects by combining
+      // the carCardDetails and carCardDisplayProperties arrays
+      const initialCardStates: CarCardState[] = cars.map((detail, index) => {
+        // Get the display properties for this card, or use defaults if not available
+        const displayProperties = carCardDisplayProperties[index];
 
-      // Return the CarCardState object with separate detail and displayProperties
-      return {
-        displayProperties,
-        detail,
-        displayMode: CardDisplayMode.ShowCriteria
-      };
-    });
-    
-    // Update the store with the combined data
-    setCarCardStates(initialCardStates);
-    
-    // Log for debugging
-    console.log("Initialized card states:", initialCardStates);
+        // Return the CarCardState object with separate detail and displayProperties
+        return {
+          displayProperties,
+          detail,
+          displayMode: CardDisplayMode.ShowCriteria
+        };
+      });
+
+      // Update the store with the combined data
+      setCarCardStates(initialCardStates);
+
+      // Log for debugging
+      console.log("Initialized card states:", initialCardStates);
+    })();
   }, []);
 
   
