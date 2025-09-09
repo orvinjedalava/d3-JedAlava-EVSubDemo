@@ -12,7 +12,7 @@ interface CarInfoChipProps {
 
 export const CarInfoChip = ({ icon, description, value, isOpacityDelayed }: CarInfoChipProps) => {
   return (
-    <motion.div className="flex flex-col items-center gap-2 bg-default-100 px-3 py-1 rounded-lg "
+    <motion.div className="flex flex-col items-center gap-2 bg-default-100 px-3 py-1 rounded-lg"
       initial="initial"
             animate={ motionOpacity.animate }
             variants={motionOpacity}
