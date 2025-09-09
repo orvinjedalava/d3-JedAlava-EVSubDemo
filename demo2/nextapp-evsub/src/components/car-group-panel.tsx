@@ -4,9 +4,9 @@ import { CarCard } from "@/components/car-card";
 export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState }) => {
   return (
     <div>
-      {carGroupState.carStates.map((carState, index) => (
+      {carGroupState.carStates.map((carState) => (
         <div 
-          key={`car-card-${index}`}
+          key={`car-card-${carState.info.title}`}
           className="absolute transition-all duration-500 ease-in-out" 
           style={{ 
             width: carState.displayProperties.width,
