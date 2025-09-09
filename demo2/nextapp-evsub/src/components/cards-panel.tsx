@@ -25,6 +25,11 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
               className="m-2 absolute transition-all duration-500 ease-in-out"
+
+              {...(carGroupState.isSelected ? { 
+                onClose: () => console.log(`Close chip for ${carGroupState.info.name}`)
+              } : {})}
+
               style={{ 
                 top: carGroupState.chipState.y,
                 left: carGroupState.chipState.x,
