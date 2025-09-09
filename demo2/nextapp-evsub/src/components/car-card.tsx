@@ -134,15 +134,16 @@ export const CarCard = ({ car }: CarCardProps) => {
           
           { showCriteria && 
               <div className="flex flex-row items-center justify-center gap-2">
+                
                 <CarInfoChip 
-                  icon="/icons/weeklycosticon.svg"
+                  icon="/icons/dollar.svg"
                   description="Weekly Cost" 
-                  value={car.detail.criteria.weeklyCost} 
+                  value={car.detail.criteria['Weekly Cost']} 
                 />
                 <CarInfoChip 
                   icon="/icons/internetspeedicon.svg"
                   description="Odometer" 
-                  value={car.detail.criteria.odometer} 
+                  value={car.detail.criteria['Odometer']} 
                 />
               </div>
             }

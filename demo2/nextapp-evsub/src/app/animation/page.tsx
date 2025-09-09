@@ -106,8 +106,8 @@ const carCardDetails: CarCardDetail[] = [
     subtitle: "Ultra Single Motor 2023",
     img: "/images/Volvo EX30.png",
     criteria: {
-      "weeklyCost": "$325.50",
-      "odometer": "43,793 km",
+      "Weekly Cost": "$325.50",
+      "Odometer": "43,793 km",
     }
   },
   {
@@ -115,8 +115,8 @@ const carCardDetails: CarCardDetail[] = [
     subtitle: "Earth 2025",
     img: "/images/KIA EV5 Earth 2025.png",
     criteria: {
-      "weeklyCost": "$295.80",
-      "odometer": "43,793 km",
+      "Weekly Cost": "$295.80",
+      "Odometer": "43,793 km",
     }
   },
   // {
