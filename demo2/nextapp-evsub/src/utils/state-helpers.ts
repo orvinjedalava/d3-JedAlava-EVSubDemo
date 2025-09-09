@@ -20,13 +20,14 @@ export const generateCarGroupStatesFrom = (
   clientHeight: number): CarGroupState[] => {
 
 
-  console.log('clientWidth, clientHeight:', clientWidth, clientHeight);
   const carsCoordinates =  [
     { width: 253, height: 350, top: 80, left: 50, opacity: 1 , zIndex: 0},
     { width: 253, height: 350, top: 350, left: 500, opacity: 1 , zIndex: 0},
     // { width: 253, height: 276, top: 0, left: 250, opacity: 1 },
     // { width: 253, height: 276, top: 0, left: 350, opacity: 1 },
   ]
+
+  refreshClientSize(clientWidth, clientHeight);
 
   // let result: CarState = {};
   let carGroupState: CarGroupState[] = [];

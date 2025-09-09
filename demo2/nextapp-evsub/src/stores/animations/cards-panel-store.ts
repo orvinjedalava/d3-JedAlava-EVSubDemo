@@ -122,6 +122,7 @@ export const useCarsStore = create<CarsState>((set) => ({
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => set((state) => {
     refreshClientSize(clientWidth, clientHeight);
+    
 
     return state;
   }),
