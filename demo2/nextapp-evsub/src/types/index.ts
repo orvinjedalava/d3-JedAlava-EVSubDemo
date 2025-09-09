@@ -34,6 +34,12 @@ export interface CarCardDetail {
   criteria: Record<string, string>;
 }
 
+export interface CarGroup {
+  id: number;
+  name: string;
+  cars: CarCardDetail[];
+}
+
 export interface BoundingBox {
   x1: number;
   y1: number;
