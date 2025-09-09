@@ -66,7 +66,7 @@ export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupSt
       displayCoordinates: { 
         cx: 0, 
         cy: 0, 
-        boundingBox: { x1: 0, y1: 0, x2: 0, y2: 0 },
+        boundingBox: { top: 0, left: 0, width: 0, height: 0 },
       },
       chipState: { 
         x: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
