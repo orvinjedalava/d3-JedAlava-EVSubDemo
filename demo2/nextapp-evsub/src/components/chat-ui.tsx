@@ -99,7 +99,7 @@ export const ChatUI = ({
     setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 0.4 });
 
-    setCarGroupChipPosition(carGroupName1, carGroupStates[0].displayCoordinates.chipX, carGroupStates[0].displayCoordinates.chipY, 1);
+    setCarGroupChipPosition(carGroupName1, 10, 10, 1);
     setCarGroupChipPosition(carGroupName2, carGroupStates[1].displayCoordinates.chipX, carGroupStates[1].displayCoordinates.chipY, 0.4);
   }
 
@@ -114,7 +114,7 @@ export const ChatUI = ({
     setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 1 });
 
-    setCarGroupChipPosition(carGroupName1, carGroupStates[0].displayCoordinates.chipX, carGroupStates[0].displayCoordinates.chipY, 1);
+    setCarGroupChipPosition(carGroupName1, 113.25, 430, 1);
     setCarGroupChipPosition(carGroupName2, carGroupStates[1].displayCoordinates.chipX, carGroupStates[1].displayCoordinates.chipY, 1);
   }
 
