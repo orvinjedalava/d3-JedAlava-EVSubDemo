@@ -56,8 +56,6 @@ export interface BoundingBox {
 }
 
 export interface CarGroupCoordinates {
-  cx: number;
-  cy: number;
   boundingBox: BoundingBox;
 } 
 
