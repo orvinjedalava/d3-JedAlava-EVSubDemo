@@ -16,6 +16,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const { 
     carGroupStates,
     setCarGroupStates,
+    refreshClientSize,
   } = useCarsStore();
 
   // Create a ref for the container div
@@ -40,6 +41,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
         
         // If you need to update a store with these values:
         // updateDimensionsInStore(width, height);
+        refreshClientSize(width, height);
       }
     });
     
@@ -56,7 +58,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
       // setCarStates(initialCardStates);
 
       const carGroups = await getCarGroups();
-      const initialCardGroupStates = generateCarsStateFrom(carGroups);
+      const initialCardGroupStates = generateCarsStateFrom(carGroups, dimensions.width, dimensions.height);
 
       // Update the store with the combined data
       if (setCarGroupStates) {

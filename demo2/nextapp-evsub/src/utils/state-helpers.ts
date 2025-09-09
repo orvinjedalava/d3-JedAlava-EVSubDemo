@@ -10,7 +10,13 @@ import type {
 
 import { CardDisplayMode } from '@/types';
 
-export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupState[] => {
+export const generateCarsStateFrom = (
+  carGroupInfos: CarGroupInfo[], 
+  clientWidth: number, 
+  clientHeight: number): CarGroupState[] => {
+
+
+  console.log('clientWidth, clientHeight:', clientWidth, clientHeight);
   const carsCoordinates =  [
     { width: 253, height: 350, top: 80, left: 50, opacity: 1 , zIndex: 0},
     { width: 253, height: 350, top: 350, left: 500, opacity: 1 , zIndex: 0},

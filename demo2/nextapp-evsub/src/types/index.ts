@@ -77,6 +77,8 @@ export interface CarsState {
   setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => void;
 
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
+
+  refreshClientSize: (clientWidth: number, clientHeight: number) => void;
 }
 
 export interface ChatMessage {
