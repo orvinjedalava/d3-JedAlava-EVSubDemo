@@ -92,16 +92,29 @@ export const CarCard = ({ car }: CarCardProps) => {
             </div>)
           } */}
 
-          <div className={`absolute grid grid-rows-[auto_auto] transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ 
-                top: '16px',
-                left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
-              }}>
-                <div>
-                  <h3 className="text-sm font-semibold">{car.detail.title}</h3>
-                  <p className="text-sm text-default-500">{car.detail.subtitle}</p>
-                </div>
-            </div>
+          <div className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
+            style={{ 
+              top: '16px',
+              left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
+            }}>
+              <div >
+                <h3 className="text-sm font-semibold">{car.detail.title}</h3>
+                <p className="text-sm text-default-500">{car.detail.subtitle}</p>
+              </div>
+              {/* <div>
+                <p className="text-sm text-default-500 transition-all duration-1000">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?</p>
+              </div> */}
+          </div>
+
+          <div className={`absolute transition-opacity ease-in-out ${isExpanded ? 'opacity-100 duration-500 delay-[500ms]' : 'transition-none opacity-0'}`}
+            style={{ 
+              top: '64px',
+              left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
+            }}>
+              <div>
+                <p className="text-sm text-default-500 transition-all duration-1000">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?</p>
+              </div>
+          </div>
 
           <div className={`absolute grid grid-rows-[auto_auto] transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'opacity-0'}`}
             style={{ 
