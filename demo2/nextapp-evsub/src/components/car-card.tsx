@@ -112,7 +112,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
             }}>
               <div>
-                <p className="text-sm text-default-500 transition-all duration-1000">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?</p>
+                <p className="text-sm text-default-500 transition-all duration-1000">{car.detail.description}</p>
               </div>
           </div>
 

@@ -105,6 +105,7 @@ const carCardDetails: CarCardDetail[] = [
   {
     title: "Volvo EX30",
     subtitle: "Ultra Single Motor 2023",
+    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
     img: "/images/Volvo EX30.png",
     criteria: {
       "Weekly Cost": "$325.50",
@@ -120,6 +121,7 @@ const carCardDetails: CarCardDetail[] = [
   {
     title: "KIA EV5",
     subtitle: "Earth 2025",
+    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
     img: "/images/KIA EV5 Earth 2025.png",
     criteria: {
       "Weekly Cost": "$295.80",

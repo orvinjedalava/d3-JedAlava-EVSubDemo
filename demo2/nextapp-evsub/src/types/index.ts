@@ -29,6 +29,7 @@ export interface CarCardDisplayProperties {
 export interface CarCardDetail {
   title: string;
   subtitle: string;
+  description: string;
   img: string;
   criteria: Record<string, string>;
 }
