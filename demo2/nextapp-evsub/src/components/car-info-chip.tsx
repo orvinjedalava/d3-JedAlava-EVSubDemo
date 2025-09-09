@@ -1,6 +1,6 @@
 import { Image } from "@heroui/image";
 import { motion } from 'framer-motion';
-import { motionOpacity } from '@/utils/coordinates-helpers';
+import { motionOpacity } from '@/utils/framer-motion-helpers';
 import { appSettings } from '@/config/app';
 
 interface CarInfoChipProps {

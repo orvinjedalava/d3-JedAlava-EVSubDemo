@@ -11,7 +11,7 @@ import { Button } from '@heroui/button';
 import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 import type { CarCardState, CarCardDetail, CarCardDisplayProperties } from '@/types';
 import { CardDisplayMode } from '@/types';
-import { motionOpacity } from '@/utils/coordinates-helpers';
+import { motionOpacity } from '@/utils/framer-motion-helpers';
 import { getCars } from '@/actions/get-cars';
 
 // const variants = {
