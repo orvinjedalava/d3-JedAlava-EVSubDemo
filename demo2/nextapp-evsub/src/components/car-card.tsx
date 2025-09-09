@@ -93,6 +93,13 @@ export const CarCard = ({ car }: CarCardProps) => {
               </div>
           </div>
 
+          <Button
+            className={`absolute top-[16px] right-[20px] transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
+            size="sm" 
+            variant="solid" 
+            color="secondary" 
+          >x</Button>
+
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
             style={{ 
               top: `${imageHeight * 1.05}px`,
@@ -163,110 +170,6 @@ export const CarCard = ({ car }: CarCardProps) => {
                 })}
               </div>
             )}
-
-
-            {/* { showCriteria && isExpanded && (<>
-              <div className="flex flex-row items-center justify-center gap-2">
-                {Object.entries(car.detail.criteria).filter((_, index) => index < 5).map(([key, value]) => {
-                // Map criteria keys to appropriate icons
-                const getIconForCriteria = (criteriaKey: string) => {
-                  switch(criteriaKey) {
-                    case 'Odometer':
-                      return '/icons/internetspeedicon.svg';
-                    default:
-                      return '/icons/dollar.svg'; // Fallback icon
-                  }
-                };
-
-                return (
-                    <CarInfoChip 
-                      key={key}
-                      icon={getIconForCriteria(key)}
-                      description={key}
-                      value={value}
-                      isOpacityDelayed={false} 
-                    />
-                  
-                );
-              })}
-              </div>
-              <div className="flex flex-row items-center justify-center gap-2">
-                {Object.entries(car.detail.criteria).filter((_, index) => index >= 5).map(([key, value]) => {
-                // Map criteria keys to appropriate icons
-                const getIconForCriteria = (criteriaKey: string) => {
-                  switch(criteriaKey) {
-                    case 'Odometer':
-                      return '/icons/internetspeedicon.svg';
-                    default:
-                      return '/icons/dollar.svg'; // Fallback icon
-                  }
-                };
-
-                return (
-                    <CarInfoChip 
-                      key={key}
-                      icon={getIconForCriteria(key)}
-                      description={key}
-                      value={value}
-                      isOpacityDelayed={false} 
-                    />
-                  
-                );
-              })}
-              </div>
-              </>
-            )} */}
-          
-          
-          {/* { showCriteria && 
-            <div className="flex flex-row flex-wrap items-center justify-center gap-2">
-              
-              {Object.entries(car.detail.criteria).filter((_, index) => index < 2).map(([key, value]) => {
-                // Map criteria keys to appropriate icons
-                const getIconForCriteria = (criteriaKey: string) => {
-                  switch(criteriaKey) {
-                    case 'Odometer':
-                      return '/icons/internetspeedicon.svg';
-                    default:
-                      return '/icons/dollar.svg'; // Fallback icon
-                  }
-                };
-
-                return (
-                    <CarInfoChip 
-                      key={key}
-                      icon={getIconForCriteria(key)}
-                      description={key}
-                      value={value}
-                      isOpacityDelayed={false} 
-                    />
-                  
-                );
-              })}
-
-            { isExpanded && Object.entries(car.detail.criteria).filter((_, index) => index >= 2).map(([key, value]) => {
-                // Map criteria keys to appropriate icons
-                const getIconForCriteria = (criteriaKey: string) => {
-                  switch(criteriaKey) {
-                    case 'Odometer':
-                      return '/icons/internetspeedicon.svg';
-                    default:
-                      return '/icons/dollar.svg'; // Fallback icon
-                  }
-                };
-
-                return (
-                  <CarInfoChip 
-                    key={key} 
-                    icon={getIconForCriteria(key)}
-                    description={key}
-                    value={value} 
-                    isOpacityDelayed={true}
-                  />
-                );
-              })}
-            </div>
-          } */}
           
           <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
             <Button className="w-[229px]" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
