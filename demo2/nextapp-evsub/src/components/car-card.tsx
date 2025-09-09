@@ -133,20 +133,30 @@ export const CarCard = ({ car }: CarCardProps) => {
           
           
           { showCriteria && 
-              <div className="flex flex-row items-center justify-center gap-2">
-                
-                <CarInfoChip 
-                  icon="/icons/dollar.svg"
-                  description="Weekly Cost" 
-                  value={car.detail.criteria['Weekly Cost']} 
-                />
-                <CarInfoChip 
-                  icon="/icons/internetspeedicon.svg"
-                  description="Odometer" 
-                  value={car.detail.criteria['Odometer']} 
-                />
-              </div>
-            }
+            <div className="flex flex-row items-center justify-center gap-2">
+              
+              {Object.entries(car.detail.criteria).map(([key, value]) => {
+                // Map criteria keys to appropriate icons
+                const getIconForCriteria = (criteriaKey: string) => {
+                  switch(criteriaKey) {
+                    case 'Odometer':
+                      return '/icons/internetspeedicon.svg';
+                    default:
+                      return '/icons/dollar.svg'; // Fallback icon
+                  }
+                };
+
+                return (
+                  <CarInfoChip 
+                    key={key}
+                    icon={getIconForCriteria(key)}
+                    description={key}
+                    value={value} 
+                  />
+                );
+              })}
+            </div>
+          }
           
           <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
             <Button className="w-[229px]" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
