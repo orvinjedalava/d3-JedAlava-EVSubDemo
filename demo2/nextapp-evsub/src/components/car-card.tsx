@@ -25,10 +25,18 @@ export const CarCard = ({ car }: CarCardProps) => {
   const [imageHeight, setImageHeight] = useState<number>(0);
 
   const { 
-        carCardStates,
-        setCarCardPosition,
-        setCarCardMode
-      } = useCarGroupStore();
+    carCardStates,
+    setCarCardPosition,
+    setCarCardMode
+  } = useCarGroupStore();
+
+  const onCloseClicked = () => {
+    onResize();
+  }
+
+  const onButtonClicked = () => {
+    !isExpanded ? onResize() : console.log("Get a quote");
+  }
 
   const onResize = () => {
     // const carCard = carCardStates[0];
@@ -118,9 +126,9 @@ export const CarCard = ({ car }: CarCardProps) => {
           <Button
             className={`absolute top-[16px] right-[20px] transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
             size="sm" 
-            variant="solid" 
+            variant="ghost" 
             color="secondary"
-            onPress={onResize} 
+            onPress={onCloseClicked} 
           >x</Button>
 
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
@@ -195,8 +203,8 @@ export const CarCard = ({ car }: CarCardProps) => {
             )}
           
           <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
-            <Button className="w-[229px]" variant="solid" color="secondary" onPress={() => console.log("Clicked!")}>
-              See more details
+            <Button className="w-[229px]" variant="solid" color="secondary" onPress={onButtonClicked}>
+              {isExpanded ? "Get a quote" : "See more details"}
             </Button>
           </div>
           </CardBody>
