@@ -44,6 +44,8 @@ export interface CarGroupState {
   carStates: CarState[];
   info: CarGroupInfo;
   displayCoordinates: CarGroupCoordinates;
+  chipState: ChipState;
+  isSelected: boolean;
 }
 
 export interface BoundingBox {
@@ -57,10 +59,13 @@ export interface CarGroupCoordinates {
   cx: number;
   cy: number;
   boundingBox: BoundingBox;
-  chipX: number;
-  chipY: number;
-  chipOpacity: number;
 } 
+
+export interface ChipState {
+  x: number;
+  y: number;
+  opacity: number;
+}
 
 export interface CarsState {
   carGroupStates: CarGroupState[];
@@ -70,7 +75,7 @@ export interface CarsState {
   setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
   setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => void;
 
-  setCarGroupChipPosition: (carGroupName: string, chipX: number, chipY: number, chipOpacity: number) => void;
+  setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
 }
 
 export interface ChatMessage {

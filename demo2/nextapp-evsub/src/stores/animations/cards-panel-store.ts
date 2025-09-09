@@ -1,37 +1,14 @@
 import { create } from 'zustand';
-import type { CarState, CarGroupState, CarGroupCoordinates, CarDisplayProperties, CardDisplayMode, CarGroupInfo, CarsState  } from '@/types';
-
-// export const useCarGroupStore = create<CarGroupState>((set) => ({
-//   carCardStates: new Array<CarState>(),
-
-//   setCarCardStates: (carCardStates) => set({ carCardStates }),
-
-//   setCarCardPosition: (index: number, displayProperties: CarDisplayProperties ) => set((state) => {
-//     const updatedCarCardStates = [...state.carCardStates];
-//     if (index >= 0 && index < updatedCarCardStates.length) {
-//       updatedCarCardStates[index] = {
-//         ...updatedCarCardStates[index],
-//         displayProperties: { ...updatedCarCardStates[index].displayProperties, ...displayProperties }
-//       };
-//     }
-//     return {
-//       carCardStates: updatedCarCardStates
-//     };
-//   }),
-
-//   setCarCardMode: (index: number, mode: CardDisplayMode) => set((state) => {
-//     const updatedCarCardStates = [...state.carCardStates];
-//     if (index >= 0 && index < updatedCarCardStates.length) {
-//       updatedCarCardStates[index] = {
-//         ...updatedCarCardStates[index],
-//         displayMode: mode
-//       };
-//     }
-//     return {
-//       carCardStates: updatedCarCardStates
-//     };
-//   })
-// }));
+import type { 
+  CarState, 
+  CarGroupState, 
+  CarGroupCoordinates, 
+  CarDisplayProperties, 
+  CardDisplayMode, 
+  CarGroupInfo, 
+  CarsState,
+  ChipState  
+} from '@/types';
 
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
@@ -100,7 +77,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarGroupChipPosition: (carGroupName: string, chipX: number, chipY: number, chipOpacity: number) => set((state) => {
+  setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
     if (!carGroupState) return state;
     const updatedCarGroupStates = [...state.carGroupStates];
@@ -108,9 +85,13 @@ export const useCarsStore = create<CarsState>((set) => ({
       ...carGroupState,
       displayCoordinates: {
         ...carGroupState.displayCoordinates,
-        chipX,
-        chipY,
-        chipOpacity
+        
+      },
+      chipState: {
+        ...carGroupState.chipState,
+        x: chipState.x,
+        y: chipState.y,
+        opacity: chipState.opacity
       }
     };
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;

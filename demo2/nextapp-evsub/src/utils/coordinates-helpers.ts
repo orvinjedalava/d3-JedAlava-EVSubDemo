@@ -67,10 +67,13 @@ export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupSt
         cx: 0, 
         cy: 0, 
         boundingBox: { x1: 0, y1: 0, x2: 0, y2: 0 },
-        chipX: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
-        chipY: ( displayProperties.top + displayProperties.height )|| 0, 
-        chipOpacity: displayProperties.opacity || 1
-      }
+      },
+      chipState: { 
+        x: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
+        y: ( displayProperties.top + displayProperties.height )|| 0, 
+        opacity: displayProperties.opacity || 1
+      },
+      isSelected: false
     });
   });
 

@@ -26,9 +26,9 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
               key={`car-group-chip-${carGroupState.info.name}`} 
               className="m-2 absolute transition-all duration-500 ease-in-out"
               style={{ 
-                top: carGroupState.displayCoordinates.chipY,
-                left: carGroupState.displayCoordinates.chipX,
-                opacity: carGroupState.displayCoordinates.chipOpacity,
+                top: carGroupState.chipState.y,
+                left: carGroupState.chipState.x,
+                opacity: carGroupState.chipState.opacity,
                 // zIndex: carGroupState.displayCoordinates.zIndex,
               }}  
             >
