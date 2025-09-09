@@ -9,10 +9,10 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
           key={`car-card-${carState.info.title}`}
           className="absolute transition-all duration-500 ease-in-out" 
           style={{ 
-            width: carState.displayProperties.width,
-            // height: cardState.displayProperties.height,
-            top: carState.displayProperties.top || 0,
-            left: carState.displayProperties.left || 0,
+            width: carState.displayProperties.boundingBox.width,
+            // height: carState.displayProperties.boundingBox.height,
+            top: carState.displayProperties.boundingBox.top || 0,
+            left: carState.displayProperties.boundingBox.left || 0,
             opacity: carState.displayProperties.opacity !== undefined ? carState.displayProperties.opacity : 1,
             zIndex: carState.displayProperties.zIndex || 0,
           }}

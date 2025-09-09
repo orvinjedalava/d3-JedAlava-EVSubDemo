@@ -43,9 +43,12 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
 
     setCarPosition(carGroupName, car.info.title, 
       { 
-        width: car.displayProperties.width === 253 ? 715 : 253, 
-        height: car.displayProperties.height === 350 ? 688 : 350,
-        left: car.displayProperties.left === 200 ? 50 : 200, 
+        boundingBox: {
+          width: car.displayProperties.boundingBox.width === 253 ? 715 : 253, 
+          height: car.displayProperties.boundingBox.height === 350 ? 688 : 350,
+          left: car.displayProperties.boundingBox.left === 200 ? 50 : 200,
+          top: car.displayProperties.boundingBox.top 
+        }
       });
 
     setCarDisplayMode(carGroupName, car.info.title, car.displayMode & CardDisplayMode.Expand ? 
@@ -98,7 +101,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                 transform: isExpanded ? `scale(0.5)` : `scale(1)`,
                 transformOrigin: 'top left'
               }}
-              width={`${car.displayProperties.width ?? 0}px`}
+              width={`${car.displayProperties.boundingBox.width ?? 0}px`}
               src={car.info.img}
             />
           </div>
@@ -106,7 +109,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
           <div className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
             style={{ 
               top: '16px',
-              left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
+              left: `${(car.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
             }}>
               <div >
                 <CarTitle title={car.info.title} subtitle={car.info.subtitle} />
@@ -116,7 +119,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
           <div className={`absolute transition-opacity ease-in-out ${isExpanded ? 'opacity-100 duration-500 delay-[500ms]' : 'transition-none opacity-0'}`}
             style={{ 
               top: '64px',
-              left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
+              left: `${(car.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
             }}>
               <div>
                 <p className="text-sm text-default-500 transition-all duration-1000">{car.info.description}</p>

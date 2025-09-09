@@ -43,7 +43,16 @@ export const generateCarGroupStatesFrom = (
       // const displayProperties = carsCoordinates[index];
       // Assign display properties to each carInfo
       carState.push({
-        displayProperties,
+        displayProperties: {
+          boundingBox: { 
+            width: displayProperties.width, 
+            height: displayProperties.height,
+            left: displayProperties.left,
+            top: displayProperties.top
+          },
+          opacity: displayProperties.opacity,
+          zIndex: displayProperties.zIndex
+        },
         info,
         displayMode: CardDisplayMode.ShowCriteria
       });
