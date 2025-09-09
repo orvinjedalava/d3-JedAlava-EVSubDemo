@@ -62,8 +62,7 @@ export interface CarGroupCoordinates {
 } 
 
 export interface ChipState {
-  x: number;
-  y: number;
+  boundingBox: BoundingBox;
   opacity: number;
 }
 

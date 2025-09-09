@@ -69,8 +69,12 @@ export const generateCarsStateFrom = (carGroupInfos: CarGroupInfo[]): CarGroupSt
         boundingBox: { top: 0, left: 0, width: 0, height: 0 },
       },
       chipState: { 
-        x: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
-        y: ( displayProperties.top + displayProperties.height )|| 0, 
+        boundingBox: { 
+          top: ( displayProperties.top + displayProperties.height )|| 0, 
+          left: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
+          width: 0, 
+          height: 0 
+        },
         opacity: displayProperties.opacity || 1
       },
       isSelected: false

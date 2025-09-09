@@ -31,8 +31,8 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
               } : {})}
 
               style={{ 
-                top: carGroupState.chipState.y,
-                left: carGroupState.chipState.x,
+                top: carGroupState.chipState.boundingBox.top,
+                left: carGroupState.chipState.boundingBox.left,
                 opacity: carGroupState.chipState.opacity,
                 // zIndex: carGroupState.displayCoordinates.zIndex,
               }}  

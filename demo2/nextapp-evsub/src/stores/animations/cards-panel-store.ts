@@ -89,8 +89,12 @@ export const useCarsStore = create<CarsState>((set) => ({
       },
       chipState: {
         ...carGroupState.chipState,
-        x: chipState.x,
-        y: chipState.y,
+        boundingBox: {
+          top: chipState.boundingBox.top,
+          left: chipState.boundingBox.left,
+          width: chipState.boundingBox.width,
+          height: chipState.boundingBox.height
+        },
         opacity: chipState.opacity
       }
     };

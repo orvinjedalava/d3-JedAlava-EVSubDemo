@@ -101,8 +101,8 @@ export const ChatUI = ({
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 0.4 });
     setCarGroupSelected(carGroupName1, true);
     
-    setCarGroupChipPosition(carGroupName1, { x: 10, y: 10, opacity: 1 });
-    setCarGroupChipPosition(carGroupName2, { x: carGroupStates[1].chipState.x, y: carGroupStates[1].chipState.y, opacity: 0.4 });
+    setCarGroupChipPosition(carGroupName1, { boundingBox: {left: 10, top: 10, height: 0, width: 0} , opacity: 1 });
+    setCarGroupChipPosition(carGroupName2, { boundingBox: {left: carGroupStates[1].chipState.boundingBox.left, top: carGroupStates[1].chipState.boundingBox.top, height: carGroupStates[1].chipState.boundingBox.height, width: carGroupStates[1].chipState.boundingBox.width} , opacity: 0.4 });
   }
 
   const onBack = () => {
@@ -117,8 +117,8 @@ export const ChatUI = ({
     setCarPosition(carGroupName2, carCard2.info.title, { opacity: 1 });
     setCarGroupSelected(carGroupName1, false);
 
-    setCarGroupChipPosition(carGroupName1, { x: 113.25, y: 430, opacity: 1 });
-    setCarGroupChipPosition(carGroupName2, { x: carGroupStates[1].chipState.x, y: carGroupStates[1].chipState.y, opacity: 1 });
+    setCarGroupChipPosition(carGroupName1, { boundingBox: {left: 113.25, top: 430, height: 0, width: 0} , opacity: 1 });
+    setCarGroupChipPosition(carGroupName2, { boundingBox: {left: carGroupStates[1].chipState.boundingBox.left, top: carGroupStates[1].chipState.boundingBox.top, height: carGroupStates[1].chipState.boundingBox.height, width: carGroupStates[1].chipState.boundingBox.width} , opacity: 1 });
   }
 
   const onResize = () => {
