@@ -14,7 +14,7 @@ export const refreshClientSize = (clientWidth: number, clientHeight: number) => 
   console.log('Refreshing client size to:', clientWidth, clientHeight);
 }
 
-export const generateCarsStateFrom = (
+export const generateCarGroupStatesFrom = (
   carGroupInfos: CarGroupInfo[], 
   clientWidth: number, 
   clientHeight: number): CarGroupState[] => {

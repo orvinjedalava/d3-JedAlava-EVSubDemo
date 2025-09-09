@@ -5,7 +5,7 @@ import { Chip } from "@heroui/chip"
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { getCarGroups } from '@/actions/get-cars';
-import { generateCarsStateFrom } from '@/utils/state-helpers';
+import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 
 interface CardsPanelProps {
   width: number;
@@ -58,7 +58,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
       // setCarStates(initialCardStates);
 
       const carGroups = await getCarGroups();
-      const initialCardGroupStates = generateCarsStateFrom(carGroups, dimensions.width, dimensions.height);
+      const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, dimensions.width, dimensions.height);
 
       // Update the store with the combined data
       if (setCarGroupStates) {
