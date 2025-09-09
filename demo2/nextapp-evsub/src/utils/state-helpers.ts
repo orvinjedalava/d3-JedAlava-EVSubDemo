@@ -9,6 +9,7 @@ import type {
   CarGroupState } from '@/types';
 
 import { CardDisplayMode } from '@/types';
+import { generateBoundingBoxes } from '@/utils/scale-helper';
 
 export const refreshClientSize = (clientWidth: number, clientHeight: number) => {
   console.log('Refreshing client size to:', clientWidth, clientHeight);
@@ -27,16 +28,23 @@ export const generateCarGroupStatesFrom = (
     // { width: 253, height: 276, top: 0, left: 350, opacity: 1 },
   ]
 
-  refreshClientSize(clientWidth, clientHeight);
+  // refreshClientSize(clientWidth, clientHeight);
+
+  // get the bounding boxes for each car group based on the number of car groups and client size
+  const carGroupBoxes = generateBoundingBoxes(carGroupInfos.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
+  console.log('clientWidth, clientHeight:', clientWidth, clientHeight);
+  console.log(carGroupBoxes);
 
   // let result: CarState = {};
   let carGroupState: CarGroupState[] = [];
 
-  carGroupInfos.map((carGroupInfo, index) => {
+  carGroupInfos.map((carGroupInfo, carGroupIdx) => {
 
     let carState: CarState[] = [];
     // Get the display properties for this card, or use defaults if not available
-    let displayProperties = carsCoordinates[index];
+    let displayProperties = carsCoordinates[carGroupIdx];
+
+    const carGroupBox = carGroupBoxes[carGroupIdx];
 
     carGroupInfo.carInfos.forEach((info, idx) => {
       // Get the display properties for this card, or use defaults if not available
@@ -62,7 +70,7 @@ export const generateCarGroupStatesFrom = (
       carStates: carState,
       info: carGroupInfo,
       displayProperties: { 
-        boundingBox: { top: 0, left: 0, width: 0, height: 0 },
+        boundingBox: carGroupBox,
       },
       chipState: { 
         boundingBox: { 

@@ -41,7 +41,8 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
         
         // If you need to update a store with these values:
         // updateDimensionsInStore(width, height);
-        refreshClientSize(width, height);
+        
+        // refreshClientSize(width, height);
       }
     });
     
