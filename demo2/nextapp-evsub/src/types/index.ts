@@ -43,7 +43,7 @@ export interface CarGroupInfo {
 export interface CarGroupState {
   carStates: CarState[];
   info: CarGroupInfo;
-  displayCoordinates: CarGroupCoordinates;
+  displayProperties: CarGroupDisplayProperties;
   chipState: ChipState;
   isSelected: boolean;
 }
@@ -55,7 +55,7 @@ export interface BoundingBox {
   height: number;
 }
 
-export interface CarGroupCoordinates {
+export interface CarGroupDisplayProperties {
   boundingBox: BoundingBox;
 } 
 

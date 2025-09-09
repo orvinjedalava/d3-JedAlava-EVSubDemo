@@ -1,6 +1,6 @@
 import type { 
   BoundingBox, 
-  CarGroupCoordinates, 
+  CarGroupDisplayProperties, 
   CarDisplayProperties, 
   CarInfo, 
   CarState,
@@ -52,7 +52,7 @@ export const generateCarGroupStatesFrom = (
     carGroupState.push({
       carStates: carState,
       info: carGroupInfo,
-      displayCoordinates: { 
+      displayProperties: { 
         boundingBox: { top: 0, left: 0, width: 0, height: 0 },
       },
       chipState: { 

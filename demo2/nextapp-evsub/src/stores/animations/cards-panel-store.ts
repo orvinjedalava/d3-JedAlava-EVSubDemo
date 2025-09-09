@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { 
   CarState, 
   CarGroupState, 
-  CarGroupCoordinates, 
+  CarGroupDisplayProperties, 
   CarDisplayProperties, 
   CardDisplayMode, 
   CarGroupInfo, 
@@ -86,7 +86,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     const updatedCarGroupState = {
       ...carGroupState,
       displayCoordinates: {
-        ...carGroupState.displayCoordinates,
+        ...carGroupState.displayProperties,
         
       },
       chipState: {
