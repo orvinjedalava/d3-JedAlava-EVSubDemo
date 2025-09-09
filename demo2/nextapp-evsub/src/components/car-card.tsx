@@ -6,6 +6,7 @@ import { Image } from "@heroui/image";
 import { CarInfoChip } from "./car-info-chip";
 import { CardDisplayMode, CarCardState } from "@/types";
 import { Button } from "@heroui/button";
+import { CarTitle } from "./car-title";
 
 interface CarCardProps {
   car: CarCardState;
@@ -58,14 +59,7 @@ export const CarCard = ({ car }: CarCardProps) => {
             className="relative transition-all duration-500 ease-in-out"
             style={{ height: isExpanded ? `220px`  :`220px` }}
             >
-            {/* <Image
-              ref={imageRef}
-              alt={car.detail.title}
-              className={`absolute ${isExpanded ? "top-5 left-5 rounded-lg" :"top-0 left-0 rounded-b-none"}`}
-              src={car.detail.img}
-              width={isExpanded ?  `${(car.displayProperties.width ?? 0) / 2 }px` :  `${(car.displayProperties.width ?? 0)}px`}
-              
-            /> */}
+            
             <Image
               ref={imageRef}
               alt={car.detail.title}
@@ -79,31 +73,14 @@ export const CarCard = ({ car }: CarCardProps) => {
             />
           </div>
           
-          {/* { isExpanded && (
-            <div className={`absolute grid grid-rows-[auto_auto] transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ 
-                top: '16px',
-                left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
-              }}>
-                <div>
-                  <h3 className="text-sm font-semibold">{car.detail.title}</h3>
-                  <p className="text-sm text-default-500">{car.detail.subtitle}</p>
-                </div>
-            </div>)
-          } */}
-
           <div className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
             style={{ 
               top: '16px',
               left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
             }}>
               <div >
-                <h3 className="text-sm font-semibold">{car.detail.title}</h3>
-                <p className="text-sm text-default-500">{car.detail.subtitle}</p>
+                <CarTitle title={car.detail.title} subtitle={car.detail.subtitle} />
               </div>
-              {/* <div>
-                <p className="text-sm text-default-500 transition-all duration-1000">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?</p>
-              </div> */}
           </div>
 
           <div className={`absolute transition-opacity ease-in-out ${isExpanded ? 'opacity-100 duration-500 delay-[500ms]' : 'transition-none opacity-0'}`}
@@ -122,8 +99,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               left: '16px',
             }}>
               <div>
-                <h3 className="text-sm font-semibold">{car.detail.title}</h3>
-                <p className="text-sm text-default-500">{car.detail.subtitle}</p>
+                <CarTitle title={car.detail.title} subtitle={car.detail.subtitle} />
               </div>
           </div>
         </div>
