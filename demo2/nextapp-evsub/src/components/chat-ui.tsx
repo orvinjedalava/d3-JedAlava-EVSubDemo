@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Input } from "@heroui/input";
 import { tv } from "tailwind-variants";
 import { Button, ButtonGroup } from "@heroui/button";
-import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
+import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { CardDisplayMode } from "@/types";
 
 type Message = {
@@ -29,11 +29,11 @@ export const ChatUI = ({
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const { 
-      carCardStates,
-      setCarCardPosition,
-      setCarCardMode
-    } = useCarGroupStore();
-  
+    carGroupStates,
+    setCarPosition,
+    setCarDisplayMode
+  } = useCarsStore();
+
   // Define message bubble styles with tails
   const messageBubble = tv({
     base: "max-w-[70%] p-3 rounded-lg relative",
@@ -88,28 +88,41 @@ export const ChatUI = ({
   };
 
   const onNext = () => {
-    setCarCardPosition(0, { left: 200, zIndex: 1 });
-    setCarCardMode(0, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
-    setCarCardPosition(1, { opacity: 0.4 });
+    const carCard1 = carGroupStates[0].carStates[0];
+    const carGroupName1 = carGroupStates[0].info.name;
+
+    const carCard2 = carGroupStates[1].carStates[0];
+    const carGroupName2 = carGroupStates[1].info.name;
+
+    setCarPosition(carGroupName1, carCard1.info.title, { left: 200, zIndex: 1 });
+    setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
+    setCarPosition(carGroupName2, carCard2.info.title, { opacity: 0.4 });
   }
 
   const onBack = () => {
-    setCarCardPosition(0, { left: 20, zIndex: 0 });
-    setCarCardMode(0,  CardDisplayMode.ShowCriteria); // Set to Clickable
-    setCarCardPosition(1, { opacity: 1 });
+    const carCard1 = carGroupStates[0].carStates[0];
+    const carGroupName1 = carGroupStates[0].info.name;
+
+    const carCard2 = carGroupStates[1].carStates[0];
+    const carGroupName2 = carGroupStates[1].info.name;
+    
+    setCarPosition(carGroupName1, carCard1.info.title, { left: 20, zIndex: 0 });
+    setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
+    setCarPosition(carGroupName2, carCard2.info.title, { opacity: 1 });
   }
 
   const onResize = () => {
-    const carCard = carCardStates[0];
+    const carCard = carGroupStates[0].carStates[0];
+    const carGroupName = carGroupStates[0].info.name;
 
-    setCarCardPosition(0, 
+    setCarPosition(carGroupName, carCard.info.title,
       { 
         width: carCard.displayProperties.width === 253 ? 715 : 253, 
         height: carCard.displayProperties.height === 350 ? 688 : 350,
         left: carCard.displayProperties.left === 200 ? 50 : 200, 
       });
 
-    setCarCardMode(0,  carCard.displayMode & CardDisplayMode.Expand ? 
+    setCarDisplayMode(carGroupName, carCard.info.title, carCard.displayMode & CardDisplayMode.Expand ? 
       CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
       : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
   }

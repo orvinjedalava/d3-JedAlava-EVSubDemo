@@ -1,5 +1,5 @@
 import { CarCard } from "@/components/car-card";
-import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
+import { useCarsStore } from "@/stores/animations/cards-panel-store";
 
 interface CardsPanelProps {
   width: number;
@@ -8,13 +8,13 @@ interface CardsPanelProps {
 
 export const CardsPanel = ({ width, height }: CardsPanelProps) => {
   const { 
-    carCardStates,
-  } = useCarGroupStore();
+    carGroupStates,
+  } = useCarsStore();
 
   return (
     
     <div className="flex-grow relative">
-      {carCardStates.map((cardState, index) => (
+      {/* {carCardStates.map((cardState, index) => (
         <div 
           key={`car-card-${index}`}
           className="absolute transition-all duration-500 ease-in-out" 
@@ -28,7 +28,27 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
           }}>
           <CarCard car={cardState} />
         </div>
-      ))}
+      ))} */}
+      {
+        carGroupStates.map((carGroupState, groupIndex) => (
+          carGroupState.carStates.map((carState, index) => (
+            <div 
+              key={`car-card-${index}`}
+              className="absolute transition-all duration-500 ease-in-out" 
+              style={{ 
+                width: carState.displayProperties.width,
+                // height: cardState.displayProperties.height,
+                top: carState.displayProperties.top || 0,
+                left: carState.displayProperties.left || 0,
+                opacity: carState.displayProperties.opacity !== undefined ? carState.displayProperties.opacity : 1,
+                zIndex: carState.displayProperties.zIndex || 0,
+              }}>
+              <CarCard car={carState} carGroupName={carGroupState.info.name}/>
+            </div>
+          ))
+        ))
+      
+      }
       
     </div>
   );

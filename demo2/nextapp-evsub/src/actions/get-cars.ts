@@ -1,7 +1,7 @@
 'use server';
-import { CarCardDetail, CarGroup } from "@/types";
+import { CarInfo, CarGroupInfo } from "@/types";
 
-export async function getCarGroups(): Promise<CarGroup[]> {
+export async function getCarGroups(): Promise<CarGroupInfo[]> {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -9,7 +9,7 @@ export async function getCarGroups(): Promise<CarGroup[]> {
     {
       id: 1,
       name: "Weekend Drives",
-      cars: [
+      carInfos: [
         {
           title: "Volvo EX30",
           subtitle: "Ultra Single Motor 2023",
@@ -31,7 +31,7 @@ export async function getCarGroups(): Promise<CarGroup[]> {
     {
       id: 2,
       name: "Local Trips",
-      cars: [
+      carInfos: [
         {
           title: "KIA EV5",
           subtitle: "Earth 2025",
@@ -53,7 +53,7 @@ export async function getCarGroups(): Promise<CarGroup[]> {
   ];
 }
 
-export async function getCars(): Promise<CarCardDetail[]> {
+export async function getCars(): Promise<CarInfo[]> {
     // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1000));
 

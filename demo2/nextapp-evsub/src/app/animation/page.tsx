@@ -6,11 +6,11 @@ import { motion } from 'framer-motion';
 import { CardsPanel } from '@/components/cards-panel';
 import { useTransitionState } from 'next-transition-router';
 import { appSettings } from '@/config/app';
-import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
-import type { CarCardState } from '@/types';
+import { useCarsStore } from "@/stores/animations/cards-panel-store";
+import type { CarState } from '@/types';
 import { motionOpacity } from '@/utils/framer-motion-helpers';
-import { getCars } from '@/actions/get-cars';
-import { getDisplayCoordinates} from '@/utils/coordinates-helpers';
+import { getCars, getCarGroups } from '@/actions/get-cars';
+import { generateCarsStateFrom } from '@/utils/coordinates-helpers';
 import { getInitialMessages } from '@/actions/get-chat-messages';
 
 export default function ExploreLayout({
@@ -23,22 +23,28 @@ export default function ExploreLayout({
   const { stage } = useTransitionState();
   
   const { 
-    carCardStates,
-    setCarCardStates,
-  } = useCarGroupStore();
+    setCarGroupStates,
+  } = useCarsStore();
 
   useEffect(() => {
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
       // Await the cars data
-      const cars = await getCars();
-      const initialCardStates: CarCardState[] = getDisplayCoordinates(cars);
+      // const cars = await getCars();
+      
+      // const initialCardStates: CarState[] = getDisplayCoordinates(cars);
+      // Update the store with the combined data
+      // setCarStates(initialCardStates);
+
+      const carGroups = await getCarGroups();
+      const initialCardGroupStates = generateCarsStateFrom(carGroups);
 
       // Update the store with the combined data
-      setCarCardStates(initialCardStates);
-
+      if (setCarGroupStates) {
+        setCarGroupStates(initialCardGroupStates);
+      }
       // Log for debugging
-      console.log("Initialized card states:", initialCardStates);
+      console.log("Initialized card group states:", initialCardGroupStates);
     })();
 
 

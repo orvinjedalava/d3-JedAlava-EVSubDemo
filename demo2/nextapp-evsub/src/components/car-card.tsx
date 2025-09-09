@@ -4,16 +4,17 @@ import { useRef, useEffect, useState } from "react";
 import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 import { Image } from "@heroui/image";
 import { CarInfoChip } from "./car-info-chip";
-import { CardDisplayMode, CarCardState } from "@/types";
+import { CardDisplayMode, CarState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "./car-title";
-import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
+import { useCarsStore } from "@/stores/animations/cards-panel-store";
 
 interface CarCardProps {
-  car: CarCardState;
+  car: CarState;
+  carGroupName: string;
 }
 
-export const CarCard = ({ car }: CarCardProps) => {
+export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const showCriteria = (car.displayMode & CardDisplayMode.ShowCriteria) !== 0;
   const showButton = (car.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (car.displayMode & CardDisplayMode.Expand) !== 0;
@@ -25,10 +26,9 @@ export const CarCard = ({ car }: CarCardProps) => {
   const [imageHeight, setImageHeight] = useState<number>(0);
 
   const { 
-    carCardStates,
-    setCarCardPosition,
-    setCarCardMode
-  } = useCarGroupStore();
+    setCarPosition,
+    setCarDisplayMode
+  } = useCarsStore();
 
   const onCloseClicked = () => {
     onResize();
@@ -41,14 +41,14 @@ export const CarCard = ({ car }: CarCardProps) => {
   const onResize = () => {
     // const carCard = carCardStates[0];
 
-    setCarCardPosition(0, 
+    setCarPosition(carGroupName, car.info.title, 
       { 
         width: car.displayProperties.width === 253 ? 715 : 253, 
         height: car.displayProperties.height === 350 ? 688 : 350,
         left: car.displayProperties.left === 200 ? 50 : 200, 
       });
 
-    setCarCardMode(0,  car.displayMode & CardDisplayMode.Expand ? 
+    setCarDisplayMode(carGroupName, car.info.title, car.displayMode & CardDisplayMode.Expand ? 
       CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
       : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
   }
@@ -92,14 +92,14 @@ export const CarCard = ({ car }: CarCardProps) => {
             
             <Image
               ref={imageRef}
-              alt={car.detail.title}
+              alt={car.info.title}
               className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
                 transform: isExpanded ? `scale(0.5)` : `scale(1)`,
                 transformOrigin: 'top left'
               }}
               width={`${car.displayProperties.width ?? 0}px`}
-              src={car.detail.img}
+              src={car.info.img}
             />
           </div>
           
@@ -109,7 +109,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
             }}>
               <div >
-                <CarTitle title={car.detail.title} subtitle={car.detail.subtitle} />
+                <CarTitle title={car.info.title} subtitle={car.info.subtitle} />
               </div>
           </div>
 
@@ -119,7 +119,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               left: `${(car.displayProperties.width ?? 0) / 7 * 4}px`,
             }}>
               <div>
-                <p className="text-sm text-default-500 transition-all duration-1000">{car.detail.description}</p>
+                <p className="text-sm text-default-500 transition-all duration-1000">{car.info.description}</p>
               </div>
           </div>
 
@@ -137,7 +137,7 @@ export const CarCard = ({ car }: CarCardProps) => {
               left: '16px',
             }}>
               <div>
-                <CarTitle title={car.detail.title} subtitle={car.detail.subtitle} />
+                <CarTitle title={car.info.title} subtitle={car.info.subtitle} />
               </div>
           </div>
         </div>
@@ -149,7 +149,7 @@ export const CarCard = ({ car }: CarCardProps) => {
             { showCriteria &&  (
               
               <div className="flex flex-row items-center justify-center gap-2 h-[95px]">
-                {Object.entries(car.detail.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value], index) => {
+                {Object.entries(car.info.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value], index) => {
                   // Map criteria keys to appropriate icons
                   const getIconForCriteria = (criteriaKey: string) => {
                     switch(criteriaKey) {
@@ -177,7 +177,7 @@ export const CarCard = ({ car }: CarCardProps) => {
             { showCriteria && isExpanded &&  (
               
               <div className="flex flex-row items-center justify-center gap-2 h-[92px]">
-                {Object.entries(car.detail.criteria).filter((_, index) => index >= 5 ).map(([key, value]) => {
+                {Object.entries(car.info.criteria).filter((_, index) => index >= 5 ).map(([key, value]) => {
                   // Map criteria keys to appropriate icons
                   const getIconForCriteria = (criteriaKey: string) => {
                     switch(criteriaKey) {

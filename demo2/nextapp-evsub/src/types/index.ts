@@ -11,13 +11,7 @@ export enum CardDisplayMode {
   Expand = 1 << 2     // 8 (binary: 1000)
 }
 
-export interface CarCardState {
-  displayProperties: CarCardDisplayProperties;
-  detail: CarCardDetail;
-  displayMode: CardDisplayMode;
-}
-
-export interface CarCardDisplayProperties {
+export interface CarDisplayProperties {
   width?: number;
   height?: number;
   top?: number;
@@ -26,7 +20,7 @@ export interface CarCardDisplayProperties {
   zIndex?: number;
 }
 
-export interface CarCardDetail {
+export interface CarInfo {
   title: string;
   subtitle: string;
   description: string;
@@ -34,10 +28,22 @@ export interface CarCardDetail {
   criteria: Record<string, string>;
 }
 
-export interface CarGroup {
+export interface CarState {
+  displayProperties: CarDisplayProperties;
+  info: CarInfo;
+  displayMode: CardDisplayMode;
+}
+
+export interface CarGroupInfo {
   id: number;
   name: string;
-  cars: CarCardDetail[];
+  carInfos: CarInfo[];
+}
+
+export interface CarGroupState {
+  carStates: CarState[];
+  info: CarGroupInfo;
+  displayCoordinates: CarGroupCoordinates;
 }
 
 export interface BoundingBox {
@@ -53,11 +59,20 @@ export interface CarGroupCoordinates {
   boundingBox: BoundingBox;
 } 
 
-export interface CarGroupState {
-  carCardStates: CarCardState[];
-  setCarCardStates: (carCardStates: CarCardState[]) => void;
-  setCarCardPosition: (index: number, displayProperties: CarCardDisplayProperties) => void;
-  setCarCardMode: (index: number, mode: CardDisplayMode) => void;
+// export interface CarGroupState {
+//   carCardStates: CarCardState[];
+//   setCarCardStates: (carCardStates: CarCardState[]) => void;
+//   setCarCardPosition: (index: number, displayProperties: CarDisplayProperties) => void;
+//   setCarCardMode: (index: number, mode: CardDisplayMode) => void;
+// }
+
+export interface CarsState {
+  carGroupStates: CarGroupState[];
+
+  setCarStates: (carGroupName: string, carStates: CarState[]) => void;
+  setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
+  setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
+  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => void;
 }
 
 export interface ChatMessage {

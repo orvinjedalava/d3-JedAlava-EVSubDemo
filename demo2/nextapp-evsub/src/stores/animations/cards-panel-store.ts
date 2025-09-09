@@ -1,34 +1,104 @@
 import { create } from 'zustand';
-import type { CarCardState, CarGroupState, CarGroupCoordinates, CarCardDisplayProperties, CardDisplayMode  } from '@/types';
+import type { CarState, CarGroupState, CarGroupCoordinates, CarDisplayProperties, CardDisplayMode, CarGroupInfo, CarsState  } from '@/types';
 
-export const useCarGroupStore = create<CarGroupState>((set) => ({
-  carCardStates: new Array<CarCardState>(),
+// export const useCarGroupStore = create<CarGroupState>((set) => ({
+//   carCardStates: new Array<CarState>(),
 
-  setCarCardStates: (carCardStates) => set({ carCardStates }),
+//   setCarCardStates: (carCardStates) => set({ carCardStates }),
 
-  setCarCardPosition: (index: number, displayProperties: CarCardDisplayProperties ) => set((state) => {
-    const updatedCarCardStates = [...state.carCardStates];
-    if (index >= 0 && index < updatedCarCardStates.length) {
-      updatedCarCardStates[index] = {
-        ...updatedCarCardStates[index],
-        displayProperties: { ...updatedCarCardStates[index].displayProperties, ...displayProperties }
-      };
-    }
+//   setCarCardPosition: (index: number, displayProperties: CarDisplayProperties ) => set((state) => {
+//     const updatedCarCardStates = [...state.carCardStates];
+//     if (index >= 0 && index < updatedCarCardStates.length) {
+//       updatedCarCardStates[index] = {
+//         ...updatedCarCardStates[index],
+//         displayProperties: { ...updatedCarCardStates[index].displayProperties, ...displayProperties }
+//       };
+//     }
+//     return {
+//       carCardStates: updatedCarCardStates
+//     };
+//   }),
+
+//   setCarCardMode: (index: number, mode: CardDisplayMode) => set((state) => {
+//     const updatedCarCardStates = [...state.carCardStates];
+//     if (index >= 0 && index < updatedCarCardStates.length) {
+//       updatedCarCardStates[index] = {
+//         ...updatedCarCardStates[index],
+//         displayMode: mode
+//       };
+//     }
+//     return {
+//       carCardStates: updatedCarCardStates
+//     };
+//   })
+// }));
+
+export const useCarsStore = create<CarsState>((set) => ({
+  carGroupStates: new Array<CarGroupState>(),
+  setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
+
+  setCarStates: (carGroupName: string, carStates: CarState[]) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+    if (!carGroupState) return state;
+    const updatedCarGroupStates = [...state.carGroupStates];
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates
+    };
     return {
-      carCardStates: updatedCarCardStates
+      carGroupStates: updatedCarGroupStates
     };
   }),
 
-  setCarCardMode: (index: number, mode: CardDisplayMode) => set((state) => {
-    const updatedCarCardStates = [...state.carCardStates];
-    if (index >= 0 && index < updatedCarCardStates.length) {
-      updatedCarCardStates[index] = {
-        ...updatedCarCardStates[index],
+  setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+    if (!carGroupState) return state;
+
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarStates = [...carGroupState.carStates];
+    
+    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    if (index >= 0 && index < updatedCarStates.length) {
+      updatedCarStates[index] = {
+        ...updatedCarStates[index],
+        displayProperties: { ...updatedCarStates[index].displayProperties, ...displayProperties }
+      };
+    }
+
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates: updatedCarStates
+    };
+    return {
+      carGroupStates: updatedCarGroupStates
+    };
+  }),
+
+  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
+    if (!carGroupState) return state;
+
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarStates = [...carGroupState.carStates];
+
+    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+
+    if (index >= 0 && index < updatedCarStates.length) {
+      updatedCarStates[index] = {
+        ...updatedCarStates[index],
         displayMode: mode
       };
     }
+
+    
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates: updatedCarStates
+    };
     return {
-      carCardStates: updatedCarCardStates
+      carGroupStates: updatedCarGroupStates
     };
   })
 }));
+
+    
