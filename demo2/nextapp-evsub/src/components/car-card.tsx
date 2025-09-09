@@ -7,6 +7,7 @@ import { CarInfoChip } from "./car-info-chip";
 import { CardDisplayMode, CarCardState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "./car-title";
+import { useCarGroupStore } from "@/stores/animations/cards-panel-store";
 
 interface CarCardProps {
   car: CarCardState;
@@ -22,6 +23,27 @@ export const CarCard = ({ car }: CarCardProps) => {
   const imageContainerRef = useRef<HTMLDivElement>(null);
   // State to store the image height
   const [imageHeight, setImageHeight] = useState<number>(0);
+
+  const { 
+        carCardStates,
+        setCarCardPosition,
+        setCarCardMode
+      } = useCarGroupStore();
+
+  const onResize = () => {
+    // const carCard = carCardStates[0];
+
+    setCarCardPosition(0, 
+      { 
+        width: car.displayProperties.width === 253 ? 715 : 253, 
+        height: car.displayProperties.height === 350 ? 688 : 350,
+        left: car.displayProperties.left === 200 ? 50 : 200, 
+      });
+
+    setCarCardMode(0,  car.displayMode & CardDisplayMode.Expand ? 
+      CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
+      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
+  }
 
   // Effect to measure the image height after it loads
   useEffect(() => {
@@ -97,7 +119,8 @@ export const CarCard = ({ car }: CarCardProps) => {
             className={`absolute top-[16px] right-[20px] transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
             size="sm" 
             variant="solid" 
-            color="secondary" 
+            color="secondary"
+            onPress={onResize} 
           >x</Button>
 
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
