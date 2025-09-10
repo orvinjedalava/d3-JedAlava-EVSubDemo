@@ -3,46 +3,56 @@
 import { useRef, useEffect, useState } from "react";
 import { Chip } from "@heroui/chip"
 import { CarGroupPanel } from "@/components/car-group-panel";
-import { useCarsStore } from "@/stores/animations/cards-panel-store";
+import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
 import { getCarGroups } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
+import { CardDisplayMode } from "@/types";
 
-interface CardsPanelProps {
-  width: number;
-  height: number;
-}
+// interface CardsPanelProps {
+//   width: number;
+//   height: number;
+// }
 
-export const CardsPanel = ({ width, height }: CardsPanelProps) => {
+export const CardsPanel = () => {
   const { 
     carGroupStates,
     setCarGroupStates,
     refreshClientSize,
+    setCarGroupSelected,
+    setCarGroupDisplayMode,
   } = useCarsStore();
 
   // Create a ref for the container div
   const containerRef = useRef<HTMLDivElement>(null);
 
   // State to store dimensions
-  const [dimensions, setDimensions] = useState({
-    width: width || 0,
-    height: height || 0
-  });
+  // const [dimensions, setDimensions] = useState({
+  //   width:  0,
+  //   height: 0
+  // });
+
+  const { width, height, setDimensions } = useCarPanelDimensionsStore();
 
   // Set up the resize observer
   useEffect(() => {
     if (!containerRef.current) return;
+
+    
+    // setDimensions({ width, height });
     
     // Create a new ResizeObserver
     const resizeObserver = new ResizeObserver(entries => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
+        // setDimensions({ width, height });
+        setDimensions(width, height);
         // console.log(`Container resized: ${width}px × ${height}px`);
         
         // If you need to update a store with these values:
         // updateDimensionsInStore(width, height);
         
-        // refreshClientSize(width, height);
+        refreshClientSize(width, height);
+        // console.log('Observed dimensions change:', width, height);
       }
     });
     
@@ -51,19 +61,16 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
 
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
-      // Await the cars data
-      // const cars = await getCars();
       
-      // const initialCardStates: CarState[] = getDisplayCoordinates(cars);
-      // Update the store with the combined data
-      // setCarStates(initialCardStates);
-
       const carGroups = await getCarGroups();
-      const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, dimensions.width, dimensions.height);
+      if (containerRef.current) {
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
 
-      // Update the store with the combined data
-      if (setCarGroupStates) {
-        setCarGroupStates(initialCardGroupStates);
+        // Update the store with the combined data
+        if (setCarGroupStates) {
+          setCarGroupStates(initialCardGroupStates);
+        }
       }
       // Log for debugging
       // console.log("Initialized card group states:", initialCardGroupStates);
@@ -79,7 +86,7 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
     
     <div 
       ref={containerRef}
-      className="flex-grow relative"
+      className="flex-grow relative border border-red-500"
     >
       {
         carGroupStates.map((carGroupState) => (
@@ -90,10 +97,24 @@ export const CardsPanel = ({ width, height }: CardsPanelProps) => {
             />
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
-              className="m-2 absolute transition-all duration-500 ease-in-out"
+              className="m-2 absolute transition-all duration-500 ease-in-out cursor-pointer"
 
               {...(carGroupState.isSelected ? { 
-                onClose: () => console.log(`Close chip for ${carGroupState.info.name}`)
+                onClose: () => {
+                  setCarGroupSelected(carGroupState.info.name, false);
+                  setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria); 
+                  // refreshClientSize(dimensions.width, dimensions.height);
+                  refreshClientSize(width, height);
+                }
+              } : {})}
+
+              {...(!carGroupState.isSelected ? { 
+                onClick: () => { 
+                  setCarGroupSelected(carGroupState.info.name, true);
+                  setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Reset display mode when selecting 
+                  // refreshClientSize(dimensions.width, dimensions.height);
+                  refreshClientSize(width, height);
+                }
               } : {})}
 
               style={{ 

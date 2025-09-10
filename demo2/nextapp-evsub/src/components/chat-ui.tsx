@@ -96,12 +96,12 @@ export const ChatUI = ({
     const carCard2 = carGroupStates[1].carStates[0];
     const carGroupName2 = carGroupStates[1].info.name;
 
-    setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 200, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height }, zIndex: 1 });
-    setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
-    setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 0.4 });
+    // setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 200, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height }, zIndex: 1 });
+    // setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
+    // setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 0.4 });
     setCarGroupSelected(carGroupName1, true);
 
-    setCarGroupChipPosition(carGroupName1, { boundingBox: { left: 10, top: 10, height: 0, width: 0 }, opacity: 1 });
+    // setCarGroupChipPosition(carGroupName1, { boundingBox: { left: 10, top: 10, height: 0, width: 0 }, opacity: 1 });
     setCarGroupChipPosition(carGroupName2, { boundingBox: { left: carGroupStates[1].chipState.boundingBox.left, top: carGroupStates[1].chipState.boundingBox.top, height: carGroupStates[1].chipState.boundingBox.height, width: carGroupStates[1].chipState.boundingBox.width }, opacity: 0.4 });
   }
 
@@ -113,7 +113,7 @@ export const ChatUI = ({
     const carGroupName2 = carGroupStates[1].info.name;
 
     setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 50, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height  }, zIndex: 0 });
-    setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
+    // setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
     setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 1 });
     setCarGroupSelected(carGroupName1, false);
 
@@ -135,9 +135,9 @@ export const ChatUI = ({
         }
       });
 
-    setCarDisplayMode(carGroupName, carCard.info.title, carCard.displayMode & CardDisplayMode.Expand ? 
-      CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
-      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
+    // setCarDisplayMode(carGroupName, carCard.info.title, carCard.displayMode & CardDisplayMode.Expand ? 
+    //   CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
+    //   : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
   }
 
   return (

@@ -7,7 +7,7 @@ import { CarInfoChip } from "./car-info-chip";
 import { CardDisplayMode, CarState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "./car-title";
-import { useCarsStore } from "@/stores/animations/cards-panel-store";
+import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
 
 interface CarCardProps {
   car: CarState;
@@ -30,6 +30,11 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
     setCarDisplayMode
   } = useCarsStore();
 
+  const {
+    width, 
+    height
+  } = useCarPanelDimensionsStore();
+
   const onCloseClicked = () => {
     onResize();
   }
@@ -41,19 +46,19 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const onResize = () => {
     // const carCard = carCardStates[0];
 
-    setCarPosition(carGroupName, car.info.title, 
-      { 
-        boundingBox: {
-          width: car.displayProperties.boundingBox.width === 253 ? 715 : 253, 
-          height: car.displayProperties.boundingBox.height === 350 ? 688 : 350,
-          left: car.displayProperties.boundingBox.left === 200 ? 50 : 200,
-          top: car.displayProperties.boundingBox.top 
-        }
-      });
+    // setCarPosition(carGroupName, car.info.title, 
+    //   { 
+    //     boundingBox: {
+    //       width: car.displayProperties.boundingBox.width === 253 ? 715 : 253, 
+    //       height: car.displayProperties.boundingBox.height === 350 ? 688 : 350,
+    //       left: car.displayProperties.boundingBox.left === 200 ? 50 : 200,
+    //       top: car.displayProperties.boundingBox.top 
+    //     }
+    //   });
 
     setCarDisplayMode(carGroupName, car.info.title, car.displayMode & CardDisplayMode.Expand ? 
       CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
-      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
+      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand, width, height) ; // Set to Clickable
   }
 
   // Effect to measure the image height after it loads
@@ -85,12 +90,12 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
     <Card isPressable={false} shadow="sm" className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden" >
       <div className="grid grid-rows-[auto_auto]">
         <div id="image container"
-          style={{ height: isExpanded ? `260px`  :`220px` }}
+          style={{ height: isExpanded ? `300px`  :`220px` }}
           >
           <div 
             ref={imageContainerRef}
             className="relative transition-all duration-500 ease-in-out"
-            style={{ height: isExpanded ? `220px`  :`220px` }}
+            style={{ height: isExpanded ? `300px`  :`220px` }}
             >
             
             <Image

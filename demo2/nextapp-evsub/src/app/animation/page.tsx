@@ -31,7 +31,7 @@ export default function ExploreLayout({
       
     </motion.div></div>
       <div className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8">
-        <CardsPanel width={780} height={860} />
+        <CardsPanel/>
       </div>
     </section>
   );

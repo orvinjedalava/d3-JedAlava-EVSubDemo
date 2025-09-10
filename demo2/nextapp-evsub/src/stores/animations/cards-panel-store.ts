@@ -12,6 +12,17 @@ import type {
 
 import { refreshClientSize } from '@/utils/state-helpers';
 
+export const useCarPanelDimensionsStore = create<{
+  width: number;
+  height: number;
+  setDimensions: (width: number, height: number) => void;
+}>((set) => ({
+
+  width: 0,
+  height: 0,
+  setDimensions: (width: number, height: number) => set({ width, height }),
+}));
+
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
@@ -53,7 +64,24 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode) => set((state) => {
+  setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
+    if (!carGroupState) return state;
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarStates = carGroupState.carStates.map((carState) => ({
+      ...carState,
+      displayMode: mode
+    }));
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates: updatedCarStates
+    };
+    return {
+      carGroupStates: updatedCarGroupStates
+    };
+  }),
+
+  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode, clientWidth: number, clientHeight: number) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
     if (!carGroupState) return state;
 
@@ -74,6 +102,9 @@ export const useCarsStore = create<CarsState>((set) => ({
       ...carGroupState,
       carStates: updatedCarStates
     };
+
+    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+
     return {
       carGroupStates: updatedCarGroupStates
     };
@@ -121,9 +152,7 @@ export const useCarsStore = create<CarsState>((set) => ({
   }),
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => set((state) => {
-    refreshClientSize(clientWidth, clientHeight);
-    
-
+    refreshClientSize(state.carGroupStates, clientWidth, clientHeight);
     return state;
   }),
 

@@ -11,24 +11,31 @@ const getYScale = (y: number, clientHeight: number) => d3.scaleLinear().domain(Y
 
 const getCardWidth = (clientWidth: number) => {
   const xScale = getXScale(0, clientWidth);
-  return xScale(250);
+  return Math.max(xScale(250), 255);
+}
+
+export const getEmptyBoundingBox = (): BoundingBox => {
+  return { top: 0, left: 0, width: 0, height: 0 };
 }
 
 export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox => {
-  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.width);
-  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.height);
+  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.left + carGroupBoundingBox.width);
+  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
+
+  const boxWidth = carGroupBoundingBox.width;
+  const boxHeight = carGroupBoundingBox.height;
 
   return { 
-    top: yScale(carGroupBoundingBox.height / 10 * 9), 
-    left: xScale(carGroupBoundingBox.width / 5 * 3),
+    top: yScale(boxHeight / 10 * 7), 
+    left: xScale(boxWidth / 10 * 8),
     width: 0,
     height: 0 
   };
 }
 
 export const getSelectedChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox => {
-  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.width);
-  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.height);
+  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.left + carGroupBoundingBox.width);
+  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
 
   return { 
     top: yScale(carGroupBoundingBox.height / 1000 * 1), 
@@ -39,8 +46,8 @@ export const getSelectedChipCoordinates = (carGroupBoundingBox: BoundingBox): Bo
 }
 
 export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
-  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.width);
-  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.height);
+  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
+  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
 
   const boxWidth = clientBoundingBox.width;
   const boxHeight = clientBoundingBox.height;
@@ -48,7 +55,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   // card width should be consistent
   const cardWidth = getCardWidth(clientBoundingBox.width);
 
-  const expandedCard = { top: boxHeight / 10 * 3, left: boxWidth / 10 * 1, width: boxWidth / 10 * 8, height: 0 };
+  const expandedCard = { top: yScale(boxHeight / 12 * 1), left: xScale(boxWidth / 16 * 1), width: boxWidth * 0.9, height: 0 };
 
   if (count <= 1) {
     return [expandedCard];
@@ -56,22 +63,22 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 2) {
     return [
       expandedCard,
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 4, width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 3) {
     return [
       expandedCard,
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 1, width: cardWidth, height: 0 },
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 4, width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 4) {
     return [
       expandedCard,
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 1, width: cardWidth, height: 0 },
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 4, width: cardWidth, height: 0 },
-      { top: boxHeight / 10 * 8, left: boxWidth / 12 * 7, width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
     ]
   }
 
@@ -79,8 +86,9 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
 }
 
 export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox: BoundingBox, clientWidth: number): BoundingBox[] => {
-  const xScale = getXScale(cardGroupBoundingBox.left, cardGroupBoundingBox.width);
-  const yScale = getYScale(cardGroupBoundingBox.top, cardGroupBoundingBox.height);
+  // console.log('generateCarGroupCoordinates ', cardGroupBoundingBox);
+  const xScale = getXScale(cardGroupBoundingBox.left, cardGroupBoundingBox.left + cardGroupBoundingBox.width);
+  const yScale = getYScale(cardGroupBoundingBox.top, cardGroupBoundingBox.top + cardGroupBoundingBox.height);
 
   const boxWidth = cardGroupBoundingBox.width;
   const boxHeight = cardGroupBoundingBox.height;
@@ -91,56 +99,58 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 }
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 8 * 4), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 3.5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 5.5), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 3), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 3), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 5), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 3), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 5 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 3.5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 4.5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 5), width: cardWidth, height: 0 },
     ];
   }
 
   return [];
 }
 
-export const generateCarGroupSelectedCoordinates = (count: number, cardGroupBoundingBox: BoundingBox): BoundingBox[] => {
-  const xScale = getXScale(cardGroupBoundingBox.left, cardGroupBoundingBox.width);
-  const yScale = getYScale(cardGroupBoundingBox.top, cardGroupBoundingBox.height);
+export const generateCarGroupSelectedCoordinates = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
+  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
+  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
 
-  const boxWidth = cardGroupBoundingBox.width;
-  const boxHeight = cardGroupBoundingBox.height;
-  
+  const boxWidth = clientBoundingBox.width;
+  const boxHeight = clientBoundingBox.height;
+
+  // card width should be consistent
+  const cardWidth = getCardWidth(clientBoundingBox.width);
 
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: yScale(250), height: 0 }
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: yScale(250), height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: yScale(250), height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: cardWidth, height: 0 },
     ];
   }
 
@@ -148,8 +158,8 @@ export const generateCarGroupSelectedCoordinates = (count: number, cardGroupBoun
 }
 
 export const generateBoundingBoxes = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
-  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.width);
-  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.height);
+  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
+  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
 
   if (count <= 1)
   {
