@@ -65,7 +65,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   // card width should be consistent
   const cardWidth = getCardWidth(clientBoundingBox.width);
 
-  const expandedCard = { top: yScale(boxHeight / 12 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
+  const expandedCard = { top: yScale(boxHeight / 16 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
 
   if (count <= 1) {
     return [expandedCard];
@@ -73,22 +73,22 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 2) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 3) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 4) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 10 * 8), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
     ]
   }
 
