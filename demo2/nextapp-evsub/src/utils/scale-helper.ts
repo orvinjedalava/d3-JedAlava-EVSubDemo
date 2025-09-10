@@ -178,10 +178,13 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
   const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
 
+  const boxWidth = X_SCALE_WIDTH;
+  const boxHeight = Y_SCALE_HEIGHT;
+
   if (count <= 1)
   {
     return [
-      { top: xScale(0), left: yScale(0), width: xScale(10000), height: yScale(10000) }
+      { top: xScale(0), left: yScale(0), width: xScale(boxWidth), height: yScale(boxHeight) }
     ];
   }
   else if (count === 2)
@@ -190,14 +193,14 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
       { 
         top: yScale(0), 
         left: xScale(0), 
-        width: xScale(5000), 
-        height: yScale(10000) 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight) 
       },
       { 
         top: yScale(0), 
-        left: xScale(5000), 
-        width: xScale(5000), 
-        height: yScale(10000) 
+        left: xScale(boxWidth / 2), 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight) 
       },
     ];
   }
@@ -206,20 +209,20 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
       { 
         top: yScale(0), 
         left: xScale(0),
-        width: xScale(5000), 
-        height: yScale(5000) 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
       { 
         top: yScale(0), 
-        left: xScale(5000),
-        width: xScale(5000), 
-        height: yScale(5000) 
+        left: xScale(boxWidth / 2),
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
       {
-        top: yScale(5000), 
-        left: xScale(2500),
-        width: xScale(5000), 
-        height: yScale(5000) 
+        top: yScale(boxHeight / 2), 
+        left: xScale(boxWidth / 4),
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       }
 
     ]
@@ -229,26 +232,26 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
       { 
         top: yScale(0), 
         left: xScale(0), 
-        width: xScale(5000), 
-        height: yScale(5000) 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
       { 
         top: yScale(0), 
-        left: xScale(5000), 
-        width: xScale(5000), 
-        height: yScale(5000) 
+        left: xScale(boxWidth / 2), 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(5000), 
+        top: yScale(boxHeight / 2), 
         left: xScale(0), 
-        width: xScale(5000), 
-        height: yScale(5000) 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(5000), 
-        left: xScale(5000), 
-        width: xScale(5000), 
-        height: yScale(5000) 
+        top: yScale(boxHeight / 2), 
+        left: xScale(boxWidth / 2), 
+        width: xScale(boxWidth / 2), 
+        height: yScale(boxHeight / 2) 
       },
     ]
   }
