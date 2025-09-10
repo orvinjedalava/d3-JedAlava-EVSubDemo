@@ -22,12 +22,8 @@ import {
 export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
   console.log('Refreshing client size to:', clientWidth, clientHeight);
 
-  // can you help me check if any of the cargroupstate is selected?
-  // const isCarGroupSelected = carGroupStates.some((carGroupState) => carGroupState.isSelected);
-
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
-  // console.log('Refreshing client size to:', clientWidth, clientHeight);
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
     const carGroupBox = carGroupBoxes[carGroupIdx];
@@ -144,55 +140,17 @@ export const generateCarGroupStatesFrom = (
   clientWidth: number, 
   clientHeight: number): CarGroupState[] => {
 
-
-  const carsCoordinates =  [
-    { width: 253, height: 350, top: 80, left: 50, opacity: 1 , zIndex: 0},
-    { width: 253, height: 350, top: 350, left: 500, opacity: 1 , zIndex: 0},
-    // { width: 253, height: 276, top: 0, left: 250, opacity: 1 },
-    // { width: 253, height: 276, top: 0, left: 350, opacity: 1 },
-  ]
-
-  // refreshClientSize(clientWidth, clientHeight);
-
-  // get the bounding boxes for each car group based on the number of car groups and client size
-  const carGroupBoxes = generateBoundingBoxes(carGroupInfos.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
-  // console.log('clientWidth, clientHeight:', clientWidth, clientHeight);
-  // console.log(carGroupBoxes);
-
-  // let result: CarState = {};
   let carGroupState: CarGroupState[] = [];
 
   carGroupInfos.map((carGroupInfo, carGroupIdx) => {
 
     let carState: CarState[] = [];
-    // Get the display properties for this card, or use defaults if not available
-    let displayProperties = carsCoordinates[carGroupIdx];
-
-    const carGroupBox = carGroupBoxes[carGroupIdx];
-    const carBoxes = generateCarGroupCoordinates(carGroupInfo.carInfos.length, carGroupBox, clientWidth);
-    const chipBox = getChipCoordinates(carGroupBox);
-
-    // console.log('carGroupBox:',carGroupBox);
-    // console.log('carBoxes:', carBoxes);
-    // console.log('chipBox:', chipBox);
-
+    
     carGroupInfo.carInfos.forEach((info, carIdx) => {
       // Get the display properties for this card, or use defaults if not available
-      // const displayProperties = carsCoordinates[index];
-      // Assign display properties to each carInfo
-      // console.log('carBox:', carBoxes[carIdx]);
       carState.push({
         displayProperties: {
-          // boundingBox: { 
-          //   width: displayProperties.width, 
-          //   height: displayProperties.height,
-          //   left: displayProperties.left,
-          //   top: displayProperties.top
-          // },
-          // boundingBox: carBoxes[carIdx],
           boundingBox: getEmptyBoundingBox(),
-          // opacity: displayProperties.opacity,
-          // zIndex: displayProperties.zIndex
           opacity: 1,
           zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria,
@@ -206,17 +164,9 @@ export const generateCarGroupStatesFrom = (
       carStates: carState,
       info: carGroupInfo,
       displayProperties: { 
-        // boundingBox: carGroupBox,
         boundingBox: getEmptyBoundingBox(),
       },
       chipState: { 
-        // boundingBox: { 
-        //   top: ( displayProperties.top + displayProperties.height )|| 0, 
-        //   left: ( displayProperties.left + displayProperties.width / 4 )|| 0, 
-        //   width: 0, 
-        //   height: 0 
-        // },
-        // boundingBox: chipBox,
         boundingBox: getEmptyBoundingBox(),
         opacity: 1
       },

@@ -32,7 +32,7 @@ export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBo
   // console.log('yscale', carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
 
   return { 
-    top: yScale(boxHeight / 10 * 7), 
+    top: yScale(boxHeight / 1000 * 995), 
     left: xScale(boxWidth / 10 * 4),
     width: 0,
     height: 0 
@@ -65,7 +65,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   // card width should be consistent
   const cardWidth = getCardWidth(clientBoundingBox.width);
 
-  const expandedCard = { top: yScale(boxHeight / 16 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
+  const expandedCard = { top: yScale(boxHeight / 20 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
 
   if (count <= 1) {
     return [expandedCard];
@@ -73,7 +73,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 2) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 120 * 94), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 3) {
@@ -191,16 +191,16 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   {
     return [
       { 
-        top: yScale(0), 
+        top: yScale(boxHeight / 6 * 2), 
         left: xScale(0), 
         width: xScale(boxWidth / 2), 
-        height: yScale(boxHeight) 
+        height: yScale(boxHeight / 2) 
       },
       { 
         top: yScale(0), 
         left: xScale(boxWidth / 2), 
         width: xScale(boxWidth / 2), 
-        height: yScale(boxHeight) 
+        height: yScale(boxHeight / 2) 
       },
     ];
   }
