@@ -49,7 +49,7 @@ export const getSelectedChipCoordinates = (carGroupBoundingBox: BoundingBox): Bo
 
   return { 
     top: yScale(1), 
-    left: xScale(1),
+    left: xScale(200),
     width: 0,
     height: 0 
   };

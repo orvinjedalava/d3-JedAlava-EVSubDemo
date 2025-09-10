@@ -4,8 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import { Input } from "@heroui/input";
 import { tv } from "tailwind-variants";
 import { Button, ButtonGroup } from "@heroui/button";
-import { useCarsStore } from "@/stores/animations/cards-panel-store";
-import { CardDisplayMode } from "@/types";
 
 type Message = {
   id: string;
@@ -27,14 +25,6 @@ export const ChatUI = ({
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-
-  const { 
-    carGroupStates,
-    setCarPosition,
-    // setCarDisplayMode,
-    setCarGroupChipPosition,
-    setCarGroupSelected
-  } = useCarsStore();
 
   // Define message bubble styles with tails
   const messageBubble = tv({
@@ -88,57 +78,6 @@ export const ChatUI = ({
       setMessages((prevMessages) => [...prevMessages, responseMessage]);
     }, 1000);
   };
-
-  const onNext = () => {
-    const carCard1 = carGroupStates[0].carStates[0];
-    const carGroupName1 = carGroupStates[0].info.name;
-
-    const carCard2 = carGroupStates[1].carStates[0];
-    const carGroupName2 = carGroupStates[1].info.name;
-
-    // setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 200, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height }, zIndex: 1 });
-    // setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Set to Clickable
-    // setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 0.4 });
-    setCarGroupSelected(carGroupName1, true);
-
-    // setCarGroupChipPosition(carGroupName1, { boundingBox: { left: 10, top: 10, height: 0, width: 0 }, opacity: 1 });
-    setCarGroupChipPosition(carGroupName2, { boundingBox: { left: carGroupStates[1].chipState.boundingBox.left, top: carGroupStates[1].chipState.boundingBox.top, height: carGroupStates[1].chipState.boundingBox.height, width: carGroupStates[1].chipState.boundingBox.width }, opacity: 0.4 });
-  }
-
-  const onBack = () => {
-    const carCard1 = carGroupStates[0].carStates[0];
-    const carGroupName1 = carGroupStates[0].info.name;
-
-    const carCard2 = carGroupStates[1].carStates[0];
-    const carGroupName2 = carGroupStates[1].info.name;
-
-    // setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 50, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height  }, zIndex: 0 });
-    // setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
-    // setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 1 });
-    setCarGroupSelected(carGroupName1, false);
-
-    setCarGroupChipPosition(carGroupName1, { boundingBox: {left: 113.25, top: 430, height: 0, width: 0} , opacity: 1 });
-    setCarGroupChipPosition(carGroupName2, { boundingBox: {left: carGroupStates[1].chipState.boundingBox.left, top: carGroupStates[1].chipState.boundingBox.top, height: carGroupStates[1].chipState.boundingBox.height, width: carGroupStates[1].chipState.boundingBox.width} , opacity: 1 });
-  }
-
-  const onResize = () => {
-    const carCard = carGroupStates[0].carStates[0];
-    const carGroupName = carGroupStates[0].info.name;
-
-    // setCarPosition(carGroupName, carCard.info.title,
-    //   { 
-    //     boundingBox: {
-    //       width: carCard.displayProperties.boundingBox.width === 253 ? 715 : 253, 
-    //       height: carCard.displayProperties.boundingBox.height === 350 ? 688 : 350,
-    //       left: carCard.displayProperties.boundingBox.left === 200 ? 50 : 200, 
-    //       top: carCard.displayProperties.boundingBox.top
-    //     }
-    //   });
-
-    // setCarDisplayMode(carGroupName, carCard.info.title, carCard.displayMode & CardDisplayMode.Expand ? 
-    //   CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
-    //   : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand) ; // Set to Clickable
-  }
 
   return (
     <div className={`flex-grow flex flex-col gap-1 w-full overflow-hidden sm:max-w-full md:max-w-3xl mx-auto justify-center`}>
@@ -198,13 +137,6 @@ export const ChatUI = ({
             Send
           </Button> */}
         </form>
-      </div>
-      <div className="p-8 flex flex-row justify-center">
-        <ButtonGroup>
-          <Button variant="solid" onPress={onNext}>Next</Button>
-          <Button variant="solid" onPress={onBack}>Back</Button>
-          <Button variant="solid" onPress={onResize}>Resize</Button>
-        </ButtonGroup>
       </div>
     </div>
   );
