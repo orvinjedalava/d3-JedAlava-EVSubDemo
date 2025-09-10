@@ -82,23 +82,21 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode, clientWidth: number, clientHeight: number) => set((state) => {
+  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
     if (!carGroupState) return state;
 
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
 
-    if (mode & CardDisplayMode.Expand) {
-      updatedCarStates.forEach(carState => { carState.displayMode &= ~CardDisplayMode.Expand });
-    }
+    updatedCarStates.forEach(carState => { carState.isExpanded = false });
 
     const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
 
     if (index >= 0 && index < updatedCarStates.length) {
       updatedCarStates[index] = {
         ...updatedCarStates[index],
-        displayMode: mode
+        isExpanded
       };
     }
 

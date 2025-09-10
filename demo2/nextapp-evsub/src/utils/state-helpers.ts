@@ -47,7 +47,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
       Object.assign(carState.displayProperties, {
         boundingBox: carBox,
         opacity: 0.05,
-        zIndex: 0
+        zIndex: 0,
+        displayMode: CardDisplayMode.ShowCriteria,
       });
 
     });
@@ -57,7 +58,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
 
   if (selectedCarGroup) { 
 
-    const expandedCarState = selectedCarGroup.carStates.find((carState) => carState.displayMode & CardDisplayMode.Expand);
+    const expandedCarState = selectedCarGroup.carStates.find((carState) => carState.isExpanded);
 
     Object.assign(selectedCarGroup.chipState, {
         opacity: 1
@@ -75,26 +76,24 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
           Object.assign(expandedCarState.displayProperties, {
             boundingBox: box,
             opacity: 1,
-            zIndex: 10
+            zIndex: 10,
+            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand
           });
         }
         else {
           // other boxes are the other cars
           let carState = selectedCarGroup.carStates[indexCounter];
-          console.log('carState original:', carState);
-          console.log('expandedCarState:', expandedCarState.info.title);
-          console.log('carState title:', carState.info.title);
           if (carState.info.title === expandedCarState.info.title) {
 
             indexCounter++;
             carState = selectedCarGroup.carStates[indexCounter];
-            console.log('carState + 1:', carState);
           }
           
           Object.assign(carState.displayProperties, {
               boundingBox: box,
               opacity: 1,
-              zIndex: 10
+              zIndex: 10,
+              displayMode: CardDisplayMode.ShowCriteria
             });
           indexCounter++;
         }
@@ -109,7 +108,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         Object.assign(carState.displayProperties, {
           boundingBox: carBox,
           opacity: 1,
-          zIndex: 10
+          zIndex: 10,
+          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton
         });
 
       });
@@ -128,7 +128,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
 
         Object.assign(carState.displayProperties, {
           opacity: 1,
-          zIndex: 0
+          zIndex: 0,
+          displayMode: CardDisplayMode.ShowCriteria
         });
       });
     });
@@ -193,10 +194,11 @@ export const generateCarGroupStatesFrom = (
           // opacity: displayProperties.opacity,
           // zIndex: displayProperties.zIndex
           opacity: 1,
-          zIndex: 0
+          zIndex: 0,
+          displayMode: CardDisplayMode.ShowCriteria,
         },
         info,
-        displayMode: CardDisplayMode.ShowCriteria
+        isExpanded: false
       });
     });
 

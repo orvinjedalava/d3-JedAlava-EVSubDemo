@@ -15,9 +15,9 @@ interface CarCardProps {
 }
 
 export const CarCard = ({ car, carGroupName }: CarCardProps) => {
-  const showCriteria = (car.displayMode & CardDisplayMode.ShowCriteria) !== 0;
-  const showButton = (car.displayMode & CardDisplayMode.ShowButton) !== 0;
-  const isExpanded = (car.displayMode & CardDisplayMode.Expand) !== 0;
+  const showCriteria = (car.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
+  const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
+  const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -27,7 +27,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
 
   const { 
     setCarPosition,
-    setCarDisplayMode
+    setCarStateIsExpanded
   } = useCarsStore();
 
   const {
@@ -36,7 +36,8 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   } = useCarPanelDimensionsStore();
 
   const onCloseClicked = () => {
-    onResize();
+    // onResize();
+    setCarStateIsExpanded(carGroupName, car.info.title, false, width, height) ; // Set to Clickable
   }
 
   const onButtonClicked = () => {
@@ -56,9 +57,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
     //     }
     //   });
 
-    setCarDisplayMode(carGroupName, car.info.title, car.displayMode & CardDisplayMode.Expand ? 
-      CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
-      : CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand, width, height) ; // Set to Clickable
+    setCarStateIsExpanded(carGroupName, car.info.title, true, width, height) ; // Set to Clickable
   }
 
   // Effect to measure the image height after it loads

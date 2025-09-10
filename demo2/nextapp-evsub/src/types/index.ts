@@ -15,6 +15,7 @@ export interface CarDisplayProperties {
   boundingBox: BoundingBox;
   opacity?: number;
   zIndex?: number;
+  displayMode: CardDisplayMode;
 }
 
 export interface CarInfo {
@@ -28,7 +29,7 @@ export interface CarInfo {
 export interface CarState {
   displayProperties: CarDisplayProperties;
   info: CarInfo;
-  displayMode: CardDisplayMode;
+  isExpanded: boolean
 }
 
 export interface CarGroupInfo {
@@ -69,7 +70,7 @@ export interface CarsState {
   setCarStates: (carGroupName: string, carStates: CarState[]) => void;
   setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
   setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
-  setCarDisplayMode: (carGroupInfoName: string, carInfoTitle: string, mode: CardDisplayMode, clientWidth: number, clientHeight: number) => void;
+  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => void;
 
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
   setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => void;

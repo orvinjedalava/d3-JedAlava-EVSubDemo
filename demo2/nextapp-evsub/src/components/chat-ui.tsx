@@ -31,7 +31,7 @@ export const ChatUI = ({
   const { 
     carGroupStates,
     setCarPosition,
-    setCarDisplayMode,
+    // setCarDisplayMode,
     setCarGroupChipPosition,
     setCarGroupSelected
   } = useCarsStore();
@@ -112,9 +112,9 @@ export const ChatUI = ({
     const carCard2 = carGroupStates[1].carStates[0];
     const carGroupName2 = carGroupStates[1].info.name;
 
-    setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 50, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height  }, zIndex: 0 });
+    // setCarPosition(carGroupName1, carCard1.info.title, { boundingBox: { left: 50, top: carCard1.displayProperties.boundingBox.top, width: carCard1.displayProperties.boundingBox.width, height: carCard1.displayProperties.boundingBox.height  }, zIndex: 0 });
     // setCarDisplayMode(carGroupName1, carCard1.info.title, CardDisplayMode.ShowCriteria); // Set to Clickable
-    setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 1 });
+    // setCarPosition(carGroupName2, carCard2.info.title, { boundingBox: carCard2.displayProperties.boundingBox, opacity: 1 });
     setCarGroupSelected(carGroupName1, false);
 
     setCarGroupChipPosition(carGroupName1, { boundingBox: {left: 113.25, top: 430, height: 0, width: 0} , opacity: 1 });
@@ -125,15 +125,15 @@ export const ChatUI = ({
     const carCard = carGroupStates[0].carStates[0];
     const carGroupName = carGroupStates[0].info.name;
 
-    setCarPosition(carGroupName, carCard.info.title,
-      { 
-        boundingBox: {
-          width: carCard.displayProperties.boundingBox.width === 253 ? 715 : 253, 
-          height: carCard.displayProperties.boundingBox.height === 350 ? 688 : 350,
-          left: carCard.displayProperties.boundingBox.left === 200 ? 50 : 200, 
-          top: carCard.displayProperties.boundingBox.top
-        }
-      });
+    // setCarPosition(carGroupName, carCard.info.title,
+    //   { 
+    //     boundingBox: {
+    //       width: carCard.displayProperties.boundingBox.width === 253 ? 715 : 253, 
+    //       height: carCard.displayProperties.boundingBox.height === 350 ? 688 : 350,
+    //       left: carCard.displayProperties.boundingBox.left === 200 ? 50 : 200, 
+    //       top: carCard.displayProperties.boundingBox.top
+    //     }
+    //   });
 
     // setCarDisplayMode(carGroupName, carCard.info.title, carCard.displayMode & CardDisplayMode.Expand ? 
     //   CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton 
