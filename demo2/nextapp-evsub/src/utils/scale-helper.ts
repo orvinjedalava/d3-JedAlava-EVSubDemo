@@ -79,16 +79,16 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 3) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 4) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 12 * 8), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
     ]
   }
 

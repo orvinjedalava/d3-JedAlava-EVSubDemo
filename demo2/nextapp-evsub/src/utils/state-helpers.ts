@@ -93,7 +93,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
               boundingBox: box,
               opacity: 1,
               zIndex: 10,
-              displayMode: CardDisplayMode.ShowCriteria
+              displayMode: CardDisplayMode.None
             });
           indexCounter++;
         }

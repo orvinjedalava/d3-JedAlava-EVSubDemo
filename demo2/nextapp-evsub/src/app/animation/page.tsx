@@ -30,7 +30,7 @@ export default function ExploreLayout({
       <ChatUI initialMessages={getInitialMessages()} height="800px" />
       
     </motion.div></div>
-      <div className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8">
+      <div className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8 justify-center">
         <CardsPanel/>
       </div>
     </section>
