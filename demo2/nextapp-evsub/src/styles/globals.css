@@ -13,3 +13,28 @@
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
+
+/* .appear-delay {
+  transition-delay: 500ms;
+} */
+
+.appear-delay {
+  transition: opacity 500ms ease-in-out 500ms,
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms;
+}
+
+/* .disappear {
+  transition: opacity 300ms ease-in-out 0ms;
+} */
+
+/* .appear-delay {
+  transition: opacity 500ms ease-in-out 500ms;
+}
+
+
+
+.move-around {
+  transition: top 500ms ease-in-out, left 500ms ease-in-out, z-index 500ms ease-in-out;
+} */

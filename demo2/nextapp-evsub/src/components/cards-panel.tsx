@@ -97,13 +97,14 @@ export const CardsPanel = () => {
             />
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
-              className="m-2 absolute transition-all duration-500 ease-in-out cursor-pointer"
+              className={`m-2 absolute transition-all duration-500 ease-in-out cursor-pointer ${
+                carGroupState.chipState.opacity === 1 ? 'appear-delay' : ''
+              }`}
 
               {...(carGroupState.isSelected ? { 
                 onClose: () => {
                   setCarGroupSelected(carGroupState.info.name, false);
                   setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria); 
-                  // refreshClientSize(dimensions.width, dimensions.height);
                   refreshClientSize(width, height);
                 }
               } : {})}
@@ -112,7 +113,6 @@ export const CardsPanel = () => {
                 onClick: () => { 
                   setCarGroupSelected(carGroupState.info.name, true);
                   setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Reset display mode when selecting 
-                  // refreshClientSize(dimensions.width, dimensions.height);
                   refreshClientSize(width, height);
                 }
               } : {})}
@@ -121,7 +121,6 @@ export const CardsPanel = () => {
                 top: carGroupState.chipState.boundingBox.top,
                 left: carGroupState.chipState.boundingBox.left,
                 opacity: carGroupState.chipState.opacity,
-                // zIndex: carGroupState.displayCoordinates.zIndex,
               }}  
             >
               {carGroupState.info.name}

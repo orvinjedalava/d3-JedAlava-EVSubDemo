@@ -7,13 +7,15 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
       {carGroupState.carStates.map((carState) => (
         <div 
           key={`car-card-${carState.info.title}`}
-          className="absolute transition-all duration-500 ease-in-out" 
+          className={`absolute  ${
+            carState.displayProperties.opacity === 1 ? 'appear-delay' : ''
+          }`}
           style={{ 
             width: carState.displayProperties.boundingBox.width,
             // height: carState.displayProperties.boundingBox.height,
             top: carState.displayProperties.boundingBox.top || 0,
             left: carState.displayProperties.boundingBox.left || 0,
-            opacity: carState.displayProperties.opacity !== undefined ? carState.displayProperties.opacity : 1,
+            opacity: carState.displayProperties.opacity,
             zIndex: carState.displayProperties.zIndex || 0,
           }}
         >
