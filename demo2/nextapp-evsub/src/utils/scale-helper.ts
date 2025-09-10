@@ -28,9 +28,6 @@ export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBo
   const boxWidth = X_SCALE_WIDTH;
   const boxHeight = Y_SCALE_HEIGHT;
 
-  // console.log('getChipCoordinatesBox ', carGroupBoundingBox);
-  // console.log('yscale', carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
-
   return { 
     top: yScale(boxHeight / 1000 * 900), 
     left: xScale(boxWidth / 10 * 4),
@@ -155,8 +152,16 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 8 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 8 * 5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
+    ];
+  }
+  else if (count === 3 )
+  {
+    return [
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 300), width: cardWidth, height: 0 },
     ];
   }
 
