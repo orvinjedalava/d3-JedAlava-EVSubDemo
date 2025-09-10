@@ -22,6 +22,8 @@
   transition: opacity 500ms ease-in-out 500ms,
               top 500ms ease-in-out 0ms,
               left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
               z-index 500ms ease-in-out 0ms;
 }
 
