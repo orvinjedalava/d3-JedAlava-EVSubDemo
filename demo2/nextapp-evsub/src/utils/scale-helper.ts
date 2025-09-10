@@ -166,8 +166,8 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 2), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 8 * 1), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 8 * 5), width: cardWidth, height: 0 },
     ];
   }
 
