@@ -4,11 +4,12 @@ import type {
   CarGroupState, 
   CarGroupDisplayProperties, 
   CarDisplayProperties, 
-  CardDisplayMode, 
   CarGroupInfo, 
   CarsState,
   ChipState  
 } from '@/types';
+
+import { CardDisplayMode } from '@/types';
 
 import { refreshClientSize } from '@/utils/state-helpers';
 
@@ -87,6 +88,10 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
+
+    if (mode & CardDisplayMode.Expand) {
+      updatedCarStates.forEach(carState => { carState.displayMode &= ~CardDisplayMode.Expand });
+    }
 
     const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
 
