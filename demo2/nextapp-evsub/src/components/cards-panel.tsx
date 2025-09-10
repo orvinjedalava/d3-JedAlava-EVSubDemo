@@ -86,7 +86,8 @@ export const CardsPanel = () => {
     
     <div 
       ref={containerRef}
-      className="flex-grow relative border border-red-500"
+      className="flex-grow relative"
+      // className="flex-grow relative border border-red-500"
     >
       {
         carGroupStates.map((carGroupState) => (

@@ -38,7 +38,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
 
     Object.assign(carGroupState.chipState, {
       boundingBox: chipBox,
-      opacity: 0.1
+      opacity: 0.05
     });
 
     carGroupState.carStates.forEach((carState, carIdx) => {
@@ -46,7 +46,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
 
       Object.assign(carState.displayProperties, {
         boundingBox: carBox,
-        opacity: 0.1,
+        opacity: 0.05,
         zIndex: 0
       });
 
@@ -80,37 +80,28 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         }
         else {
           // other boxes are the other cars
-          const carState = selectedCarGroup.carStates[indexCounter];
-          if (carState !== expandedCarState) {
-            Object.assign(carState.displayProperties, {
+          let carState = selectedCarGroup.carStates[indexCounter];
+          console.log('carState original:', carState);
+          console.log('expandedCarState:', expandedCarState.info.title);
+          console.log('carState title:', carState.info.title);
+          if (carState.info.title === expandedCarState.info.title) {
+
+            indexCounter++;
+            carState = selectedCarGroup.carStates[indexCounter];
+            console.log('carState + 1:', carState);
+          }
+          
+          Object.assign(carState.displayProperties, {
               boundingBox: box,
               opacity: 1,
               zIndex: 10
             });
-            indexCounter++;
-          }
+          indexCounter++;
         }
       });
-
-      
-
-      // selectedCarGroup.carStates.forEach((carState, carIdx) => {
-
-
-      //   Object.assign(carState.displayProperties, {
-      //     boundingBox: carState === expandedCarState ? selectedCarBoxes[0] : selectedCarBoxes[carIdx + 1],
-      //     opacity: 1,
-      //     zIndex: 10
-      //   });
-
-      // });
     }
     else {
       const selectedCarBoxes = generateCarGroupSelectedCoordinates(selectedCarGroup.info.carInfos.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
-
-      // Object.assign(selectedCarGroup.chipState, {
-      //   opacity: 1
-      // });
 
       selectedCarGroup.carStates.forEach((carState, carIdx) => {
         const carBox = selectedCarBoxes[carIdx];
