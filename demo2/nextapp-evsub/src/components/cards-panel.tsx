@@ -86,7 +86,7 @@ export const CardsPanel = () => {
     
     <div 
       ref={containerRef}
-      className="flex-grow relative"
+      className="flex-grow relative max-h-[1000px] max-w-[1000px]"
       // className="flex-grow relative border border-red-500"
     >
       {
