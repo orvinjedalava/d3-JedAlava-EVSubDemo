@@ -122,8 +122,8 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 3.5), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 5.5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 100), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
