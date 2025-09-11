@@ -21,7 +21,7 @@ export const getEmptyBoundingBox = (): BoundingBox => {
   return { top: 0, left: 0, width: 0, height: 0 };
 }
 
-export const getCarStateFlipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox[] => {
+export const getCarStateFlipCoordinates = (count: number, carGroupBoundingBox: BoundingBox): BoundingBox[] => {
   const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.left + carGroupBoundingBox.width);
   const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
 
@@ -30,11 +30,36 @@ export const getCarStateFlipCoordinates = (carGroupBoundingBox: BoundingBox): Bo
 
   const cardWidth = getCardWidth(carGroupBoundingBox.width);
 
-  return [
-    { top: yScale(0), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
-    { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
+  if (count <= 1)
+  {
+    return [
+      { top: yScale(0), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
+    ];
+  }
+  else if (count === 2 )
+  {
+    return [
+      { top: yScale(0), left: xScale(boxWidth / 600 * 180), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 180), width: cardWidth, height: 0 }
+    ];
+  }
+  else if (count === 3 )
+  {
+    return [
+      { top: yScale(0), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
+    ];
+  }
+  else if (count === 4 )
+  {
+    return [
+      { top: yScale(0), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 }
+    ];
+  }
 
-  ]
+  return [];
 
 }
 

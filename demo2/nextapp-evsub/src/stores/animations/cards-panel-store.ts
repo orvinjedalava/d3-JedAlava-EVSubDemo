@@ -120,6 +120,12 @@ export const useCarsStore = create<CarsState>((set) => ({
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
     const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+
+    if (updatedCarStates[index].priority === 1) {
+      // Already on top
+      return state;
+    }
+    
     if (index >= 0 && index < updatedCarStates.length) {
       updatedCarStates[index] = {
         ...updatedCarStates[index],

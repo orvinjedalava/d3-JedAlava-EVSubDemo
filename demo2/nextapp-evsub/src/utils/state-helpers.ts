@@ -158,15 +158,17 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         if (flippedCarState) {
           if (carState.info.title === flippedCarState.info.title) {
             Object.assign(carState.displayProperties, {
-              boundingBox: getCarStateFlipCoordinates(carGroupBox)[0],
+              boundingBox: getCarStateFlipCoordinates(carGroupState.carStates.length, carGroupBox)[0],
               zIndex: 10,
-              rotateAngle: 0
+              rotateAngle: 0,
+              opacity: 1,
             });
           }
           else {
             Object.assign(carState.displayProperties, {
-              boundingBox: getCarStateFlipCoordinates(carGroupBox)[1],
-              rotateAngle: 0
+              boundingBox: getCarStateFlipCoordinates(carGroupState.carStates.length,carGroupBox)[1],
+              rotateAngle: 0,
+              opacity: 0.2
             });
           }
         }
