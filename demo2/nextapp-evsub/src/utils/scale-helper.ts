@@ -102,14 +102,14 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 1), width: cardWidth, height: 0 }
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 180), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
