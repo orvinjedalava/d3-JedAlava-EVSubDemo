@@ -156,7 +156,8 @@ export const generateCarGroupStatesFrom = (
           displayMode: CardDisplayMode.ShowCriteria,
         },
         info,
-        isExpanded: false
+        isExpanded: false,
+        isClickable: false,
       });
     });
 

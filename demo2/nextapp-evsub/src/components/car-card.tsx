@@ -18,6 +18,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const showCriteria = (car.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
   const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
+  const isCardClickable = (car.displayProperties.displayMode & CardDisplayMode.Clickable) !== 0;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -36,7 +37,6 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   } = useCarPanelDimensionsStore();
 
   const onCloseClicked = () => {
-    // onResize();
     setCarStateIsExpanded(carGroupName, car.info.title, false, width, height) ; // Set to Clickable
   }
 
@@ -45,18 +45,6 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   }
 
   const onResize = () => {
-    // const carCard = carCardStates[0];
-
-    // setCarPosition(carGroupName, car.info.title, 
-    //   { 
-    //     boundingBox: {
-    //       width: car.displayProperties.boundingBox.width === 253 ? 715 : 253, 
-    //       height: car.displayProperties.boundingBox.height === 350 ? 688 : 350,
-    //       left: car.displayProperties.boundingBox.left === 200 ? 50 : 200,
-    //       top: car.displayProperties.boundingBox.top 
-    //     }
-    //   });
-
     setCarStateIsExpanded(carGroupName, car.info.title, true, width, height) ; // Set to Clickable
   }
 
