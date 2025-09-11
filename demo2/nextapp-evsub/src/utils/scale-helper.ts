@@ -187,7 +187,7 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   if (count <= 1)
   {
     return [
-      { top: xScale(0), left: yScale(0), width: xScale(boxWidth), height: yScale(boxHeight) }
+      { top: yScale(boxHeight / 60 * 15), left: xScale(boxWidth / 60 * 15), width: xScale(boxWidth / 2), height: yScale(boxHeight / 2) }
     ];
   }
   else if (count === 2)

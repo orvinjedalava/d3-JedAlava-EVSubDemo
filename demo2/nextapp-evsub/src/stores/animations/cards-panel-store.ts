@@ -120,12 +120,36 @@ export const useCarsStore = create<CarsState>((set) => ({
     const updatedCarStates = [...carGroupState.carStates];
     // const maxZIndex = Math.max(...updatedCarStates.map(carState => carState.displayProperties.zIndex || 0));
     const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    if (updatedCarStates[index].priority === 1) {
+      // Already on top
+      return state;
+    }
+
+    console.log('Bringing to top:', carInfoTitle, 'with priority', updatedCarStates[index].priority);
 
     // How do I set the carState with index to be the last carState inside updatedCarStates.carStates array?
     // One way is to remove it from its current position and push it to the end of the array
+    // if (index >= 0 && index < updatedCarStates.length) {
+    //   const [carState] = updatedCarStates.splice(index, 1);
+    //   updatedCarStates.push(carState);
+    // }
+
+    // How do I switch the carState priority between the carState with index and carState with priority = 1?
     if (index >= 0 && index < updatedCarStates.length) {
-      const [carState] = updatedCarStates.splice(index, 1);
-      updatedCarStates.push(carState);
+      const carStateTarget = updatedCarStates[index];
+      const carStateWithPriorityOneIndex = updatedCarStates.findIndex(carState => carState.priority === 1);
+      if (carStateWithPriorityOneIndex >= 0 && carStateWithPriorityOneIndex < updatedCarStates.length) {
+        // Swap priorities
+        updatedCarStates[carStateWithPriorityOneIndex] = {
+          ...updatedCarStates[carStateWithPriorityOneIndex],
+          priority: carStateTarget.priority
+        };
+
+        updatedCarStates[index] = {
+          ...updatedCarStates[index],
+          priority: 1
+        };
+      }
     }
 
     // if (index >= 0 && index < updatedCarStates.length) {
