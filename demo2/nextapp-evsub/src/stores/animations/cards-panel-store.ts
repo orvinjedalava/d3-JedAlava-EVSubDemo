@@ -84,7 +84,6 @@ export const useCarsStore = create<CarsState>((set) => ({
 
   setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
-    
     if (!carGroupState) return state;
 
     const updatedCarGroupStates = [...state.carGroupStates];
@@ -100,12 +99,35 @@ export const useCarsStore = create<CarsState>((set) => ({
         isExpanded
       };
     }
-
     
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
       ...carGroupState,
       carStates: updatedCarStates
     };
+
+    if (isExpanded) {
+      const carState = carGroupState.carStates.find((carState) => carState.info.title === carInfoTitle); 
+      
+      if (carState) {
+        const originalCarStateTargetPriority = carState.priority;
+
+        updatedCarStates[index] = {
+          ...updatedCarStates[index],
+          priority: 0,
+          // isFlipped: false,
+        };
+
+        // I need to loop through all carStates inside updatedCarStates and increment their priority by 1
+        updatedCarStates.forEach((carState, idx) => {
+          updatedCarStates[idx] = {
+              ...carState,
+              priority: originalCarStateTargetPriority === carState.priority ? 0 
+              : originalCarStateTargetPriority < carState.priority ? carState.priority : carState.priority + 1
+            };
+        });
+      }
+      
+    }
 
     refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
 
@@ -125,7 +147,7 @@ export const useCarsStore = create<CarsState>((set) => ({
       // Already on top
       return state;
     }
-    
+
     if (index >= 0 && index < updatedCarStates.length) {
       updatedCarStates[index] = {
         ...updatedCarStates[index],
@@ -167,21 +189,6 @@ export const useCarsStore = create<CarsState>((set) => ({
       priority: 0,
       isFlipped: false,
     };
-
-    // // How do I switch the carState priority between the carState with index and carState with priority = 1?
-    // if (index >= 0 && index < updatedCarStates.length) {
-    //   const carStateTarget = updatedCarStates[index];
-    //   const carStateWithPriorityOneIndex = updatedCarStates.findIndex(carState => carState.priority === 1);
-    //   if (carStateWithPriorityOneIndex >= 0 && carStateWithPriorityOneIndex < updatedCarStates.length) {
-    //     // // Swap priorities
-    //     // updatedCarStates[carStateWithPriorityOneIndex] = {
-    //     //   ...updatedCarStates[carStateWithPriorityOneIndex],
-    //     //   priority: carStateTarget.priority
-    //     // };
-
-        
-    //   }
-    // }
 
     // I need to loop through all carStates inside updatedCarStates and increment their priority by 1
     updatedCarStates.forEach((carState, idx) => {
