@@ -66,7 +66,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 2) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 120 * 94), left: xScale(boxWidth / 160 * 60), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 60), width: cardWidth, height: 0 },
     ]
   }
   else if (count === 3) {
