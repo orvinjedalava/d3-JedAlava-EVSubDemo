@@ -121,7 +121,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
             style={{ height: isExpanded ? `300px`  :`220px` }}
             >
             
-            <Image
+            {/* <Image
               ref={imageRef}
               alt={car.info.title}
               className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
@@ -130,6 +130,22 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                 transformOrigin: 'top left'
               }}
               width={`${car.displayProperties.boundingBox.width ?? 0}px`}
+              src={car.info.img}
+            /> */}
+            <img
+              ref={imageRef}
+              alt={car.info.title}
+              className={`absolute ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
+              style={{
+                minWidth: '255px',
+                // transform: isExpanded ? `scale(0.5)` : `scale(1)`,
+                // transformOrigin: 'top left',
+                // transition: 'transform 10ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
+                width: `${ isExpanded ? car.displayProperties.boundingBox.width / 2 : car.displayProperties.boundingBox.width}px`,
+                transition: 'width 500ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
+                zIndex: 100
+              }}
+              // width={`${car.displayProperties.boundingBox.width ?? 0}px`}
               src={car.info.img}
             />
           </div>
