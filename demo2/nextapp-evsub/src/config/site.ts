@@ -9,13 +9,17 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Explore",
-      href: "/explore",
+      label: "Browse",
+      href: "/browse",
     },
-    {
-      label: "Animation",
-      href: "/animation",
-    }
+    // {
+    //   label: "Explore",
+    //   href: "/explore",
+    // },
+    // {
+    //   label: "Animation",
+    //   href: "/animation",
+    // },
     // {
     //   label: "Bubble Chart",
     //   href: "/bubble-chart",
