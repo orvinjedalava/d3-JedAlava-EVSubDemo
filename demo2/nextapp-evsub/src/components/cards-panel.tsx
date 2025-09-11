@@ -99,9 +99,9 @@ export const CardsPanel = () => {
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
               className={`m-2 absolute transition-all duration-500 ease-in-out cursor-pointer ${
-                carGroupState.chipState.opacity === 1 ? 'appear-delay' : ''
+                carGroupState.chipState.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
               }`}
-
+              
               {...(carGroupState.isSelected ? { 
                 onClose: () => {
                   setCarGroupSelected(carGroupState.info.name, false);

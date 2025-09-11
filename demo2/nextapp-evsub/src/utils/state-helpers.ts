@@ -18,11 +18,8 @@ import {
   getSelectedChipCoordinates,
   getCarGroupExpandedCoordinates,
 } from '@/utils/scale-helper';
-import { get } from 'http';
 
 export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
-  console.log('Refreshing client size to:', clientWidth, clientHeight);
-
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
@@ -187,16 +184,18 @@ export const generateCarGroupStatesFrom = (
 }
 
 export const getCardStateRotateAngles = (count: number ) => {
+  const rotateVal = 10
+
   if (count <= 1) return [0];
 
   else if (count === 2 ) {
-    return [-20, 0];
+    return [-rotateVal, 0];
   }
   else if (count === 3 ) {
-    return [-20, 20, 0];
+    return [-rotateVal, rotateVal, 0];
   }
   else if (count === 4 ) {
-    return [-20, -20, 20, 0];
+    return [-rotateVal, -rotateVal, rotateVal, 0];
   }
 
   return [0];

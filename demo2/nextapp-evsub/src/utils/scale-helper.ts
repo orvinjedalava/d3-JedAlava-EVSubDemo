@@ -116,8 +116,8 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   {
     return [
       { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
@@ -125,8 +125,8 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
     return [
       { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
       { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 55), left: xScale(boxWidth / 600 * 270), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 270), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 55), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
     ];
   }
 

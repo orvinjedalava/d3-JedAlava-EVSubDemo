@@ -8,7 +8,7 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
         <div 
           key={`car-card-${carState.info.title}`}
           className={`absolute  ${
-            carState.displayProperties.opacity === 1 ? 'appear-delay' : ''
+            carState.displayProperties.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
           }`}
           style={{ 
             width: carState.displayProperties.boundingBox.width,
@@ -17,6 +17,8 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
             left: carState.displayProperties.boundingBox.left || 0,
             opacity: carState.displayProperties.opacity,
             zIndex: carState.displayProperties.zIndex || 0,
+            transform: `rotate(${carState.displayProperties.rotateAngle}deg)`,
+            transformOrigin: 'center',
           }}
         >
           <CarCard car={carState} carGroupName={carGroupState.info.name} />

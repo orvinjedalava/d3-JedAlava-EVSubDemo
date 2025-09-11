@@ -18,13 +18,33 @@
   transition-delay: 500ms;
 } */
 
-.appear-delay {
+/* .car-card-default {
+  transition: opacity 500ms ease-in-out 0ms,
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms,
+              rotate 500ms ease-in-out 0ms;
+} */
+.car-card-default {
+  transition: 
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms,
+              transform 500ms ease-in-out 0ms;
+}
+
+.car-card-appear-delay {
   transition: opacity 500ms ease-in-out 500ms,
               top 500ms ease-in-out 0ms,
               left 500ms ease-in-out 0ms,
               width 500ms ease-in-out 0ms,
               height 500ms ease-in-out 0ms,
-              z-index 500ms ease-in-out 0ms;
+              z-index 500ms ease-in-out 0ms,
+              transform 500ms ease-in-out 0ms;
 }
 
 /* .disappear {
