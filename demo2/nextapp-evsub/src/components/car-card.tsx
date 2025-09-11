@@ -74,7 +74,12 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   }, [imageRef.current]);
 
   return (
-    <Card isPressable={false} shadow="sm" className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden" >
+    <Card 
+      isPressable={isCardClickable} 
+      shadow="sm" 
+      className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden"
+      onPress={() => setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)} 
+    >
       <div className="grid grid-rows-[auto_auto]">
         <div id="image container"
           style={{ height: isExpanded ? `300px`  :`220px` }}
