@@ -18,7 +18,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const showCriteria = (car.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
   const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
-  const isCardClickable = (car.displayProperties.displayMode & CardDisplayMode.Clickable) !== 0;
+  const isCardClickable = (car.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);

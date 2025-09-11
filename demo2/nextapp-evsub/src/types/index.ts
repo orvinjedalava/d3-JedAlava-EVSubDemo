@@ -9,7 +9,7 @@ export enum CardDisplayMode {
   ShowCriteria = 1 << 0,    // 2 (binary: 0010)
   ShowButton = 1 << 1,   // 4 (binary: 0100)
   Expand = 1 << 2,     // 8 (binary: 1000)
-  Clickable = 1 << 3   // 16 (binary: 10000)
+  ClickExpandable = 1 << 3   // 16 (binary: 10000)
 }
 
 export interface CarDisplayProperties {
