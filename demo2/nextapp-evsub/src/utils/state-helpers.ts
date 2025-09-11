@@ -119,19 +119,36 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
     else {
       const selectedCarBoxes = generateCarGroupSelectedCoordinates(selectedCarGroup.info.carInfos.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
-      selectedCarGroup.carStates.forEach((carState, carIdx) => {
-        const carBox = selectedCarBoxes[carIdx];
+      // selectedCarGroup.carStates.forEach((carState, carIdx) => {
+      //   const carBox = selectedCarBoxes[carIdx];
 
-        Object.assign(carState.displayProperties, {
-          boundingBox: carBox,
-          opacity: 1,
-          zIndex: 10 + ( 10 - carState.priority ),
-          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable,
-          rotateAngle: 0
+      //   Object.assign(carState.displayProperties, {
+      //     boundingBox: carBox,
+      //     opacity: 1,
+      //     zIndex: 10 + ( 10 - carState.priority ),
+      //     displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable,
+      //     rotateAngle: 0
+      //   });
+
+        
+
+      // });
+
+      selectedCarGroup.carStates
+        .map((carState, index) => ({ carState, originalIndex: index, priority: carState.priority }))
+        .sort((a, b) => b.priority - a.priority)
+        .forEach(({ carState, originalIndex }, sortedIndex) => {
+          const carBox = selectedCarBoxes[sortedIndex]; // Use original index for carBoxes
+          
+          Object.assign(carState.displayProperties, {
+            boundingBox: carBox,
+            opacity: 1,
+            zIndex: 10 + ( 10 - carState.priority ),
+            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable,
+            rotateAngle: 0
+          });
         });
-
-      });
-    }
+      }
 
     selectedCarGroup.chipState.boundingBox = getSelectedChipCoordinates({ top: 0, left: 0, width: clientWidth, height: clientHeight });
   }
