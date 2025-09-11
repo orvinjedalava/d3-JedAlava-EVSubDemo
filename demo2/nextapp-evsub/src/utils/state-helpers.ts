@@ -18,6 +18,7 @@ import {
   getSelectedChipCoordinates,
   getCarGroupExpandedCoordinates,
 } from '@/utils/scale-helper';
+import { get } from 'http';
 
 export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
   console.log('Refreshing client size to:', clientWidth, clientHeight);
@@ -45,6 +46,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         opacity: 0.05,
         zIndex: 0,
         displayMode: CardDisplayMode.ShowCriteria,
+        rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[carIdx] || 0,
       });
 
     });
@@ -73,7 +75,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
             boundingBox: box,
             opacity: 1,
             zIndex: 10,
-            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand
+            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand,
+            rotateAngle: 0
           });
         }
         else {
@@ -89,7 +92,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
               boundingBox: box,
               opacity: 1,
               zIndex: 10,
-              displayMode: CardDisplayMode.Clickable
+              displayMode: CardDisplayMode.Clickable,
+              rotateAngle: 0
             });
           indexCounter++;
         }
@@ -105,7 +109,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
           boundingBox: carBox,
           opacity: 1,
           zIndex: 10,
-          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton
+          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton,
+          rotateAngle: 0
         });
 
       });
@@ -125,7 +130,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         Object.assign(carState.displayProperties, {
           opacity: 1,
           zIndex: 0,
-          displayMode: CardDisplayMode.ShowCriteria
+          displayMode: CardDisplayMode.ShowCriteria,
         });
       });
     });
@@ -154,6 +159,7 @@ export const generateCarGroupStatesFrom = (
           opacity: 1,
           zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria,
+          rotateAngle: 0,
         },
         info,
         isExpanded: false,
@@ -178,4 +184,20 @@ export const generateCarGroupStatesFrom = (
   refreshClientSize(carGroupState, clientWidth, clientHeight);
 
   return carGroupState;
+}
+
+export const getCardStateRotateAngles = (count: number ) => {
+  if (count <= 1) return [0];
+
+  else if (count === 2 ) {
+    return [-20, 0];
+  }
+  else if (count === 3 ) {
+    return [-20, 20, 0];
+  }
+  else if (count === 4 ) {
+    return [-20, -20, 20, 0];
+  }
+
+  return [0];
 }

@@ -14,9 +14,10 @@ export enum CardDisplayMode {
 
 export interface CarDisplayProperties {
   boundingBox: BoundingBox;
-  opacity?: number;
-  zIndex?: number;
+  opacity: number;
+  zIndex: number;
   displayMode: CardDisplayMode;
+  rotateAngle: number;
 }
 
 export interface CarInfo {
