@@ -9,7 +9,8 @@ export enum CardDisplayMode {
   ShowCriteria = 1 << 0,    // 2 (binary: 0010)
   ShowButton = 1 << 1,   // 4 (binary: 0100)
   Expand = 1 << 2,     // 8 (binary: 1000)
-  ClickExpandable = 1 << 3   // 16 (binary: 10000)
+  ClickExpandable = 1 << 3,   // 16 (binary: 10000)
+  ClickFlipable = 1 << 4,   // 32 (binary: 100000)
 }
 
 export interface CarDisplayProperties {
@@ -72,11 +73,13 @@ export interface CarsState {
 
   setCarStates: (carGroupName: string, carStates: CarState[]) => void;
   setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
-  setCarGroupStates?: (carGroupStates: CarGroupState[]) => void;
+  
   setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => void;
+  setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => void;
 
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
   setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => void;
+  setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => void;
 }

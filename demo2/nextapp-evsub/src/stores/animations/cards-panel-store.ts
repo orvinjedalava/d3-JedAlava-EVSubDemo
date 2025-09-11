@@ -113,6 +113,42 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
+  setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+    if (!carGroupState) return state;
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarStates = [...carGroupState.carStates];
+    // const maxZIndex = Math.max(...updatedCarStates.map(carState => carState.displayProperties.zIndex || 0));
+    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+
+    // How do I set the carState with index to be the last carState inside updatedCarStates.carStates array?
+    // One way is to remove it from its current position and push it to the end of the array
+    if (index >= 0 && index < updatedCarStates.length) {
+      const [carState] = updatedCarStates.splice(index, 1);
+      updatedCarStates.push(carState);
+    }
+
+    // if (index >= 0 && index < updatedCarStates.length) {
+    //   updatedCarStates[index] = {
+    //     ...updatedCarStates[index],
+    //     displayProperties: {
+    //       ...updatedCarStates[index].displayProperties,
+    //       zIndex: maxZIndex + 1
+    //     }
+    //   };
+    // } 
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates: updatedCarStates
+    };
+
+    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+
+    return {
+      carGroupStates: updatedCarGroupStates
+    };
+  }),
+
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
     if (!carGroupState) return state;
