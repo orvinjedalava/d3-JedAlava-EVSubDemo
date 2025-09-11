@@ -246,6 +246,17 @@ export const useCarsStore = create<CarsState>((set) => ({
       ...carGroupState,
       isSelected
     };
+
+    // need to set all carStates.isExpanded = false 
+    const updatedCarStates = carGroupState.carStates.map((carState) => ({
+      ...carState,
+      isExpanded: false
+    }));
+
+    Object.assign(updatedCarGroupState, {
+      carStates: updatedCarStates
+    });
+    
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
     return {
       carGroupStates: updatedCarGroupStates
