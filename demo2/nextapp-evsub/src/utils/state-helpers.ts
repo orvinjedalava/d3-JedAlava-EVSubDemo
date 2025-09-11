@@ -108,7 +108,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
           Object.assign(carState.displayProperties, {
               boundingBox: box,
               opacity: 1,
-              zIndex: 10,
+              zIndex: 10 + ( 10 - carState.priority ),
               displayMode: CardDisplayMode.ClickExpandable,
               rotateAngle: 0
             });
@@ -125,7 +125,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         Object.assign(carState.displayProperties, {
           boundingBox: carBox,
           opacity: 1,
-          zIndex: 10,
+          zIndex: 10 + ( 10 - carState.priority ),
           displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable,
           rotateAngle: 0
         });
