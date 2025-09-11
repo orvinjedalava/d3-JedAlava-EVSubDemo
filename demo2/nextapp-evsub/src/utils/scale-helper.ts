@@ -79,9 +79,9 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   else if (count === 4) {
     return [
       expandedCard,
-      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 16 * 1), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 4), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 12 * 7), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 10), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 60), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 110), width: cardWidth, height: 0 },
     ]
   }
 
@@ -123,10 +123,10 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 4), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 6 * 3.5), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 4.5), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 4 * 1), left: xScale(boxWidth / 4 * 5), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 210), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 55), left: xScale(boxWidth / 600 * 270), width: cardWidth, height: 0 },
     ];
   }
 
@@ -162,6 +162,15 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
       { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
       { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
       { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 300), width: cardWidth, height: 0 },
+    ];
+  }
+  else if (count === 4 )
+  {
+    return [
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
     ];
   }
 
