@@ -35,6 +35,7 @@ export interface CarState {
   isExpanded: boolean;
   isClickable: boolean;
   priority: number;
+  isFlipped: boolean;
 }
 
 export interface CarGroupInfo {
@@ -77,6 +78,7 @@ export interface CarsState {
   
   setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => void;
   setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => void;
+  setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean, clientWidth: number, clientHeight: number) => void;
 
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
   setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => void;

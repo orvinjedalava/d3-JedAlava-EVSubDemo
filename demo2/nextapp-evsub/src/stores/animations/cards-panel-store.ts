@@ -114,6 +114,28 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
+  setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean, clientWidth: number, clientHeight: number) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
+    if (!carGroupState) return state;
+    const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarStates = [...carGroupState.carStates];
+    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    if (index >= 0 && index < updatedCarStates.length) {
+      updatedCarStates[index] = {
+        ...updatedCarStates[index],
+        isFlipped
+      };
+    }
+    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
+      ...carGroupState,
+      carStates: updatedCarStates
+    };
+    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+    return {
+      carGroupStates: updatedCarGroupStates
+    };
+  }),
+
   setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
 
@@ -136,7 +158,8 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     updatedCarStates[index] = {
       ...updatedCarStates[index],
-      priority: 0
+      priority: 0,
+      isFlipped: false,
     };
 
     // // How do I switch the carState priority between the carState with index and carState with priority = 1?

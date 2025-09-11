@@ -21,6 +21,23 @@ export const getEmptyBoundingBox = (): BoundingBox => {
   return { top: 0, left: 0, width: 0, height: 0 };
 }
 
+export const getCarStateFlipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox[] => {
+  const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.left + carGroupBoundingBox.width);
+  const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
+
+  const boxWidth = X_SCALE_WIDTH;
+  const boxHeight = Y_SCALE_HEIGHT;
+
+  const cardWidth = getCardWidth(carGroupBoundingBox.width);
+
+  return [
+    { top: yScale(0), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+    { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
+
+  ]
+
+}
+
 export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBox => {
   const xScale = getXScale(carGroupBoundingBox.left, carGroupBoundingBox.left + carGroupBoundingBox.width);
   const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
@@ -89,7 +106,6 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
 }
 
 export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox: BoundingBox, clientWidth: number): BoundingBox[] => {
-  // console.log('generateCarGroupCoordinates ', cardGroupBoundingBox);
   const xScale = getXScale(cardGroupBoundingBox.left, cardGroupBoundingBox.left + cardGroupBoundingBox.width);
   const yScale = getYScale(cardGroupBoundingBox.top, cardGroupBoundingBox.top + cardGroupBoundingBox.height);
 

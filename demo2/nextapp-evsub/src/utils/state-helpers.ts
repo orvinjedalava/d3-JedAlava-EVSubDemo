@@ -17,6 +17,7 @@ import {
   generateCarGroupSelectedCoordinates,
   getSelectedChipCoordinates,
   getCarGroupExpandedCoordinates,
+  getCarStateFlipCoordinates,
 } from '@/utils/scale-helper';
 
 export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
@@ -54,7 +55,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
       .forEach(({ carState, originalIndex }, sortedIndex) => {
         const carBox = carBoxes[sortedIndex]; // Use original index for carBoxes
         
-        console.log('title, priority, originalIndex, sortedIndex', carState.info.title, carState.priority, originalIndex, sortedIndex);
+        // console.log('title, priority, originalIndex, sortedIndex', carState.info.title, carState.priority, originalIndex, sortedIndex);
 
         Object.assign(carState.displayProperties, {
           boundingBox: carBox,
@@ -135,19 +136,41 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
     selectedCarGroup.chipState.boundingBox = getSelectedChipCoordinates({ top: 0, left: 0, width: clientWidth, height: clientHeight });
   }
   else {
-    carGroupStates.forEach(carGroupState => {
+    carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
+      const carGroupBox = carGroupBoxes[carGroupIdx];
+      
       Object.assign(carGroupState.chipState, {
         opacity: 1
       });
-      
+
+      // can you find the carState that is flipped and put it in a const variable?
+      const flippedCarState = carGroupState.carStates.find(carState => carState.isFlipped);
+
       carGroupState.carStates.forEach(carState => {
 
         Object.assign(carState.displayProperties, {
           opacity: 1,
-          // zIndex: 0,
+          //zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
         });
+
+        if (flippedCarState) {
+          if (carState.info.title === flippedCarState.info.title) {
+            Object.assign(carState.displayProperties, {
+              boundingBox: getCarStateFlipCoordinates(carGroupBox)[0],
+              zIndex: 10,
+              rotateAngle: 0
+            });
+          }
+          else {
+            Object.assign(carState.displayProperties, {
+              boundingBox: getCarStateFlipCoordinates(carGroupBox)[1],
+              rotateAngle: 0
+            });
+          }
+        }
+        
       });
     });
   }
@@ -182,6 +205,7 @@ export const generateCarGroupStatesFrom = (
         isExpanded: false,
         isClickable: false,
         priority: priorityCounter,
+        isFlipped: false,
       });
       priorityCounter++;
     });

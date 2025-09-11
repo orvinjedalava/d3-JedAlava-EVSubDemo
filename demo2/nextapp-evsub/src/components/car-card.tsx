@@ -27,10 +27,13 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const imageContainerRef = useRef<HTMLDivElement>(null);
   // State to store the image height
   const [imageHeight, setImageHeight] = useState<number>(0);
+  const [isProcessingFlip, setIsProcessingFlip] = useState(false);
+
 
   const { 
     setCarStateIsExpanded,
     setCarStateOnTop,
+    setCarStateIsFlipped,
   } = useCarsStore();
 
   const {
@@ -86,11 +89,25 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
         className={`grid grid-rows-[auto_auto] ${isShowPointer ? 'cursor-pointer' : ''}`}
         {...(isShowPointer ? { 
                 onClick: () => {
+                  if (isProcessingFlip) return;
+
                   if (isClickExpandable && !isExpanded){
                     setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
                   }
                   else if (isClickFlipable){
-                    setCarStateOnTop(carGroupName, car.info.title, width, height);
+                    // Set processing flag to prevent additional clicks
+                    setIsProcessingFlip(true);
+
+                    setCarStateIsFlipped(carGroupName, car.info.title, true, width, height);
+
+                    // // Then after 500ms, bring it to the top
+                    setTimeout(() => {
+                      setCarStateOnTop(carGroupName, car.info.title, width, height);
+                      
+                      // Reset the processing flag after operations complete
+                      setIsProcessingFlip(false);
+                      // console.log('is flipped');
+                    }, 500);
                   }
                 }
               } : {})}
