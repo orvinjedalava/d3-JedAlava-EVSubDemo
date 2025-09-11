@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@config "../../tailwind.config.js";
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1000ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+/* .appear-delay {
+  transition-delay: 500ms;
+} */
+
+/* .car-card-default {
+  transition: opacity 500ms ease-in-out 0ms,
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms,
+              rotate 500ms ease-in-out 0ms;
+} */
+.car-card-default {
+  transition: 
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms,
+              transform 500ms ease-in-out 0ms;
+}
+
+.car-card-appear-delay {
+  transition: opacity 500ms ease-in-out 500ms,
+              top 500ms ease-in-out 0ms,
+              left 500ms ease-in-out 0ms,
+              width 500ms ease-in-out 0ms,
+              height 500ms ease-in-out 0ms,
+              z-index 500ms ease-in-out 0ms,
+              transform 500ms ease-in-out 0ms;
+}
+
+/* .disappear {
+  transition: opacity 300ms ease-in-out 0ms;
+} */
+
+/* .appear-delay {
+  transition: opacity 500ms ease-in-out 500ms;
+}
+
+
+
+.move-around {
+  transition: top 500ms ease-in-out, left 500ms ease-in-out, z-index 500ms ease-in-out;
+} */
