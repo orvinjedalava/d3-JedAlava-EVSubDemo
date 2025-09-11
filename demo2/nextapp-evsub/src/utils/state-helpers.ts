@@ -35,20 +35,36 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
       opacity: 0.05
     });
 
-    carGroupState.carStates.forEach((carState, carIdx) => {
-      const carBox = carBoxes[carIdx];
+    // carGroupState.carStates.forEach((carState, carIdx) => {
+    //   const carBox = carBoxes[carIdx];
 
-      Object.assign(carState.displayProperties, {
-        boundingBox: carBox,
-        opacity: 0.05,
-        zIndex: 0,
-        // displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
-        displayMode: CardDisplayMode.None,
-        rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[carIdx] || 0,
+    //   Object.assign(carState.displayProperties, {
+    //     boundingBox: carBox,
+    //     opacity: 0.05,
+    //     zIndex: 0,
+    //     // displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
+    //     displayMode: CardDisplayMode.None,
+    //     rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[carIdx] || 0,
+    //   });
+
+    // });
+    carGroupState.carStates
+      .map((carState, index) => ({ carState, originalIndex: index, priority: carState.priority }))
+      .sort((a, b) => a.priority - b.priority)
+      .forEach(({ carState, originalIndex }, sortedIndex) => {
+        const carBox = carBoxes[sortedIndex]; // Use original index for carBoxes
+
+        Object.assign(carState.displayProperties, {
+          boundingBox: carBox,
+          opacity: 0.05,
+          zIndex: 0 + sortedIndex,
+          displayMode: CardDisplayMode.None,
+          rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[originalIndex] || 0,
+          // If you need to store the sorted position:
+          // sortPosition: sortedIndex
+        });
       });
-
-    });
-  })
+  });
 
   const selectedCarGroup = carGroupStates.find((carGroupState) => carGroupState.isSelected);
 
