@@ -18,7 +18,8 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const showCriteria = (car.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
   const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
-  const isCardClickable = (car.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
+  const isClickExpandable = (car.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
+  const isShowPointer = isClickExpandable && !isExpanded;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -75,12 +76,19 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
 
   return (
     <Card 
-      isPressable={isCardClickable} 
+      // isPressable={isCardClickable && !showCriteria && !showButton && !isExpanded} 
       shadow="sm" 
       className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden"
-      onPress={() => setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)} 
+      // onPress={() => setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)} 
     >
-      <div className="grid grid-rows-[auto_auto]">
+      <div 
+        className={`grid grid-rows-[auto_auto] ${isShowPointer ? 'cursor-pointer' : ''}`}
+        {...(isClickExpandable && !isExpanded ? { 
+                onClick: () => {
+                  setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
+                }
+              } : {})}
+      >
         <div id="image container"
           style={{ height: isExpanded ? `300px`  :`220px` }}
           >
