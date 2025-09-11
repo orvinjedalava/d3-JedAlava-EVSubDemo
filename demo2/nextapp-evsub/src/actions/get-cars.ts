@@ -193,6 +193,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
     //       subtitle: "Earth 2025",
     //       description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
     //       img: "/images/Tesla Model 3 Earth 2025.png",
+    //       priority: 1,
     //       criteria: {
     //         "Weekly Cost": "$295.80",
     //         "Odometer": "43,793 km",

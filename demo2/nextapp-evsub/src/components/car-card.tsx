@@ -89,6 +89,9 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                   if (isClickExpandable && !isExpanded){
                     setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
                   }
+                  else if (isClickFlipable){
+                    setCarStateOnTop(carGroupName, car.info.title, width, height);
+                  }
                 }
               } : {})}
       >

@@ -148,6 +148,7 @@ export const generateCarGroupStatesFrom = (
   carGroupInfos.map((carGroupInfo, carGroupIdx) => {
 
     let carState: CarState[] = [];
+    let priorityCounter = 1;
     
     carGroupInfo.carInfos.forEach((info, carIdx) => {
       // Get the display properties for this card, or use defaults if not available
@@ -162,7 +163,9 @@ export const generateCarGroupStatesFrom = (
         info,
         isExpanded: false,
         isClickable: false,
+        priority: priorityCounter,
       });
+      priorityCounter++;
     });
 
     carGroupState.push({

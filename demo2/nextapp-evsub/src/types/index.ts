@@ -32,8 +32,9 @@ export interface CarInfo {
 export interface CarState {
   displayProperties: CarDisplayProperties;
   info: CarInfo;
-  isExpanded: boolean,
-  isClickable: boolean,
+  isExpanded: boolean;
+  isClickable: boolean;
+  priority: number;
 }
 
 export interface CarGroupInfo {
