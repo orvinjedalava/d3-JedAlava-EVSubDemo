@@ -42,7 +42,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         boundingBox: carBox,
         opacity: 0.05,
         zIndex: 0,
-        displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
+        // displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
+        displayMode: CardDisplayMode.None,
         rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[carIdx] || 0,
       });
 
@@ -127,7 +128,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         Object.assign(carState.displayProperties, {
           opacity: 1,
           zIndex: 0,
-          displayMode: CardDisplayMode.ShowCriteria,
+          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
         });
       });
     });

@@ -19,7 +19,8 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
   const isClickExpandable = (car.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
-  const isShowPointer = isClickExpandable && !isExpanded;
+  const isClickFlipable = (car.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
+  const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -28,8 +29,8 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   const [imageHeight, setImageHeight] = useState<number>(0);
 
   const { 
-    setCarPosition,
-    setCarStateIsExpanded
+    setCarStateIsExpanded,
+    setCarStateOnTop,
   } = useCarsStore();
 
   const {
@@ -83,9 +84,11 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
     >
       <div 
         className={`grid grid-rows-[auto_auto] ${isShowPointer ? 'cursor-pointer' : ''}`}
-        {...(isClickExpandable && !isExpanded ? { 
+        {...(isShowPointer ? { 
                 onClick: () => {
-                  setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
+                  if (isClickExpandable && !isExpanded){
+                    setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
+                  }
                 }
               } : {})}
       >
