@@ -149,7 +149,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => set((state) => {
+  setCarStateOnTop: (carGroupName: string, carInfoTitle: string) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
 
     if (!carGroupState) return state;
@@ -189,7 +189,8 @@ export const useCarsStore = create<CarsState>((set) => ({
       carStates: updatedCarStates
     };
 
-    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(updatedCarGroupStates, width, height);
 
     return {
       ...state,

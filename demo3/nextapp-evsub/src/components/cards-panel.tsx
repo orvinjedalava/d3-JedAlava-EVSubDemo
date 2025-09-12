@@ -8,7 +8,7 @@ import { getCarGroups } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
-import { ChipStack } from "./chip-stack";
+import { ChipStack } from "@/components/chip-stack";
 
 export const CardsPanel = () => {
   const { 
