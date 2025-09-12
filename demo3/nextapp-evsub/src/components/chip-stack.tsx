@@ -12,9 +12,9 @@ export const ChipStack = () => {
       {chipCrumbStack.map((crumb, index) => (
         <Chip 
           key={index}
-          onClose={() => setCarGroupSelected(crumb.carGroupState.info.name, false)}
+          onClose={() => crumb.carGroupState && setCarGroupSelected(crumb.carGroupState.info.name, false)}
         >
-          {crumb.carGroupState.info.name}
+          {crumb.carGroupState?.info.name}
         </Chip>
       ))}
     </div>
