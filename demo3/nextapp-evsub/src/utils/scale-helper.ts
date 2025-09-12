@@ -232,7 +232,12 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 60 * 15), left: xScale(boxWidth / 60 * 15), width: xScale(boxWidth / 2), height: yScale(boxHeight / 2) }
+      { 
+        top: yScale(boxHeight / 1000 * 100), 
+        left: xScale(boxWidth / 3), 
+        width: xScale(boxWidth / 3), 
+        height: yScale(boxHeight / 2) 
+      }
     ];
   }
   else if (count === 2)
