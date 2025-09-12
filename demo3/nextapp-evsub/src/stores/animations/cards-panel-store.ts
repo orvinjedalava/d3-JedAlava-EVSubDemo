@@ -254,7 +254,9 @@ export const useCarsStore = create<CarsState>((set) => ({
         carGroupState: updatedCarGroupState
       });
     } else {
-      updatedChipCrumbStack = updatedChipCrumbStack.filter(crumb => crumb.carGroupState.info.name !== carGroupName);
+      updatedChipCrumbStack = updatedChipCrumbStack.filter(
+        crumb => crumb.carGroupState && crumb.carGroupState.info.name !== carGroupName
+      );
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
