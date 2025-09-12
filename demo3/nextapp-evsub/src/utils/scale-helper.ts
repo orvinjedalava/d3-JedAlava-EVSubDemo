@@ -239,15 +239,15 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   {
     return [
       { 
-        top: yScale(boxHeight / 6 * 2), 
-        left: xScale(0), 
-        width: xScale(boxWidth / 2), 
+        top: yScale(boxHeight / 1000 * 70), 
+        left: xScale(boxWidth / 1000 * 150), 
+        width: xScale(boxWidth / 3), 
         height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(0), 
-        left: xScale(boxWidth / 2), 
-        width: xScale(boxWidth / 2), 
+        top: yScale(boxHeight / 1000 * 120), 
+        left: xScale(boxWidth / 1000 * 520), 
+        width: xScale(boxWidth / 3), 
         height: yScale(boxHeight / 2) 
       },
     ];
