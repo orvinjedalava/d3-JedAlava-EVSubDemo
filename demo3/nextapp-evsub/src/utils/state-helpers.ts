@@ -36,27 +36,12 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
       opacity: 0.05
     });
 
-    // carGroupState.carStates.forEach((carState, carIdx) => {
-    //   const carBox = carBoxes[carIdx];
-
-    //   Object.assign(carState.displayProperties, {
-    //     boundingBox: carBox,
-    //     opacity: 0.05,
-    //     zIndex: 0,
-    //     // displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ClickFlipable,
-    //     displayMode: CardDisplayMode.None,
-    //     rotateAngle: getCardStateRotateAngles(carGroupState.carStates.length)[carIdx] || 0,
-    //   });
-
-    // });
     carGroupState.carStates
       .map((carState, index) => ({ carState, originalIndex: index, priority: carState.priority }))
       .sort((a, b) => b.priority - a.priority)
       .forEach(({ carState, originalIndex }, sortedIndex) => {
         const carBox = carBoxes[sortedIndex]; // Use original index for carBoxes
         
-        // console.log('title, priority, originalIndex, sortedIndex', carState.info.title, carState.priority, originalIndex, sortedIndex);
-
         Object.assign(carState.displayProperties, {
           boundingBox: carBox,
           opacity: 0.05,
@@ -106,11 +91,11 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
           }
           
           Object.assign(carState.displayProperties, {
-              boundingBox: box,
-              opacity: 1,
+              // boundingBox: box,
+              opacity: 0.05,
               zIndex: 10 + ( 10 - carState.priority ),
-              displayMode: CardDisplayMode.ClickExpandable,
-              rotateAngle: 0
+              // displayMode: CardDisplayMode.ClickExpandable,
+              // rotateAngle: 0
             });
           indexCounter++;
         }
