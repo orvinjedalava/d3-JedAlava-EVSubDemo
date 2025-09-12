@@ -23,11 +23,9 @@ export const ChipStack = () => {
           <Chip
             key={`crumb-${index}`} 
             onClose={() => {
-              console.log('Closing crumb:', crumb); 
               if (crumb.carState && crumb.carGroupState)
               {
-                console.log('Setting car state to not expanded:', crumb.carState.info.title);
-                setCarStateIsExpanded(crumb.carGroupState.info.name, crumb.carState.info.title, false)
+                setCarStateIsExpanded(crumb.carGroupState.info.id, crumb.carState.info.id, false)
               }
               else if (crumb.carGroupState) 
               {

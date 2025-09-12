@@ -21,7 +21,7 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
             transformOrigin: 'center',
           }}
         >
-          <CarCard car={carState} carGroupName={carGroupState.info.name} />
+          <CarCard carState={carState} carGroupState={carGroupState} />
         </div>
       ))}
     </div>

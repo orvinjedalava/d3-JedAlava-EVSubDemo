@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 // import { Image } from "@heroui/image";
 import { CarInfoChip } from "@/components/car-info-chip";
-import { CardDisplayMode, CarState } from "@/types";
+import { CardDisplayMode, CarState, CarGroupState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "@/components/car-title";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
@@ -12,16 +12,16 @@ import { getCardWidth } from '@/utils/scale-helper';
 import { BackButton } from "@/components/back-button";
 
 interface CarCardProps {
-  car: CarState;
-  carGroupName: string;
+  carState: CarState;
+  carGroupState: CarGroupState;
 }
 
-export const CarCard = ({ car, carGroupName }: CarCardProps) => {
-  const showCriteria = (car.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
-  const showButton = (car.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
-  const isExpanded = (car.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
-  const isClickExpandable = (car.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
-  const isClickFlipable = (car.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
+export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
+  const showCriteria = (carState.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
+  const showButton = (carState.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
+  const isExpanded = (carState.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
+  const isClickExpandable = (carState.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
+  const isClickFlipable = (carState.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
   const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
 
   // Create a ref for the image element
@@ -39,7 +39,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   } = useCarsStore();
 
   const onCloseClicked = () => {
-    setCarStateIsExpanded(carGroupName, car.info.title, false) ; // Set to Clickable
+    setCarStateIsExpanded(carGroupState.info.id, carState.info.id, false) ; // Set to Clickable
   }
 
   const onButtonClicked = () => {
@@ -47,7 +47,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   }
 
   const onResize = () => {
-    setCarStateIsExpanded(carGroupName, car.info.title, true) ; // Set to Clickable
+    setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true) ; // Set to Clickable
   }
 
   // Effect to measure the image height after it loads
@@ -74,10 +74,8 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
 
   return (
     <Card 
-      // isPressable={isCardClickable && !showCriteria && !showButton && !isExpanded} 
       shadow="sm" 
       className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden"
-      // onPress={() => setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)} 
     >
       <div 
         className={`grid grid-rows-[auto_auto] ${isShowPointer ? 'cursor-pointer' : ''}`}
@@ -86,18 +84,18 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                   if (isProcessingFlip) return;
 
                   if (isClickExpandable && !isExpanded){
-                    setCarStateIsExpanded(carGroupName, car.info.title, true)
+                    setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true)
                   }
                   else if (isClickFlipable){
                     // Set processing flag to prevent additional clicks
                     setIsProcessingFlip(true);
 
-                    setCarStateIsFlipped(carGroupName, car.info.title, true);
+                    setCarStateIsFlipped(carGroupState.info.name, carState.info.title, true);
 
                     // // Then after 500ms, bring it to the top
                     setTimeout(() => {
-                      setCarStateOnTop(carGroupName, car.info.title);
-                      
+                      setCarStateOnTop(carGroupState.info.name, carState.info.title);
+
                       // Reset the processing flag after operations complete
                       setIsProcessingFlip(false);
                       
@@ -117,39 +115,39 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
             
             <img
               ref={imageRef}
-              alt={car.info.title}
+              alt={carState.info.title}
               className={`absolute ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
                 minWidth: getCardWidth() + 'px',
                 // transform: isExpanded ? `scale(0.5)` : `scale(1)`,
                 // transformOrigin: 'top left',
                 // transition: 'transform 10ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
-                width: `${ isExpanded ? car.displayProperties.boundingBox.width / 4 : getCardWidth()}px`,
+                width: `${ isExpanded ? carState.displayProperties.boundingBox.width / 4 : getCardWidth()}px`,
                 transition: 'width 500ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
                 zIndex: 100
               }}
               // width={`${car.displayProperties.boundingBox.width ?? 0}px`}
-              src={car.info.img}
+              src={carState.info.img}
             />
           </div>
           
           <div className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}
             style={{ 
               top: '16px',
-              left: `${(car.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
+              left: `${(carState.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
             }}>
               <div >
-                <CarTitle title={car.info.title} subtitle={car.info.subtitle} />
+                <CarTitle title={carState.info.title} subtitle={carState.info.subtitle} />
               </div>
           </div>
 
           <div className={`absolute transition-opacity ease-in-out ${isExpanded ? 'opacity-100 duration-500 delay-[500ms]' : 'transition-none opacity-0'}`}
             style={{ 
               top: '64px',
-              left: `${(car.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
+              left: `${(carState.displayProperties.boundingBox.width ?? 0) / 7 * 4}px`,
             }}>
               <div>
-                <p className="text-sm text-default-500 transition-all duration-1000">{car.info.description}</p>
+                <p className="text-sm text-default-500 transition-all duration-1000">{carState.info.description}</p>
               </div>
           </div>
 
@@ -168,7 +166,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
               left: '16px',
             }}>
               <div>
-                <CarTitle title={car.info.title} subtitle={car.info.subtitle} />
+                <CarTitle title={carState.info.title} subtitle={carState.info.subtitle} />
               </div>
           </div>
         </div>
@@ -180,7 +178,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
             { showCriteria &&  (
               
               <div className="flex flex-row items-center justify-center gap-2 h-[95px]">
-                {Object.entries(car.info.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value], index) => {
+                {Object.entries(carState.info.criteria).filter((_, index) => !isExpanded ? index < 2 : index < 5).map(([key, value], index) => {
                   // Map criteria keys to appropriate icons
                   const getIconForCriteria = (criteriaKey: string) => {
                     switch(criteriaKey) {
@@ -208,7 +206,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
             { showCriteria && isExpanded &&  (
               
               <div className="flex flex-row items-center justify-center gap-2 h-[92px]">
-                {Object.entries(car.info.criteria).filter((_, index) => index >= 5 ).map(([key, value]) => {
+                {Object.entries(carState.info.criteria).filter((_, index) => index >= 5 ).map(([key, value]) => {
                   // Map criteria keys to appropriate icons
                   const getIconForCriteria = (criteriaKey: string) => {
                     switch(criteriaKey) {

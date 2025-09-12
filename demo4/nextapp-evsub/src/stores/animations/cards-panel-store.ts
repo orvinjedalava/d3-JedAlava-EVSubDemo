@@ -42,10 +42,8 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean) => set((state) => {
-    console.log('setCarStateIsExpanded called with:', carGroupInfoName, carInfoTitle, isExpanded);
-
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
+  setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;
 
     const updatedCarGroupStates = [...state.carGroupStates];
@@ -53,7 +51,7 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     updatedCarStates.forEach(carState => { carState.isExpanded = false });
 
-    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
 
     if (index >= 0 && index < updatedCarStates.length) {
       updatedCarStates[index] = {
@@ -68,7 +66,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
 
     if (isExpanded) {
-      const carState = carGroupState.carStates.find((carState) => carState.info.title === carInfoTitle); 
+      const carState = carGroupState.carStates.find((carState) => carState.info.id === carInfoId);
       
       if (carState) {
         const originalCarStateTargetPriority = carState.priority;
@@ -94,7 +92,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
     let updatedChipCrumbStack = [...state.chipCrumbStack];
     if (isExpanded) {
-      const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.name === carGroupInfoName);
+      const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
       updatedChipCrumbStack.push({
         carGroupState: updatedCarGroupStates[carGroupIdx],
         carState: updatedCarStates[index]
@@ -104,8 +102,6 @@ export const useCarsStore = create<CarsState>((set) => ({
         crumb => !crumb.carState
       );
     }
-
-    console.log('Updated chipCrumbStack:', updatedChipCrumbStack);
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(updatedCarGroupStates, width, height);

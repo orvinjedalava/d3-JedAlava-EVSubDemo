@@ -81,7 +81,7 @@ export interface CarsState {
   setCarStates: (carGroupName: string, carStates: CarState[]) => void;
   setChipCrumbStack: (chipCrumbStack: ChipCrumb[]) => void;
 
-  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean) => void;
+  setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
   setCarStateOnTop: (carGroupName: string, carInfoTitle: string) => void;
   setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean) => void;
 
