@@ -29,7 +29,7 @@ export const ChipStack = () => {
               }
               else if (crumb.carGroupState) 
               {
-                setCarGroupSelected(crumb.carGroupState.info.name, false) 
+                setCarGroupSelected(crumb.carGroupState.info.id, false) 
               }
               
             }}

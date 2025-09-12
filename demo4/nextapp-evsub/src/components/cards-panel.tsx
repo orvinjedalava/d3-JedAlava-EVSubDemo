@@ -84,7 +84,7 @@ export const CardsPanel = () => {
               
               {...(!carGroupState.isSelected ? { 
                 onClick: () => { 
-                  setCarGroupSelected(carGroupState.info.name, true);
+                  setCarGroupSelected(carGroupState.info.id, true);
                 }
               } : {})}
 

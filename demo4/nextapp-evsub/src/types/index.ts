@@ -85,7 +85,7 @@ export interface CarsState {
   setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => void;
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
-  setCarGroupSelected: (carGroupName: string, isSelected: boolean) => void;
+  setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => void;
 }

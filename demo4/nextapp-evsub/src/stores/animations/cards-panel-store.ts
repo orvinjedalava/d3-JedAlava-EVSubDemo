@@ -180,8 +180,8 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarGroupSelected: (carGroupName: string, isSelected: boolean) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+  setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;
 
     const updatedCarGroupStates = [...state.carGroupStates];
@@ -210,7 +210,7 @@ export const useCarsStore = create<CarsState>((set) => ({
       });
     } else {
       updatedChipCrumbStack = updatedChipCrumbStack.filter(
-        crumb => crumb.carGroupState && crumb.carGroupState.info.name !== carGroupName
+        crumb => crumb.carGroupState && crumb.carGroupState.info.id !== carGroupInfoId
       );
     }
 
