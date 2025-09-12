@@ -21,7 +21,7 @@ export const CardsPanel = () => {
   // Create a ref for the container div
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { width, height, setDimensions } = useCarPanelDimensionsStore();
+  const { setDimensions } = useCarPanelDimensionsStore();
 
   // Set up the resize observer
   useEffect(() => {
@@ -33,8 +33,7 @@ export const CardsPanel = () => {
         const { width, height } = entry.contentRect;
         setDimensions(width, height);
         
-        refreshClientSize(width, height);
-        // console.log('Observed dimensions change:', width, height);
+        refreshClientSize();
       }
     });
     

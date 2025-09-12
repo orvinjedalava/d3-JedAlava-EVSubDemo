@@ -224,8 +224,9 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  refreshClientSize: (clientWidth: number, clientHeight: number) => set((state) => {
-    refreshClientSize(state.carGroupStates, clientWidth, clientHeight);
+  refreshClientSize: () => set((state) => {
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(state.carGroupStates, width, height);
     return state;
   }),
 

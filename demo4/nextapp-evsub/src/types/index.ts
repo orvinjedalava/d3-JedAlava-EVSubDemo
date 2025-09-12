@@ -87,7 +87,7 @@ export interface CarsState {
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
 
-  refreshClientSize: (clientWidth: number, clientHeight: number) => void;
+  refreshClientSize: () => void;
 }
 
 export interface ChatMessage {
