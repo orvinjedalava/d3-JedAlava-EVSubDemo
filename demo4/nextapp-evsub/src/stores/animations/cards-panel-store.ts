@@ -131,12 +131,12 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateOnTop: (carGroupName: string, carInfoTitle: string) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
+  setCarStateOnTop: (carGroupInfoId: string, carInfoId: string) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
 
     if (!carGroupState) return state;
 
-    const carState = carGroupState.carStates.find((carState) => carState.info.title === carInfoTitle); 
+    const carState = carGroupState.carStates.find((carState) => carState.info.id === carInfoId);
 
     if (!carState) return state;
 
@@ -145,7 +145,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
     // const maxZIndex = Math.max(...updatedCarStates.map(carState => carState.displayProperties.zIndex || 0));
-    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
     if (updatedCarStates[index].priority === 1) {
       // Already on top
       return state;

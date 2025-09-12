@@ -94,7 +94,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
 
                     // // Then after 500ms, bring it to the top
                     setTimeout(() => {
-                      setCarStateOnTop(carGroupState.info.name, carState.info.title);
+                      setCarStateOnTop(carGroupState.info.id, carState.info.id);
 
                       // Reset the processing flag after operations complete
                       setIsProcessingFlip(false);
