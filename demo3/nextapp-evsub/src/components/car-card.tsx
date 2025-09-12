@@ -9,6 +9,7 @@ import { Button } from "@heroui/button";
 import { CarTitle } from "./car-title";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
 import { getCardWidth } from '@/utils/scale-helper';
+import { BackButton } from "./back-button";
 
 interface CarCardProps {
   car: CarState;
@@ -160,13 +161,14 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
               </div>
           </div>
 
-          <Button
+          {/* <Button
             className={`absolute top-[16px] right-[20px] transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
             size="sm" 
             variant="ghost" 
             color="secondary"
             onPress={onCloseClicked} 
-          >x</Button>
+          >x</Button> */}
+          <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} />
 
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
             style={{ 
