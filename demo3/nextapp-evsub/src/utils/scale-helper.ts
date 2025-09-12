@@ -255,19 +255,19 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   else if (count === 3) {
     return [
       { 
-        top: yScale(boxHeight / 6 * 3), 
+        top: yScale(boxHeight / 1000 * 100), 
         left: xScale(0),
         width: xScale(boxWidth / 3), 
         height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(0), 
+        top: yScale(boxHeight / 1000 * 50), 
         left: xScale(boxWidth / 3),
         width: xScale(boxWidth / 3), 
         height: yScale(boxHeight / 2) 
       },
       {
-        top: yScale(boxHeight / 6 * 2), 
+        top: yScale(boxHeight / 1000 * 150), 
         left: xScale(boxWidth / 3 * 2),
         width: xScale(boxWidth / 3), 
         height: yScale(boxHeight / 2) 
