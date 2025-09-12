@@ -96,22 +96,22 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
             "Lease": "$295.80",
           }
         },
-        {
-          title: "KIA EV5",
-          subtitle: "Earth 2025",
-          description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
-          img: "/images/KIA EV5 Earth 2025.png",
-          criteria: {
-            "Weekly Cost": "$295.80",
-            "Odometer": "43,793 km",
-            "Fuel Efficiency": "15.5 km/L",
-            "Service Due": "8,000km",
-            "Next Service Date": "15 Aug 2044",
-            "Loan": "$195.80",
-            "Subscription": "$195.80",
-            "Lease": "$195.80",
-          }
-        },
+        // {
+        //   title: "KIA EV5",
+        //   subtitle: "Earth 2025",
+        //   description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
+        //   img: "/images/KIA EV5 Earth 2025.png",
+        //   criteria: {
+        //     "Weekly Cost": "$295.80",
+        //     "Odometer": "43,793 km",
+        //     "Fuel Efficiency": "15.5 km/L",
+        //     "Service Due": "8,000km",
+        //     "Next Service Date": "15 Aug 2044",
+        //     "Loan": "$195.80",
+        //     "Subscription": "$195.80",
+        //     "Lease": "$195.80",
+        //   }
+        // },
         // {
         //   title: "Volvo EX30",
         //   subtitle: "Ultra Single Motor 2023",
