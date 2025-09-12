@@ -68,6 +68,10 @@ export interface ChipState {
   opacity: number;
 }
 
+export interface ChipInfo {
+  title: string;
+}
+
 export interface CarsState {
   carGroupStates: CarGroupState[];
 

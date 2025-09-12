@@ -26,6 +26,8 @@ export const useCarPanelDimensionsStore = create<{
 
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
+
+  
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
   setCarStates: (carGroupName: string, carStates: CarState[]) => set((state) => {
