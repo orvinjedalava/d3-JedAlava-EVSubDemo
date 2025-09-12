@@ -75,7 +75,7 @@ export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBo
   const boxHeight = Y_SCALE_HEIGHT;
 
   return { 
-    top: yScale(boxHeight / 1000 * 830), 
+    top: yScale(boxHeight / 1000 * 800), 
     left: xScale(boxWidth / 1000 * 350),
     width: 0,
     height: 0 
