@@ -7,6 +7,7 @@ import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/ca
 import { getCarGroups } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
+import { CarPark } from "@/components/car-park";
 
 // interface CardsPanelProps {
 //   width: number;
@@ -88,7 +89,7 @@ export const CardsPanel = () => {
       ref={containerRef}
       // className="flex-grow relative max-h-[950px] max-w-[950px]"
       // className="flex-grow relative min-h-[930px] min-w-[950px] max-h-[1000px] max-w-[1000px]"
-      className="flex-grow relative min-h-[1040px] max-h-[1040px] border"
+      className="flex-grow relative min-h-[1040px] max-h-[1040px]"
     >
       {
         carGroupStates.map((carGroupState) => (
@@ -130,6 +131,7 @@ export const CardsPanel = () => {
           </div>
         ))
       }
+      <CarPark />
       
     </div>
   );
