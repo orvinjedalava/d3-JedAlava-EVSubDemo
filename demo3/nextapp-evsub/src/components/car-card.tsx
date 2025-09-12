@@ -44,7 +44,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   } = useCarPanelDimensionsStore();
 
   const onCloseClicked = () => {
-    setCarStateIsExpanded(carGroupName, car.info.title, false, width, height) ; // Set to Clickable
+    setCarStateIsExpanded(carGroupName, car.info.title, false) ; // Set to Clickable
   }
 
   const onButtonClicked = () => {
@@ -52,7 +52,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
   }
 
   const onResize = () => {
-    setCarStateIsExpanded(carGroupName, car.info.title, true, width, height) ; // Set to Clickable
+    setCarStateIsExpanded(carGroupName, car.info.title, true) ; // Set to Clickable
   }
 
   // Effect to measure the image height after it loads
@@ -94,7 +94,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                   if (isProcessingFlip) return;
 
                   if (isClickExpandable && !isExpanded){
-                    setCarStateIsExpanded(carGroupName, car.info.title, true, width, height)
+                    setCarStateIsExpanded(carGroupName, car.info.title, true)
                   }
                   else if (isClickFlipable){
                     // Set processing flag to prevent additional clicks

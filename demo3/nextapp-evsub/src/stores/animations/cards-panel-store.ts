@@ -65,7 +65,9 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => set((state) => {
+  setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean) => set((state) => {
+    console.log('setCarStateIsExpanded called with:', carGroupInfoName, carInfoTitle, isExpanded);
+
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
     if (!carGroupState) return state;
 
@@ -112,10 +114,28 @@ export const useCarsStore = create<CarsState>((set) => ({
       
     }
 
-    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+    // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
+    let updatedChipCrumbStack = [...state.chipCrumbStack];
+    if (isExpanded) {
+      const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.name === carGroupInfoName);
+      updatedChipCrumbStack.push({
+        carGroupState: updatedCarGroupStates[carGroupIdx],
+        carState: updatedCarStates[index]
+      });
+    } else {
+      updatedChipCrumbStack = updatedChipCrumbStack.filter(
+        crumb => !crumb.carState
+      );
+    }
+
+    console.log('Updated chipCrumbStack:', updatedChipCrumbStack);
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(updatedCarGroupStates, width, height);
 
     return {
       ...state,
+      chipCrumbStack: updatedChipCrumbStack,
       carGroupStates: updatedCarGroupStates
     };
   }),
