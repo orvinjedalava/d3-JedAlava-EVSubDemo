@@ -28,20 +28,6 @@ export const useCarsStore = create<CarsState>((set) => ({
 
   setChipCrumbStack: (chipCrumbStack: ChipCrumb[]) => set({ chipCrumbStack }),
 
-  setCarStates: (carGroupName: string, carStates: CarState[]) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
-    if (!carGroupState) return state;
-    const updatedCarGroupStates = [...state.carGroupStates];
-    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
-      ...carGroupState,
-      carStates
-    };
-    return {
-      ...state,
-      carGroupStates: updatedCarGroupStates
-    };
-  }),
-
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;
