@@ -113,12 +113,12 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
+  setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => set((state) => {
+    const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
-    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
+    const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
 
     if (updatedCarStates[index].priority === 1) {
       // Already on top
