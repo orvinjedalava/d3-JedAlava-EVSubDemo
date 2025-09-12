@@ -6,7 +6,7 @@ import type {
   CarState,
   CarGroupInfo,
   CarsState,
-  CarGroupState } from '@/types';
+  CarGroupState, ChipCrumb } from '@/types';
 
 import { CardDisplayMode } from '@/types';
 import { 
@@ -250,3 +250,37 @@ export const getCardStateRotateAngles = (count: number ) => {
 
   return [0];
 }
+
+export const addToChipCrumb = (chipCrumb: ChipCrumb, carGroupState: CarGroupState, carState?: CarState) => {
+  let currentCrumb = chipCrumb;
+
+  const newChipCrumb: ChipCrumb = {
+    carGroupState,
+    carState,
+    chipCrumb: undefined
+  };
+
+  while (currentCrumb.chipCrumb) {
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+
+  currentCrumb.chipCrumb = newChipCrumb;
+
+}
+
+export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupStateId: string, carStateId?: string) => {
+  let currentCrumb = chipCrumb;
+  let parentCrumb: ChipCrumb | undefined = undefined;
+
+  while (currentCrumb) {
+    if (currentCrumb.carGroupState && currentCrumb.carGroupState.info.id === carGroupStateId && (!carStateId || (currentCrumb.carState && currentCrumb.carState.info.id === carStateId))) {
+      // Found the crumb to remove
+      if (parentCrumb) {
+        parentCrumb.chipCrumb = undefined;
+      }
+      return;
+    }
+    parentCrumb = currentCrumb;
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+};

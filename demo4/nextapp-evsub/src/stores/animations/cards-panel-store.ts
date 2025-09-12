@@ -7,7 +7,7 @@ import type {
   ChipCrumb,  
 } from '@/types';
 
-import { refreshClientSize } from '@/utils/state-helpers';
+import { refreshClientSize, addToChipCrumb, removeFromChipCrumb } from '@/utils/state-helpers';
 
 export const useCarPanelDimensionsStore = create<{
   width: number;
@@ -22,11 +22,11 @@ export const useCarPanelDimensionsStore = create<{
 
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
-  chipCrumbStack: new Array<ChipCrumb>(),
+  chipCrumb: {} as ChipCrumb,
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
-  setChipCrumbStack: (chipCrumbStack: ChipCrumb[]) => set({ chipCrumbStack }),
+  setChipCrumb: (chipCrumb: ChipCrumb) => set({ chipCrumb }),
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
@@ -75,18 +75,13 @@ export const useCarsStore = create<CarsState>((set) => ({
       
     }
 
-    // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
-    let updatedChipCrumbStack = [...state.chipCrumbStack];
+    let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isExpanded) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      updatedChipCrumbStack.push({
-        carGroupState: updatedCarGroupStates[carGroupIdx],
-        carState: updatedCarStates[index]
-      });
+      addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], updatedCarStates[index]);
+
     } else {
-      updatedChipCrumbStack = updatedChipCrumbStack.filter(
-        crumb => !crumb.carState
-      );
+      removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, carInfoId);
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
@@ -94,7 +89,7 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     return {
       ...state,
-      chipCrumbStack: updatedChipCrumbStack,
+      chipCrumb: updatedChipCrumb,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -203,15 +198,24 @@ export const useCarsStore = create<CarsState>((set) => ({
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
 
     // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
-    let updatedChipCrumbStack = [...state.chipCrumbStack];
+    // let updatedChipCrumbStack = [...state.chipCrumb];
+    // if (isSelected) {
+    //   updatedChipCrumbStack.push({
+    //     carGroupState: updatedCarGroupState
+    //   });
+    // } else {
+    //   updatedChipCrumbStack = updatedChipCrumbStack.filter(
+    //     crumb => crumb.carGroupState && crumb.carGroupState.info.id !== carGroupInfoId
+    //   );
+    // }
+
+    let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isSelected) {
-      updatedChipCrumbStack.push({
-        carGroupState: updatedCarGroupState
-      });
+      const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
+      addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], undefined);
+
     } else {
-      updatedChipCrumbStack = updatedChipCrumbStack.filter(
-        crumb => crumb.carGroupState && crumb.carGroupState.info.id !== carGroupInfoId
-      );
+      removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, undefined);
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
@@ -219,7 +223,7 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     return {
       ...state,
-      chipCrumbStack: updatedChipCrumbStack,
+      chipCrumb: updatedChipCrumb,
       carGroupStates: updatedCarGroupStates
     };
   }),
