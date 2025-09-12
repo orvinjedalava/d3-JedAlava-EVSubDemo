@@ -10,28 +10,16 @@ import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
 import { ChipStack } from "./chip-stack";
 
-// interface CardsPanelProps {
-//   width: number;
-//   height: number;
-// }
-
 export const CardsPanel = () => {
   const { 
     carGroupStates,
     setCarGroupStates,
     refreshClientSize,
     setCarGroupSelected,
-    setCarGroupDisplayMode,
   } = useCarsStore();
 
   // Create a ref for the container div
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // State to store dimensions
-  // const [dimensions, setDimensions] = useState({
-  //   width:  0,
-  //   height: 0
-  // });
 
   const { width, height, setDimensions } = useCarPanelDimensionsStore();
 
@@ -39,19 +27,11 @@ export const CardsPanel = () => {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    
-    // setDimensions({ width, height });
-    
     // Create a new ResizeObserver
     const resizeObserver = new ResizeObserver(entries => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-        // setDimensions({ width, height });
         setDimensions(width, height);
-        // console.log(`Container resized: ${width}px × ${height}px`);
-        
-        // If you need to update a store with these values:
-        // updateDimensionsInStore(width, height);
         
         refreshClientSize(width, height);
         // console.log('Observed dimensions change:', width, height);
@@ -74,8 +54,6 @@ export const CardsPanel = () => {
           setCarGroupStates(initialCardGroupStates);
         }
       }
-      // Log for debugging
-      // console.log("Initialized card group states:", initialCardGroupStates);
     })();
     
     // Clean up the observer when component unmounts
@@ -88,8 +66,6 @@ export const CardsPanel = () => {
     
     <div 
       ref={containerRef}
-      // className="flex-grow relative max-h-[950px] max-w-[950px]"
-      // className="flex-grow relative min-h-[930px] min-w-[950px] max-h-[1000px] max-w-[1000px]"
       className="flex-grow relative min-h-[1040px] max-h-[1040px]"
     >
       <ChipStack />
@@ -106,19 +82,9 @@ export const CardsPanel = () => {
                 carGroupState.chipState.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
               }`}
               
-              {...(carGroupState.isSelected ? { 
-                onClose: () => {
-                  setCarGroupSelected(carGroupState.info.name, false);
-                  // setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria); 
-                  // refreshClientSize(width, height);
-                }
-              } : {})}
-
               {...(!carGroupState.isSelected ? { 
                 onClick: () => { 
                   setCarGroupSelected(carGroupState.info.name, true);
-                  // setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Reset display mode when selecting 
-                  // refreshClientSize(width, height);
                 }
               } : {})}
 
