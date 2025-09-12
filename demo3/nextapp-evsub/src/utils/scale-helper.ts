@@ -283,26 +283,26 @@ export const generateBoundingBoxes = (count: number, clientBoundingBox: Bounding
   else if (count === 4 ) {
     return [
       { 
-        top: yScale(0), 
-        left: xScale(0), 
+        top: yScale(boxHeight / 1000 * 260), 
+        left: xScale(-(boxHeight / 1000 * 50)), 
         width: xScale(boxWidth / 2), 
         height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(0), 
-        left: xScale(boxWidth / 2), 
+        top: yScale(boxHeight / 1000 * 20), 
+        left: xScale(boxWidth / 1000 * 200), 
         width: xScale(boxWidth / 2), 
         height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(boxHeight / 2), 
-        left: xScale(0), 
+        top: yScale(boxHeight / 1000 * 350), 
+        left: xScale(boxWidth / 1000 * 450), 
         width: xScale(boxWidth / 2), 
         height: yScale(boxHeight / 2) 
       },
       { 
-        top: yScale(boxHeight / 2), 
-        left: xScale(boxWidth / 2), 
+        top: yScale(boxHeight / 1000 * 10), 
+        left: xScale(boxWidth / 1000 * 650), 
         width: xScale(boxWidth / 2), 
         height: yScale(boxHeight / 2) 
       },
