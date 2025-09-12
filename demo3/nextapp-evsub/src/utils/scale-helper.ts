@@ -212,10 +212,10 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 720), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 520), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 320), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 120), width: cardWidth, height: 0 },
     ];
   }
 

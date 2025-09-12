@@ -239,11 +239,11 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
               </div>
             )}
           
-          <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+          {/* <div className={`w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out ${showButton ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
             <Button className="w-[229px]" variant="solid" color="secondary" onPress={onButtonClicked}>
               {isExpanded ? "Get a quote" : "See more details"}
             </Button>
-          </div>
+          </div> */}
           </CardBody>
         </div>
       </div>
