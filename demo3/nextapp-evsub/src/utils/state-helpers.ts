@@ -61,8 +61,9 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
     const expandedCarState = selectedCarGroup.carStates.find((carState) => carState.isExpanded);
 
     Object.assign(selectedCarGroup.chipState, {
-        opacity: 1
+        opacity: 0
       });
+    // selectedCarGroup.chipState.boundingBox = getSelectedChipCoordinates({ top: 0, left: 0, width: clientWidth, height: clientHeight });
     
     if (expandedCarState) {
       
@@ -135,7 +136,6 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
         });
       }
 
-    selectedCarGroup.chipState.boundingBox = getSelectedChipCoordinates({ top: 0, left: 0, width: clientWidth, height: clientHeight });
   }
   else {
     carGroupStates.forEach((carGroupState, carGroupIdx) => {

@@ -1,13 +1,14 @@
 'use client';
 
 import { useRef, useEffect, useState } from "react";
-import { Chip } from "@heroui/chip"
+import { Chip } from "@heroui/chip";
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
 import { getCarGroups } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
+import { ChipStack } from "./chip-stack";
 
 // interface CardsPanelProps {
 //   width: number;
@@ -91,6 +92,7 @@ export const CardsPanel = () => {
       // className="flex-grow relative min-h-[930px] min-w-[950px] max-h-[1000px] max-w-[1000px]"
       className="flex-grow relative min-h-[1040px] max-h-[1040px]"
     >
+      <ChipStack />
       {
         carGroupStates.map((carGroupState) => (
           <div key={`car-group-${carGroupState.info.name}`} >
@@ -107,16 +109,16 @@ export const CardsPanel = () => {
               {...(carGroupState.isSelected ? { 
                 onClose: () => {
                   setCarGroupSelected(carGroupState.info.name, false);
-                  setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria); 
-                  refreshClientSize(width, height);
+                  // setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria); 
+                  // refreshClientSize(width, height);
                 }
               } : {})}
 
               {...(!carGroupState.isSelected ? { 
                 onClick: () => { 
                   setCarGroupSelected(carGroupState.info.name, true);
-                  setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Reset display mode when selecting 
-                  refreshClientSize(width, height);
+                  // setCarGroupDisplayMode(carGroupState.info.name, CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton); // Reset display mode when selecting 
+                  // refreshClientSize(width, height);
                 }
               } : {})}
 

@@ -68,17 +68,16 @@ export interface ChipState {
   opacity: number;
 }
 
-export interface ChipInfo {
-  title: string;
+export interface ChipCrumb {
+  carGroupState: CarGroupState;
 }
 
 export interface CarsState {
   carGroupStates: CarGroupState[];
-
-  setCarGroupSelected: (carGroupName: string, isSelected: boolean) => void;
+  chipCrumbStack: ChipCrumb[];
 
   setCarStates: (carGroupName: string, carStates: CarState[]) => void;
-  setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => void;
+  setChipCrumbStack: (chipCrumbStack: ChipCrumb[]) => void;
   
   setCarStateIsExpanded: (carGroupInfoName: string, carInfoTitle: string, isExpanded: boolean, clientWidth: number, clientHeight: number) => void;
   setCarStateOnTop: (carGroupName: string, carInfoTitle: string, clientWidth: number, clientHeight: number) => void;
@@ -87,6 +86,7 @@ export interface CarsState {
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
   setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => void;
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
+  setCarGroupSelected: (carGroupName: string, isSelected: boolean) => void;
 
   refreshClientSize: (clientWidth: number, clientHeight: number) => void;
 }

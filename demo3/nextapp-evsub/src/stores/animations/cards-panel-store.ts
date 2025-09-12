@@ -7,7 +7,7 @@ import type {
   CarGroupInfo, 
   CarsState,
   ChipState,
-  ChipInfo,  
+  ChipCrumb,  
 } from '@/types';
 
 import { CardDisplayMode } from '@/types';
@@ -27,9 +27,11 @@ export const useCarPanelDimensionsStore = create<{
 
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
-  chipInfoStack: new Array<ChipInfo>(), 
+  chipCrumbStack: new Array<ChipCrumb>(),
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
+
+  setChipCrumbStack: (chipCrumbStack: ChipCrumb[]) => set({ chipCrumbStack }),
 
   setCarStates: (carGroupName: string, carStates: CarState[]) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
@@ -38,31 +40,6 @@ export const useCarsStore = create<CarsState>((set) => ({
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
       ...carGroupState,
       carStates
-    };
-    return {
-      ...state,
-      carGroupStates: updatedCarGroupStates
-    };
-  }),
-
-  setCarPosition: (carGroupName: string, carInfoTitle: string, displayProperties: CarDisplayProperties) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
-    if (!carGroupState) return state;
-
-    const updatedCarGroupStates = [...state.carGroupStates];
-    const updatedCarStates = [...carGroupState.carStates];
-
-    const index = updatedCarStates.findIndex((carState) => carState.info.title === carInfoTitle);
-    if (index >= 0 && index < updatedCarStates.length) {
-      updatedCarStates[index] = {
-        ...updatedCarStates[index],
-        displayProperties: { ...updatedCarStates[index].displayProperties, ...displayProperties }
-      };
-    }
-
-    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
-      ...carGroupState,
-      carStates: updatedCarStates
     };
     return {
       ...state,
@@ -251,6 +228,7 @@ export const useCarsStore = create<CarsState>((set) => ({
   setCarGroupSelected: (carGroupName: string, isSelected: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
     if (!carGroupState) return state;
+
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarGroupState = {
       ...carGroupState,
@@ -268,8 +246,23 @@ export const useCarsStore = create<CarsState>((set) => ({
     });
     
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
+
+    // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
+    let updatedChipCrumbStack = [...state.chipCrumbStack];
+    if (isSelected) {
+      updatedChipCrumbStack.push({
+        carGroupState: updatedCarGroupState
+      });
+    } else {
+      updatedChipCrumbStack = updatedChipCrumbStack.filter(crumb => crumb.carGroupState.info.name !== carGroupName);
+    }
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(updatedCarGroupStates, width, height);
+
     return {
       ...state,
+      chipCrumbStack: updatedChipCrumbStack,
       carGroupStates: updatedCarGroupStates
     };
   }),
