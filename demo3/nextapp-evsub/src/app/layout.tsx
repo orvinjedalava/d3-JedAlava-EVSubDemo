@@ -46,7 +46,10 @@ export default function RootLayout({
           <div className="relative flex flex-col h-screen">
             <Navbar />
             {/* <div className="flex-grow"> */}
-            <main className="container mx-auto max-w-7xl px-6 flex-grow flex flex-col">
+            <main 
+              // className="container mx-auto max-w-7xl flex-grow flex flex-col"
+              className="container mx-auto min-w-[1536px] max-w-[1536px] flex-grow flex flex-col"
+            >
               <TransitionProvider>
                 
                   {children}

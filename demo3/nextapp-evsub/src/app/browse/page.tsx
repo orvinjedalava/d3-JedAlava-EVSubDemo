@@ -15,7 +15,7 @@ export default function BrowsePage() {
   
   return (
     <section className="flex-grow w-full relative flex flex-col gap-2 lg:flex-row">
-      <div className="h-screen lg:h-auto lg:w-1/4 flex flex-col py-8">
+      {/* <div className="h-screen lg:h-auto lg:w-1/4 flex flex-col py-8">
       <motion.div
         className="flex-grow flex flex-col"
         initial="initial"
@@ -28,7 +28,9 @@ export default function BrowsePage() {
     </motion.div></div>
       <div className="h-screen lg:h-auto lg:w-3/4 flex flex-col py-8 justify-center">
         <CardsPanel/>
-      </div>
+      </div> */}
+
+      <CardsPanel/>
     </section>
   );
 }

@@ -12,9 +12,13 @@ const Y_SCALE_DOMAIN: [number, number] = [0, Y_SCALE_HEIGHT];
 const getXScale = (x: number, clientWidth: number) => d3.scaleLinear().domain(X_SCALE_DOMAIN).range([x, clientWidth]);
 const getYScale = (y: number, clientHeight: number) => d3.scaleLinear().domain(Y_SCALE_DOMAIN).range([y, clientHeight]);
 
-const getCardWidth = (clientWidth: number) => {
-  const xScale = getXScale(0, clientWidth);
-  return Math.max(xScale(2500), 255);
+// const getCardWidth = (clientWidth: number) => {
+//   const xScale = getXScale(0, clientWidth);
+//   return Math.max(xScale(2500), 255);
+// }
+
+export const getCardWidth = () => {
+  return 255;
 }
 
 export const getEmptyBoundingBox = (): BoundingBox => {
@@ -28,7 +32,7 @@ export const getCarStateFlipCoordinates = (count: number, carGroupBoundingBox: B
   const boxWidth = X_SCALE_WIDTH;
   const boxHeight = Y_SCALE_HEIGHT;
 
-  const cardWidth = getCardWidth(carGroupBoundingBox.width);
+  const cardWidth = getCardWidth();
 
   if (count <= 1)
   {
@@ -98,7 +102,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   const boxHeight = Y_SCALE_HEIGHT;
 
   // card width should be consistent
-  const cardWidth = getCardWidth(clientBoundingBox.width);
+  const cardWidth = getCardWidth();
 
   const expandedCard = { top: yScale(boxHeight / 20 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
 
@@ -138,7 +142,7 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   const boxHeight = Y_SCALE_HEIGHT;
 
   // card width should be consistent
-  const cardWidth = getCardWidth(clientWidth);
+  const cardWidth = getCardWidth();
 
   if (count <= 1)
   {
@@ -182,7 +186,7 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   const boxHeight = Y_SCALE_HEIGHT;
 
   // card width should be consistent
-  const cardWidth = getCardWidth(clientBoundingBox.width);
+  const cardWidth = getCardWidth();
 
   if (count <= 1)
   {

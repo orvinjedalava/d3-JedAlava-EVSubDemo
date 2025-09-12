@@ -8,6 +8,7 @@ import { CardDisplayMode, CarState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "./car-title";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
+import { getCardWidth } from '@/utils/scale-helper';
 
 interface CarCardProps {
   car: CarState;
@@ -137,11 +138,11 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
               alt={car.info.title}
               className={`absolute ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
-                minWidth: '255px',
+                minWidth: getCardWidth() + 'px',
                 // transform: isExpanded ? `scale(0.5)` : `scale(1)`,
                 // transformOrigin: 'top left',
                 // transition: 'transform 10ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
-                width: `${ isExpanded ? car.displayProperties.boundingBox.width / 2 : car.displayProperties.boundingBox.width}px`,
+                width: `${ isExpanded ? car.displayProperties.boundingBox.width / 4 : getCardWidth()}px`,
                 transition: 'width 500ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
                 zIndex: 100
               }}

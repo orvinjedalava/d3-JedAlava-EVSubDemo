@@ -87,7 +87,8 @@ export const CardsPanel = () => {
     <div 
       ref={containerRef}
       // className="flex-grow relative max-h-[950px] max-w-[950px]"
-      className="flex-grow relative min-h-[930px] min-w-[950px] max-h-[1000px] max-w-[1000px]"
+      // className="flex-grow relative min-h-[930px] min-w-[950px] max-h-[1000px] max-w-[1000px]"
+      className="flex-grow relative min-h-[930px] max-h-[1000px] border"
     >
       {
         carGroupStates.map((carGroupState) => (

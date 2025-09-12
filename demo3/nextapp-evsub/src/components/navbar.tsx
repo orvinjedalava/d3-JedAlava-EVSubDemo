@@ -25,7 +25,12 @@ export const Navbar = () => {
 
   return (
     // <HeroUINavbar disableAnimation maxWidth="xl" position="sticky" onMenuOpenChange={setIsMenuOpen}  isMenuOpen={isMenuOpen} >
-    <HeroUINavbar disableAnimation maxWidth="xl" position="sticky" >
+    <HeroUINavbar 
+      disableAnimation 
+      // maxWidth="xl"
+      maxWidth="2xl" 
+      position="sticky" 
+    >
 
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         {/* <NavbarMenuToggle className="lg:hidden"/> */}
