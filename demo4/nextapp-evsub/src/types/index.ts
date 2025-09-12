@@ -22,6 +22,7 @@ export interface CarDisplayProperties {
 }
 
 export interface CarInfo {
+  id: string;
   title: string;
   subtitle: string;
   description: string;
@@ -39,7 +40,7 @@ export interface CarState {
 }
 
 export interface CarGroupInfo {
-  id: number;
+  id: string;
   name: string;
   carInfos: CarInfo[];
 }

@@ -7,10 +7,11 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
 
   return [
     {
-      id: 1,
+      id: "1",
       name: "Local Trips",
       carInfos: [
         {
+          id: "1",
           title: "KIA EV5",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -27,6 +28,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "2",
           title: "Tesla Model 3",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -43,6 +45,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "3",
           title: "BMW I4",
           subtitle: "EDrive35 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -59,6 +62,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "4",
           title: "Volvo EX30",
           subtitle: "Ultra Single Motor 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -77,10 +81,11 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
       ]
     },
     {
-      id: 2,
+      id: "2",
       name: "Road Trips",
       carInfos: [
         {
+          id: "5",
           title: "BMW I4",
           subtitle: "EDrive35 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -97,6 +102,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "6",
           title: "KIA EV5",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -113,6 +119,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "7",
           title: "Tesla Model 3",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -129,6 +136,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "8",
           title: "Volvo EX30",
           subtitle: "Ultra Single Motor 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -147,10 +155,11 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
       ]
     },
     {
-      id: 3,
+      id: "3",
       name: "Weekend Drives",
       carInfos: [
         {
+          id: "9",
           title: "Volvo EX30",
           subtitle: "Ultra Single Motor 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -167,6 +176,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "10",
           title: "BMW I4",
           subtitle: "EDrive35 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -183,6 +193,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "11",
           title: "KIA EV5",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -199,6 +210,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "12",
           title: "Tesla Model 3",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -217,10 +229,11 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
       ]
     },
     {
-      id: 4,
+      id: "4",
       name: "Luxury Rides",
       carInfos: [
         {
+          id: "13",
           title: "Tesla Model 3",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -237,6 +250,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "14",
           title: "KIA EV5",
           subtitle: "Earth 2025",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -253,6 +267,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "15",
           title: "Volvo EX30",
           subtitle: "Ultra Single Motor 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
@@ -269,6 +284,7 @@ export async function getCarGroups(): Promise<CarGroupInfo[]> {
           }
         },
         {
+          id: "16",
           title: "BMW I4",
           subtitle: "EDrive35 2023",
           description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
