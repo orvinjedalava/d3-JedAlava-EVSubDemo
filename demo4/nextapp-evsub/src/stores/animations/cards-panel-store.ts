@@ -180,34 +180,6 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
-    if (!carGroupState) return state;
-    const updatedCarGroupStates = [...state.carGroupStates];
-    const updatedCarGroupState = {
-      ...carGroupState,
-      displayCoordinates: {
-        ...carGroupState.displayProperties,
-        
-      },
-      chipState: {
-        ...carGroupState.chipState,
-        boundingBox: {
-          top: chipState.boundingBox.top,
-          left: chipState.boundingBox.left,
-          width: chipState.boundingBox.width,
-          height: chipState.boundingBox.height
-        },
-        opacity: chipState.opacity
-      }
-    };
-    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
-    return {
-      ...state,
-      carGroupStates: updatedCarGroupStates
-    };
-  }),
-
   setCarGroupSelected: (carGroupName: string, isSelected: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupName);
     if (!carGroupState) return state;
