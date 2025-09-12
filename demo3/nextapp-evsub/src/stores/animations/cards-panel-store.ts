@@ -6,7 +6,8 @@ import type {
   CarDisplayProperties, 
   CarGroupInfo, 
   CarsState,
-  ChipState  
+  ChipState,
+  ChipInfo,  
 } from '@/types';
 
 import { CardDisplayMode } from '@/types';
@@ -26,8 +27,8 @@ export const useCarPanelDimensionsStore = create<{
 
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
+  chipInfoStack: new Array<ChipInfo>(), 
 
-  
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
   setCarStates: (carGroupName: string, carStates: CarState[]) => set((state) => {
@@ -39,6 +40,7 @@ export const useCarsStore = create<CarsState>((set) => ({
       carStates
     };
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -63,6 +65,7 @@ export const useCarsStore = create<CarsState>((set) => ({
       carStates: updatedCarStates
     };
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -80,6 +83,7 @@ export const useCarsStore = create<CarsState>((set) => ({
       carStates: updatedCarStates
     };
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -134,6 +138,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
 
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -162,6 +167,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
     refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -209,6 +215,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
 
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -236,6 +243,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
@@ -261,6 +269,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
     return {
+      ...state,
       carGroupStates: updatedCarGroupStates
     };
   }),
