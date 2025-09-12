@@ -122,17 +122,6 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
             style={{ height: isExpanded ? `300px`  :`220px` }}
             >
             
-            {/* <Image
-              ref={imageRef}
-              alt={car.info.title}
-              className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
-              style={{
-                transform: isExpanded ? `scale(0.5)` : `scale(1)`,
-                transformOrigin: 'top left'
-              }}
-              width={`${car.displayProperties.boundingBox.width ?? 0}px`}
-              src={car.info.img}
-            /> */}
             <img
               ref={imageRef}
               alt={car.info.title}
@@ -191,7 +180,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
         </div>
 
         <div id="card body" className="grid grid-rows-[auto_auto_auto] transition-all duration-500 ease-in-out">
-          <CardBody className="flex-grow p-3 gap-2 overflow-x-hidden">
+          <CardBody className="flex-grow p-1 gap-2 overflow-x-hidden">
 
             
             { showCriteria &&  (

@@ -18,7 +18,7 @@ const getYScale = (y: number, clientHeight: number) => d3.scaleLinear().domain(Y
 // }
 
 export const getCardWidth = () => {
-  return 255;
+  return 250;
 }
 
 export const getEmptyBoundingBox = (): BoundingBox => {
