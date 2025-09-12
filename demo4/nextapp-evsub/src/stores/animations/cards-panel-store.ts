@@ -139,8 +139,8 @@ export const useCarsStore = create<CarsState>((set) => ({
 
     const updatedCarGroupStates = [...state.carGroupStates];
     const updatedCarStates = [...carGroupState.carStates];
-    // const maxZIndex = Math.max(...updatedCarStates.map(carState => carState.displayProperties.zIndex || 0));
     const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
+    
     if (updatedCarStates[index].priority === 1) {
       // Already on top
       return state;
@@ -196,18 +196,6 @@ export const useCarsStore = create<CarsState>((set) => ({
     });
     
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
-
-    // I need to add the updatedCarGroupState to chipCrumbStack if isSelected is true and remove it if isSelected is false
-    // let updatedChipCrumbStack = [...state.chipCrumb];
-    // if (isSelected) {
-    //   updatedChipCrumbStack.push({
-    //     carGroupState: updatedCarGroupState
-    //   });
-    // } else {
-    //   updatedChipCrumbStack = updatedChipCrumbStack.filter(
-    //     crumb => crumb.carGroupState && crumb.carGroupState.info.id !== carGroupInfoId
-    //   );
-    // }
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isSelected) {
