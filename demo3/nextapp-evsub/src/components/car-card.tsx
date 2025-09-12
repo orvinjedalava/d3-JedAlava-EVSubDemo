@@ -100,7 +100,7 @@ export const CarCard = ({ car, carGroupName }: CarCardProps) => {
                     // Set processing flag to prevent additional clicks
                     setIsProcessingFlip(true);
 
-                    setCarStateIsFlipped(carGroupName, car.info.title, true, width, height);
+                    setCarStateIsFlipped(carGroupName, car.info.title, true);
 
                     // // Then after 500ms, bring it to the top
                     setTimeout(() => {

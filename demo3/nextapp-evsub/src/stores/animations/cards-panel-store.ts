@@ -2,9 +2,6 @@ import { create } from 'zustand';
 import type { 
   CarState, 
   CarGroupState, 
-  CarGroupDisplayProperties, 
-  CarDisplayProperties, 
-  CarGroupInfo, 
   CarsState,
   ChipState,
   ChipCrumb,  
@@ -120,7 +117,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     };
   }),
 
-  setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean, clientWidth: number, clientHeight: number) => set((state) => {
+  setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
     if (!carGroupState) return state;
     const updatedCarGroupStates = [...state.carGroupStates];
@@ -142,7 +139,10 @@ export const useCarsStore = create<CarsState>((set) => ({
       ...carGroupState,
       carStates: updatedCarStates
     };
-    refreshClientSize(updatedCarGroupStates, clientWidth, clientHeight);
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(updatedCarGroupStates, width, height);
+
     return {
       ...state,
       carGroupStates: updatedCarGroupStates
