@@ -10,8 +10,6 @@ import type {
   ChipCrumb,  
 } from '@/types';
 
-import { CardDisplayMode } from '@/types';
-
 import { refreshClientSize } from '@/utils/state-helpers';
 
 export const useCarPanelDimensionsStore = create<{
@@ -40,24 +38,6 @@ export const useCarsStore = create<CarsState>((set) => ({
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
       ...carGroupState,
       carStates
-    };
-    return {
-      ...state,
-      carGroupStates: updatedCarGroupStates
-    };
-  }),
-
-  setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => set((state) => {
-    const carGroupState = state.carGroupStates.find((group) => group.info.name === carGroupInfoName);
-    if (!carGroupState) return state;
-    const updatedCarGroupStates = [...state.carGroupStates];
-    const updatedCarStates = carGroupState.carStates.map((carState) => ({
-      ...carState,
-      displayMode: mode
-    }));
-    updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = {
-      ...carGroupState,
-      carStates: updatedCarStates
     };
     return {
       ...state,

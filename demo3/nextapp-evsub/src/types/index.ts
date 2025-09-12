@@ -85,7 +85,6 @@ export interface CarsState {
   setCarStateIsFlipped: (carGroupInfoName: string, carInfoTitle: string, isFlipped: boolean, clientWidth: number, clientHeight: number) => void;
 
   setCarGroupChipPosition: (carGroupName: string, chipState: ChipState) => void;
-  setCarGroupDisplayMode: (carGroupInfoName: string, mode: CardDisplayMode) => void;
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setCarGroupSelected: (carGroupName: string, isSelected: boolean) => void;
 
