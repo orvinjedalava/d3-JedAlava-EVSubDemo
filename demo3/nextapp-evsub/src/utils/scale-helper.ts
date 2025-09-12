@@ -204,9 +204,9 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 800 * 450), left: xScale(boxWidth / 800 * 300), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 500), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 800 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 620), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 220), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
