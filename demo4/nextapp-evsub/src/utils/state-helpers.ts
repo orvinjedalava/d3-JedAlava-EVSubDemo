@@ -284,3 +284,7 @@ export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupSt
     currentCrumb = currentCrumb.chipCrumb;
   }
 };
+
+export const generateGUID = (): string => {
+  return crypto.randomUUID();
+};

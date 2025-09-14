@@ -4,7 +4,9 @@ import type {
   CarGroupState, 
   CarsState,
   ChipState,
-  ChipCrumb,  
+  ChipCrumb,
+  CarGroupSuggestions,
+  CarGroupSuggestion  
 } from '@/types';
 
 import { refreshClientSize, addToChipCrumb, removeFromChipCrumb } from '@/utils/state-helpers';
@@ -23,10 +25,13 @@ export const useCarPanelDimensionsStore = create<{
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
   chipCrumb: {} as ChipCrumb,
+  carGroupSuggestions: {} as CarGroupSuggestions,
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
   setChipCrumb: (chipCrumb: ChipCrumb) => set({ chipCrumb }),
+
+  setCarGroupSuggestions: (carGroupSuggestions: CarGroupSuggestions) => set({ carGroupSuggestions }),
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);

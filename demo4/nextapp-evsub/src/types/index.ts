@@ -88,14 +88,16 @@ export interface ChipCrumb {
 export interface CarsState {
   carGroupStates: CarGroupState[];
   chipCrumb: ChipCrumb;
+  carGroupSuggestions: CarGroupSuggestions;
 
+  setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;
+  setCarGroupSuggestions: (carGroupSuggestions: CarGroupSuggestions) => void;
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
   setCarStateOnTop: (carGroupInfoId: string, carInfoId: string) => void;
   setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => void;
-
-  setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
+  
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
 
   refreshClientSize: () => void;

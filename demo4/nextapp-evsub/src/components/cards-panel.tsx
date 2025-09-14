@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Chip } from "@heroui/chip";
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
-import { getCarGroups } from '@/actions/get-cars';
+import { getCarGroups, getRelatedGroupSuggestions, getCars } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
@@ -16,6 +16,7 @@ export const CardsPanel = () => {
     setCarGroupStates,
     refreshClientSize,
     setCarGroupSelected,
+    setCarGroupSuggestions,
   } = useCarsStore();
 
   // Create a ref for the container div
@@ -40,10 +41,26 @@ export const CardsPanel = () => {
     // Start observing the container
     resizeObserver.observe(containerRef.current);
 
+    // // Wrap async logic in an IIFE since useEffect cannot be async
+    // (async () => {
+      
+    //   const carGroups = await getCarGroups();
+    //   if (containerRef.current) {
+    //     const { width, height } = containerRef.current.getBoundingClientRect();
+    //     const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
+
+    //     // Update the store with the combined data
+    //     if (setCarGroupStates) {
+    //       setCarGroupStates(initialCardGroupStates);
+    //     }
+    //   }
+    // })();
+
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
       
       const carGroups = await getCarGroups();
+      
       if (containerRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect();
         const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
@@ -52,6 +69,12 @@ export const CardsPanel = () => {
         if (setCarGroupStates) {
           setCarGroupStates(initialCardGroupStates);
         }
+      }
+
+      const carGroupSuggestions = await getRelatedGroupSuggestions('', 0);
+      if (carGroupSuggestions) {
+        setCarGroupSuggestions(carGroupSuggestions);
+        console.log('Fetched car group suggestions:', carGroupSuggestions);
       }
     })();
     
