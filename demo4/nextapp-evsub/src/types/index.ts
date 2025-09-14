@@ -13,6 +13,16 @@ export enum CardDisplayMode {
   ClickFlipable = 1 << 4,   // 32 (binary: 100000)
 }
 
+export interface CarGroupSuggestions {
+  name: string;
+  groups: CarGroupSuggestion[];
+}
+
+export interface CarGroupSuggestion {
+  name: string;
+  shortName: string;
+}
+
 export interface CarDisplayProperties {
   boundingBox: BoundingBox;
   opacity: number;
