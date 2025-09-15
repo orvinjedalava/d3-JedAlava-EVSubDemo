@@ -5,11 +5,12 @@ import type {
   CarsState,
   ChipState,
   ChipCrumb,
-  CarGroupSuggestions,
-  CarGroupSuggestion  
+  Suggestions,
+    
 } from '@/types';
 
-import { refreshClientSize, addToChipCrumb, removeFromChipCrumb } from '@/utils/state-helpers';
+import { refreshClientSize, addToChipCrumb, removeFromChipCrumb, generateCarGroupStatesFrom } from '@/utils/state-helpers';
+import { getCarGroupsFrom } from '@/actions/get-cars';
 
 export const useCarPanelDimensionsStore = create<{
   width: number;
@@ -25,13 +26,26 @@ export const useCarPanelDimensionsStore = create<{
 export const useCarsStore = create<CarsState>((set) => ({
   carGroupStates: new Array<CarGroupState>(),
   chipCrumb: {} as ChipCrumb,
-  carGroupSuggestions: {} as CarGroupSuggestions,
+  suggestions: {} as Suggestions,
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
   setChipCrumb: (chipCrumb: ChipCrumb) => set({ chipCrumb }),
 
-  setCarGroupSuggestions: (carGroupSuggestions: CarGroupSuggestions) => set({ carGroupSuggestions }),
+  setSuggestions: (suggestions: Suggestions) => set({ suggestions }),
+
+  getCarGroupsFrom: async (suggestion: string) => {
+    const carGroupInfos = await getCarGroupsFrom(suggestion);
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    const initialCardGroupStates = generateCarGroupStatesFrom(carGroupInfos, width, height);
+
+    console.log('Fetched car groups from suggestion:', initialCardGroupStates);
+
+    // Update the store with the combined data
+    // set({ carGroupStates: initialCardGroupStates });
+
+  },
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);

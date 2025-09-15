@@ -13,12 +13,12 @@ export enum CardDisplayMode {
   ClickFlipable = 1 << 4,   // 32 (binary: 100000)
 }
 
-export interface CarGroupSuggestions {
+export interface Suggestions {
   name: string;
-  groups: CarGroupSuggestion[];
+  groups: Suggestion[];
 }
 
-export interface CarGroupSuggestion {
+export interface Suggestion {
   name: string;
   shortName: string;
 }
@@ -88,17 +88,18 @@ export interface ChipCrumb {
 export interface CarsState {
   carGroupStates: CarGroupState[];
   chipCrumb: ChipCrumb;
-  carGroupSuggestions: CarGroupSuggestions;
+  suggestions: Suggestions;
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;
-  setCarGroupSuggestions: (carGroupSuggestions: CarGroupSuggestions) => void;
+  setSuggestions: (suggestions: Suggestions) => void;
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
   setCarStateOnTop: (carGroupInfoId: string, carInfoId: string) => void;
   setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => void;
   
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
+  getCarGroupsFrom: (suggestion: string) => Promise<void>;
 
   refreshClientSize: () => void;
 }

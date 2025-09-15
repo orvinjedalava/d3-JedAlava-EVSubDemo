@@ -1,11 +1,11 @@
 'use server';
-import { CarInfo, CarGroupInfo, CarGroupSuggestions, CarGroupSuggestion } from "@/types";
+import { CarInfo, CarGroupInfo, Suggestions, Suggestion } from "@/types";
 
-export async function getRelatedGroupSuggestions(group: string, groupCount: number): Promise<CarGroupSuggestions> {
+export async function getSuggestions(suggestion: string, groupCount: number): Promise<Suggestions> {
   // Simulate fetching related group suggestions
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  const groupOption1: CarGroupSuggestion[] = [
+  const groupOption1: Suggestion[] = [
     { name: "Weekend Warrior", shortName: "Weekend" },
     { name: "Daily Commuter", shortName: "Commuter" },
     { name: "Budget Conscious", shortName: "Budget" },
@@ -13,7 +13,7 @@ export async function getRelatedGroupSuggestions(group: string, groupCount: numb
     { name: "Urban Stylist", shortName: "Urban" },
     { name: "Vans/People Movers", shortName: "Vans" }
   ];
-  const groupOption2: CarGroupSuggestion[] = [
+  const groupOption2: Suggestion[] = [
     { name: "Hatchback", shortName: "Hatch" },
     { name: "Sedan", shortName: "Sedan" },
     { name: "Small SUV", shortName: "Small SUV" },
@@ -21,12 +21,12 @@ export async function getRelatedGroupSuggestions(group: string, groupCount: numb
     { name: "Large SUV", shortName: "Large SUV" },
     { name: "Vans/People Movers", shortName: "Vans" }
   ];
-  const groupOption3: CarGroupSuggestion[] = [
+  const groupOption3: Suggestion[] = [
     { name: "Australia's Top 10 Best Sellers", shortName: "Australia's Top 10" },
     { name: 'Most Chosen Vehicle This Month', shortName: 'Most Chosen' },
     { name: 'Newest Arrivals', shortName: 'Newest Arrivals' },
   ];
-  const groupOption4: CarGroupSuggestion[] = [
+  const groupOption4: Suggestion[] = [
     { name: "Long Range (500km+)", shortName: "Long Range" },
     { name: "Standard Range (300-499km)", shortName: "Standard Range" },
     { name: "City Range (under 300km)", shortName: "City Range" },
@@ -56,6 +56,14 @@ export async function getRelatedGroupSuggestions(group: string, groupCount: numb
       name: "Range ",
       groups: groupOption4
     }
+}
+
+export async function getCarGroupsFrom(suggestion: string): Promise<CarGroupInfo[]> {
+  // Simulate network delay
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  // For simplicity, return all car groups regardless of suggestion
+  return getCarGroups();
 }
 
 export async function getCars(group: string): Promise<CarInfo[]> {

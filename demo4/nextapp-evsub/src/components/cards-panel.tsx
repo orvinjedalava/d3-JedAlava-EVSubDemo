@@ -4,12 +4,12 @@ import { useRef, useEffect, useState } from "react";
 import { Chip } from "@heroui/chip";
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
-import { getCarGroups, getRelatedGroupSuggestions, getCars } from '@/actions/get-cars';
+import { getCarGroups, getSuggestions, getCars } from '@/actions/get-cars';
 import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
 import { ChipStack } from "@/components/chip-stack";
-import { CarGroupSuggestionsPanel } from "@/components/car-group-suggestions-panel";
+import { SuggestionsPanel } from "@/components/suggestions-panel";
 
 export const CardsPanel = () => {
   const { 
@@ -17,7 +17,7 @@ export const CardsPanel = () => {
     setCarGroupStates,
     refreshClientSize,
     setCarGroupSelected,
-    setCarGroupSuggestions,
+    setSuggestions,
   } = useCarsStore();
 
   // Create a ref for the container div
@@ -72,10 +72,10 @@ export const CardsPanel = () => {
         }
       }
 
-      const carGroupSuggestions = await getRelatedGroupSuggestions('', 0);
-      if (carGroupSuggestions) {
-        setCarGroupSuggestions(carGroupSuggestions);
-        console.log('Fetched car group suggestions:', carGroupSuggestions);
+      const suggestions = await getSuggestions('', 0);
+      if (suggestions) {
+        setSuggestions(suggestions);
+        console.log('Fetched car group suggestions:', suggestions);
       }
     })();
     
@@ -122,7 +122,7 @@ export const CardsPanel = () => {
           </div>
         ))
       }
-      <CarGroupSuggestionsPanel />
+      <SuggestionsPanel />
       <CarPark />
       
     </div>
