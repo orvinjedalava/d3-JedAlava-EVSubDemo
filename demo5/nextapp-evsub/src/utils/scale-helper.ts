@@ -44,15 +44,15 @@ export const getCarStateFlipCoordinates = (count: number, carGroupBoundingBox: B
   else if (count === 2 )
   {
     return [
-      { top: yScale(0), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 }
+      { top: yScale(0), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 3 )
   {
     return [
-      { top: yScale(0), left: xScale(boxWidth / 600 * 100), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 100), width: cardWidth, height: 0 }
+      { top: yScale(0), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 4 )
@@ -75,8 +75,8 @@ export const getChipCoordinates = (carGroupBoundingBox: BoundingBox): BoundingBo
   const boxHeight = Y_SCALE_HEIGHT;
 
   return { 
-    top: yScale(boxHeight / 1000 * 800), 
-    left: xScale(boxWidth / 1000 * 345),
+    top: yScale(boxHeight / 1000 * 870), 
+    left: xScale(boxWidth / 1000 * 330),
     width: 0,
     height: 0 
   };
@@ -147,31 +147,31 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 135), width: cardWidth, height: 0 }
+      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 135), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 100), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 20), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 60), left: xScale(boxWidth / 600 * 150), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 75), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 125), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 20), left: xScale(boxWidth / 600 * 100), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 95), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 80), left: xScale(boxWidth / 600 * 145), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 400 * 15), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 40), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 45), left: xScale(boxWidth / 600 * 190), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 25), left: xScale(boxWidth / 600 * 160), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 55), left: xScale(boxWidth / 600 * 90), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 80), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 85), left: xScale(boxWidth / 600 * 190), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 160), width: cardWidth, height: 0 },
     ];
   }
 
