@@ -18,6 +18,8 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { OriginIcon } from "@/components/icons";
 
+import { Origin360EVIcon } from "@/components/icons";
+
 export const Navbar = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false);
@@ -34,7 +36,7 @@ export const Navbar = () => {
 
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         {/* <NavbarMenuToggle className="lg:hidden"/> */}
-        <ul className="flex gap-4 justify-start ml-2">
+        {/* <ul className="flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -49,7 +51,19 @@ export const Navbar = () => {
               </NextLink>
             </NavbarItem>
           ))}
-        </ul>
+        </ul> */}
+        <NavbarBrand as="li" className="gap-3 max-w-fit">
+          <NextLink 
+            className="flex justify-start items-center gap-1 px-20" 
+            href="https://www.originenergy.com.au/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {/* <Origin360EVIcon className="text-primary" height={8} width={8} /> */}
+            <img src="/icons/origin360-ev-logo.svg" alt="Origin 360EV" className="h-20 w-52"/>
+            {/* <p className="font-bold text-primary">Origin</p> */}
+          </NextLink>
+        </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarBrand as="li" className="gap-3 max-w-fit">

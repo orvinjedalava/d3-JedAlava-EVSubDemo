@@ -1,4 +1,3 @@
-import { PlusIcon } from "@/components/icons";
 import { Button } from "@heroui/button";
 import {  PlusCircleIcon } from "@heroicons/react/24/outline";
 

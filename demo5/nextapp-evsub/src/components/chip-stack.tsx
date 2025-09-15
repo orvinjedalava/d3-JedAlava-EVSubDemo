@@ -65,7 +65,7 @@ export const ChipStack = () => {
   }
 
   return (
-    <div className="absolute top-[24px] left-[24px] flex flex-row gap-4">
+    <div className="absolute top-[24px] left-[100px] flex flex-row gap-4">
       {chipComponents}
     </div>
   );
