@@ -304,11 +304,13 @@ export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, 
     if (currentCrumb.id === crumbId) {
       if (parentCrumb) {
         parentCrumb.chipCrumb = undefined;
+        console.log('New chipCrumb after removal:', chipCrumb);
+        return chipCrumb;
       }
       else {
         return undefined;
       }
-      return chipCrumb;
+      
     }
     parentCrumb = currentCrumb;
     currentCrumb = currentCrumb.chipCrumb;

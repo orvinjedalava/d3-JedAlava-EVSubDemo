@@ -77,7 +77,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(retrievedCarGroupStates, width, height);
-
+    console.log('current chip crumb:', get().chipCrumb);
   },
 
   removeSuggestion: (crumbId: string) => set((state) => {
@@ -86,6 +86,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
+
+    console.log('Removing crumbId:', crumbId, ' from chipCrumb:', updatedChipCrumb);
     
     return {
       ...state,
@@ -114,7 +116,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       console.log('lastCrumb found:', lastCrumb);
 
       set({
-      chipCrumb: lastCrumb,
       suggestions: lastCrumb.parentSuggestions,
       carGroupStates: lastCrumb.carGroupStates,
       currentSuggestion: lastCrumb.suggestion
