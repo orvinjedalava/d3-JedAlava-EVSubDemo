@@ -9,6 +9,7 @@ import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
 import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
 import { ChipStack } from "@/components/chip-stack";
+import { CarGroupSuggestionsPanel } from "@/components/car-group-suggestions-panel";
 
 export const CardsPanel = () => {
   const { 
@@ -121,6 +122,7 @@ export const CardsPanel = () => {
           </div>
         ))
       }
+      <CarGroupSuggestionsPanel />
       <CarPark />
       
     </div>
