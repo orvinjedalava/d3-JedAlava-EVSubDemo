@@ -192,6 +192,10 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
                     switch(criteriaKey) {
                       case 'Odometer':
                         return '/icons/internetspeedicon.svg';
+                      case 'Efficiency':
+                        return '/icons/efficiency.svg';
+                      case 'Range':
+                        return '/icons/range.svg';
                       default:
                         return '/icons/dollar.svg'; // Fallback icon
                     }

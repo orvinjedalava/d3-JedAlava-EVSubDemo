@@ -93,9 +93,10 @@ export async function getCars(): Promise<CarInfo[]> {
       description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
       img: "/images/KIA EV5 Earth 2025.png",
       criteria: {
-        "Weekly Cost": "$295.80",
+        "Range": "478 km",
+        "Efficiency": "15.5 km/L",
         "Odometer": "43,793 km",
-        "Fuel Efficiency": "15.5 km/L",
+        // "Weekly Cost": "$295.80",
         "Service Due": "8,000km",
         "Next Service Date": "15 Aug 2044",
         "Loan": "$195.80",
@@ -110,9 +111,11 @@ export async function getCars(): Promise<CarInfo[]> {
       description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
       img: "/images/Tesla Model 3 Earth 2025.png",
       criteria: {
-        "Weekly Cost": "$295.80",
+        "Range": "478 km",
+        // "Weekly Cost": "$295.80",
+        "Efficiency": "15.5 km/L",
         "Odometer": "43,793 km",
-        "Fuel Efficiency": "15.5 km/L",
+        
         "Service Due": "8,000km",
         "Next Service Date": "15 Aug 2044",
         "Loan": "$195.80",
@@ -127,9 +130,11 @@ export async function getCars(): Promise<CarInfo[]> {
       description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
       img: "/images/BMW I4 EDrive35 2023.png",
       criteria: {
-        "Weekly Cost": "$325.50",
+        "Range": "478 km",
+        // "Weekly Cost": "$325.50",
+        "Efficiency": "12.5 km/L",
         "Odometer": "43,793 km",
-        "Fuel Efficiency": "12.5 km/L",
+        
         "Service Due": "5,000km",
         "Next Service Date": "15 March 2044",
         "Loan": "$295.80",
@@ -144,9 +149,11 @@ export async function getCars(): Promise<CarInfo[]> {
       description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magnam voluptatem repudiandae perferendis ipsam maiores nostrum dolor earum numquam, quisquam facere inventore consectetur a est dolorem impedit nam. Maiores, dolorem?",
       img: "/images/Volvo EX30.png",
       criteria: {
-        "Weekly Cost": "$325.50",
+        "Range": "478 km",
+        // "Weekly Cost": "$325.50",
+        "Efficiency": "12.5 km/L",
         "Odometer": "43,793 km",
-        "Fuel Efficiency": "12.5 km/L",
+        
         "Service Due": "5,000km",
         "Next Service Date": "15 March 2044",
         "Loan": "$295.80",
