@@ -1,19 +1,15 @@
 'use client';
 
-import type { Suggestions } from '@/types';
 import { Chip } from "@heroui/chip";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { AnimatePresence, motion } from 'framer-motion';
 import { motionOpacity } from '@/utils/framer-motion-helpers';
-import { useTransitionState } from 'next-transition-router';
 
 export const SuggestionsPanel = () => {
   const { 
     suggestions,
     getCarGroupsFrom,
   } = useCarsStore();
-
-  const { stage } = useTransitionState();
 
   return (
     <div
