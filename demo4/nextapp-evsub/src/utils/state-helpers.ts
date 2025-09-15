@@ -8,7 +8,8 @@ import type {
   CarsState,
   CarGroupState, 
   ChipCrumb,
-  Suggestions 
+  Suggestions,
+  Suggestion 
 } from '@/types';
 
 import { CardDisplayMode } from '@/types';
@@ -256,7 +257,7 @@ export const getCardStateRotateAngles = (count: number ) => {
 }
 
 export const createChipCrumbRoot = (parentSuggestions: Suggestions,
-  suggestion: string, 
+  suggestion: Suggestion, 
   carGroupStates: CarGroupState[] ) => {
   return  {
     id: generateGUID(),
@@ -272,7 +273,7 @@ export const createChipCrumbRoot = (parentSuggestions: Suggestions,
 export const addToChipCrumb = (
   chipCrumb: ChipCrumb , 
   parentSuggestions: Suggestions,
-  suggestion: string, 
+  suggestion: Suggestion, 
   carGroupStates: CarGroupState[], 
   selectedCarGroupState?: CarGroupState, 
   selectedCarState?: CarState) : ChipCrumb => 
@@ -304,15 +305,19 @@ export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, 
     if (currentCrumb.id === crumbId) {
       if (parentCrumb) {
         parentCrumb.chipCrumb = undefined;
+
+        console.log('removed crumb', chipCrumb);
         return chipCrumb;
       }
       else {
+        console.log('removed crumb last', chipCrumb);
         return undefined;
       }
       
     }
     parentCrumb = currentCrumb;
     currentCrumb = currentCrumb.chipCrumb;
+    console.log('removed crumb', chipCrumb);
   }
   return chipCrumb;
 };
@@ -348,6 +353,8 @@ export const getLastChipCrumb = (chipCrumb: ChipCrumb | undefined): ChipCrumb | 
 };
 
 export const getSelectedSuggestionCount = (chipCrumb: ChipCrumb | undefined): number => {
+  if (isEmptyChipCrumb(chipCrumb)) return 0;
+
   let currentCrumb = chipCrumb;
   let count = 0;
 
@@ -360,6 +367,10 @@ export const getSelectedSuggestionCount = (chipCrumb: ChipCrumb | undefined): nu
   }
 
   return count;
+};
+
+export const isEmptyChipCrumb = (crumb: ChipCrumb | undefined) => {
+  return !crumb || Object.keys(crumb).length === 0;
 };
 
 

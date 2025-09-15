@@ -82,7 +82,7 @@ export interface ChipState {
 export interface ChipCrumb {
   id: string;
   parentSuggestions: Suggestions;
-  suggestion: string;
+  suggestion: Suggestion;
   carGroupStates: CarGroupState[];
   selectedCarGroupState?: CarGroupState;
   selectedCarState?: CarState;
@@ -93,14 +93,14 @@ export interface CarsState {
   carGroupStates: CarGroupState[];
   chipCrumb: ChipCrumb | undefined;
   suggestions: Suggestions;
-  currentSuggestion: string;
+  currentSuggestion: Suggestion;
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;
 
   removeSuggestion: (suggestionId: string) => void;
   setSuggestions: (suggestions: Suggestions) => void;
-  setCurrentSuggestion: (suggestion: string) => void;
+  setCurrentSuggestion: (suggestion: Suggestion) => void;
   setCarStateFromLastSuggestion: () => Promise<void>;
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
@@ -108,7 +108,7 @@ export interface CarsState {
   setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => void;
   
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
-  getCarGroupsFrom: (suggestion: string) => Promise<void>;
+  getCarGroupsFrom: (suggestion: Suggestion) => Promise<void>;
 
   refreshClientSize: () => void;
 }

@@ -4,7 +4,7 @@ import { generateGUID } from '@/utils/general';
 
 export async function getSuggestions(suggestion: string, suggestionCount: number): Promise<Suggestions> {
   // Simulate fetching related group suggestions
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 250));
 
   const groupOption1: Suggestion[] = [
     { name: "Weekend Warrior", shortName: "Weekend" },
@@ -61,20 +61,22 @@ export async function getSuggestions(suggestion: string, suggestionCount: number
 
 export async function getCarGroupsFrom(suggestion: string, suggestionCount: number): Promise<CarGroupInfo[]> {
   // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 250));
 
-  const suggestions = await getSuggestions(suggestion, suggestionCount);
+  const suggestions = await getSuggestions(suggestion, suggestionCount + 1);
 
   const carGroupInfos: CarGroupInfo[] = [];
 
   // Get a Randomize number between 1 - 3
   const carGroupCount = Math.floor(Math.random() * 3) + 1; 
 
+  // console.log('suggestion count', suggestionCount);
+
   // loop to get that many car groups
   for (let i = 0; i < carGroupCount; i++) {
     carGroupInfos.push({
       id: generateGUID(),
-      name: suggestions.groups[i % suggestions.groups.length].name,
+      name: suggestions.groups[i % suggestions.groups.length].shortName,
       carInfos: await getRandomCars()
     })
   }

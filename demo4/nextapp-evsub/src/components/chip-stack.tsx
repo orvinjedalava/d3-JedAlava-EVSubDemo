@@ -51,7 +51,7 @@ export const ChipStack = () => {
           >
             {crumb.selectedCarState ? 
             crumb.selectedCarState.info.title 
-            : crumb.selectedCarGroupState?.info.name || crumb.suggestion}
+            : crumb.selectedCarGroupState?.info.name || crumb.suggestion.name}
           </Chip>
         </motion.div>
       );

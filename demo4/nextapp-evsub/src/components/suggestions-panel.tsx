@@ -44,9 +44,9 @@ export const SuggestionsPanel = () => {
                     transition={{ duration: 0.5 }}
                   >
                     <Chip 
-                      key={`suggestion-name-${suggestion.name}`} 
+                      key={`suggestion-name-${suggestion.shortName}`} 
                       className="cursor-pointer" 
-                      onClick={() => getCarGroupsFrom(suggestion.name)}
+                      onClick={() => getCarGroupsFrom(suggestion)}
                     >
                       {suggestion.name}
                     </Chip>
