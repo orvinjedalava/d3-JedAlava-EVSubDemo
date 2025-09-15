@@ -43,7 +43,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     console.log('Fetched car groups from suggestion:', initialCardGroupStates);
 
     // Update the store with the combined data
-    // set({ carGroupStates: initialCardGroupStates });
+    set({ carGroupStates: initialCardGroupStates });
 
   },
 

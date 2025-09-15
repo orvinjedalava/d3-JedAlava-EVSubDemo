@@ -60,22 +60,21 @@ export const CardsPanel = () => {
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
       
-      const carGroups = await getCarGroups();
+      // const carGroups = await getCarGroups();
       
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
+      // if (containerRef.current) {
+      //   const { width, height } = containerRef.current.getBoundingClientRect();
+      //   const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
 
-        // Update the store with the combined data
-        if (setCarGroupStates) {
-          setCarGroupStates(initialCardGroupStates);
-        }
-      }
+      //   // Update the store with the combined data
+      //   if (setCarGroupStates) {
+      //     setCarGroupStates(initialCardGroupStates);
+      //   }
+      // }
 
       const suggestions = await getSuggestions('', 0);
       if (suggestions) {
         setSuggestions(suggestions);
-        console.log('Fetched car group suggestions:', suggestions);
       }
     })();
     
