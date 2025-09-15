@@ -269,6 +269,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => set((state) => {
+    console.log('setCarGroupSelected', carGroupInfoId, isSelected);
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;
 

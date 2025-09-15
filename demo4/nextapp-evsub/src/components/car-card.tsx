@@ -22,7 +22,8 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   const isExpanded = (carState.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
   const isClickExpandable = (carState.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
   const isClickFlipable = (carState.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
-  const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
+  // const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
+  const isShowPointer = true;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -36,6 +37,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
     setCarStateIsExpanded,
     setCarStateOnTop,
     setCarStateIsFlipped,
+    setCarGroupSelected,
   } = useCarsStore();
 
   const onCloseClicked = () => {
@@ -84,9 +86,11 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
                   if (isProcessingFlip) return;
 
                   if (isClickExpandable && !isExpanded){
+                    console.log('Expand card');
                     setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true)
                   }
                   else if (isClickFlipable){
+                    console.log('Flip card');
                     // Set processing flag to prevent additional clicks
                     setIsProcessingFlip(true);
 
@@ -100,6 +104,10 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
                       setIsProcessingFlip(false);
                       
                     }, 500);
+                  }
+                  else {
+                    console.log('No action assigned');
+                    setCarGroupSelected(carGroupState.info.id, true);
                   }
                 }
               } : {})}
