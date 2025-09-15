@@ -65,7 +65,7 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="basis-1 pl-4" justify="end">
+      {/* <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink 
             className="flex justify-start items-center gap-1" 
@@ -78,7 +78,7 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
         <ThemeSwitch />
-      </NavbarContent>
+      </NavbarContent> */}
       {/* <NavbarMenu>
         {siteConfig.navItems.map((item) => (
             <NavbarMenuItem key={`menu-${item.href}`}>
