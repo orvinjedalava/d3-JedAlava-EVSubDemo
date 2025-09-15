@@ -30,6 +30,17 @@ export const CardsPanel = () => {
 
   // Set up the resize observer
   useEffect(() => {
+    if (process.env.SUPPRESS_FRAMER_WARNINGS === 'true') {
+    const originalWarn = console.warn;
+    console.warn = (...args) => {
+      if (args[0] && typeof args[0] === 'string' && 
+          args[0].includes('AnimatePresence')) {
+        return;
+      }
+      originalWarn.apply(console, args);
+    };
+  }
+  
     if (!containerRef.current) return;
 
     // Create a new ResizeObserver

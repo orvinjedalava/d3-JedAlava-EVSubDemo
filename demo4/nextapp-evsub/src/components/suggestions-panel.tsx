@@ -33,26 +33,24 @@ export const SuggestionsPanel = () => {
               {suggestions.name}
             </span>
             <div className="flex flex-row gap-2 overflow-x-auto p-2">
-              <AnimatePresence mode="wait">
-                {suggestions.groups.map((suggestion) => (
-                  <motion.div
-                    key={`motion-suggestion-name-${suggestion.name}`}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    variants={motionOpacity}
-                    transition={{ duration: 0.5 }}
+              {suggestions.groups.map((suggestion) => (
+                <motion.div
+                  key={`motion-suggestion-name-${suggestion.name}`}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={motionOpacity}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Chip 
+                    key={`suggestion-name-${suggestion.shortName}`} 
+                    className="cursor-pointer" 
+                    onClick={() => getCarGroupsFrom(suggestion)}
                   >
-                    <Chip 
-                      key={`suggestion-name-${suggestion.shortName}`} 
-                      className="cursor-pointer" 
-                      onClick={() => getCarGroupsFrom(suggestion)}
-                    >
-                      {suggestion.name}
-                    </Chip>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                    {suggestion.name}
+                  </Chip>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         )}

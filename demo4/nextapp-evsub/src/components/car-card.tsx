@@ -86,11 +86,9 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
                   if (isProcessingFlip) return;
 
                   if (isClickExpandable && !isExpanded){
-                    console.log('Expand card');
                     setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true)
                   }
                   else if (isClickFlipable){
-                    console.log('Flip card');
                     // Set processing flag to prevent additional clicks
                     setIsProcessingFlip(true);
 
@@ -106,7 +104,6 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
                     }, 500);
                   }
                   else {
-                    console.log('No action assigned');
                     setCarGroupSelected(carGroupState.info.id, true);
                   }
                 }
@@ -159,13 +156,6 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
               </div>
           </div>
 
-          {/* <Button
-            className={`absolute top-[16px] right-[20px] transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
-            size="sm" 
-            variant="ghost" 
-            color="secondary"
-            onPress={onCloseClicked} 
-          >x</Button> */}
           <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} />
 
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
