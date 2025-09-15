@@ -23,10 +23,11 @@ export const useCarPanelDimensionsStore = create<{
   setDimensions: (width: number, height: number) => set({ width, height }),
 }));
 
-export const useCarsStore = create<CarsState>((set) => ({
+export const useCarsStore = create<CarsState>((set, get) => ({
   carGroupStates: new Array<CarGroupState>(),
   chipCrumb: {} as ChipCrumb,
   suggestions: {} as Suggestions,
+  currentSuggestion: '' as string,
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
@@ -34,16 +35,33 @@ export const useCarsStore = create<CarsState>((set) => ({
 
   setSuggestions: (suggestions: Suggestions) => set({ suggestions }),
 
+  setCurrentSuggestion: (suggestion: string) => set({ currentSuggestion: suggestion }),
+
   getCarGroupsFrom: async (suggestion: string) => {
     const carGroupInfos = await getCarGroupsFrom(suggestion);
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    const initialCardGroupStates = generateCarGroupStatesFrom(carGroupInfos, width, height);
+    const retrievedCarGroupStates = generateCarGroupStatesFrom(carGroupInfos, width, height);
 
-    console.log('Fetched car groups from suggestion:', initialCardGroupStates);
+    set({ currentSuggestion: suggestion });
+
+    console.log('Fetched car groups from suggestion:', get().currentSuggestion, retrievedCarGroupStates);
 
     // Update the store with the combined data
-    set({ carGroupStates: initialCardGroupStates });
+    set({ carGroupStates: retrievedCarGroupStates });
+
+    let updatedChipCrumb = structuredClone(get().chipCrumb);
+    addToChipCrumb(updatedChipCrumb, get().currentSuggestion, retrievedCarGroupStates, undefined, undefined);
+
+
+    // let updatedChipCrumb = structuredClone(state.chipCrumb);
+    // if (isSelected) {
+    //   const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
+    //   addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], undefined);
+
+    // } else {
+    //   removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, undefined);
+    // }
 
   },
 
@@ -97,7 +115,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isExpanded) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], updatedCarStates[index]);
+      addToChipCrumb(updatedChipCrumb, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], updatedCarStates[index]);
 
     } else {
       removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, carInfoId);
@@ -219,7 +237,7 @@ export const useCarsStore = create<CarsState>((set) => ({
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isSelected) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], undefined);
+      addToChipCrumb(updatedChipCrumb, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], undefined);
 
     } else {
       removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, undefined);

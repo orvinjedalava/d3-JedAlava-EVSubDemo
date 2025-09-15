@@ -251,11 +251,19 @@ export const getCardStateRotateAngles = (count: number ) => {
   return [0];
 }
 
-export const addToChipCrumb = (chipCrumb: ChipCrumb, carGroupState: CarGroupState, carState?: CarState) => {
+export const addToChipCrumb = (
+  chipCrumb: ChipCrumb, 
+  suggestion: string, 
+  carGroupStates: CarGroupState[], 
+  selectedCarGroupState?: CarGroupState, 
+  carState?: CarState) => 
+{
   let currentCrumb = chipCrumb;
 
   const newChipCrumb: ChipCrumb = {
-    carGroupState,
+    suggestion,
+    carGroupStates,
+    selectedCarGroupState,
     carState,
     chipCrumb: undefined
   };
@@ -273,7 +281,7 @@ export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupSt
   let parentCrumb: ChipCrumb | undefined = undefined;
 
   while (currentCrumb) {
-    if (currentCrumb.carGroupState && currentCrumb.carGroupState.info.id === carGroupStateId && (!carStateId || (currentCrumb.carState && currentCrumb.carState.info.id === carStateId))) {
+    if (currentCrumb.selectedCarGroupState && currentCrumb.selectedCarGroupState.info.id === carGroupStateId && (!carStateId || (currentCrumb.carState && currentCrumb.carState.info.id === carStateId))) {
       // Found the crumb to remove
       if (parentCrumb) {
         parentCrumb.chipCrumb = undefined;

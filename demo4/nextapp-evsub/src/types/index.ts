@@ -80,7 +80,9 @@ export interface ChipState {
 }
 
 export interface ChipCrumb {
-  carGroupState?: CarGroupState;
+  suggestion: string;
+  carGroupStates: CarGroupState[];
+  selectedCarGroupState?: CarGroupState;
   carState?: CarState;
   chipCrumb?: ChipCrumb;
 }
@@ -89,10 +91,12 @@ export interface CarsState {
   carGroupStates: CarGroupState[];
   chipCrumb: ChipCrumb;
   suggestions: Suggestions;
+  currentSuggestion: string;
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;
   setSuggestions: (suggestions: Suggestions) => void;
+  setCurrentSuggestion: (suggestion: string) => void;
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
   setCarStateOnTop: (carGroupInfoId: string, carInfoId: string) => void;
