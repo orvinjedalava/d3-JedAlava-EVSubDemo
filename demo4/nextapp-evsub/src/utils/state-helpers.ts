@@ -6,7 +6,10 @@ import type {
   CarState,
   CarGroupInfo,
   CarsState,
-  CarGroupState, ChipCrumb } from '@/types';
+  CarGroupState, 
+  ChipCrumb,
+  Suggestions 
+} from '@/types';
 
 import { CardDisplayMode } from '@/types';
 import { 
@@ -253,6 +256,7 @@ export const getCardStateRotateAngles = (count: number ) => {
 
 export const addToChipCrumb = (
   chipCrumb: ChipCrumb, 
+  parentSuggestions: Suggestions,
   suggestion: string, 
   carGroupStates: CarGroupState[], 
   selectedCarGroupState?: CarGroupState, 
@@ -261,6 +265,8 @@ export const addToChipCrumb = (
   let currentCrumb = chipCrumb;
 
   const newChipCrumb: ChipCrumb = {
+    id: generateGUID(),
+    parentSuggestions: parentSuggestions,
     suggestion,
     carGroupStates,
     selectedCarGroupState,
@@ -296,6 +302,34 @@ export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupSt
   }
 };
 
+export const getLastChipCrumb = (chipCrumb: ChipCrumb | undefined): ChipCrumb | undefined => {
+  let currentCrumb = chipCrumb;
+  let lastCrumb: ChipCrumb | undefined = undefined;
+  while (currentCrumb) {
+    lastCrumb = currentCrumb;
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+  return lastCrumb;
+};
+
+export const getSelectedSuggestionCount = (chipCrumb: ChipCrumb | undefined): number => {
+  let currentCrumb = chipCrumb;
+  let count = 0;
+
+  while (currentCrumb) {
+    if (currentCrumb?.selectedCarGroupState) {
+       break;
+    }
+    count++;
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+
+  return count;
+};
+
+
 export const generateGUID = (): string => {
   return crypto.randomUUID();
 };
+
+

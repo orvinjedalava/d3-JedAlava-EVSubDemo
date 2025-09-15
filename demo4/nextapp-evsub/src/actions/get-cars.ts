@@ -1,7 +1,7 @@
 'use server';
 import { CarInfo, CarGroupInfo, Suggestions, Suggestion } from "@/types";
 
-export async function getSuggestions(suggestion: string, groupCount: number): Promise<Suggestions> {
+export async function getSuggestions(suggestion: string, suggestionCount: number): Promise<Suggestions> {
   // Simulate fetching related group suggestions
   await new Promise(resolve => setTimeout(resolve, 500));
 
@@ -33,19 +33,19 @@ export async function getSuggestions(suggestion: string, groupCount: number): Pr
   ];
 
 
-  if (groupCount % 4 === 0) {
+  if (suggestionCount % 4 === 0) {
     return {
       name: "Vehicle Types",
       groups: groupOption1
     }
   }
-  else if (groupCount % 4 === 1) {
+  else if (suggestionCount % 4 === 1) {
     return {
       name: "Vehicle Types",
       groups: groupOption2
     }
   }
-  else if (groupCount % 4 === 2) {
+  else if (suggestionCount % 4 === 2) {
     return {
       name: "Most Popular",
       groups: groupOption3

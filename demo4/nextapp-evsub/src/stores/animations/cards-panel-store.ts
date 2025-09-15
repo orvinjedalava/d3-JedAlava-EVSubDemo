@@ -9,8 +9,18 @@ import type {
     
 } from '@/types';
 
-import { refreshClientSize, addToChipCrumb, removeFromChipCrumb, generateCarGroupStatesFrom } from '@/utils/state-helpers';
-import { getCarGroupsFrom } from '@/actions/get-cars';
+import { 
+  refreshClientSize, 
+  addToChipCrumb, 
+  removeFromChipCrumb, 
+  generateCarGroupStatesFrom,
+  getLastChipCrumb,
+  getSelectedSuggestionCount 
+} from '@/utils/state-helpers';
+
+import { 
+  getCarGroupsFrom, 
+  getSuggestions } from '@/actions/get-cars';
 
 export const useCarPanelDimensionsStore = create<{
   width: number;
@@ -43,31 +53,45 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     const { width, height } = useCarPanelDimensionsStore.getState();
     const retrievedCarGroupStates = generateCarGroupStatesFrom(carGroupInfos, width, height);
 
-    set({ currentSuggestion: suggestion });
-
-    console.log('Fetched car groups from suggestion:', get().currentSuggestion, retrievedCarGroupStates);
-
-    
-
     let updatedChipCrumb = structuredClone(get().chipCrumb);
-    addToChipCrumb(updatedChipCrumb, get().currentSuggestion, retrievedCarGroupStates, undefined, undefined);
+    addToChipCrumb(updatedChipCrumb, get().suggestions, suggestion, retrievedCarGroupStates, undefined, undefined);
+    const retrievedSuggestions = await getSuggestions(suggestion, getSelectedSuggestionCount(updatedChipCrumb) );
 
     // Update the store with the combined data
     set({ 
+      currentSuggestion: suggestion,
       carGroupStates: retrievedCarGroupStates,
-      chipCrumb: updatedChipCrumb 
+      chipCrumb: updatedChipCrumb,
+      suggestions: retrievedSuggestions
     });
 
-    // let updatedChipCrumb = structuredClone(state.chipCrumb);
-    // if (isSelected) {
-    //   const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-    //   addToChipCrumb(updatedChipCrumb, updatedCarGroupStates[carGroupIdx], undefined);
-
-    // } else {
-    //   removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, undefined);
-    // }
-
   },
+
+  setCarStateFromLastSuggestion: () => set((state) => {
+    const lastSuggestion = state.currentSuggestion;
+    const carGroupStates = state.carGroupStates;
+
+    // Find the car group state that matches the last suggestion
+    const matchingCarGroup = carGroupStates.find((group) => group.info.name === lastSuggestion);
+
+    if (state.chipCrumb === undefined) {
+      return state;
+    }
+
+    const lastCrumb = getLastChipCrumb(state.chipCrumb);
+    if (lastCrumb === undefined) {
+      return state;
+    }
+
+    return {
+      ...state,
+      chipCrumb: lastCrumb,
+      suggestions: lastCrumb.parentSuggestions,
+      carGroupStates: lastCrumb.carGroupStates,
+      currentSuggestion: lastCrumb.suggestion
+    }
+
+  }),
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
@@ -119,7 +143,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isExpanded) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], updatedCarStates[index]);
+      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], updatedCarStates[index]);
 
     } else {
       removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, carInfoId);
@@ -241,7 +265,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     if (isSelected) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], undefined);
+      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], undefined);
 
     } else {
       removeFromChipCrumb(updatedChipCrumb, carGroupInfoId, undefined);
