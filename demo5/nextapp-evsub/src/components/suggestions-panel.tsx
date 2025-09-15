@@ -28,7 +28,7 @@ export const SuggestionsPanel = () => {
             transition={{ duration: 0.5 }}
           >
             <span 
-              className="text-red-500 font-bold mb-1"
+              className="text-primary font-bold mb-1"
             >
               {suggestions.name}
             </span>
@@ -44,7 +44,7 @@ export const SuggestionsPanel = () => {
                 >
                   <Chip 
                     key={`suggestion-name-${suggestion.shortName}`} 
-                    className="cursor-pointer" 
+                    className="cursor-pointer bg-white/40 border border-[#ababab]" 
                     onClick={() => getCarGroupsFrom(suggestion)}
                   >
                     {suggestion.name}

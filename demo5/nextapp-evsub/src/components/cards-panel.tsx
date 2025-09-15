@@ -4,9 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Chip } from "@heroui/chip";
 import { CarGroupPanel } from "@/components/car-group-panel";
 import { useCarsStore, useCarPanelDimensionsStore } from "@/stores/animations/cards-panel-store";
-import { getCarGroups, getSuggestions, getCars } from '@/actions/get-cars';
-import { generateCarGroupStatesFrom } from '@/utils/state-helpers';
-import { CardDisplayMode } from "@/types";
+import { getSuggestions } from '@/actions/get-cars';
 import { CarPark } from "@/components/car-park";
 import { ChipStack } from "@/components/chip-stack";
 import { SuggestionsPanel } from "@/components/suggestions-panel";
@@ -17,7 +15,6 @@ export const CardsPanel = () => {
   const {
     currentSuggestion, 
     carGroupStates,
-    setCarGroupStates,
     refreshClientSize,
     setCarGroupSelected,
     setSuggestions,
@@ -95,7 +92,7 @@ export const CardsPanel = () => {
             />
             <Chip 
               key={`car-group-chip-${carGroupState.info.name}`} 
-              className={`m-2 absolute transition-all duration-500 ease-in-out cursor-pointer ${
+              className={`m-2 h-[56px] text-[20px] p-2 absolute transition-all duration-500 ease-in-out cursor-pointer rounded-[16px] bg-white/40 ${
                 carGroupState.chipState.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
               }`}
               

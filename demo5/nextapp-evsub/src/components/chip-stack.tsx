@@ -37,6 +37,7 @@ export const ChipStack = () => {
           transition={{ duration: 0.5 }}
         >
           <Chip
+            className='bg-white/40 border border-[#ababab]'
             key={`crumb-${index}`} 
             onClose={async () => {
               if (crumb.selectedCarState && crumb.selectedCarGroupState) {

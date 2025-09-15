@@ -15,7 +15,7 @@ const config = {
           DEFAULT: '#ffb233', // Main secondary color
           light: '#ffd185',   // Lighter version for hover states
         },
-        tertiary: '#8c39f5'
+        tertiary: '#ffcffd'
       },
       transitionTimingFunction: {
         'cubic-bezier': 'cubic-bezier(0.4, 0, 0.2, 1)',
