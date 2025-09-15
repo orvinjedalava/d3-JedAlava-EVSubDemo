@@ -66,7 +66,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     const retrievedSuggestions = await getSuggestions(suggestion, getSelectedSuggestionCount(updatedChipCrumb) );
     
-    console.log('Updated chipCrumb after adding new suggestion:', updatedChipCrumb);
     // Update the store with the combined data
     set({ 
       currentSuggestion: suggestion,
@@ -77,7 +76,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(retrievedCarGroupStates, width, height);
-    console.log('current chip crumb:', get().chipCrumb);
+    
   },
 
   removeSuggestion: (crumbId: string) => set((state) => {
@@ -87,8 +86,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
 
-    console.log('Removing crumbId:', crumbId, ' from chipCrumb:', updatedChipCrumb);
-    
     return {
       ...state,
       chipCrumb: removeSuggestionFromChipCrumb(updatedChipCrumb, crumbId),
@@ -101,7 +98,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     const lastCrumb = !state.chipCrumb || getLastChipCrumb(state.chipCrumb);
     
     if (!lastCrumb || lastCrumb === true || !lastCrumb.id || !lastCrumb.suggestion) {
-      // console.log('lastCrumb is undefined, fetching new suggestions');
       const retrievedSuggestions = await getSuggestions('', 0 );
 
       set({
@@ -112,8 +108,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       });
     }
     else {
-
-      console.log('lastCrumb found:', lastCrumb);
 
       set({
       suggestions: lastCrumb.parentSuggestions,
