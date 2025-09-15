@@ -201,6 +201,7 @@ export const generateCarGroupStatesFrom = (
         isClickable: false,
         priority: priorityCounter,
         isFlipped: false,
+        isFavorite: false,
       });
       priorityCounter++;
     });

@@ -47,6 +47,7 @@ export interface CarState {
   isClickable: boolean;
   priority: number;
   isFlipped: boolean;
+  isFavorite: boolean;
 }
 
 export interface CarGroupInfo {
