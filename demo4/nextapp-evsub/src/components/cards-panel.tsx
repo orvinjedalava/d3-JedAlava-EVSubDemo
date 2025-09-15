@@ -14,7 +14,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { motionOpacity } from '@/utils/framer-motion-helpers';
 
 export const CardsPanel = () => {
-  const { 
+  const {
+    currentSuggestion, 
     carGroupStates,
     setCarGroupStates,
     refreshClientSize,
@@ -47,18 +48,6 @@ export const CardsPanel = () => {
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
       
-      // const carGroups = await getCarGroups();
-      
-      // if (containerRef.current) {
-      //   const { width, height } = containerRef.current.getBoundingClientRect();
-      //   const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
-
-      //   // Update the store with the combined data
-      //   if (setCarGroupStates) {
-      //     setCarGroupStates(initialCardGroupStates);
-      //   }
-      // }
-
       const suggestions = await getSuggestions('', 0);
       if (suggestions) {
         setSuggestions(suggestions);
@@ -82,7 +71,7 @@ export const CardsPanel = () => {
       {
         carGroupStates && carGroupStates.map((carGroupState) => (
           <motion.div 
-            key={`car-group-${carGroupState.info.name}`} 
+            key={`car-group-${currentSuggestion}-${carGroupState.info.name}`} 
             initial="initial"
             animate="animate"
             exit="exit"

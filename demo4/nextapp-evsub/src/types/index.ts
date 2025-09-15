@@ -91,7 +91,7 @@ export interface ChipCrumb {
 
 export interface CarsState {
   carGroupStates: CarGroupState[];
-  chipCrumb: ChipCrumb;
+  chipCrumb: ChipCrumb | undefined;
   suggestions: Suggestions;
   currentSuggestion: string;
 

@@ -188,8 +188,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
 
 export const generateCarGroupStatesFrom = (
   carGroupInfos: CarGroupInfo[], 
-  clientWidth: number, 
-  clientHeight: number): CarGroupState[] => {
+): CarGroupState[] => {
 
   let carGroupState: CarGroupState[] = [];
 
@@ -231,7 +230,7 @@ export const generateCarGroupStatesFrom = (
     });
   });
 
-  refreshClientSize(carGroupState, clientWidth, clientHeight);
+  // refreshClientSize(carGroupState, clientWidth, clientHeight);
 
   return carGroupState;
 }
@@ -254,16 +253,28 @@ export const getCardStateRotateAngles = (count: number ) => {
   return [0];
 }
 
+export const createChipCrumbRoot = (parentSuggestions: Suggestions,
+  suggestion: string, 
+  carGroupStates: CarGroupState[] ) => {
+  return  {
+    id: generateGUID(),
+    parentSuggestions: parentSuggestions,
+    suggestion,
+    carGroupStates,
+    selectedCarGroupState: undefined,
+    selectedCarState: undefined,
+    chipCrumb: undefined
+  };
+}
+
 export const addToChipCrumb = (
-  chipCrumb: ChipCrumb, 
+  chipCrumb: ChipCrumb , 
   parentSuggestions: Suggestions,
   suggestion: string, 
   carGroupStates: CarGroupState[], 
   selectedCarGroupState?: CarGroupState, 
-  selectedCarState?: CarState) => 
+  selectedCarState?: CarState) : ChipCrumb => 
 {
-  let currentCrumb = chipCrumb;
-
   const newChipCrumb: ChipCrumb = {
     id: generateGUID(),
     parentSuggestions: parentSuggestions,
@@ -274,15 +285,16 @@ export const addToChipCrumb = (
     chipCrumb: undefined
   };
 
+  let currentCrumb = chipCrumb;
   while (currentCrumb.chipCrumb) {
     currentCrumb = currentCrumb.chipCrumb;
   }
-
   currentCrumb.chipCrumb = newChipCrumb;
 
+  return chipCrumb;
 }
 
-export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, crumbId: string) => {
+export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, crumbId: string): ChipCrumb | undefined => {
   let currentCrumb = chipCrumb;
   let parentCrumb: ChipCrumb | undefined = undefined;
 
@@ -292,13 +304,14 @@ export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, 
         parentCrumb.chipCrumb = undefined;
       }
       else {
-        chipCrumb = undefined;
+        return undefined;
       }
-      return;
+      return chipCrumb;
     }
     parentCrumb = currentCrumb;
     currentCrumb = currentCrumb.chipCrumb;
   }
+  return chipCrumb;
 };
 
 export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupStateId: string, carStateId?: string) => {
