@@ -84,7 +84,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
             boundingBox: box,
             opacity: 1,
             zIndex: 20,
-            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand,
+            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand | CardDisplayMode.ShowFavorite,
             rotateAngle: 0
           });
         }
@@ -121,7 +121,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: 
             boundingBox: carBox,
             opacity: 1,
             zIndex: 10 + ( 10 - carState.priority ),
-            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable,
+            displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.ClickExpandable | CardDisplayMode.ShowFavorite,
             rotateAngle: 0
           });
         });

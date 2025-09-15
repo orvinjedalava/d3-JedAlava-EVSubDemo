@@ -11,6 +11,7 @@ export enum CardDisplayMode {
   Expand = 1 << 2,     // 8 (binary: 1000)
   ClickExpandable = 1 << 3,   // 16 (binary: 10000)
   ClickFlipable = 1 << 4,   // 32 (binary: 100000)
+  ShowFavorite = 1 << 5,   // 64 (binary: 1000000)
 }
 
 export interface Suggestions {

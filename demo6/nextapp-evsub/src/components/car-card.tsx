@@ -10,6 +10,7 @@ import { CarTitle } from "@/components/car-title";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { getCardWidth } from '@/utils/scale-helper';
 import { BackButton } from "@/components/back-button";
+import { FavoriteButton } from "@/components/favorite-button";
 
 interface CarCardProps {
   carState: CarState;
@@ -22,6 +23,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   const isExpanded = (carState.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
   const isClickExpandable = (carState.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
   const isClickFlipable = (carState.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
+  const showFavorite = (carState.displayProperties.displayMode & CardDisplayMode.ShowFavorite) !== 0;
   // const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
   const isShowPointer = true;
 
@@ -156,7 +158,12 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
               </div>
           </div>
 
-          <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} />
+          { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={16} right={16} isFilled={carState.isFavorite} onClick={() => {
+            // Toggle favorite state
+            // setCarStateIsFlipped(carGroupState.info.id, carState.info.id, !carState.isFavorite);
+          }} />)}
+          
+          {/* <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} /> */}
 
           <div className={`absolute transition-opacity duration-500 ease-in-out ${!isExpanded ? 'opacity-100' : 'transition-none opacity-0'}`}
             style={{ 

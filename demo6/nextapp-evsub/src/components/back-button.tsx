@@ -19,6 +19,7 @@ export const BackButton = ({ isExpanded, top, right, onClick }: BackButtonProps)
       style={{
         top: `${top}px`,
         right: `${right}px`,
+        zIndex: 100,
       }}
     >
       <ArrowUturnLeftIcon className="text-secondary size-8"  />
