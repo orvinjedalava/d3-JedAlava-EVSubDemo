@@ -10,6 +10,8 @@ import { CardDisplayMode } from "@/types";
 import { CarPark } from "@/components/car-park";
 import { ChipStack } from "@/components/chip-stack";
 import { SuggestionsPanel } from "@/components/suggestions-panel";
+import { AnimatePresence, motion } from 'framer-motion';
+import { motionOpacity } from '@/utils/framer-motion-helpers';
 
 export const CardsPanel = () => {
   const { 
@@ -41,21 +43,6 @@ export const CardsPanel = () => {
     
     // Start observing the container
     resizeObserver.observe(containerRef.current);
-
-    // // Wrap async logic in an IIFE since useEffect cannot be async
-    // (async () => {
-      
-    //   const carGroups = await getCarGroups();
-    //   if (containerRef.current) {
-    //     const { width, height } = containerRef.current.getBoundingClientRect();
-    //     const initialCardGroupStates = generateCarGroupStatesFrom(carGroups, width, height);
-
-    //     // Update the store with the combined data
-    //     if (setCarGroupStates) {
-    //       setCarGroupStates(initialCardGroupStates);
-    //     }
-    //   }
-    // })();
 
     // Wrap async logic in an IIFE since useEffect cannot be async
     (async () => {
@@ -91,9 +78,17 @@ export const CardsPanel = () => {
       className="flex-grow relative min-h-[1040px] max-h-[1040px]"
     >
       <ChipStack />
+      <AnimatePresence mode="wait">
       {
         carGroupStates && carGroupStates.map((carGroupState) => (
-          <div key={`car-group-${carGroupState.info.name}`} >
+          <motion.div 
+            key={`car-group-${carGroupState.info.name}`} 
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={motionOpacity}
+            transition={{ duration: 0.5 }}
+          >
             <CarGroupPanel 
               key={`car-group-panel-${carGroupState.info.name}`} 
               carGroupState={carGroupState} 
@@ -118,9 +113,10 @@ export const CardsPanel = () => {
             >
               {carGroupState.info.name}
             </Chip>
-          </div>
+          </motion.div>
         ))
       }
+      </AnimatePresence>
       <SuggestionsPanel />
       <CarPark />
       
