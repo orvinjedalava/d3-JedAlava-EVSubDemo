@@ -83,7 +83,7 @@ export interface ChipCrumb {
   suggestion: string;
   carGroupStates: CarGroupState[];
   selectedCarGroupState?: CarGroupState;
-  carState?: CarState;
+  selectedCarState?: CarState;
   chipCrumb?: ChipCrumb;
 }
 

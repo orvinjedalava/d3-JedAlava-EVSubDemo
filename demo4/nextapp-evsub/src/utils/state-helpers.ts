@@ -256,7 +256,7 @@ export const addToChipCrumb = (
   suggestion: string, 
   carGroupStates: CarGroupState[], 
   selectedCarGroupState?: CarGroupState, 
-  carState?: CarState) => 
+  selectedCarState?: CarState) => 
 {
   let currentCrumb = chipCrumb;
 
@@ -264,7 +264,7 @@ export const addToChipCrumb = (
     suggestion,
     carGroupStates,
     selectedCarGroupState,
-    carState,
+    selectedCarState,
     chipCrumb: undefined
   };
 
@@ -281,7 +281,10 @@ export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupSt
   let parentCrumb: ChipCrumb | undefined = undefined;
 
   while (currentCrumb) {
-    if (currentCrumb.selectedCarGroupState && currentCrumb.selectedCarGroupState.info.id === carGroupStateId && (!carStateId || (currentCrumb.carState && currentCrumb.carState.info.id === carStateId))) {
+    if (currentCrumb.selectedCarGroupState 
+      && currentCrumb.selectedCarGroupState.info.id === carGroupStateId 
+      && (!carStateId || (currentCrumb.selectedCarState 
+        && currentCrumb.selectedCarState.info.id === carStateId))) {
       // Found the crumb to remove
       if (parentCrumb) {
         parentCrumb.chipCrumb = undefined;

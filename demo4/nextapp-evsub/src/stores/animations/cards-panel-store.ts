@@ -47,12 +47,16 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     console.log('Fetched car groups from suggestion:', get().currentSuggestion, retrievedCarGroupStates);
 
-    // Update the store with the combined data
-    set({ carGroupStates: retrievedCarGroupStates });
+    
 
     let updatedChipCrumb = structuredClone(get().chipCrumb);
     addToChipCrumb(updatedChipCrumb, get().currentSuggestion, retrievedCarGroupStates, undefined, undefined);
 
+    // Update the store with the combined data
+    set({ 
+      carGroupStates: retrievedCarGroupStates,
+      chipCrumb: updatedChipCrumb 
+    });
 
     // let updatedChipCrumb = structuredClone(state.chipCrumb);
     // if (isSelected) {

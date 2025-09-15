@@ -23,7 +23,7 @@ export const ChipStack = () => {
   // Traverse the linked list until we reach undefined
   while (currentCrumb) {
     // Only process crumbs that have a carGroupState
-    if (currentCrumb.selectedCarGroupState) {
+    if (currentCrumb.carGroupStates) {
       const crumb = currentCrumb; // Create a constant reference for the closure
       
       chipComponents.push(
@@ -37,14 +37,16 @@ export const ChipStack = () => {
           <Chip
             key={`crumb-${index}`} 
             onClose={() => {
-              if (crumb.carState && crumb.selectedCarGroupState) {
-                setCarStateIsExpanded(crumb.selectedCarGroupState.info.id, crumb.carState.info.id, false);
+              if (crumb.selectedCarState && crumb.selectedCarGroupState) {
+                setCarStateIsExpanded(crumb.selectedCarGroupState.info.id, crumb.selectedCarState.info.id, false);
               } else if (crumb.selectedCarGroupState) {
                 setCarGroupSelected(crumb.selectedCarGroupState.info.id, false);
               }
             }}
           >
-            {crumb.carState ? crumb.carState.info.title : crumb.selectedCarGroupState?.info.name || ''}
+            {crumb.selectedCarState ? 
+            crumb.selectedCarState.info.title 
+            : crumb.selectedCarGroupState?.info.name || crumb.suggestion}
           </Chip>
         </motion.div>
       );
