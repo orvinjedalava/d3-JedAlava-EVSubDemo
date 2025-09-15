@@ -68,7 +68,8 @@ export async function getCarGroupsFrom(suggestion: string, suggestionCount: numb
   const carGroupInfos: CarGroupInfo[] = [];
 
   // Get a Randomize number between 1 - 3
-  const carGroupCount = Math.floor(Math.random() * 3) + 1; 
+  // const carGroupCount = Math.floor(Math.random() * 3) + 1;
+  const carGroupCount = Math.random() < 0.5 ? 2 : 3; 
 
   // loop to get that many car groups
   for (let i = 0; i < carGroupCount; i++) {
@@ -156,17 +157,26 @@ export async function getCars(): Promise<CarInfo[]> {
   ];
 }
 
-/**
- * Returns a random subset of CarInfo objects.
- * Randomly selects between 1 and 4 cars from the full set.
- * Both the number of cars and which specific cars are randomized.
- */
+// export async function getRandomCars(): Promise<CarInfo[]> {
+//   // Get all available cars
+//   const allCars = await getCars();
+  
+//   // Randomly determine how many cars to return (1-4)
+//   const count = Math.floor(Math.random() * 4) + 1; // Random number between 1 and 4
+  
+//   // Shuffle the array of cars
+//   const shuffledCars = [...allCars].sort(() => Math.random() - 0.5);
+  
+//   // Return the randomly selected cars
+//   return shuffledCars.slice(0, count);
+// }
+// ...existing code...
 export async function getRandomCars(): Promise<CarInfo[]> {
   // Get all available cars
   const allCars = await getCars();
   
-  // Randomly determine how many cars to return (1-4)
-  const count = Math.floor(Math.random() * 4) + 1; // Random number between 1 and 4
+  // Randomly determine how many cars to return (2-4) with equal probability
+  const count = Math.floor(Math.random() * 3) + 2; // Random number between 2 and 4
   
   // Shuffle the array of cars
   const shuffledCars = [...allCars].sort(() => Math.random() - 0.5);

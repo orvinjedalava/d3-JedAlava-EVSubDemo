@@ -37,8 +37,8 @@ export const getCarStateFlipCoordinates = (count: number, carGroupBoundingBox: B
   if (count <= 1)
   {
     return [
-      { top: yScale(0), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 }
+      { top: yScale(0), left: xScale(boxWidth / 600 * 135), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 135), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
@@ -147,7 +147,7 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 }
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 135), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
