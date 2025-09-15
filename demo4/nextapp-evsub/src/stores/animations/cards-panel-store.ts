@@ -62,12 +62,10 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     
     if (isEmptyChipCrumb(get().chipCrumb)) {
       updatedChipCrumb = createChipCrumbRoot(retrievedSuggestions, suggestion, retrievedCarGroupStates);
-      console.log('created root crumb', updatedChipCrumb);
     }
     else {
       updatedChipCrumb = structuredClone(get().chipCrumb)!;
       updatedChipCrumb = addToChipCrumb(updatedChipCrumb, retrievedSuggestions, suggestion, retrievedCarGroupStates, undefined, undefined);
-      console.log('added crumb', updatedChipCrumb);
     }
 
     // Update the store with the combined data
@@ -91,7 +89,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     let updatedChipCrumb = structuredClone(state.chipCrumb);
 
     const result =  removeSuggestionFromChipCrumb(updatedChipCrumb, crumbId)
-    console.log('removeSuggestion result', result);
 
     return {
       ...state,

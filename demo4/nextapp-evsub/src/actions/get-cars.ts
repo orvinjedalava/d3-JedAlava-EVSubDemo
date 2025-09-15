@@ -70,8 +70,6 @@ export async function getCarGroupsFrom(suggestion: string, suggestionCount: numb
   // Get a Randomize number between 1 - 3
   const carGroupCount = Math.floor(Math.random() * 3) + 1; 
 
-  // console.log('suggestion count', suggestionCount);
-
   // loop to get that many car groups
   for (let i = 0; i < carGroupCount; i++) {
     carGroupInfos.push({
