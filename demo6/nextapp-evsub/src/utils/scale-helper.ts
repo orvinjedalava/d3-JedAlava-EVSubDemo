@@ -104,7 +104,7 @@ export const getCarGroupExpandedCoordinates = (count: number, clientBoundingBox:
   // card width should be consistent
   const cardWidth = getCardWidth();
 
-  const expandedCard = { top: yScale(boxHeight / 20 * 1), left: xScale(boxWidth / 16 * 1), width: xScale(boxWidth * 0.9), height: 0 };
+  const expandedCard = { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 50), width: xScale(boxWidth * 0.9), height: 0 };
 
   if (count <= 1) {
     return [expandedCard];
@@ -191,31 +191,31 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   if (count <= 1)
   {
     return [
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 }
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 520), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 320), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 520), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 320), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 620), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 220), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 620), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 220), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 720), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 520), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 320), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 120), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 720), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 520), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 320), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 800 * 150), left: xScale(boxWidth / 1000 * 120), width: cardWidth, height: 0 },
     ];
   }
 
