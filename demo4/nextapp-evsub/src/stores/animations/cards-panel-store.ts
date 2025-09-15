@@ -50,7 +50,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   setCurrentSuggestion: (suggestion: string) => set({ currentSuggestion: suggestion }),
 
   getCarGroupsFrom: async (suggestion: string) => {
-    const retrievedCarGroupInfos = await getCarGroupsFrom(suggestion);
+    const retrievedCarGroupInfos = await getCarGroupsFrom(suggestion, getSelectedSuggestionCount(get().chipCrumb));
     
     const retrievedCarGroupStates = generateCarGroupStatesFrom(retrievedCarGroupInfos);
 

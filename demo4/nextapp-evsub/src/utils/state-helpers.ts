@@ -23,6 +23,8 @@ import {
   getCarStateFlipCoordinates,
 } from '@/utils/scale-helper';
 
+import { generateGUID } from '@/utils/general';
+
 export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
@@ -360,8 +362,6 @@ export const getSelectedSuggestionCount = (chipCrumb: ChipCrumb | undefined): nu
 };
 
 
-export const generateGUID = (): string => {
-  return crypto.randomUUID();
-};
+
 
 

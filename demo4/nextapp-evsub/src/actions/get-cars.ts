@@ -1,5 +1,6 @@
 'use server';
 import { CarInfo, CarGroupInfo, Suggestions, Suggestion } from "@/types";
+import { generateGUID } from '@/utils/general';
 
 export async function getSuggestions(suggestion: string, suggestionCount: number): Promise<Suggestions> {
   // Simulate fetching related group suggestions
@@ -58,15 +59,31 @@ export async function getSuggestions(suggestion: string, suggestionCount: number
     }
 }
 
-export async function getCarGroupsFrom(suggestion: string): Promise<CarGroupInfo[]> {
+export async function getCarGroupsFrom(suggestion: string, suggestionCount: number): Promise<CarGroupInfo[]> {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 500));
 
+  const suggestions = await getSuggestions(suggestion, suggestionCount);
+
+  const carGroupInfos: CarGroupInfo[] = [];
+
+  // Get a Randomize number between 1 - 3
+  const carGroupCount = Math.floor(Math.random() * 3) + 1; 
+
+  // loop to get that many car groups
+  for (let i = 0; i < carGroupCount; i++) {
+    carGroupInfos.push({
+      id: generateGUID(),
+      name: suggestions.groups[i % suggestions.groups.length].name,
+      carInfos: await getRandomCars()
+    })
+  }
+
   // For simplicity, return all car groups regardless of suggestion
-  return getCarGroups();
+  return carGroupInfos;
 }
 
-export async function getCars(group: string): Promise<CarInfo[]> {
+export async function getCars(): Promise<CarInfo[]> {
   return [
     {
       id: "1",
@@ -137,6 +154,25 @@ export async function getCars(group: string): Promise<CarInfo[]> {
       }
     },
   ];
+}
+
+/**
+ * Returns a random subset of CarInfo objects.
+ * Randomly selects between 1 and 4 cars from the full set.
+ * Both the number of cars and which specific cars are randomized.
+ */
+export async function getRandomCars(): Promise<CarInfo[]> {
+  // Get all available cars
+  const allCars = await getCars();
+  
+  // Randomly determine how many cars to return (1-4)
+  const count = Math.floor(Math.random() * 4) + 1; // Random number between 1 and 4
+  
+  // Shuffle the array of cars
+  const shuffledCars = [...allCars].sort(() => Math.random() - 0.5);
+  
+  // Return the randomly selected cars
+  return shuffledCars.slice(0, count);
 }
 
 export async function getCarGroups(): Promise<CarGroupInfo[]> {
