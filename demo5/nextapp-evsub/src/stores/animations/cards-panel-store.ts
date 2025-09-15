@@ -53,7 +53,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   getCarGroupsFrom: async (suggestion: Suggestion) => {
     const retrievedCarGroupInfos = await getCarGroupsFrom(suggestion.name, getSelectedSuggestionCount(get().chipCrumb));
-    
     const retrievedCarGroupStates = generateCarGroupStatesFrom(retrievedCarGroupInfos);
 
     const retrievedSuggestions = await getSuggestions(suggestion.name, getSelectedSuggestionCount(get().chipCrumb) + 1);
@@ -73,7 +72,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       currentSuggestion: suggestion,
       carGroupStates: retrievedCarGroupStates,
       chipCrumb: updatedChipCrumb,
-      suggestions: retrievedSuggestions
+      suggestions: getSelectedSuggestionCount(get().chipCrumb) < 3 ? retrievedSuggestions : {} as Suggestions
     });
 
     const { width, height } = useCarPanelDimensionsStore.getState();
