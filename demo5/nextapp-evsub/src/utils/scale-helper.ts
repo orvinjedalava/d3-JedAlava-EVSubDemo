@@ -87,7 +87,7 @@ export const getSelectedChipCoordinates = (carGroupBoundingBox: BoundingBox): Bo
   const yScale = getYScale(carGroupBoundingBox.top, carGroupBoundingBox.top + carGroupBoundingBox.height);
 
   return { 
-    top: yScale(1), 
+    top: yScale(100), 
     left: xScale(200),
     width: 0,
     height: 0 

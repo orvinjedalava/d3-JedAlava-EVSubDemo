@@ -37,7 +37,7 @@ export const ChipStack = () => {
           transition={{ duration: 0.5 }}
         >
           <Chip
-            className='bg-white/40 border border-[#ababab]'
+            className='bg-white/40 border border-[#ababab] rounded-[8px]'
             key={`crumb-${index}`} 
             onClose={async () => {
               if (crumb.selectedCarState && crumb.selectedCarGroupState) {
@@ -65,7 +65,7 @@ export const ChipStack = () => {
   }
 
   return (
-    <div className="absolute top-[10px] left-[10px] flex flex-row gap-1">
+    <div className="absolute top-[24px] left-[24px] flex flex-row gap-4">
       {chipComponents}
     </div>
   );

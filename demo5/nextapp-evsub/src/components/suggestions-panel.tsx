@@ -44,7 +44,7 @@ export const SuggestionsPanel = () => {
                 >
                   <Chip 
                     key={`suggestion-name-${suggestion.shortName}`} 
-                    className="cursor-pointer bg-white/40 border border-[#ababab]" 
+                    className="cursor-pointer rounded-[8px] bg-white/40 border border-[#ababab]" 
                     onClick={() => getCarGroupsFrom(suggestion)}
                   >
                     {suggestion.name}
