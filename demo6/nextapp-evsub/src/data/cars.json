@@ -1,0 +1,412 @@
+[
+  {
+    "name": "Electric",
+    "level": 1,
+    "priority": 20,
+    "nodes": [
+      {
+        "name": "Tesla",
+        "level": 2,
+        "priority": 1,
+        "nodes": [
+          {
+            "name": "Model S",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Model 3",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Model X",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "BYD",
+        "level": 2,
+        "priority": 2,
+        "nodes": [
+          {
+            "name": "Han EV",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Tang EV",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Song EV",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Chevrolet",
+        "level": 2,
+        "priority": 3,
+        "nodes": [
+          {
+            "name": "Bolt EV",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Equinox EV",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Blazer EV",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hybrid",
+    "level": 1,
+    "priority": 8,
+    "nodes": [
+      {
+        "name": "Toyota",
+        "level": 2,
+        "priority": 1,
+        "nodes": [
+          {
+            "name": "Prius",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Camry Hybrid",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "RAV4 Hybrid",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Mazda",
+        "level": 2,
+        "priority": 2,
+        "nodes": [
+          {
+            "name": "Mazda3 Hybrid",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Mazda CX-5 Hybrid",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Mazda MX-30 Hybrid",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Honda",
+        "level": 2,
+        "priority": 3,
+        "nodes": [
+          {
+            "name": "Accord Hybrid",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "CR-V Hybrid",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Insight",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sedan",
+    "level": 6,
+    "priority": 3,
+    "nodes": [
+      {
+        "name": "Honda",
+        "level": 2,
+        "priority": 1,
+        "nodes": [
+          {
+            "name": "Accord",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Civic",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Insight",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Toyota",
+        "level": 2,
+        "priority": 2,
+        "nodes": [
+          {
+            "name": "Camry",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Corolla",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "RAV4",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Nissan",
+        "level": 2,
+        "priority": 3,
+        "nodes": [
+          {
+            "name": "Altima",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Maxima",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Rogue",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "SUV",
+    "level": 4,
+    "priority": 4,
+    "nodes": [
+      {
+        "name": "Mazda",
+        "level": 2,
+        "priority": 1,
+        "nodes": [
+          {
+            "name": "Mazda CX-5",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Mazda CX-30",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Mazda MX-30",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Toyota",
+        "level": 2,
+        "priority": 2,
+        "nodes": [
+          {
+            "name": "RAV4 Hybrid",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Highlander Hybrid",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Venza",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Ford",
+        "level": 2,
+        "priority": 3,
+        "nodes": [
+          {
+            "name": "Escape Hybrid",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Explorer Hybrid",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Maverick Hybrid",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Truck",
+    "level": 1,
+    "priority": 5,
+    "nodes": [
+      {
+        "name": "Ford",
+        "level": 2,
+        "priority": 1,
+        "nodes": [
+          {
+            "name": "F-150",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Ranger",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Maverick",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Chevrolet",
+        "level": 2,
+        "priority": 2,
+        "nodes": [
+          {
+            "name": "Silverado",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "Colorado",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "Sonic",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      },
+      {
+        "name": "Ram",
+        "level": 2,
+        "priority": 3,
+        "nodes": [
+          {
+            "name": "1500",
+            "level": 3,
+            "priority": 1,
+            "nodes": []
+          },
+          {
+            "name": "2500",
+            "level": 3,
+            "priority": 2,
+            "nodes": []
+          },
+          {
+            "name": "3500",
+            "level": 3,
+            "priority": 3,
+            "nodes": []
+          }
+        ]
+      }
+    ]
+  }
+]
