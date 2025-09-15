@@ -15,7 +15,8 @@ import {
   removeFromChipCrumb, 
   generateCarGroupStatesFrom,
   getLastChipCrumb,
-  getSelectedSuggestionCount 
+  getSelectedSuggestionCount,
+  removeSuggestionFromChipCrumb 
 } from '@/utils/state-helpers';
 
 import { 
@@ -67,31 +68,72 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   },
 
-  setCarStateFromLastSuggestion: () => set((state) => {
-    const lastSuggestion = state.currentSuggestion;
-    const carGroupStates = state.carGroupStates;
-
-    // Find the car group state that matches the last suggestion
-    const matchingCarGroup = carGroupStates.find((group) => group.info.name === lastSuggestion);
-
+  removeSuggestion: (crumbId: string) => set((state) => {
     if (state.chipCrumb === undefined) {
       return state;
     }
 
-    const lastCrumb = getLastChipCrumb(state.chipCrumb);
-    if (lastCrumb === undefined) {
-      return state;
-    }
+    const updatedChipCrumb = structuredClone(state.chipCrumb);
 
+    removeSuggestionFromChipCrumb(updatedChipCrumb, crumbId);
+
+    
     return {
       ...state,
+      chipCrumb: updatedChipCrumb,
+    };
+  }),
+
+  setCarStateFromLastSuggestion: async () => {
+    console.log('setCarStateFromLastSuggestion called');
+    const state = get();
+    // const lastSuggestion = state.currentSuggestion;
+    // const carGroupStates = state.carGroupStates;
+
+    // // Find the car group state that matches the last suggestion
+    // const matchingCarGroup = carGroupStates.find((group) => group.info.name === lastSuggestion);
+
+    const lastCrumb = !state.chipCrumb || getLastChipCrumb(state.chipCrumb);
+    console.log('lastCrumb:', lastCrumb);
+
+    if (!lastCrumb || !lastCrumb.id || !lastCrumb.suggestion) {
+      console.log('lastCrumb is undefined, fetching new suggestions');
+      const retrievedSuggestions = await getSuggestions('', 0 );
+
+      set({
+        chipCrumb: {} as ChipCrumb,
+        suggestions: retrievedSuggestions,
+        carGroupStates: [],
+        currentSuggestion: ''
+      });
+    }
+    else {
+
+      console.log('lastCrumb found:', lastCrumb);
+
+      set({
       chipCrumb: lastCrumb,
       suggestions: lastCrumb.parentSuggestions,
       carGroupStates: lastCrumb.carGroupStates,
       currentSuggestion: lastCrumb.suggestion
+    });
     }
 
-  }),
+    // const lastCrumb = getLastChipCrumb(state.chipCrumb);
+    // if (lastCrumb === undefined) {
+    //   const retrievedSuggestions = await getSuggestions('', 0 );
+
+    //   set({
+    //     chipCrumb: {} as ChipCrumb,
+    //     suggestions: retrievedSuggestions,
+    //     carGroupStates: [],
+    //     currentSuggestion: ''
+    //   });
+    //   return;
+    // }
+
+    
+  },
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);

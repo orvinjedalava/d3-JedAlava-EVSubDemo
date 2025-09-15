@@ -97,9 +97,11 @@ export interface CarsState {
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;
+
+  removeSuggestion: (suggestionId: string) => void;
   setSuggestions: (suggestions: Suggestions) => void;
   setCurrentSuggestion: (suggestion: string) => void;
-  setCarStateFromLastSuggestion: () => void;
+  setCarStateFromLastSuggestion: () => Promise<void>;
 
   setCarStateIsExpanded: (carGroupInfoId: string, carInfoId: string, isExpanded: boolean) => void;
   setCarStateOnTop: (carGroupInfoId: string, carInfoId: string) => void;

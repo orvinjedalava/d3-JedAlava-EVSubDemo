@@ -9,6 +9,8 @@ export const ChipStack = () => {
     chipCrumb,
     setCarGroupSelected, 
     setCarStateIsExpanded,
+    removeSuggestion,
+    setCarStateFromLastSuggestion
   } = useCarsStore(state => state);
 
   // Create an array to hold our chip components
@@ -36,11 +38,14 @@ export const ChipStack = () => {
         >
           <Chip
             key={`crumb-${index}`} 
-            onClose={() => {
+            onClose={async () => {
               if (crumb.selectedCarState && crumb.selectedCarGroupState) {
                 setCarStateIsExpanded(crumb.selectedCarGroupState.info.id, crumb.selectedCarState.info.id, false);
               } else if (crumb.selectedCarGroupState) {
                 setCarGroupSelected(crumb.selectedCarGroupState.info.id, false);
+              } else {
+                removeSuggestion(crumb.id);
+                await setCarStateFromLastSuggestion();
               }
             }}
           >

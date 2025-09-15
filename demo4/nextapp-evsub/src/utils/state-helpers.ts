@@ -282,6 +282,25 @@ export const addToChipCrumb = (
 
 }
 
+export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, crumbId: string) => {
+  let currentCrumb = chipCrumb;
+  let parentCrumb: ChipCrumb | undefined = undefined;
+
+  while (currentCrumb) {
+    if (currentCrumb.id === crumbId) {
+      if (parentCrumb) {
+        parentCrumb.chipCrumb = undefined;
+      }
+      else {
+        chipCrumb = undefined;
+      }
+      return;
+    }
+    parentCrumb = currentCrumb;
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+};
+
 export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupStateId: string, carStateId?: string) => {
   let currentCrumb = chipCrumb;
   let parentCrumb: ChipCrumb | undefined = undefined;

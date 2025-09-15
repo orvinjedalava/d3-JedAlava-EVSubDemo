@@ -92,7 +92,7 @@ export const CardsPanel = () => {
     >
       <ChipStack />
       {
-        carGroupStates.map((carGroupState) => (
+        carGroupStates && carGroupStates.map((carGroupState) => (
           <div key={`car-group-${carGroupState.info.name}`} >
             <CarGroupPanel 
               key={`car-group-panel-${carGroupState.info.name}`} 
