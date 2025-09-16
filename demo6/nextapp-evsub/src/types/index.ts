@@ -113,6 +113,7 @@ export interface CarsState {
   setCarGroupSelected: (carGroupInfoId: string, isSelected: boolean) => void;
   getCarGroupsFrom: (suggestion: Suggestion) => Promise<void>;
 
+  setFavoriteCar: (carInfoId: CarState) => void;
   toggleFavoriteCar: (carInfoId: CarState) => void;
 
   refreshClientSize: () => void;

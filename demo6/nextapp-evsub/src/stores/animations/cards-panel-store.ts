@@ -52,6 +52,25 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   setCurrentSuggestion: (suggestion: Suggestion) => set({ currentSuggestion: suggestion }),
 
+  setFavoriteCar: (carState: CarState) => set((state) => {
+    const isAlreadyFavorite = state.favoriteCars.some(car => car.info.id === carState.info.id);
+    if (isAlreadyFavorite) {
+      return { ...state };
+    } 
+
+    let updatedFavorites: CarState[];
+
+    updatedFavorites = [...state.favoriteCars, carState];
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(state.carGroupStates, updatedFavorites, width, height);
+
+    return {
+      ...state, 
+      favoriteCars: updatedFavorites 
+    };
+  }),
+
   toggleFavoriteCar: (carState: CarState) => set((state) => {
     const isAlreadyFavorite = state.favoriteCars.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];

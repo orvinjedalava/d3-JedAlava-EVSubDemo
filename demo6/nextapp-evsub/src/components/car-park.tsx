@@ -5,7 +5,7 @@ import { useState, useCallback } from "react";
 import { CarState } from "@/types";
 
 export const CarPark = () => {
-  const { toggleFavoriteCar } = useCarsStore();
+  const { setFavoriteCar } = useCarsStore();
   const [isDragOver, setIsDragOver] = useState(false);
 
   // Add drop handlers
@@ -28,12 +28,12 @@ export const CarPark = () => {
       const data = JSON.parse(e.dataTransfer.getData('application/json'));
       if (data && data.carState) {
         // Call setFavoriteCar with the dropped car state
-        toggleFavoriteCar(data.carState);
+        setFavoriteCar(data.carState);
       }
     } catch (error) {
       console.error('Error parsing dropped data:', error);
     }
-  }, [toggleFavoriteCar]);
+  }, [setFavoriteCar]);
 
   return (
     <div
