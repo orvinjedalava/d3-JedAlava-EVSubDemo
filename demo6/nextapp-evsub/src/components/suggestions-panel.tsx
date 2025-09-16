@@ -13,7 +13,7 @@ export const SuggestionsPanel = () => {
 
   return (
     <div
-      className={`absolute top-[810px] left-[120px] min-w-[1300px] max-w-[1300px] min-h-[100px] 
+      className={`absolute top-[785px] left-[120px] min-w-[1300px] max-w-[1300px] min-h-[100px] 
         flex flex-col items-center justify-center
         `}
     >

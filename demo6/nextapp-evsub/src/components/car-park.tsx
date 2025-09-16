@@ -39,7 +39,7 @@ export const CarPark = () => {
 
   return (
     <div
-      className={`absolute top-[910px] left-[120px] min-w-[1300px] max-w-[1300px] min-h-[135px] 
+      className={`absolute top-[880px] left-[120px] min-w-[1300px] max-w-[1300px] min-h-[165px] 
         flex flex-col items-center justify-center
         rounded-tl-lg rounded-tr-lg 
         transition-all duration-200 ease-in-out

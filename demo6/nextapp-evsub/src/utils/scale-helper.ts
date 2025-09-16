@@ -18,11 +18,11 @@ const getYScale = (y: number, clientHeight: number) => d3.scaleLinear().domain(Y
 // }
 
 export const getCardWidth = (isFromCarPark: boolean = false) => {
-  return isFromCarPark ? 100 : 250;
+  return isFromCarPark ? 160 : 250;
 }
 
 export const getCardHeight = (isExpanded: boolean, isFromCarPark: boolean = false) => {
-  return isExpanded? 300 : 220; 
+  return isExpanded? 300 : isFromCarPark ? 145: 220; 
 }
 
 export const getEmptyBoundingBox = (): BoundingBox => {

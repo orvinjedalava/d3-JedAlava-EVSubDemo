@@ -159,7 +159,7 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
               alt={carState.info.title}
               className={`absolute ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
-                minWidth: getCardWidth() + 'px',
+                minWidth: getCardWidth(isFromCarPark) + 'px',
                 width: `${ isExpanded ? carState.displayProperties.boundingBox.width / 4 : getCardWidth(isFromCarPark)}px`,
                 transition: 'width 500ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
                 zIndex: 100

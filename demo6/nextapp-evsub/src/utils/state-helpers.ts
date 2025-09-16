@@ -22,6 +22,7 @@ import {
   getSelectedChipCoordinates,
   getCarGroupExpandedCoordinates,
   getCarStateFlipCoordinates,
+  getCardWidth,
 } from '@/utils/scale-helper';
 
 import { generateGUID } from '@/utils/general';
@@ -203,7 +204,7 @@ export const generateCarGroupStatesFrom = (
           zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria,
           rotateAngle: 0,
-          favoriteBoxWidth: 100,
+          favoriteBoxWidth: getCardWidth(true),
         },
         info,
         isExpanded: false,
