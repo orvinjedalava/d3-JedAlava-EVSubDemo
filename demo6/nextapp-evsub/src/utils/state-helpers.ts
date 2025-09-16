@@ -26,6 +26,7 @@ import {
   getFavoriteCarGroupCoordinates,
   getCarParkWidth,
   getCarParkHeight,
+  getFavoriteCarGroupExpandedCoordinates,
 } from '@/utils/scale-helper';
 
 import { generateGUID } from '@/utils/general';
@@ -52,8 +53,56 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
   });
 
   const expandedFavoriteCarState = favoriteCarGroupState.carStates.find((carState) => carState.isExpanded);
-  console.log('favoriteCarGroupState:', favoriteCarGroupState);
 
+  if (expandedFavoriteCarState) {
+    const favoriteCarStatesExpandedBoxes = getFavoriteCarGroupExpandedCoordinates(favoriteCarGroupState.carStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
+
+    // const expandedFavoriteCarState = favoriteCarGroupState.carStates.find((carState) => carState.isExpanded);
+
+    // Object.assign(favoriteCarGroupState.displayProperties, {
+    //   boundingBox: favoriteCarGroupBox,
+    // });
+
+    // favoriteCarGroupState.carStates.forEach((favCarState, favIdx) => {
+    //   Object.assign(favCarState.displayProperties, {
+    //     boundingBox: favoriteCarStatesExpandedBoxes[favIdx],
+    //     rotateAngle: 0
+    //   });
+    // });
+    let indexCounter = 0;
+
+    favoriteCarStatesExpandedBoxes.forEach((box, boxIdx) => {
+      if (boxIdx === 0) {
+        // first box is the expanded car
+        Object.assign(expandedFavoriteCarState.displayProperties, {
+          boundingBox: box,
+          opacity: 1,
+          zIndex: 20,
+          displayMode: CardDisplayMode.ShowCriteria | CardDisplayMode.ShowButton | CardDisplayMode.Expand | CardDisplayMode.ShowFavorite,
+          rotateAngle: 0
+        });
+      }
+      else {
+        // other boxes are the other cars
+        let favoriteCarState = favoriteCarGroupState.carStates[indexCounter];
+        if (favoriteCarState.info.title === expandedFavoriteCarState.info.title) {
+
+          indexCounter++;
+          favoriteCarState = favoriteCarGroupState.carStates[indexCounter];
+        }
+
+        Object.assign(favoriteCarState.displayProperties, {
+            // boundingBox: box,
+            // opacity: 0.05,
+            zIndex: 10 + ( 10 - favoriteCarState.priority ),
+            // displayMode: CardDisplayMode.ClickExpandable,
+            // rotateAngle: 0
+          });
+        indexCounter++;
+      }
+    });
+  }
+  
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
     const carGroupBox = carGroupBoxes[carGroupIdx];
@@ -162,8 +211,6 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
 
       const carGroupBox = carGroupBoxes[carGroupIdx];
 
-      console.log('expandedFavoriteCarState:', expandedFavoriteCarState);
-      
       Object.assign(carGroupState.chipState, {
         opacity: expandedFavoriteCarState ? 0.05 : 1
       });

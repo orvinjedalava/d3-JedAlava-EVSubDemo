@@ -119,6 +119,7 @@ export interface CarsState {
   setFavoriteCar: (carInfoId: CarState) => void;
   toggleFavoriteCar: (carInfoId: CarState) => void;
   setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => void;
+  resetFavoriteCars: () => void;
 
   refreshClientSize: () => void;
 }
