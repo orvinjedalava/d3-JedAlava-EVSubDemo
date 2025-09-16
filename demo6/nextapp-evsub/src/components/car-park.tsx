@@ -44,7 +44,7 @@ export const CarPark = () => {
 
   return (
     <div
-      className={`absolute top-[880px] left-[120px] min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] 
+      className={`absolute top-[880px] left-[120px] 
         flex flex-col items-center justify-center
         rounded-tl-lg rounded-tr-lg 
         transition-all duration-200 ease-in-out
@@ -57,22 +57,20 @@ export const CarPark = () => {
       onDragExit={handleDragLeave}
       onDrop={handleDrop}
       style={{
-            minWidth: getCarParkWidth(),
-            maxWidth: getCarParkWidth(),
-            minHeight: getCarParkHeight(),
-            // maxHeight: getCarParkHeight(),
-          }}
+        minWidth: getCarParkWidth(),
+        maxWidth: getCarParkWidth(),
+        minHeight: getCarParkHeight(),
+      }}
     >
       { favoriteCarGroupState.carStates.length > 0 ? (
         <div
-          className={`overflow-x-auto overflow-y-hidden min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
-          // className={`overflow-x-auto overflow-y-hidden`}
-          // style={{
-          //   minWidth: getCarParkWidth(),
-          //   maxWidth: getCarParkWidth(),
-          //   minHeight: getCarParkHeight(),
-          //   // maxHeight: getCarParkHeight(),
-          // }}
+          // className={`overflow-x-auto overflow-y-hidden min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
+          className={`overflow-x-auto overflow-y-hidden`}
+          style={{
+            minWidth: getCarParkWidth(),
+            maxWidth: getCarParkWidth(),
+            minHeight: getCarParkHeight(),
+          }}
         >
           {/* <AnimatePresence mode="wait"> */}
           <motion.div 
