@@ -15,9 +15,10 @@ import { FavoriteButton } from "@/components/favorite-button";
 interface CarCardProps {
   carState: CarState;
   carGroupState: CarGroupState;
+  isFromCarPark?: boolean;
 }
 
-export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
+export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarCardProps) => {
   const showCriteria = (carState.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
   const showButton = (carState.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
   const isExpanded = (carState.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
@@ -44,18 +45,6 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
     toggleFavoriteCar,
   } = useCarsStore();
 
-  const onCloseClicked = () => {
-    setCarStateIsExpanded(carGroupState.info.id, carState.info.id, false) ; // Set to Clickable
-  }
-
-  const onButtonClicked = () => {
-    !isExpanded ? onResize() : console.log("Get a quote");
-  }
-
-  const onResize = () => {
-    setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true) ; // Set to Clickable
-  }
-  
   // Drag handlers
   const handleDragStart = useCallback((e: React.DragEvent) => {
     // Store the car data in the drag event

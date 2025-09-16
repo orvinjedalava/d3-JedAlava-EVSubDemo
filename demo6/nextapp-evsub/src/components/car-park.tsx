@@ -3,9 +3,10 @@ import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { useState, useCallback } from "react";
 import { CarState } from "@/types";
+import { CarCard } from "@/components/car-card";
 
 export const CarPark = () => {
-  const { setFavoriteCar } = useCarsStore();
+  const { setFavoriteCar, favoriteCars } = useCarsStore();
   const [isDragOver, setIsDragOver] = useState(false);
 
   // Add drop handlers
@@ -50,10 +51,40 @@ export const CarPark = () => {
       onDragExit={handleDragLeave}
       onDrop={handleDrop}
     >
-      <Button isIconOnly variant="light">
-        <PlusCircleIcon className="text-secondary size-8" />
-      </Button>
-      <span>Favourited vehicles will appear here OR drag vehicles that interest you</span>
+      { favoriteCars.length > 0 ? (
+        <div
+          className='flex flex-row items-center gap-2 overflow-x-auto px-4'
+        >
+          {favoriteCars.map((carState) => (
+            <div 
+              key={`favorite-car-card-${carState.info.title}`}
+              // className={`absolute  ${
+              //   carState.displayProperties.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
+              // }`}
+              style={{ 
+                width: carState.displayProperties.favoriteBoxWidth,
+                // height: carState.displayProperties.boundingBox.height,
+                // top: carState.displayProperties.boundingBox.top || 0,
+                // left: carState.displayProperties.boundingBox.left || 0,
+                // opacity: carState.displayProperties.opacity,
+                // zIndex: carState.displayProperties.zIndex || 0,
+                // transform: `rotate(${carState.displayProperties.rotateAngle}deg)`,
+                // transformOrigin: 'center',
+              }}
+            >
+              {/* <CarCard carState={carState} carGroupState={carGroupState} /> */}
+            </div>
+          ))}
+        </div>) 
+      : (
+        <>
+          <Button isIconOnly variant="light">
+            <PlusCircleIcon className="text-secondary size-8" />
+          </Button>
+          <span>Favourited vehicles will appear here OR drag vehicles that interest you</span></>
+        ) 
+      }
+      
     </div>
   );
 };
