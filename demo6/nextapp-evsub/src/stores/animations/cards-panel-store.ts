@@ -58,8 +58,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   setCurrentSuggestion: (suggestion: Suggestion) => set({ currentSuggestion: suggestion }),
 
   setFavoriteCar: (carState: CarState) => set((state) => {
-    get().resetFavoriteCars();
-    
     // for now, limit favorite cars to 4
     if (state.favoriteCarGroupState.carStates.length === 4) {
       return { ...state };
@@ -90,6 +88,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       carStates: updatedFavorites
     };
 
+    updatedFavoriteCarGroupState.carStates.forEach(carState => { carState.isExpanded = false });
+
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(state.carGroupStates, updatedFavoriteCarGroupState, width, height);
 
@@ -100,8 +100,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   toggleFavoriteCar: (carState: CarState) => set((state) => {
-    get().resetFavoriteCars();
-
     const isAlreadyFavorite = state.favoriteCarGroupState.carStates.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];
 
@@ -132,6 +130,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       carStates: updatedFavorites
     };
 
+    updatedFavoriteCarGroupState.carStates.forEach(carState => { carState.isExpanded = false });
+
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(state.carGroupStates, updatedFavoriteCarGroupState, width, height);
 
@@ -142,7 +142,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   getCarGroupsFrom: async (suggestion: Suggestion) => {
-    get().resetFavoriteCars();
+    // get().resetFavoriteCars();
     
     const retrievedCarGroupInfos = await getCarGroupsFrom(suggestion.name, getSelectedSuggestionCount(get().chipCrumb));
     const retrievedCarGroupStates = generateCarGroupStatesFrom(retrievedCarGroupInfos);
@@ -162,12 +162,17 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       updatedChipCrumb = addToChipCrumb(updatedChipCrumb, retrievedSuggestions, suggestion, retrievedCarGroupStates, undefined, undefined);
     }
 
+    const updatedFavoriteCarGroupState = { ...get().favoriteCarGroupState };
+    
+    updatedFavoriteCarGroupState.carStates.forEach(carState => { carState.isExpanded = false });
+
     // Update the store with the combined data
     set({ 
       currentSuggestion: suggestion,
       carGroupStates: retrievedCarGroupStates,
       chipCrumb: updatedChipCrumb,
-      suggestions: getSelectedSuggestionCount(get().chipCrumb) < 3 ? retrievedSuggestions : {} as Suggestions
+      suggestions: getSelectedSuggestionCount(get().chipCrumb) < 3 ? retrievedSuggestions : {} as Suggestions,
+      favoriteCarGroupState: updatedFavoriteCarGroupState,
     });
 
     const { width, height } = useCarPanelDimensionsStore.getState();

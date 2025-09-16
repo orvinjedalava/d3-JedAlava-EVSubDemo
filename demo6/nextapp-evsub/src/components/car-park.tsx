@@ -56,10 +56,23 @@ export const CarPark = () => {
       onDragLeave={handleDragLeave}
       onDragExit={handleDragLeave}
       onDrop={handleDrop}
+      style={{
+            minWidth: getCarParkWidth(),
+            maxWidth: getCarParkWidth(),
+            minHeight: getCarParkHeight(),
+            // maxHeight: getCarParkHeight(),
+          }}
     >
       { favoriteCarGroupState.carStates.length > 0 ? (
         <div
           className={`overflow-x-auto overflow-y-hidden min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
+          // className={`overflow-x-auto overflow-y-hidden`}
+          // style={{
+          //   minWidth: getCarParkWidth(),
+          //   maxWidth: getCarParkWidth(),
+          //   minHeight: getCarParkHeight(),
+          //   // maxHeight: getCarParkHeight(),
+          // }}
         >
           {/* <AnimatePresence mode="wait"> */}
           <motion.div 
