@@ -253,25 +253,25 @@ export const getFavoriteCarGroupCoordinates = (count: number, clientBoundingBox:
   else if (count === 2 )
   {
     return [
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 530), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 330), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 500), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 360), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 630), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 570), width: cardWidth, height: 0 },
       { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 430), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 230), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 290), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )
   {
     return [
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 730), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 670), width: cardWidth, height: 0 },
       { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 530), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 330), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 130), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 390), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 250), width: cardWidth, height: 0 },
     ];
   }
 
