@@ -65,7 +65,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       ...structuredClone(carState),
       isExpanded: false,
       isFlipped: false,
-      isClickable: true
+      isClickable: true,
+      isFavorite: true,
     };
     
     updatedFavorites = [...state.favoriteCars, clonedCarState];
@@ -89,7 +90,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       ...structuredClone(carState),
       isExpanded: false,
       isFlipped: false,
-      isClickable: true
+      isClickable: true,
+      isFavorite: true,
     };
 
     if (isAlreadyFavorite) {

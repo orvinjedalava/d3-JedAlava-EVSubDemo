@@ -8,7 +8,7 @@ import { CardDisplayMode, CarState, CarGroupState } from "@/types";
 import { Button } from "@heroui/button";
 import { CarTitle } from "@/components/car-title";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
-import { getCardWidth } from '@/utils/scale-helper';
+import { getCardWidth, getCardHeight } from '@/utils/scale-helper';
 import { BackButton } from "@/components/back-button";
 import { FavoriteButton } from "@/components/favorite-button";
 
@@ -146,12 +146,12 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
               } : {})}
       >
         <div id="image container"
-          style={{ height: isExpanded ? `300px`  :`220px` }}
+          style={{ height: getCardHeight(isExpanded, isFromCarPark) }}
           >
           <div 
             ref={imageContainerRef}
             className="relative transition-all duration-500 ease-in-out"
-            style={{ height: isExpanded ? `300px`  :`220px` }}
+            style={{ height: getCardHeight(isExpanded, isFromCarPark) }}
             >
             
             <img
@@ -160,7 +160,7 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
               className={`absolute ${isExpanded ? "top-[20px] left-[20px] rounded-lg" : "top-0 left-0 rounded-b-none"}`}
               style={{
                 minWidth: getCardWidth() + 'px',
-                width: `${ isExpanded ? carState.displayProperties.boundingBox.width / 4 : getCardWidth()}px`,
+                width: `${ isExpanded ? carState.displayProperties.boundingBox.width / 4 : getCardWidth(isFromCarPark)}px`,
                 transition: 'width 500ms ease-in-out, top 500ms ease-in-out, left 500ms ease-in-out, border-radius 500ms ease-in-out',
                 zIndex: 100
               }}
@@ -168,20 +168,6 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
               src={carState.info.img}
             />
 
-            {/* { showFavorite && (<div 
-              className={`absolute transition-opacity duration-500 ease-in-out rounded-bl-[20px]  ${isExpanded ? 'opacity-0' : 'opacity-100 delay-[500ms]'} `}
-              style={{
-                top: isExpanded ? '60px' : '7px',
-                left: '217.2px',
-                width: '24px',
-                height: '24px',
-                background: 'radial-gradient(circle, rgba(64, 64, 64, 0.8) 0%, rgba(64, 64, 64, 0.6) 80%, rgba(64, 64, 64, 0) 100%)',
-                // background: 'linear-gradient(225deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.5) 10%, rgba(128, 128, 128, 0.7) 50%, rgba(128, 128, 128, 0.5) 60%,rgba(128, 128, 128, 0) 100%)',
-                zIndex: 150,
-                pointerEvents: 'none',
-              }}
-            />)} */}
-            
           </div>
           
           <div className={`absolute transition-all duration-500 ease-in-out ${isExpanded ? 'opacity-100' : 'opacity-0'}`}

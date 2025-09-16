@@ -2,8 +2,9 @@ import { Button } from "@heroui/button";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { useState, useCallback } from "react";
-import { CarState } from "@/types";
+import type { CarState, CarGroupState } from "@/types";
 import { CarCard } from "@/components/car-card";
+import { getEmptyCarGroupState } from "@/utils/state-helpers";
 
 export const CarPark = () => {
   const { setFavoriteCar, favoriteCars } = useCarsStore();
@@ -72,7 +73,7 @@ export const CarPark = () => {
                 // transformOrigin: 'center',
               }}
             >
-              {/* <CarCard carState={carState} carGroupState={carGroupState} /> */}
+              <CarCard carState={carState} carGroupState={getEmptyCarGroupState()} isFromCarPark={true} />
             </div>
           ))}
         </div>) 

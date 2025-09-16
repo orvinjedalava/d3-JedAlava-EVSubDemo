@@ -38,7 +38,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
     carGroupState.displayProperties.boundingBox = carGroupBox;
 
     favoriteCars.forEach(favCar => {
-      favCar.displayProperties.displayMode = CardDisplayMode.ShowCriteria | CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
+      favCar.displayProperties.displayMode = CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
     });
 
     Object.assign(carGroupState.chipState, {
@@ -203,7 +203,7 @@ export const generateCarGroupStatesFrom = (
           zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria,
           rotateAngle: 0,
-          favoriteBoxWidth: 150,
+          favoriteBoxWidth: 100,
         },
         info,
         isExpanded: false,
@@ -380,3 +380,17 @@ export const setFavoriteCarInCrumb = (chipCrumb: ChipCrumb | undefined, carState
   }
 };
 
+export const getEmptyCarGroupState = (): CarGroupState => {
+  return {
+    carStates: [],
+    info: { id: generateGUID(), name: '', carInfos: [] },
+    displayProperties: { 
+      boundingBox: getEmptyBoundingBox(),
+    },
+    chipState: { 
+      boundingBox: getEmptyBoundingBox(),
+      opacity: 1
+    },
+    isSelected: false
+  };
+};
