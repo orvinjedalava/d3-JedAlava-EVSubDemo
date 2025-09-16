@@ -61,7 +61,7 @@ export const CarPark = () => {
         <div
           className={`relative overflow-x-auto overflow-y-hidden min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
         >
-          <AnimatePresence mode="wait">
+          {/* <AnimatePresence mode="wait"> */}
           <motion.div 
               key={`favorite-car-card-${favoriteCarGroupState.info.name}`}
               initial="initial"
@@ -76,14 +76,22 @@ export const CarPark = () => {
                 isFromCarPark={true} 
               />
             </motion.div>
-          </AnimatePresence>
+          {/* </AnimatePresence> */}
         </div>) 
       : (
-        <>
+        <motion.div
+          key={`favorite-car-park`}
+          className='flex flex-col items-center justify-center gap-1 text-center'
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={motionOpacity}
+          transition={{ duration: 0.5 }}
+        >
           <Button isIconOnly variant="light">
             <PlusCircleIcon className="text-secondary size-8" />
           </Button>
-          <span>Favourited vehicles will appear here OR drag vehicles that interest you</span></>
+          <span>Favourited vehicles will appear here OR drag vehicles that interest you</span></motion.div>
         ) 
       }
       
