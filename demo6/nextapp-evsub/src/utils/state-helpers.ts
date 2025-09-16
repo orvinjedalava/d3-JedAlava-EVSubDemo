@@ -26,7 +26,7 @@ import {
 
 import { generateGUID } from '@/utils/general';
 
-export const refreshClientSize = (carGroupStates: CarGroupState[], clientWidth: number, clientHeight: number) => {
+export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars: CarState[], clientWidth: number, clientHeight: number) => {
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
   carGroupStates.forEach((carGroupState, carGroupIdx) => {

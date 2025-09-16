@@ -42,6 +42,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   chipCrumb: undefined as ChipCrumb | undefined,
   suggestions: {} as Suggestions,
   currentSuggestion: {} as Suggestion,
+  favoriteCars: [] as CarState[],
 
   setCarGroupStates: (carGroupStates) => set({ carGroupStates }),
 
@@ -50,6 +51,22 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   setSuggestions: (suggestions: Suggestions) => set({ suggestions }),
 
   setCurrentSuggestion: (suggestion: Suggestion) => set({ currentSuggestion: suggestion }),
+
+  setFavoriteCar: (carState: CarState) => set((state) => {
+    const isAlreadyFavorite = state.favoriteCars.includes(carState);
+    let updatedFavorites: CarState[];
+
+    if (isAlreadyFavorite) {
+      updatedFavorites = state.favoriteCars.filter(car => car.info.id !== carState.info.id);
+    } else {
+      updatedFavorites = [...state.favoriteCars, carState];
+    }
+
+    return {
+      ...state, 
+      favoriteCars: updatedFavorites 
+    };
+  }),
 
   getCarGroupsFrom: async (suggestion: Suggestion) => {
     const retrievedCarGroupInfos = await getCarGroupsFrom(suggestion.name, getSelectedSuggestionCount(get().chipCrumb));
@@ -76,7 +93,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     });
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(retrievedCarGroupStates, width, height);
+    refreshClientSize(retrievedCarGroupStates, get().favoriteCars, width, height);
     
   },
 
@@ -177,7 +194,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(updatedCarGroupStates, width, height);
+    refreshClientSize(updatedCarGroupStates, get().favoriteCars, width, height);
 
     return {
       ...state,
@@ -210,7 +227,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     };
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(updatedCarGroupStates, width, height);
+    refreshClientSize(updatedCarGroupStates, get().favoriteCars, width, height);
 
     return {
       ...state,
@@ -259,7 +276,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     };
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(updatedCarGroupStates, width, height);
+    refreshClientSize(updatedCarGroupStates, get().favoriteCars, width, height);
 
     return {
       ...state,
@@ -299,7 +316,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(updatedCarGroupStates, width, height);
+    refreshClientSize(updatedCarGroupStates, get().favoriteCars, width, height);
 
     return {
       ...state,
@@ -310,7 +327,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   refreshClientSize: () => set((state) => {
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(state.carGroupStates, width, height);
+    refreshClientSize(state.carGroupStates, get().favoriteCars, width, height);
     return state;
   }),
 
