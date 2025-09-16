@@ -329,7 +329,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     if (isExpanded && updatedChipCrumb) {
       // const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedFavoriteCarGroupState], updatedFavoriteCarGroupState, updatedCarStates[index]);
+      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedFavoriteCarGroupState], updatedFavoriteCarGroupState, updatedFavoriteCarStates[index]);
 
     } else if (updatedChipCrumb) {
       removeFromChipCrumb(updatedChipCrumb, updatedFavoriteCarGroupState.info.id, carInfoId);
