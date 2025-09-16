@@ -61,9 +61,16 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     let updatedFavorites: CarState[];
 
-    updatedFavorites = [...state.favoriteCars, carState];
+    const clonedCarState = {
+      ...structuredClone(carState),
+      isExpanded: false,
+      isFlipped: false,
+      isClickable: true
+    };
+    
+    updatedFavorites = [...state.favoriteCars, clonedCarState];
 
-    setFavoriteCarInCrumb(state.chipCrumb, carState, true);
+    setFavoriteCarInCrumb(state.chipCrumb, clonedCarState, true);
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(state.carGroupStates, updatedFavorites, width, height);
@@ -78,12 +85,19 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     const isAlreadyFavorite = state.favoriteCars.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];
 
+    const clonedCarState = {
+      ...structuredClone(carState),
+      isExpanded: false,
+      isFlipped: false,
+      isClickable: true
+    };
+
     if (isAlreadyFavorite) {
       updatedFavorites = state.favoriteCars.filter(car => car.info.id !== carState.info.id);
-      setFavoriteCarInCrumb(state.chipCrumb, carState, false);
+      setFavoriteCarInCrumb(state.chipCrumb, clonedCarState, false);
     } else {
-      updatedFavorites = [...state.favoriteCars, carState];
-      setFavoriteCarInCrumb(state.chipCrumb, carState, true);
+      updatedFavorites = [...state.favoriteCars, clonedCarState];
+      setFavoriteCarInCrumb(state.chipCrumb, clonedCarState, true);
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
