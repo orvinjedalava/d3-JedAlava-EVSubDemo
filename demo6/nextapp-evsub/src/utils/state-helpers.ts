@@ -37,6 +37,10 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
     
     carGroupState.displayProperties.boundingBox = carGroupBox;
 
+    favoriteCars.forEach(favCar => {
+      favCar.displayProperties.displayMode = CardDisplayMode.ShowCriteria | CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
+    });
+
     Object.assign(carGroupState.chipState, {
       boundingBox: chipBox,
       opacity: 0.05
