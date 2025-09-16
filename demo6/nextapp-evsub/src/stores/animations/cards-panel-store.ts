@@ -20,6 +20,7 @@ import {
   removeSuggestionFromChipCrumb,
   createChipCrumbRoot, 
   isEmptyChipCrumb,
+  setFavoriteCarInCrumb,
 } from '@/utils/state-helpers';
 
 import { 
@@ -62,6 +63,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     updatedFavorites = [...state.favoriteCars, carState];
 
+    setFavoriteCarInCrumb(state.chipCrumb, carState, true);
+
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(state.carGroupStates, updatedFavorites, width, height);
 
@@ -76,11 +79,11 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     let updatedFavorites: CarState[];
 
     if (isAlreadyFavorite) {
-      console.log('Removing from favorites:', carState);
       updatedFavorites = state.favoriteCars.filter(car => car.info.id !== carState.info.id);
+      setFavoriteCarInCrumb(state.chipCrumb, carState, false);
     } else {
-      console.log('Adding to favorites:', carState);
       updatedFavorites = [...state.favoriteCars, carState];
+      setFavoriteCarInCrumb(state.chipCrumb, carState, true);
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();

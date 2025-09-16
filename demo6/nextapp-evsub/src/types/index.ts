@@ -30,6 +30,7 @@ export interface CarDisplayProperties {
   zIndex: number;
   displayMode: CardDisplayMode;
   rotateAngle: number;
+  favoriteBoxWidth?: number;
 }
 
 export interface CarInfo {

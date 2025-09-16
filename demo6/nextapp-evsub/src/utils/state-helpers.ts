@@ -149,8 +149,8 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
         Object.assign(carState.displayProperties, {
           opacity: 1,
           //zIndex: 0,
-          displayMode: carState.priority === 1 ? CardDisplayMode.ShowCriteria 
-          : CardDisplayMode.ShowCriteria  | CardDisplayMode.ClickFlipable,
+          displayMode: carState.priority === 1 ? CardDisplayMode.ShowCriteria | CardDisplayMode.ShowFavorite
+          : CardDisplayMode.ShowCriteria  | CardDisplayMode.ClickFlipable | CardDisplayMode.ShowFavorite,
         });
 
         if (flippedCarState) {
@@ -199,6 +199,7 @@ export const generateCarGroupStatesFrom = (
           zIndex: 0,
           displayMode: CardDisplayMode.ShowCriteria,
           rotateAngle: 0,
+          favoriteBoxWidth: 150,
         },
         info,
         isExpanded: false,
@@ -361,7 +362,17 @@ export const isEmptyChipCrumb = (crumb: ChipCrumb | undefined) => {
   return !crumb || Object.keys(crumb).length === 0;
 };
 
-
-
-
+export const setFavoriteCarInCrumb = (chipCrumb: ChipCrumb | undefined, carState: CarState, isFavorite: boolean) => {
+  let currentCrumb = chipCrumb;
+  while (currentCrumb) {
+    currentCrumb.carGroupStates.forEach(carGroupState => {
+      carGroupState.carStates.forEach(cs => {
+        if (cs.info.id === carState.info.id) {
+          cs.isFavorite = isFavorite;
+        }
+      });
+    });
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+};
 
