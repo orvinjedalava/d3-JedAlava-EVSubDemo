@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 // import { Image } from "@heroui/image";
 import { CarInfoChip } from "@/components/car-info-chip";
@@ -33,6 +33,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   // State to store the image height
   const [imageHeight, setImageHeight] = useState<number>(0);
   const [isProcessingFlip, setIsProcessingFlip] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
 
   const { 
@@ -54,6 +55,36 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   const onResize = () => {
     setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true) ; // Set to Clickable
   }
+  
+  // Drag handlers
+  const handleDragStart = useCallback((e: React.DragEvent) => {
+    // Store the car data in the drag event
+    e.dataTransfer.setData('application/json', JSON.stringify({
+      carGroupId: carGroupState.info.id,
+      carId: carState.info.id,
+      carState: carState
+    }));
+    e.dataTransfer.effectAllowed = 'move';
+    setIsDragging(true);
+    
+    // Create a drag image if the image ref is available
+    if (imageRef.current) {
+      const rect = imageRef.current.getBoundingClientRect();
+      e.dataTransfer.setDragImage(imageRef.current, rect.width / 2, rect.height / 2);
+    }
+  }, [carGroupState.info.id, carState]);
+  
+  const handleDragEnd = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+  
+  // Keyboard accessibility for favoriting
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      setFavoriteCar(carState);
+      e.preventDefault();
+    }
+  }, [carState, setFavoriteCar]);
 
   // Effect to measure the image height after it loads
   useEffect(() => {
@@ -80,7 +111,13 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   return (
     <Card 
       shadow="sm" 
-      className="w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden"
+      className={`w-full h-full transition-all duration-500 ease-in-out overflow-x-hidden ${isDragging ? 'opacity-50' : ''}`}
+      draggable={true}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      aria-label={`${carState.info.title} - Press Enter to add to favorites`}
     >
       <div 
         className={`grid grid-rows-[auto_auto] ${isShowPointer ? 'cursor-pointer' : ''}`}
