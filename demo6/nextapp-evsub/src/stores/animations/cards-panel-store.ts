@@ -74,7 +74,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       ...structuredClone(carState),
       isExpanded: false,
       isFlipped: false,
-      isClickable: true,
+      isClickable: false,
       isFavorite: true,
       rotateAngle: 0,
     };
@@ -107,7 +107,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       ...structuredClone(carState),
       isExpanded: false,
       isFlipped: false,
-      isClickable: true,
+      isClickable: false,
       isFavorite: true,
       rotateAngle: 0,
     };
@@ -344,13 +344,14 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
       } else  {
         // removeFromChipCrumb(updatedChipCrumb, updatedFavoriteCarGroupState.info.id, carInfoId);
-        console.log('Removing favorite from crumb');
         removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
       }
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(get().carGroupStates, get().favoriteCarGroupState, width, height);
+
+    console.log('favorite', updatedFavoriteCarGroupState);
 
     return {
       ...state,

@@ -20,13 +20,11 @@ interface CarCardProps {
 
 export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarCardProps) => {
   const showCriteria = (carState.displayProperties.displayMode & CardDisplayMode.ShowCriteria) !== 0;
-  const showButton = (carState.displayProperties.displayMode & CardDisplayMode.ShowButton) !== 0;
-  const isExpanded = (carState.displayProperties.displayMode & CardDisplayMode.Expand) !== 0;
+  const isExpanded = carState.isExpanded;
   const isClickExpandable = (carState.displayProperties.displayMode & CardDisplayMode.ClickExpandable) !== 0;
   const isClickFlipable = (carState.displayProperties.displayMode & CardDisplayMode.ClickFlipable) !== 0;
   const showFavorite = (carState.displayProperties.displayMode & CardDisplayMode.ShowFavorite) !== 0;
-  // const isShowPointer = ( isClickExpandable && !isExpanded ) || isClickFlipable;
-  const isShowPointer = true;
+  const isShowPointer = !isExpanded;
 
   // Create a ref for the image element
   const imageRef = useRef<HTMLImageElement>(null);
@@ -35,7 +33,6 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
   const [imageHeight, setImageHeight] = useState<number>(0);
   const [isProcessingFlip, setIsProcessingFlip] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-
 
   const { 
     setCarStateIsExpanded,
@@ -145,7 +142,9 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
                     }, 500);
                   }
                   else {
-                    setCarGroupSelected(carGroupState.info.id, true);
+                    if (!isExpanded) {
+                      setCarGroupSelected(carGroupState.info.id, true);
+                    }
                   }
                 }
               } : {})}
