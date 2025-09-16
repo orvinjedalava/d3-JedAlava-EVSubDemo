@@ -18,7 +18,7 @@ export const CardsPanel = () => {
     refreshClientSize,
     setCarGroupSelected,
     setSuggestions,
-    setFavoriteCar,
+    toggleFavoriteCar,
   } = useCarsStore();
 
   // Create a ref for the container div

@@ -52,19 +52,21 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   setCurrentSuggestion: (suggestion: Suggestion) => set({ currentSuggestion: suggestion }),
 
-  setFavoriteCar: (carState: CarState) => set((state) => {
-    const isAlreadyFavorite = state.favoriteCars.includes(carState);
+  toggleFavoriteCar: (carState: CarState) => set((state) => {
+    const isAlreadyFavorite = state.favoriteCars.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];
 
     if (isAlreadyFavorite) {
+      console.log('Removing from favorites:', carState);
       updatedFavorites = state.favoriteCars.filter(car => car.info.id !== carState.info.id);
     } else {
+      console.log('Adding to favorites:', carState);
       updatedFavorites = [...state.favoriteCars, carState];
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
     refreshClientSize(state.carGroupStates, updatedFavorites, width, height);
-    
+
     return {
       ...state, 
       favoriteCars: updatedFavorites 

@@ -41,7 +41,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
     setCarStateOnTop,
     setCarStateIsFlipped,
     setCarGroupSelected,
-    setFavoriteCar,
+    toggleFavoriteCar,
   } = useCarsStore();
 
   const onCloseClicked = () => {
@@ -81,10 +81,10 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
   // Keyboard accessibility for favoriting
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      setFavoriteCar(carState);
+      toggleFavoriteCar(carState);
       e.preventDefault();
     }
-  }, [carState, setFavoriteCar]);
+  }, [carState, toggleFavoriteCar]);
 
   // Effect to measure the image height after it loads
   useEffect(() => {
@@ -210,7 +210,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
 
           { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={1} right={1} isFilled={carState.isFavorite} onClick={() => {
             // Toggle favorite state
-            setFavoriteCar(carState);
+            toggleFavoriteCar(carState);
           }} />)}
           
           {/* <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} /> */}
