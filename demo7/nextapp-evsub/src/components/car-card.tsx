@@ -9,7 +9,6 @@ import { Button } from "@heroui/button";
 import { CarTitle } from "@/components/car-title";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { getCardWidth, getCardHeight } from '@/utils/scale-helper';
-import { BackButton } from "@/components/back-button";
 import { FavoriteButton } from "@/components/favorite-button";
 
 interface CarCardProps {
