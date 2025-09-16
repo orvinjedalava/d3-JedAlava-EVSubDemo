@@ -63,8 +63,8 @@ export const getCarStateFlipCoordinates = (count: number, carGroupBoundingBox: B
   else if (count === 3 )
   {
     return [
-      { top: yScale(0), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 }
+      { top: yScale(0), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 65), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 }
     ];
   }
   else if (count === 4 )
@@ -172,9 +172,9 @@ export const generateCarGroupCoordinates = (count: number, cardGroupBoundingBox:
   else if (count === 3 )
   {
     return [
-      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 95), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 80), left: xScale(boxWidth / 600 * 145), width: cardWidth, height: 0 },
-      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 120), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 90), left: xScale(boxWidth / 600 * 105), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 80), left: xScale(boxWidth / 600 * 155), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 400 * 50), left: xScale(boxWidth / 600 * 130), width: cardWidth, height: 0 },
     ];
   }
   else if (count === 4 )

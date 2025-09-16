@@ -56,6 +56,11 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   setCurrentSuggestion: (suggestion: Suggestion) => set({ currentSuggestion: suggestion }),
 
   setFavoriteCar: (carState: CarState) => set((state) => {
+    // for now, limit favorite cars to 4
+    if (state.favoriteCarGroupState.carStates.length === 4) {
+      return { ...state };
+    }
+
     const isAlreadyFavorite = state.favoriteCarGroupState.carStates.some(car => car.info.id === carState.info.id);
     if (isAlreadyFavorite) {
       return { ...state };
@@ -91,6 +96,8 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   toggleFavoriteCar: (carState: CarState) => set((state) => {
+    
+
     const isAlreadyFavorite = state.favoriteCarGroupState.carStates.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];
 
@@ -102,6 +109,11 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       isFavorite: true,
       rotateAngle: 0,
     };
+
+    if (!isAlreadyFavorite && state.favoriteCarGroupState.carStates.length === 4) {
+      // for now, limit favorite cars to 4
+      return { ...state };
+    }
 
     if (isAlreadyFavorite) {
       updatedFavorites = state.favoriteCarGroupState.carStates.filter(car => car.info.id !== carState.info.id);

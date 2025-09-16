@@ -88,9 +88,7 @@ export const CarPark = () => {
           variants={motionOpacity}
           transition={{ duration: 0.5 }}
         >
-          <Button isIconOnly variant="light">
-            <PlusCircleIcon className="text-secondary size-8" />
-          </Button>
+          <PlusCircleIcon className="text-secondary size-8" />
           <span>Favourited vehicles will appear here OR drag vehicles that interest you</span></motion.div>
         ) 
       }
