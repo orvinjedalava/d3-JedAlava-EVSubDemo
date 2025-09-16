@@ -23,11 +23,14 @@ import {
   getCarGroupExpandedCoordinates,
   getCarStateFlipCoordinates,
   getCardWidth,
+  getFavoriteCarGroupCoordinates,
+  getCarParkWidth,
+  getCarParkHeight,
 } from '@/utils/scale-helper';
 
 import { generateGUID } from '@/utils/general';
 
-export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars: CarState[], clientWidth: number, clientHeight: number) => {
+export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGroupState: CarGroupState, clientWidth: number, clientHeight: number) => {
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
@@ -35,11 +38,27 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
     const carGroupBox = carGroupBoxes[carGroupIdx];
     const carBoxes = generateCarGroupCoordinates(carGroupState.info.carInfos.length, carGroupBox, clientWidth);
     const chipBox = getChipCoordinates(carGroupBox);
+
+    const favoriteCarGroupBox = { top: 0, left: 0, width: getCarParkWidth(), height: getCarParkHeight() };
+    const favoriteCarStatesBoxes = getFavoriteCarGroupCoordinates(favoriteCarGroupState.carStates.length, favoriteCarGroupBox);
+
+    
     
     carGroupState.displayProperties.boundingBox = carGroupBox;
 
-    favoriteCars.forEach(favCar => {
+    favoriteCarGroupState.carStates.forEach(favCar => {
       favCar.displayProperties.displayMode = CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
+    });
+
+    Object.assign(favoriteCarGroupState.displayProperties, {
+      boundingBox: favoriteCarGroupBox,
+    });
+
+    favoriteCarGroupState.carStates.forEach((favCarState, favIdx) => {
+      Object.assign(favCarState.displayProperties, {
+        boundingBox: favoriteCarStatesBoxes[favIdx],
+        rotateAngle: 0
+      });
     });
 
     Object.assign(carGroupState.chipState, {
@@ -64,7 +83,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
         });
 
         Object.assign(carState, {
-          isFavorite: favoriteCars.some(favCar => favCar.info.id === carState.info.id)
+          isFavorite: favoriteCarGroupState.carStates.some(favCar => favCar.info.id === carState.info.id)
         })
       });
   });
@@ -381,10 +400,10 @@ export const setFavoriteCarInCrumb = (chipCrumb: ChipCrumb | undefined, carState
   }
 };
 
-export const getEmptyCarGroupState = (): CarGroupState => {
+export const getFavoriteCarGroupState = (): CarGroupState => {
   return {
     carStates: [],
-    info: { id: generateGUID(), name: '', carInfos: [] },
+    info: { id: generateGUID(), name: 'Favorites', carInfos: [] },
     displayProperties: { 
       boundingBox: getEmptyBoundingBox(),
     },

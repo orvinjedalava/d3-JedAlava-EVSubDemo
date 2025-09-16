@@ -98,6 +98,7 @@ export interface CarsState {
   suggestions: Suggestions;
   currentSuggestion: Suggestion;
   favoriteCars: CarState[];
+  favoriteCarGroupState: CarGroupState;
 
   setCarGroupStates: (carGroupStates: CarGroupState[]) => void;
   setChipCrumb: (chipCrumb: ChipCrumb) => void;

@@ -1,7 +1,12 @@
 import { CarGroupState } from "@/types";
 import { CarCard } from "@/components/car-card";
 
-export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState }) => {
+interface CarGroupPanelProps {
+  carGroupState: CarGroupState;
+  isFromCarPark?: boolean;
+}
+
+export const CarGroupPanel = ({ carGroupState, isFromCarPark = false }: CarGroupPanelProps) => {
   return (
     <div>
       {carGroupState.carStates.map((carState) => (
@@ -21,7 +26,7 @@ export const CarGroupPanel = ({ carGroupState }: { carGroupState: CarGroupState 
             transformOrigin: 'center',
           }}
         >
-          <CarCard carState={carState} carGroupState={carGroupState} />
+          <CarCard carState={carState} carGroupState={carGroupState} isFromCarPark={isFromCarPark} />
         </div>
       ))}
     </div>

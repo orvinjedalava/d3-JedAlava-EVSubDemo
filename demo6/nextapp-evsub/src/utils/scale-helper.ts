@@ -25,6 +25,14 @@ export const getCardHeight = (isExpanded: boolean, isFromCarPark: boolean = fals
   return isExpanded? 300 : isFromCarPark ? 145: 220; 
 }
 
+export const getCarParkWidth = () => {
+  return 1300;
+}
+
+export const getCarParkHeight = () => {
+  return 165;
+}
+
 export const getEmptyBoundingBox = (): BoundingBox => {
   return { top: 0, left: 0, width: 0, height: 0 };
 }
@@ -224,6 +232,51 @@ export const generateCarGroupSelectedCoordinates = (count: number, clientBoundin
   }
 
   return [];
+}
+
+export const getFavoriteCarGroupCoordinates = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
+  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
+  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
+
+  const boxWidth = X_SCALE_WIDTH;
+  const boxHeight = Y_SCALE_HEIGHT;
+
+  // card width should be consistent
+  const cardWidth = getCardWidth(true);
+
+  if (count <= 1)
+  {
+    return [
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 420), width: cardWidth, height: 0 }
+    ];
+  }
+  else if (count === 2 )
+  {
+    return [
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 530), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 330), width: cardWidth, height: 0 },
+    ];
+  }
+  else if (count === 3 )
+  {
+    return [
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 630), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 430), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 230), width: cardWidth, height: 0 },
+    ];
+  }
+  else if (count === 4 )
+  {
+    return [
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 730), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 530), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 330), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 1000 * 30), left: xScale(boxWidth / 1000 * 130), width: cardWidth, height: 0 },
+    ];
+  }
+
+  return [];
+
 }
 
 export const generateBoundingBoxes = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {

@@ -6,12 +6,13 @@ import { useCarsStore } from "@/stores/animations/cards-panel-store";
 import { useState, useCallback } from "react";
 import type { CarState, CarGroupState } from "@/types";
 import { CarCard } from "@/components/car-card";
-import { getEmptyCarGroupState } from "@/utils/state-helpers";
 import { AnimatePresence, motion } from 'framer-motion';
 import { motionOpacity } from '@/utils/framer-motion-helpers';
+import { CarGroupPanel } from "@/components/car-group-panel";
+import { getCarParkWidth, getCarParkHeight } from '@/utils/scale-helper';
 
 export const CarPark = () => {
-  const { setFavoriteCar, favoriteCars } = useCarsStore();
+  const { setFavoriteCar, favoriteCarGroupState } = useCarsStore();
   const [isDragOver, setIsDragOver] = useState(false);
 
   // Add drop handlers
@@ -43,7 +44,7 @@ export const CarPark = () => {
 
   return (
     <div
-      className={`absolute top-[880px] left-[120px] min-w-[1300px] max-w-[1300px] min-h-[165px] 
+      className={`absolute top-[880px] left-[120px] min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] 
         flex flex-col items-center justify-center
         rounded-tl-lg rounded-tr-lg 
         transition-all duration-200 ease-in-out
@@ -56,26 +57,25 @@ export const CarPark = () => {
       onDragExit={handleDragLeave}
       onDrop={handleDrop}
     >
-      { favoriteCars.length > 0 ? (
+      { favoriteCarGroupState.carStates.length > 0 ? (
         <div
-          className='flex flex-row items-center gap-2 overflow-x-auto px-4'
+          className={`relative overflow-x-auto min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
         >
           <AnimatePresence mode="wait">
-          {favoriteCars.map((carState) => (
-            <motion.div 
-              key={`favorite-car-card-${carState.info.title}`}
+          <motion.div 
+              key={`favorite-car-card-${favoriteCarGroupState.info.name}`}
               initial="initial"
               animate="animate"
               exit="exit"
               variants={motionOpacity}
               transition={{ duration: 0.5 }}
-              style={{ 
-                width: carState.displayProperties.favoriteBoxWidth,
-              }}
             >
-              <CarCard carState={carState} carGroupState={getEmptyCarGroupState()} isFromCarPark={true} />
+              <CarGroupPanel 
+                key={`favorite-car-group-panel-${favoriteCarGroupState.info.name}`} 
+                carGroupState={favoriteCarGroupState}
+                isFromCarPark={true} 
+              />
             </motion.div>
-          ))}
           </AnimatePresence>
         </div>) 
       : (
