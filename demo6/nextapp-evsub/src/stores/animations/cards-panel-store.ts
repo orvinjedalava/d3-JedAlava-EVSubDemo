@@ -279,16 +279,16 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => set((state) => {
     
     // const updatedCarGroupStates = [...state.carGroupStates];
-    const updatedCarGroupState = { ...state.favoriteCarGroupState };
-    const updatedCarStates = [...state.favoriteCarGroupState.carStates];
+    const updatedFavoriteCarGroupState = { ...state.favoriteCarGroupState };
+    const updatedFavoriteCarStates = [...state.favoriteCarGroupState.carStates];
 
-    updatedCarStates.forEach(carState => { carState.isExpanded = false });
+    updatedFavoriteCarStates.forEach(carState => { carState.isExpanded = false });
 
-    const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
+    const index = updatedFavoriteCarStates.findIndex((carState) => carState.info.id === carInfoId);
 
-    if (index >= 0 && index < updatedCarStates.length) {
-      updatedCarStates[index] = {
-        ...updatedCarStates[index],
+    if (index >= 0 && index < updatedFavoriteCarStates.length) {
+      updatedFavoriteCarStates[index] = {
+        ...updatedFavoriteCarStates[index],
         isExpanded
       };
     }
@@ -298,7 +298,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     //   carStates: updatedCarStates
     // };
 
-    updatedCarGroupState.carStates = updatedCarStates;
+    updatedFavoriteCarGroupState.carStates = updatedFavoriteCarStates;
 
     if (isExpanded) {
       const carState = state.favoriteCarGroupState.carStates.find((carState) => carState.info.id === carInfoId);
@@ -306,15 +306,15 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       if (carState) {
         const originalCarStateTargetPriority = carState.priority;
 
-        updatedCarStates[index] = {
-          ...updatedCarStates[index],
+        updatedFavoriteCarStates[index] = {
+          ...updatedFavoriteCarStates[index],
           priority: 0,
           // isFlipped: false,
         };
 
-        // I need to loop through all carStates inside updatedCarStates and increment their priority by 1
-        updatedCarStates.forEach((carState, idx) => {
-          updatedCarStates[idx] = {
+        // I need to loop through all carStates inside updatedFavoriteCarStates and increment their priority by 1
+        updatedFavoriteCarStates.forEach((carState, idx) => {
+          updatedFavoriteCarStates[idx] = {
               ...carState,
               priority: originalCarStateTargetPriority === carState.priority ? 0 
               : originalCarStateTargetPriority < carState.priority ? carState.priority : carState.priority + 1
@@ -326,13 +326,13 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
     removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
-    
+
     if (isExpanded && updatedChipCrumb) {
       // const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedCarGroupState], updatedCarGroupState, updatedCarStates[index]);
+      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedFavoriteCarGroupState], updatedFavoriteCarGroupState, updatedCarStates[index]);
 
     } else if (updatedChipCrumb) {
-      removeFromChipCrumb(updatedChipCrumb, updatedCarGroupState.info.id, carInfoId);
+      removeFromChipCrumb(updatedChipCrumb, updatedFavoriteCarGroupState.info.id, carInfoId);
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
@@ -341,6 +341,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     return {
       ...state,
       chipCrumb: updatedChipCrumb,
+      favoriteCarGroupState: updatedFavoriteCarGroupState
     };
   }),
 
