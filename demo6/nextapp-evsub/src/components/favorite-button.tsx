@@ -16,7 +16,7 @@ export const FavoriteButton = ({ isExpanded, top, right, isFilled, onClick }: Fa
       // className={`absolute 
       //   transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center ${isExpanded ? 'opacity-100 delay-[500ms]' : 'opacity-0'}`}
       className={`absolute 
-        transition-all duration-500 ease-in-out rounded-full w-6 h-6 min-w-0 flex items-center justify-center `}
+        transition-all duration-500 ease-in-out rounded-full w-12 h-12 min-w-0 flex items-center justify-center `}
       isIconOnly 
       onPress={() => onClick && onClick()}
       variant="light"

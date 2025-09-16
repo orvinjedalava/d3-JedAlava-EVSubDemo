@@ -158,7 +158,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
               </div>
           </div>
 
-          { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={16} right={16} isFilled={carState.isFavorite} onClick={() => {
+          { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={4} right={4} isFilled={carState.isFavorite} onClick={() => {
             // Toggle favorite state
             // setCarStateIsFlipped(carGroupState.info.id, carState.info.id, !carState.isFavorite);
           }} />)}
