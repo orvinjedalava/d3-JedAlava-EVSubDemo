@@ -27,7 +27,12 @@ export const FavoriteButton = ({ isExpanded, top, right, isFilled, onClick }: Fa
       variant="light"
       
     >
-      { isFilled ? <HeartIconSolid className="text-secondary size-8" /> : <HeartIconOutline className="text-secondary size-8" style={{ fill: `rgba(128, 128, 128, ${isExpanded ? 0.1 : 0.9})`, stroke: 'currentColor' }} /> }
+      { isFilled ? <HeartIconSolid className="text-secondary size-8" /> : <HeartIconOutline className="text-secondary size-8" style={{ 
+        fill: `rgba(128, 128, 128, ${isExpanded ? 0.1 : 0.9})`, 
+        stroke: 'currentColor',
+        transition: 'fill 500ms ease-in-out',
+        transitionDelay: isExpanded ? '0ms' : '400ms'
+      }} /> }
     </Button>
     
   )
