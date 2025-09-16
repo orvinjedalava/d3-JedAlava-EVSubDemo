@@ -134,20 +134,19 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
               src={carState.info.img}
             />
 
-            {/* Gray overlay for favorite button area */}
-            { showFavorite && (<div 
+            {/* { showFavorite && (<div 
               className={`absolute transition-opacity duration-500 ease-in-out rounded-bl-[20px]  ${isExpanded ? 'opacity-0' : 'opacity-100 delay-[500ms]'} `}
               style={{
-                top: isExpanded ? '60px' : '0px',
-                left: '207px',
-                width: '45px',
-                height: '40px',
-                // background: 'radial-gradient(circle, rgba(64, 64, 64, 0.5) 0%, rgba(64, 64, 64, 0.1) 80%, rgba(64, 64, 64, 0) 100%)',
-                background: 'linear-gradient(225deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.5) 10%, rgba(128, 128, 128, 0.7) 50%, rgba(128, 128, 128, 0.5) 60%,rgba(128, 128, 128, 0) 100%)',
+                top: isExpanded ? '60px' : '7px',
+                left: '217.2px',
+                width: '24px',
+                height: '24px',
+                background: 'radial-gradient(circle, rgba(64, 64, 64, 0.8) 0%, rgba(64, 64, 64, 0.6) 80%, rgba(64, 64, 64, 0) 100%)',
+                // background: 'linear-gradient(225deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.5) 10%, rgba(128, 128, 128, 0.7) 50%, rgba(128, 128, 128, 0.5) 60%,rgba(128, 128, 128, 0) 100%)',
                 zIndex: 150,
                 pointerEvents: 'none',
               }}
-            />)}
+            />)} */}
             
           </div>
           
