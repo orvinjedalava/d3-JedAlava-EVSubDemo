@@ -277,8 +277,13 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => set((state) => {
-    
-    // const updatedCarGroupStates = [...state.carGroupStates];
+
+    const updatedCarGroupStates = { ...state.carGroupStates };
+
+    updatedCarGroupStates.forEach(carGroupState => {
+      carGroupState.carStates.forEach(carState => { carState.isExpanded = false });
+    });
+
     const updatedFavoriteCarGroupState = { ...state.favoriteCarGroupState };
     const updatedFavoriteCarStates = [...state.favoriteCarGroupState.carStates];
 
@@ -340,6 +345,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
     return {
       ...state,
+      carGroupStates: updatedCarGroupStates,
       chipCrumb: updatedChipCrumb,
       favoriteCarGroupState: updatedFavoriteCarGroupState
     };
