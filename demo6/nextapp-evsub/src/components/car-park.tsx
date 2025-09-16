@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@heroui/button";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useCarsStore } from "@/stores/animations/cards-panel-store";
@@ -5,6 +7,8 @@ import { useState, useCallback } from "react";
 import type { CarState, CarGroupState } from "@/types";
 import { CarCard } from "@/components/car-card";
 import { getEmptyCarGroupState } from "@/utils/state-helpers";
+import { AnimatePresence, motion } from 'framer-motion';
+import { motionOpacity } from '@/utils/framer-motion-helpers';
 
 export const CarPark = () => {
   const { setFavoriteCar, favoriteCars } = useCarsStore();
@@ -56,26 +60,23 @@ export const CarPark = () => {
         <div
           className='flex flex-row items-center gap-2 overflow-x-auto px-4'
         >
+          <AnimatePresence mode="wait">
           {favoriteCars.map((carState) => (
-            <div 
+            <motion.div 
               key={`favorite-car-card-${carState.info.title}`}
-              // className={`absolute  ${
-              //   carState.displayProperties.opacity === 1 ? 'car-card-appear-delay' : 'car-card-default'
-              // }`}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={motionOpacity}
+              transition={{ duration: 0.5 }}
               style={{ 
                 width: carState.displayProperties.favoriteBoxWidth,
-                // height: carState.displayProperties.boundingBox.height,
-                // top: carState.displayProperties.boundingBox.top || 0,
-                // left: carState.displayProperties.boundingBox.left || 0,
-                // opacity: carState.displayProperties.opacity,
-                // zIndex: carState.displayProperties.zIndex || 0,
-                // transform: `rotate(${carState.displayProperties.rotateAngle}deg)`,
-                // transformOrigin: 'center',
               }}
             >
               <CarCard carState={carState} carGroupState={getEmptyCarGroupState()} isFromCarPark={true} />
-            </div>
+            </motion.div>
           ))}
+          </AnimatePresence>
         </div>) 
       : (
         <>
