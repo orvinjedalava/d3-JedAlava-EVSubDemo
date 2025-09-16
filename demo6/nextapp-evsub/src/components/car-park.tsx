@@ -59,7 +59,7 @@ export const CarPark = () => {
     >
       { favoriteCarGroupState.carStates.length > 0 ? (
         <div
-          className={`relative overflow-x-auto min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
+          className={`relative overflow-x-auto overflow-y-hidden min-w-[${getCarParkWidth()}px] max-w-[${getCarParkWidth()}px] min-h-[${getCarParkHeight()}px] `}
         >
           <AnimatePresence mode="wait">
           <motion.div 
