@@ -47,6 +47,11 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
 
   // Drag handlers
   const handleDragStart = useCallback((e: React.DragEvent) => {
+    if (isFromCarPark) {
+      // Prevent dragging if the card is from the car park
+      e.preventDefault();
+      return;
+    }
     // Store the car data in the drag event
     e.dataTransfer.setData('application/json', JSON.stringify({
       carGroupId: carGroupState.info.id,
@@ -113,6 +118,8 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
         {...(isShowPointer ? { 
                 onClick: () => {
                   if (isProcessingFlip) return;
+
+                  if(isFromCarPark) return;
 
                   if (isClickExpandable && !isExpanded){
                     setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true)
