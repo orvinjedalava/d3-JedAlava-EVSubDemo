@@ -57,6 +57,10 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCars:
           // If you need to store the sorted position:
           // sortPosition: sortedIndex
         });
+
+        Object.assign(carState, {
+          isFavorite: favoriteCars.some(favCar => favCar.info.id === carState.info.id)
+        })
       });
   });
 
