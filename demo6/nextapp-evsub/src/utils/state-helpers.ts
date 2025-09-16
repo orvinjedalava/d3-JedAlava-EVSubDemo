@@ -34,22 +34,24 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
   const favoriteCarGroupBox = { top: 0, left: 0, width: getCarParkWidth(), height: getCarParkHeight() };
-    const favoriteCarStatesBoxes = getFavoriteCarGroupCoordinates(favoriteCarGroupState.carStates.length, favoriteCarGroupBox);
-    
-    favoriteCarGroupState.carStates.forEach(favCar => {
-      favCar.displayProperties.displayMode = CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
-    });
+  const favoriteCarStatesBoxes = getFavoriteCarGroupCoordinates(favoriteCarGroupState.carStates.length, favoriteCarGroupBox);
+  
+  favoriteCarGroupState.carStates.forEach(favCar => {
+    favCar.displayProperties.displayMode = CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
+  });
 
-    Object.assign(favoriteCarGroupState.displayProperties, {
-      boundingBox: favoriteCarGroupBox,
-    });
+  Object.assign(favoriteCarGroupState.displayProperties, {
+    boundingBox: favoriteCarGroupBox,
+  });
 
-    favoriteCarGroupState.carStates.forEach((favCarState, favIdx) => {
-      Object.assign(favCarState.displayProperties, {
-        boundingBox: favoriteCarStatesBoxes[favIdx],
-        rotateAngle: 0
-      });
+  favoriteCarGroupState.carStates.forEach((favCarState, favIdx) => {
+    Object.assign(favCarState.displayProperties, {
+      boundingBox: favoriteCarStatesBoxes[favIdx],
+      rotateAngle: 0
     });
+  });
+
+  const expandedFavoriteCarState = favoriteCarGroupState.carStates.find((carState) => carState.isExpanded);
 
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
