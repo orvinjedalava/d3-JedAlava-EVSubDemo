@@ -136,13 +136,14 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
 
             {/* Gray overlay for favorite button area */}
             { showFavorite && (<div 
-              className={`absolute transition-opacity duration-500 ease-in-out rounded-full ${isExpanded ? 'opacity-0' : 'opacity-100 delay-[500ms]'} `}
+              className={`absolute transition-opacity duration-500 ease-in-out rounded-bl-[20px]  ${isExpanded ? 'opacity-0' : 'opacity-100 delay-[500ms]'} `}
               style={{
-                top: isExpanded ? '60px' : '5px',
+                top: isExpanded ? '60px' : '0px',
                 left: '207px',
-                width: '40px',
+                width: '45px',
                 height: '40px',
-                background: 'radial-gradient(circle, rgba(64, 64, 64, 0.5) 0%, rgba(64, 64, 64, 0.1) 80%, rgba(64, 64, 64, 0) 100%)',
+                // background: 'radial-gradient(circle, rgba(64, 64, 64, 0.5) 0%, rgba(64, 64, 64, 0.1) 80%, rgba(64, 64, 64, 0) 100%)',
+                background: 'linear-gradient(225deg, rgba(128, 128, 128, 0) 0%, rgba(128, 128, 128, 0.5) 10%, rgba(128, 128, 128, 0.7) 50%, rgba(128, 128, 128, 0.5) 60%,rgba(128, 128, 128, 0) 100%)',
                 zIndex: 150,
                 pointerEvents: 'none',
               }}
@@ -170,7 +171,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
               </div>
           </div>
 
-          { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={5} right={3} isFilled={carState.isFavorite} onClick={() => {
+          { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={1} right={1} isFilled={carState.isFavorite} onClick={() => {
             // Toggle favorite state
             // setCarStateIsFlipped(carGroupState.info.id, carState.info.id, !carState.isFavorite);
           }} />)}
