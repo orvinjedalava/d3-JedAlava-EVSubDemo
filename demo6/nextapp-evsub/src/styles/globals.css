@@ -48,6 +48,15 @@
               transform 500ms ease-in-out 0ms;
 }
 
+.no-hover-effect[data-hover] {
+  /* Set the styles to be the same as the non-hovered state */
+  background-color: var(--hero-ui-button-bg-default); /* Example */
+  color: var(--hero-ui-button-text-default); /* Example */
+  box-shadow: none; /* Remove any box-shadow on hover */
+  transform: none; /* Prevent any transform effects on hover */
+  transition: none; /* Disable transitions for hover state */
+}
+
 /* .disappear {
   transition: opacity 300ms ease-in-out 0ms;
 } */

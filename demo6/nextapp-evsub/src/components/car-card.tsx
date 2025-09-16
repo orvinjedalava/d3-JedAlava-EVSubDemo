@@ -40,6 +40,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
     setCarStateOnTop,
     setCarStateIsFlipped,
     setCarGroupSelected,
+    setFavoriteCar,
   } = useCarsStore();
 
   const onCloseClicked = () => {
@@ -172,7 +173,7 @@ export const CarCard = ({ carState, carGroupState }: CarCardProps) => {
 
           { showFavorite && (<FavoriteButton isExpanded={isExpanded} top={1} right={1} isFilled={carState.isFavorite} onClick={() => {
             // Toggle favorite state
-            // setCarStateIsFlipped(carGroupState.info.id, carState.info.id, !carState.isFavorite);
+            setFavoriteCar(carState);
           }} />)}
           
           {/* <BackButton isExpanded={isExpanded} top={16} right={20} onClick={onCloseClicked} /> */}

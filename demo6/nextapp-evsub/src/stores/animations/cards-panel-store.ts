@@ -62,6 +62,9 @@ export const useCarsStore = create<CarsState>((set, get) => ({
       updatedFavorites = [...state.favoriteCars, carState];
     }
 
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(state.carGroupStates, updatedFavorites, width, height);
+    
     return {
       ...state, 
       favoriteCars: updatedFavorites 

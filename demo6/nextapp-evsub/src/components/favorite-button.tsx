@@ -14,8 +14,7 @@ export const FavoriteButton = ({ isExpanded, top, right, isFilled, onClick }: Fa
   return (
     <Button 
       className={`absolute 
-        transition-all duration-500 ease-in-out rounded-full w-10 h-10 min-w-0 flex items-center justify-center `}
-      // className={`rounded-full w-10 h-10 min-w-0 flex items-center justify-center `}
+        transition-all duration-500 ease-in-out rounded-full w-10 h-10 min-w-0 flex items-center justify-center no-hover-effect`}
       style={{
         top: `${top}px`,
         // ...(isExpanded ? { right: `${right}px` } : { left: `${left}px` }),
@@ -25,7 +24,8 @@ export const FavoriteButton = ({ isExpanded, top, right, isFilled, onClick }: Fa
       isIconOnly 
       onPress={() => onClick && onClick()}
       variant="light"
-      
+      disableRipple
+      disableAnimation
     >
       { isFilled ? <HeartIconSolid className="text-secondary size-8" /> : <HeartIconOutline className="text-secondary size-8" style={{ 
         fill: `rgba(128, 128, 128, ${isExpanded ? 0.1 : 0.9})`, 
