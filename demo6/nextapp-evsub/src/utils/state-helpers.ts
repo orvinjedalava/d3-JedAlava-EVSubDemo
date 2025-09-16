@@ -33,19 +33,9 @@ import { generateGUID } from '@/utils/general';
 export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGroupState: CarGroupState, clientWidth: number, clientHeight: number) => {
   const carGroupBoxes = generateBoundingBoxes(carGroupStates.length, { top: 0, left: 0, width: clientWidth, height: clientHeight });
 
-  carGroupStates.forEach((carGroupState, carGroupIdx) => {
-
-    const carGroupBox = carGroupBoxes[carGroupIdx];
-    const carBoxes = generateCarGroupCoordinates(carGroupState.info.carInfos.length, carGroupBox, clientWidth);
-    const chipBox = getChipCoordinates(carGroupBox);
-
-    const favoriteCarGroupBox = { top: 0, left: 0, width: getCarParkWidth(), height: getCarParkHeight() };
+  const favoriteCarGroupBox = { top: 0, left: 0, width: getCarParkWidth(), height: getCarParkHeight() };
     const favoriteCarStatesBoxes = getFavoriteCarGroupCoordinates(favoriteCarGroupState.carStates.length, favoriteCarGroupBox);
-
     
-    
-    carGroupState.displayProperties.boundingBox = carGroupBox;
-
     favoriteCarGroupState.carStates.forEach(favCar => {
       favCar.displayProperties.displayMode = CardDisplayMode.ShowFavorite | CardDisplayMode.ClickExpandable;
     });
@@ -60,6 +50,14 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
         rotateAngle: 0
       });
     });
+
+  carGroupStates.forEach((carGroupState, carGroupIdx) => {
+
+    const carGroupBox = carGroupBoxes[carGroupIdx];
+    const carBoxes = generateCarGroupCoordinates(carGroupState.info.carInfos.length, carGroupBox, clientWidth);
+    const chipBox = getChipCoordinates(carGroupBox);
+
+    carGroupState.displayProperties.boundingBox = carGroupBox;
 
     Object.assign(carGroupState.chipState, {
       boundingBox: chipBox,

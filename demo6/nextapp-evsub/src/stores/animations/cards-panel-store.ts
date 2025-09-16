@@ -276,6 +276,74 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     };
   }),
 
+  setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => set((state) => {
+    
+    // const updatedCarGroupStates = [...state.carGroupStates];
+    const updatedCarGroupState = { ...state.favoriteCarGroupState };
+    const updatedCarStates = [...state.favoriteCarGroupState.carStates];
+
+    updatedCarStates.forEach(carState => { carState.isExpanded = false });
+
+    const index = updatedCarStates.findIndex((carState) => carState.info.id === carInfoId);
+
+    if (index >= 0 && index < updatedCarStates.length) {
+      updatedCarStates[index] = {
+        ...updatedCarStates[index],
+        isExpanded
+      };
+    }
+    
+    // updatedCarGroupStates[updatedCarGroupStates.indexOf(state.favoriteCarGroupState)] = {
+    //   ...state.favoriteCarGroupState,
+    //   carStates: updatedCarStates
+    // };
+
+    updatedCarGroupState.carStates = updatedCarStates;
+
+    if (isExpanded) {
+      const carState = state.favoriteCarGroupState.carStates.find((carState) => carState.info.id === carInfoId);
+      
+      if (carState) {
+        const originalCarStateTargetPriority = carState.priority;
+
+        updatedCarStates[index] = {
+          ...updatedCarStates[index],
+          priority: 0,
+          // isFlipped: false,
+        };
+
+        // I need to loop through all carStates inside updatedCarStates and increment their priority by 1
+        updatedCarStates.forEach((carState, idx) => {
+          updatedCarStates[idx] = {
+              ...carState,
+              priority: originalCarStateTargetPriority === carState.priority ? 0 
+              : originalCarStateTargetPriority < carState.priority ? carState.priority : carState.priority + 1
+            };
+        });
+      }
+      
+    }
+
+    let updatedChipCrumb = structuredClone(state.chipCrumb);
+    removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
+    
+    if (isExpanded && updatedChipCrumb) {
+      // const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
+      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedCarGroupState], updatedCarGroupState, updatedCarStates[index]);
+
+    } else if (updatedChipCrumb) {
+      removeFromChipCrumb(updatedChipCrumb, updatedCarGroupState.info.id, carInfoId);
+    }
+
+    const { width, height } = useCarPanelDimensionsStore.getState();
+    refreshClientSize(get().carGroupStates, get().favoriteCarGroupState, width, height);
+
+    return {
+      ...state,
+      chipCrumb: updatedChipCrumb,
+    };
+  }),
+
   setCarStateIsFlipped: (carGroupInfoId: string, carInfoId: string, isFlipped: boolean) => set((state) => {
     const carGroupState = state.carGroupStates.find((group) => group.info.id === carGroupInfoId);
     if (!carGroupState) return state;

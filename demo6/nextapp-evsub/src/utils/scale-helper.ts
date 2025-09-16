@@ -279,6 +279,46 @@ export const getFavoriteCarGroupCoordinates = (count: number, clientBoundingBox:
 
 }
 
+export const getFavoriteCarGroupExpandedCoordinates = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
+  const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
+  const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
+
+  const boxWidth = X_SCALE_WIDTH;
+  const boxHeight = Y_SCALE_HEIGHT;
+
+  // card width should be consistent
+  const cardWidth = getCardWidth(true);
+
+  const expandedCard = { top: -yScale(boxHeight / 800 * 50), left: xScale(boxWidth / 1000 * 50), width: xScale(boxWidth * 0.9), height: 0 };
+
+  if (count <= 1) {
+    return [expandedCard];
+  }
+  else if (count === 2) {
+    return [
+      expandedCard,
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 60), width: cardWidth, height: 0 },
+    ]
+  }
+  else if (count === 3) {
+    return [
+      expandedCard,
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 30), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 90), width: cardWidth, height: 0 },
+    ]
+  }
+  else if (count === 4) {
+    return [
+      expandedCard,
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 10), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 60), width: cardWidth, height: 0 },
+      { top: yScale(boxHeight / 24 * 17), left: xScale(boxWidth / 160 * 110), width: cardWidth, height: 0 },
+    ]
+  }
+
+  return [];
+}
+
 export const generateBoundingBoxes = (count: number, clientBoundingBox: BoundingBox): BoundingBox[] => {
   const xScale = getXScale(clientBoundingBox.left, clientBoundingBox.left + clientBoundingBox.width);
   const yScale = getYScale(clientBoundingBox.top, clientBoundingBox.top + clientBoundingBox.height);
