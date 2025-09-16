@@ -123,10 +123,3 @@ export interface CarsState {
 
   refreshClientSize: () => void;
 }
-
-export interface ChatMessage {
-  id: string,
-  text: string,
-  isUser: boolean,
-  timestamp: Date
-}
