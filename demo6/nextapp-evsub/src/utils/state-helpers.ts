@@ -52,6 +52,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
   });
 
   const expandedFavoriteCarState = favoriteCarGroupState.carStates.find((carState) => carState.isExpanded);
+  console.log('favoriteCarGroupState:', favoriteCarGroupState);
 
   carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
@@ -160,9 +161,11 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
     carGroupStates.forEach((carGroupState, carGroupIdx) => {
 
       const carGroupBox = carGroupBoxes[carGroupIdx];
+
+      console.log('expandedFavoriteCarState:', expandedFavoriteCarState);
       
       Object.assign(carGroupState.chipState, {
-        opacity: 1
+        opacity: expandedFavoriteCarState ? 0.05 : 1
       });
 
       // can you find the carState that is flipped and put it in a const variable?
@@ -171,7 +174,7 @@ export const refreshClientSize = (carGroupStates: CarGroupState[], favoriteCarGr
       carGroupState.carStates.forEach(carState => {
 
         Object.assign(carState.displayProperties, {
-          opacity: 1,
+          opacity: expandedFavoriteCarState ? 0.05 : 1,
           //zIndex: 0,
           displayMode: carState.priority === 1 ? CardDisplayMode.ShowCriteria | CardDisplayMode.ShowFavorite
           : CardDisplayMode.ShowCriteria  | CardDisplayMode.ClickFlipable | CardDisplayMode.ShowFavorite,

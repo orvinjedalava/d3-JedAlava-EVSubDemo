@@ -98,8 +98,6 @@ export const useCarsStore = create<CarsState>((set, get) => ({
   }),
 
   toggleFavoriteCar: (carState: CarState) => set((state) => {
-    
-
     const isAlreadyFavorite = state.favoriteCarGroupState.carStates.some(car => car.info.id === carState.info.id);
     let updatedFavorites: CarState[];
 
@@ -279,11 +277,10 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => set((state) => {
 
-    console.log(`Toggling favorite car ${carInfoId} to ${isExpanded}`);
-
     const updatedCarGroupStates = [...state.carGroupStates];
 
     updatedCarGroupStates.forEach(carGroupState => {
+      carGroupState.isSelected = false;
       carGroupState.carStates.forEach(carState => { carState.isExpanded = false });
     });
 
@@ -333,7 +330,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
-    // removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
+    removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
 
     if (updatedChipCrumb)
     {
@@ -349,7 +346,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();
-    refreshClientSize(get().carGroupStates, get().favoriteCarGroupState, width, height);
+    refreshClientSize(updatedCarGroupStates, updatedFavoriteCarGroupState, width, height);
 
     console.log('favorite', updatedFavoriteCarGroupState);
 
