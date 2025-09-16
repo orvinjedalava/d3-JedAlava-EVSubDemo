@@ -23,6 +23,7 @@ import {
   setFavoriteCarInCrumb,
   getFavoriteCarGroupState,
   removeSelectedCarGroupFromChipCrumb,
+  addFavoriteToChipCrumb,
 } from '@/utils/state-helpers';
 
 import { 
@@ -278,7 +279,9 @@ export const useCarsStore = create<CarsState>((set, get) => ({
 
   setFavoriteCarStateIsExpanded: (carInfoId: string, isExpanded: boolean) => set((state) => {
 
-    const updatedCarGroupStates = { ...state.carGroupStates };
+    console.log(`Toggling favorite car ${carInfoId} to ${isExpanded}`);
+
+    const updatedCarGroupStates = [...state.carGroupStates];
 
     updatedCarGroupStates.forEach(carGroupState => {
       carGroupState.carStates.forEach(carState => { carState.isExpanded = false });
@@ -330,14 +333,20 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
-    removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
+    // removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
 
-    if (isExpanded && updatedChipCrumb) {
-      // const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
-      addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedFavoriteCarGroupState], updatedFavoriteCarGroupState, updatedFavoriteCarStates[index]);
+    if (updatedChipCrumb)
+    {
+      if (isExpanded ) {
+        // const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
+        // addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, updatedCarGroupStates, updatedFavoriteCarGroupState, undefined);
+        addFavoriteToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, [updatedFavoriteCarGroupState], updatedFavoriteCarGroupState, updatedFavoriteCarStates[index]);
 
-    } else if (updatedChipCrumb) {
-      removeFromChipCrumb(updatedChipCrumb, updatedFavoriteCarGroupState.info.id, carInfoId);
+      } else  {
+        // removeFromChipCrumb(updatedChipCrumb, updatedFavoriteCarGroupState.info.id, carInfoId);
+        console.log('Removing favorite from crumb');
+        removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
+      }
     }
 
     const { width, height } = useCarPanelDimensionsStore.getState();

@@ -90,6 +90,7 @@ export interface ChipCrumb {
   selectedCarGroupState?: CarGroupState;
   selectedCarState?: CarState;
   chipCrumb?: ChipCrumb;
+  isFavoriteCrumb?: boolean;
 }
 
 export interface CarsState {

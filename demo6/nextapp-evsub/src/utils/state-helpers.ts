@@ -313,6 +313,34 @@ export const addToChipCrumb = (
   return chipCrumb;
 }
 
+export const addFavoriteToChipCrumb = (
+  chipCrumb: ChipCrumb , 
+  parentSuggestions: Suggestions,
+  suggestion: Suggestion, 
+  carGroupStates: CarGroupState[], 
+  selectedCarGroupState?: CarGroupState, 
+  selectedCarState?: CarState) : ChipCrumb => 
+{
+  const newChipCrumb: ChipCrumb = {
+    id: generateGUID(),
+    parentSuggestions: parentSuggestions,
+    suggestion,
+    carGroupStates,
+    selectedCarGroupState,
+    selectedCarState,
+    isFavoriteCrumb: true,
+    chipCrumb: undefined
+  };
+
+  let currentCrumb = chipCrumb;
+  while (currentCrumb.chipCrumb) {
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+  currentCrumb.chipCrumb = newChipCrumb;
+
+  return chipCrumb;
+}
+
 export const removeSuggestionFromChipCrumb = (chipCrumb: ChipCrumb | undefined, crumbId: string): ChipCrumb | undefined => {
   let currentCrumb = chipCrumb;
   let parentCrumb: ChipCrumb | undefined = undefined;

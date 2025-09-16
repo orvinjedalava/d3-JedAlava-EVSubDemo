@@ -43,6 +43,7 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
     setCarStateIsFlipped,
     setCarGroupSelected,
     toggleFavoriteCar,
+    setFavoriteCarStateIsExpanded,
   } = useCarsStore();
 
   // Drag handlers
@@ -119,7 +120,11 @@ export const CarCard = ({ carState, carGroupState, isFromCarPark = false }: CarC
                 onClick: () => {
                   if (isProcessingFlip) return;
 
-                  if(isFromCarPark) return;
+                  if(isFromCarPark) 
+                  {
+                    setFavoriteCarStateIsExpanded(carState.info.id, !isExpanded);
+                    return;
+                  }
 
                   if (isClickExpandable && !isExpanded){
                     setCarStateIsExpanded(carGroupState.info.id, carState.info.id, true)

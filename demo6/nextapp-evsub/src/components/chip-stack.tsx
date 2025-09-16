@@ -10,7 +10,8 @@ export const ChipStack = () => {
     setCarGroupSelected, 
     setCarStateIsExpanded,
     removeSuggestion,
-    setCarStateFromLastSuggestion
+    setCarStateFromLastSuggestion,
+    setFavoriteCarStateIsExpanded
   } = useCarsStore(state => state);
 
   // Create an array to hold our chip components
@@ -41,7 +42,16 @@ export const ChipStack = () => {
             key={`crumb-${index}`} 
             onClose={async () => {
               if (crumb.selectedCarState && crumb.selectedCarGroupState) {
-                setCarStateIsExpanded(crumb.selectedCarGroupState.info.id, crumb.selectedCarState.info.id, false);
+                
+                if (crumb.isFavoriteCrumb) {
+                  // Handle favorite crumb removal
+                  setFavoriteCarStateIsExpanded(crumb.selectedCarState.info.id, false);
+                  console.log(`Removing crumb for favorite ${crumb.selectedCarState.info.title}`);
+                } else {
+                  // Handle regular crumb removal
+                  setCarStateIsExpanded(crumb.selectedCarGroupState.info.id, crumb.selectedCarState.info.id, false);
+                  console.log(`Removing crumb for car ${crumb.selectedCarState.info.title}`);
+                }
               } else if (crumb.selectedCarGroupState) {
                 setCarGroupSelected(crumb.selectedCarGroupState.info.id, false);
               } else {
