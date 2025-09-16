@@ -355,6 +355,22 @@ export const removeFromChipCrumb = (chipCrumb: ChipCrumb | undefined, carGroupSt
   }
 };
 
+export const removeSelectedCarGroupFromChipCrumb = (chipCrumb: ChipCrumb | undefined) => {
+  let currentCrumb = chipCrumb;
+  let parentCrumb: ChipCrumb | undefined = undefined;
+  while (currentCrumb) {
+    if (currentCrumb.selectedCarGroupState) {
+      // Found the crumb to remove
+      if (parentCrumb) {
+        parentCrumb.chipCrumb = undefined;
+      }
+      return;
+    }
+    parentCrumb = currentCrumb;
+    currentCrumb = currentCrumb.chipCrumb;
+  }
+};  
+
 export const getLastChipCrumb = (chipCrumb: ChipCrumb | undefined): ChipCrumb | undefined => {
   let currentCrumb = chipCrumb;
   let lastCrumb: ChipCrumb | undefined = undefined;

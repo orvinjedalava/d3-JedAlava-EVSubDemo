@@ -22,6 +22,7 @@ import {
   isEmptyChipCrumb,
   setFavoriteCarInCrumb,
   getFavoriteCarGroupState,
+  removeSelectedCarGroupFromChipCrumb,
 } from '@/utils/state-helpers';
 
 import { 
@@ -150,6 +151,9 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     }
     else {
       updatedChipCrumb = structuredClone(get().chipCrumb)!;
+
+      removeSelectedCarGroupFromChipCrumb(updatedChipCrumb);
+      
       updatedChipCrumb = addToChipCrumb(updatedChipCrumb, retrievedSuggestions, suggestion, retrievedCarGroupStates, undefined, undefined);
     }
 
@@ -376,6 +380,7 @@ export const useCarsStore = create<CarsState>((set, get) => ({
     updatedCarGroupStates[updatedCarGroupStates.indexOf(carGroupState)] = updatedCarGroupState;
 
     let updatedChipCrumb = structuredClone(state.chipCrumb);
+    
     if (isSelected && updatedChipCrumb) {
       const carGroupIdx = updatedCarGroupStates.findIndex((carGroup) => carGroup.info.id === carGroupInfoId);
       addToChipCrumb(updatedChipCrumb, get().suggestions, get().currentSuggestion, updatedCarGroupStates, updatedCarGroupStates[carGroupIdx], undefined);
